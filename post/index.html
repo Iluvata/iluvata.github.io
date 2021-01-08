@@ -152,20 +152,23 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/blog/">
     
-      <img src="/img/default1.jpg" alt="test" />
+      <img src="/img/default2.jpg" alt="hugo博客站点搭建" />
     
   </a>
 
   <div class="content">
     <h2 class="ui medium header">
-      <a href="/post/blog/">test</a>
+      <a href="/post/blog/">hugo博客站点搭建</a>
     </h2>
     <div class="meta">
       <p class="date">Friday, Jan 8, 2021</p>
     </div>
     <div class="description">
-       hello  sd   just  waaaa
-    
+        由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。
+安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
+hugo server --buildDrafts -t dream  新建github仓库 云端部署
+hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org 云端仓库为：根目录/public （在此目录下管理git） 云端文章目录为：根目录/public/post/blog
+  
     </div>
   </div>
 

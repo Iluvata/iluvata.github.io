@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>test | My New Hugo Site</title>
+    <title>hugo博客站点搭建 | My New Hugo Site</title>
 
     
 
@@ -20,9 +20,12 @@
 <link rel="canonical" href="https://iluvata.github.io/post/blog/" />
 
 
-<meta property="og:title" content="test" />
-<meta property="og:description" content=" hello  sd   just  waaaa
-    " />
+<meta property="og:title" content="hugo博客站点搭建" />
+<meta property="og:description" content="  由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。
+安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
+hugo server --buildDrafts -t dream  新建github仓库 云端部署
+hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org 云端仓库为：根目录/public （在此目录下管理git） 云端文章目录为：根目录/public/post/blog
+  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iluvata.github.io/post/blog/" />
 <meta property="article:published_time" content="2021-01-08T15:02:22+08:00" />
@@ -31,9 +34,12 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="test"/>
-<meta name="twitter:description" content=" hello  sd   just  waaaa
-    "/>
+<meta name="twitter:title" content="hugo博客站点搭建"/>
+<meta name="twitter:description" content="  由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。
+安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
+hugo server --buildDrafts -t dream  新建github仓库 云端部署
+hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org 云端仓库为：根目录/public （在此目录下管理git） 云端文章目录为：根目录/public/post/blog
+  "/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -92,7 +98,7 @@
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          test
+          hugo博客站点搭建
           <div class="sub header">
             @
             
@@ -114,24 +120,50 @@
       </header>
 
       <article class="main">
-<div id="outline-container-headline-1" class="outline-2">
-<h2 id="headline-1">
-hello
-</h2>
-<div id="outline-text-headline-1" class="outline-text-2">
+<p>
+由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。</p>
+<div id="outline-container-headline-1" class="outline-3">
+<h3 id="headline-1">
+安装hugo
+</h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">sudo apt-get install hugo</code></pre></div>
+</div>
+</div>
+</div>
 <div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
-sd
+新建站点
 </h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">hugo new site /path/to/site</code></pre></div>
+</div>
+<p>下载主题（我用的是dream）
+本地运行</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">hugo server --buildDrafts -t dream</code></pre></div>
+</div>
+<p>新建github仓库
+云端部署</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts</code></pre></div>
+</div>
+</div>
 </div>
 <div id="outline-container-headline-3" class="outline-3">
 <h3 id="headline-3">
-just
+写/发布文章
 </h3>
 <div id="outline-text-headline-3" class="outline-text-3">
-<p>waaaa</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">hugo new post/newBlog.org
+hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts</code></pre></div>
 </div>
-</div>
+<p>文章路径为：根目录/content/post/newBlog.org
+云端仓库为：根目录/public （在此目录下管理git）
+云端文章目录为：根目录/public/post/blog</p>
 </div>
 </div>
 </article>
@@ -164,13 +196,11 @@ just
       <div class="ui segment toc">
         <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">hello</a>
-<ul>
-<li><a href="#headline-2">sd</a>
+<li><a href="#headline-1">安装hugo</a>
 </li>
-<li><a href="#headline-3">just</a>
+<li><a href="#headline-2">新建站点</a>
 </li>
-</ul>
+<li><a href="#headline-3">写/发布文章</a>
 </li>
 </ul>
 </nav>
