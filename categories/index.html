@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>All Categories | Iluvata&#39;s Tree House</title>
+    <title>All Categories | Hugo Theme Dream</title>
 
     
 
 
 
-<meta name="author" content="" />
+<meta name="author" content="Yue Yang" />
 <meta name="description" content="" />
 
 
@@ -45,9 +45,26 @@
   }
 
   
-
+  a {
+    color: seagreen !important;
+  }
   
 
+  
+  .inverted a,
+  .inverted a:hover {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+  }
   
 
   
@@ -58,7 +75,7 @@
 
   <body class="default">
     
-<nav class="ui secondary menu dream-menu">
+<nav class="ui secondary inverted menu dream-menu">
 
   <div class="item">
     <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
@@ -83,13 +100,15 @@
   <section class="ui top attached center aligned segment">
     <div class="ui small circular image">
       
+        <img src="/img/avatar.jpg">
+      
     </div>
 
     
     <div class="ui medium header">
     
-      &#39;s blog
-      <div class="sub header" style="margin-top: 0.5rem;"></div>
+      Yue Yang&#39;s blog
+      <div class="sub header" style="margin-top: 0.5rem;">Motto</div>
     
     </div>
     
@@ -113,6 +132,12 @@
     <nav class="ui secondary menu dream-menu dream-socials">
   
   
+    <div class="item">
+      <a href="mailto:g1enyy0ung@gmail.com">
+        <i class=" mail icon" title="Email"></i>
+      </a>
+    </div>
+  
 
   
 
@@ -135,7 +160,7 @@
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 Iluvata&#39;s Tree House</p>
+      <p>© 2016 - 2021 Hugo Theme Dream</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
@@ -177,6 +202,12 @@
         <nav class="ui secondary menu dream-menu dream-socials">
   
   
+    <div class="item">
+      <a href="mailto:g1enyy0ung@gmail.com">
+        <i class="large mail icon" title="Email"></i>
+      </a>
+    </div>
+  
 
   
 
@@ -217,7 +248,7 @@
   window.defaultDark =  null 
   window.backgroundDark =  null 
   window.backgroundImageDark =  null 
-  window.darkNav =  null 
+  window.darkNav =  true 
   window.hasTwitterEmbed =  null 
 
   if (window.hasTwitterEmbed) {
