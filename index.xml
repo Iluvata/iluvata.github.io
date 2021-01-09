@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>Iluvata&#39;s Tree House</title>
     <link>https://iluvata.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on Iluvata&#39;s Tree House</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
     <lastBuildDate>Fri, 08 Jan 2021 15:02:22 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo博客站点搭建</title>
@@ -16,7 +16,7 @@
       <description>  由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。
 安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
 hugo server --buildDrafts -t dream  新建github仓库 云端部署
-hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org 云端仓库为：根目录/public （在此目录下管理git） 云端文章目录为：根目录/public/post/blog   </description>
+hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org  云端仓库为：根目录/public （在此目录下管理git）  云端文章目录为：根目录/public/post/blog   </description>
     </item>
     
   </channel>
