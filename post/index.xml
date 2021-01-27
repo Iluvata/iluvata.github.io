@@ -13,7 +13,12 @@
       <pubDate>Wed, 27 Jan 2021 10:58:42 +0800</pubDate>
       
       <guid>https://iluvata.github.io/post/01-27_hugo_config/</guid>
-      <description> 主题配置   插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
+      <description> 主题配置  我创建了一个包含整个博客目录的仓库，在这里，以便在不同的地方随时pull下来
+ 需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
+ 主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
+ 如配置头像所用的avatar=&amp;#34;/img/avatar.png&amp;#34;实际所在位置为themes/dream/static/img/avatar.png
+ 修改封面图片：文章添加参数&amp;#34;cover&amp;#34; cover:&amp;#34;\/img\/…png&amp;#34;
+  插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
 print(&amp;#34;hello world&amp;#34;)   插入图片：用
 [[图片路径]]     </description>
     </item>
