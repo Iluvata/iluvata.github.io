@@ -126,6 +126,16 @@
   </section>
 
   
+  <section class="ui attached center aligned segment dream-tags">
+    
+      
+      
+      <a class="ui label" href="/tags/hugo/" title="Hugo">
+        Hugo
+      </a>
+    
+  </section>
+  
 
   
 
@@ -194,8 +204,9 @@
  需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
  如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
- 修改封面图片：文章添加参数&#34;cover&#34; cover:&#34;\/img\/…png&#34;
-  插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
+ 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
+ 添加tag和categlory: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categlories: [&#34;categlory1&#34;, &#34;categlory2&#34;]
+   插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
 print(&#34;hello world&#34;)   插入图片：用
 [[图片路径]]     
     </div>
@@ -214,7 +225,7 @@ print(&#34;hello world&#34;)   插入图片：用
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/01-08_hugo/">
     
-      <img src="/img/default3.jpg" alt="hugo博客站点搭建" />
+      <img src="/img/default1.jpg" alt="hugo博客站点搭建" />
     
   </a>
 

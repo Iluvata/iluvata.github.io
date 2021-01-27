@@ -25,8 +25,9 @@
  需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
  如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
- 修改封面图片：文章添加参数&#34;cover&#34; cover:&#34;\/img\/…png&#34;
-  插入附件  文章嵌入代码：用#&#43;begin_src和#&#43;end_src表示代码
+ 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
+ 添加tag和categlory: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categlories: [&#34;categlory1&#34;, &#34;categlory2&#34;]
+   插入附件  文章嵌入代码：用#&#43;begin_src和#&#43;end_src表示代码
 print(&#34;hello world&#34;)   插入图片：用
 [[图片路径]]     " />
 <meta property="og:type" content="article" />
@@ -42,8 +43,9 @@ print(&#34;hello world&#34;)   插入图片：用
  需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
  如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
- 修改封面图片：文章添加参数&#34;cover&#34; cover:&#34;\/img\/…png&#34;
-  插入附件  文章嵌入代码：用#&#43;begin_src和#&#43;end_src表示代码
+ 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
+ 添加tag和categlory: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categlories: [&#34;categlory1&#34;, &#34;categlory2&#34;]
+   插入附件  文章嵌入代码：用#&#43;begin_src和#&#43;end_src表示代码
 print(&#34;hello world&#34;)   插入图片：用
 [[图片路径]]     "/>
 
@@ -152,13 +154,17 @@ print(&#34;hello world&#34;)   插入图片：用
 <p>我创建了一个包含整个博客目录的仓库，在<a href="https://github.com/iluvata/my-hugo-blog">这里</a>，以便在不同的地方随时pull下来</p>
 <p>
 需要注意的是这个仓库中还嵌套包含了另外两个仓库，<a href="https://github.com/iluvata/iluvata.github.io">页面仓库</a>对应public文件夹，以及
-<a href="https://github.com/g1eny0ung/hugo-theme-dream">dream</a>主题仓库，对应themes/dream文件夹</p>
+<a href="https://github.com/iluvata/hugo-theme-dream">dream</a>主题仓库，对应themes/dream文件夹</p>
 <p>
 主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.</p>
 <p>
 如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png</p>
 <p>
-修改封面图片：文章添加参数&#34;cover&#34;  cover:&#34;\/img\/…png&#34;</p>
+修改封面图片：文章添加参数&#34;cover&#34;  cover:/img/somepicture.png</p>
+<p>
+添加tag和categlory: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categlories: [&#34;categlory1&#34;, &#34;categlory2&#34;]</p>
+<p>
+<img src="/img/2021-01-27_params.jpg" alt="/img/2021-01-27_params.jpg" title="/img/2021-01-27_params.jpg" /></p>
 </div>
 </div>
 <div id="outline-container-headline-2" class="outline-3">
@@ -184,7 +190,9 @@ print(&#34;hello world&#34;)   插入图片：用
 
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
-          <a class="ui label">No Tags</a>
+        
+          <a class="ui label" href="/tags/hugo" title="hugo">hugo</a>
+        
       
       <div
         class="ui label"
@@ -246,6 +254,16 @@ print(&#34;hello world&#34;)   插入图片：用
     </div>
   </section>
 
+  
+  <section class="ui attached center aligned segment dream-tags">
+    
+      
+      
+      <a class="ui label" href="/tags/hugo/" title="Hugo">
+        Hugo
+      </a>
+    
+  </section>
   
 
   

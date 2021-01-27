@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://iluvata.github.io/tags/hugo/</loc>
+    <lastmod>2021-01-27T10:58:42+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://iluvata.github.io/post/01-27_hugo_config/</loc>
     <lastmod>2021-01-27T10:58:42+08:00</lastmod>
   </url>
@@ -18,16 +23,17 @@
   </url>
   
   <url>
+    <loc>https://iluvata.github.io/tags/</loc>
+    <lastmod>2021-01-27T10:58:42+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://iluvata.github.io/post/01-08_hugo/</loc>
     <lastmod>2021-01-08T15:02:22+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://iluvata.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://iluvata.github.io/tags/</loc>
   </url>
   
 </urlset>
