@@ -6,7 +6,18 @@
     <description>Recent content in Posts on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 08 Jan 2021 15:02:22 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Jan 2021 10:58:42 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo 博客配置</title>
+      <link>https://iluvata.github.io/post/01-27_hugo_config/</link>
+      <pubDate>Wed, 27 Jan 2021 10:58:42 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/01-27_hugo_config/</guid>
+      <description> 主题配置   插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
+print(&amp;#34;hello world&amp;#34;)   插入图片：用
+[[图片路径]]     </description>
+    </item>
+    
     <item>
       <title>hugo博客站点搭建</title>
       <link>https://iluvata.github.io/post/01-08_hugo/</link>
