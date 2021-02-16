@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title> | Iluvata&#39;s Blog</title>
+    <title>work | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,19 +17,19 @@
 
 <meta name="generator" content="Hugo 0.80.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/" />
+<link rel="canonical" href="https://iluvata.github.io/tags/work/" />
 
 
-<meta property="og:title" content="Posts" />
+<meta property="og:title" content="work" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://iluvata.github.io/post/" />
+<meta property="og:url" content="https://iluvata.github.io/tags/work/" />
 <meta property="og:updated_time" content="2021-02-16T19:00:39+08:00" />
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="work"/>
 <meta name="twitter:description" content=""/>
 
 
@@ -105,12 +105,12 @@
     </div>
 
     
-    <h1 class="ui medium header">
+    <div class="ui medium header">
     
       Iluvata&#39;s blog
       <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
     
-    </h1>
+    </div>
     
 
     <div class="ui horizontal list">
@@ -282,143 +282,6 @@
  不复习，面试被问到也肯定gg。这两周B站找了个数据结构的视频有空看，但是不做习题还是没啥用。翻了下《算法笔记》，里面就是一道一道题，硬去做的话效率也不高。好在我之前准备PAT的时候每题的代码和感悟都还留着，还在微软TO DO上按
  专题把一些题目分了类。之后就按之前的记录再刷一遍吧，把每个专题的知识点在博客上整理下。然后还是要刷下北航的机试真题。
   面试     
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/02-02_scheme-in-emacs/">
-    
-      <img src="/img/default2.jpg" alt="在spacemacs中写scheme" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/02-02_hugo-with-emacs/">
-    
-      <img src="/img/default1.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34; 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/01-27_hugo-config/">
-    
-      <img src="/img/picdemo.png" alt="hugo 博客配置" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/01-27_hugo-config/">hugo 博客配置</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Wednesday, Jan 27, 2021</p>
-    </div>
-    <div class="description">
-       主题配置  我创建了一个包含整个博客目录的仓库，在这里，以便在不同的地方随时pull下来
- 需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
- 主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
- 如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
- 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
- 添加tag和category: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categories: [&#34;category1&#34;, &#34;category2&#34;]
-   插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
-print(&#34;hello world&#34;)   插入图片：用
-[[图片路径]]     
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/01-08_hugo/">
-    
-      <img src="/img/default3.jpg" alt="hugo博客站点搭建" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/01-08_hugo/">hugo博客站点搭建</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Jan 8, 2021</p>
-    </div>
-    <div class="description">
-        由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。
-安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
-hugo server --buildDrafts -t dream  新建github仓库 云端部署
-hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org  云端仓库为：根目录/public （在此目录下管理git）  云端文章目录为：根目录/public/post/blog   
     </div>
   </div>
 
