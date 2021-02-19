@@ -9,13 +9,14 @@
     <lastBuildDate>Wed, 27 Jan 2021 10:58:42 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/categories/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo 博客配置</title>
-      <link>https://iluvata.github.io/post/01-27_hugo-config/</link>
+      <link>https://iluvata.github.io/post/2021-01-27_hugo-config/</link>
       <pubDate>Wed, 27 Jan 2021 10:58:42 +0800</pubDate>
       
-      <guid>https://iluvata.github.io/post/01-27_hugo-config/</guid>
+      <guid>https://iluvata.github.io/post/2021-01-27_hugo-config/</guid>
       <description> 主题配置  我创建了一个包含整个博客目录的仓库，在这里，以便在不同的地方随时pull下来
  需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
- 主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
+  02-19注：之前以为删了dream里面的.git就可以直接管理整个博客了，后面发现并不行。需要用 git rm --cached themes/dream 把git子模块去掉
+  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
  如配置头像所用的avatar=&amp;#34;/img/avatar.png&amp;#34;实际所在位置为themes/dream/static/img/avatar.png
  修改封面图片：文章添加参数&amp;#34;cover&amp;#34; cover:/img/somepicture.png
  添加tag和category: 在文章头部添加参数tags: [&amp;#34;tag1&amp;#34;, &amp;#34;tag2&amp;#34;]，categories: [&amp;#34;category1&amp;#34;, &amp;#34;category2&amp;#34;]

@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 02 Feb 2021 22:35:46 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/tags/sicp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在spacemacs中写scheme</title>
-      <link>https://iluvata.github.io/post/02-02_scheme-in-emacs/</link>
+      <link>https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/</link>
       <pubDate>Tue, 02 Feb 2021 22:35:46 +0800</pubDate>
       
-      <guid>https://iluvata.github.io/post/02-02_scheme-in-emacs/</guid>
+      <guid>https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/</guid>
       <description>参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
 windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
  首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
