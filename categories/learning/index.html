@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>sicp | Iluvata&#39;s Blog</title>
+    <title>learning | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,19 +17,19 @@
 
 <meta name="generator" content="Hugo 0.80.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/tags/sicp/" />
+<link rel="canonical" href="https://iluvata.github.io/categories/learning/" />
 
 
-<meta property="og:title" content="sicp" />
+<meta property="og:title" content="learning" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://iluvata.github.io/tags/sicp/" />
-<meta property="og:updated_time" content="2021-02-02T22:35:46+08:00" />
+<meta property="og:url" content="https://iluvata.github.io/categories/learning/" />
+<meta property="og:updated_time" content="2021-02-19T13:35:34+08:00" />
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="sicp"/>
+<meta name="twitter:title" content="learning"/>
 <meta name="twitter:description" content=""/>
 
 
@@ -301,31 +301,27 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
+  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dijkstra-floyd/">
     
-      <img src="/img/default1.jpg" alt="在spacemacs中写scheme" />
+      <img src="/img/2021-02-19_dijkstra.jpg" alt="理解dijkstra算法与floyd-warshall算法" />
     
   </a>
 
   <div class="content">
     <h2 class="ui medium header">
-      <a href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
+      <a href="/post/2021-02-19_dijkstra-floyd/">理解dijkstra算法与floyd-warshall算法</a>
     </h2>
     <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
+      <p class="date">Friday, Feb 19, 2021</p>
     </div>
     <div class="description">
-      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
+       今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和求最短路径的算法一起整理一下。
+集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。这里简单介绍一下，具体的以后再专门整理。 这里我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序） 函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射. A function from A to B is an assignment of exactly one element of B to each element of A. 包括
+  单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.
+  满射（onto）函数：值域中每个值都有对应的定义域元素.
+  双射： 满足单射及满射 https://www.shuxuele.com/sets/injective-surjective-bijective.html
+    动态规划与floyd-warshall算法  https://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html
+  贪心与dijkstra算法   
     </div>
   </div>
 
