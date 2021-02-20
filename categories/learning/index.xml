@@ -8,18 +8,22 @@
     <language>en</language>
     <lastBuildDate>Fri, 19 Feb 2021 13:35:34 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/categories/learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>理解dijkstra算法与floyd-warshall算法</title>
-      <link>https://iluvata.github.io/post/2021-02-19_dijkstra-floyd/</link>
+      <title>理解动态规划</title>
+      <link>https://iluvata.github.io/post/2021-02-19_warshall/</link>
       <pubDate>Fri, 19 Feb 2021 13:35:34 +0800</pubDate>
       
-      <guid>https://iluvata.github.io/post/2021-02-19_dijkstra-floyd/</guid>
-      <description> 今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和求最短路径的算法一起整理一下。
-集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。这里简单介绍一下，具体的以后再专门整理。 这里我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序） 函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射. A function from A to B is an assignment of exactly one element of B to each element of A. 包括
+      <guid>https://iluvata.github.io/post/2021-02-19_warshall/</guid>
+      <description>今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
+集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
+关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）
+ 函数：函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射.
+ A function from A to B is an assignment of exactly one element of B to each element of A.
+ 函数的种类包括
   单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.
   满射（onto）函数：值域中每个值都有对应的定义域元素.
-  双射： 满足单射及满射 https://www.shuxuele.com/sets/injective-surjective-bijective.html
-    动态规划与floyd-warshall算法  https://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html
-  贪心与dijkstra算法   </description>
+  双射： 满足单射及满射
+    闭包  闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。 其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).
+ 一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中， 如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c) 的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)}, 进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的 自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。</description>
     </item>
     
   </channel>
