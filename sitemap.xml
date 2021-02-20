@@ -4,11 +4,26 @@
   
   <url>
     <loc>https://iluvata.github.io/</loc>
-    <lastmod>2021-02-16T19:00:39+08:00</lastmod>
+    <lastmod>2021-02-19T11:45:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iluvata.github.io/post/2021-02-19_deploy-nextcloud/</loc>
+    <lastmod>2021-02-19T11:45:28+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://iluvata.github.io/post/</loc>
+    <lastmod>2021-02-19T11:45:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iluvata.github.io/categories/</loc>
+    <lastmod>2021-02-16T19:00:39+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iluvata.github.io/categories/life/</loc>
     <lastmod>2021-02-16T19:00:39+08:00</lastmod>
   </url>
   
@@ -58,17 +73,7 @@
   </url>
   
   <url>
-    <loc>https://iluvata.github.io/categories/</loc>
-    <lastmod>2021-01-27T10:58:42+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://iluvata.github.io/post/01-27_hugo-config/</loc>
-    <lastmod>2021-01-27T10:58:42+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iluvata.github.io/categories/life/</loc>
     <lastmod>2021-01-27T10:58:42+08:00</lastmod>
   </url>
   
