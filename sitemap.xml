@@ -73,30 +73,12 @@
   </url>
   
   <url>
-<<<<<<< HEAD
-    <loc>https://iluvata.github.io/post/01-27_hugo-config/</loc>
-=======
-    <loc>https://iluvata.github.io/categories/</loc>
-    <lastmod>2021-01-27T10:58:42+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://iluvata.github.io/post/2021-01-27_hugo-config/</loc>
->>>>>>> f71ecb7d573e1fe960d4612354790a5d228a4ad3
     <lastmod>2021-01-27T10:58:42+08:00</lastmod>
   </url>
   
   <url>
-<<<<<<< HEAD
-    <loc>https://iluvata.github.io/post/01-08_hugo/</loc>
-=======
-    <loc>https://iluvata.github.io/categories/life/</loc>
-    <lastmod>2021-01-27T10:58:42+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iluvata.github.io/post/2021-02-08_hugo/</loc>
->>>>>>> f71ecb7d573e1fe960d4612354790a5d228a4ad3
+    <loc>https://iluvata.github.io/post/2021-01-08_hugo/</loc>
     <lastmod>2021-01-08T15:02:22+08:00</lastmod>
   </url>
   
