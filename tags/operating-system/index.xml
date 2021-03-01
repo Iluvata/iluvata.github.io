@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>operating system on Iluvata&#39;s Blog</title>
+    <link>https://iluvata.github.io/tags/operating-system/</link>
+    <description>Recent content in operating system on Iluvata&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Mar 2021 22:52:59 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/tags/operating-system/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>电脑是怎么启动的</title>
+      <link>https://iluvata.github.io/post/2021-03-01_how-computer-startup/</link>
+      <pubDate>Mon, 01 Mar 2021 22:52:59 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-03-01_how-computer-startup/</guid>
+      <description> 启动过程简介  计算机开机过程大致可以被分为几个阶段：
+  按下开机键
+  cpu跳转至bios
+  bios进行开机自检
+  寻找启动设备
+  从MBR加载启动区
+  BIOS
+    BIOS   参考链接：计算机启动过程 北航课件
+  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,13 +6,52 @@
     <description>Recent content on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Feb 2021 13:35:34 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Mar 2021 22:52:59 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>理解动态规划</title>
-      <link>https://iluvata.github.io/post/2021-02-19_warshall/</link>
+      <title>电脑是怎么启动的</title>
+      <link>https://iluvata.github.io/post/2021-03-01_how-computer-startup/</link>
+      <pubDate>Mon, 01 Mar 2021 22:52:59 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-03-01_how-computer-startup/</guid>
+      <description> 启动过程简介  计算机开机过程大致可以被分为几个阶段：
+  按下开机键
+  cpu跳转至bios
+  bios进行开机自检
+  寻找启动设备
+  从MBR加载启动区
+  BIOS
+    BIOS   参考链接：计算机启动过程 北航课件
+  </description>
+    </item>
+    
+    <item>
+      <title>理解贪心算法与dijkstra算法</title>
+      <link>https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/</link>
+      <pubDate>Wed, 24 Feb 2021 10:52:06 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/</guid>
+      <description> 贪心与动态规划  我们知道动态规划求解的问题需要具有 1. 最优子结构 2. 重复子问题 具有最优子结构的问题有时也可以用贪心算法求解。条件是最优解中只包含一个子问题的最优解，而一般的动态规划 最优解包含多个子问题的最优解。比如fib算法，fib(5)需要fib(4)与fib(3)两个子问题的解，无法使用贪心算法。 阶乘算法factorial(5)的递归解只需要使用一个子问题factorial(4)的解，这种情况使用贪心算法，即无需自底向上 记录每一子问题的解，只需记录当前最近一子问题的解用于求解当前解。
+ 一个更直观的例子是0-1背包问题和部分背包问题。背包问题要求在指定的一些商品中选出能装入背包重量的最大价值的商品 组合。0-1背包问题中的每个商品是一个整体，要么整个装入，要么不装。部分背包问题里的商品类似水或金沙，可以分割后 装入部分。0-1背包问题是典型的动态规划例子，部分背包是贪心。
+ 我们容易得到背包问题的最优子结构
+  </description>
+    </item>
+    
+    <item>
+      <title>在org mode中嵌入latex</title>
+      <link>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</link>
+      <pubDate>Mon, 22 Feb 2021 23:30:15 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</guid>
+      <description>最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
+ 首先自然是官方文档.</description>
+    </item>
+    
+    <item>
+      <title>理解动态规划与warshall算法</title>
+      <link>https://iluvata.github.io/post/2021-02-19_dp_and_warshall/</link>
       <pubDate>Fri, 19 Feb 2021 13:35:34 +0800</pubDate>
       
-      <guid>https://iluvata.github.io/post/2021-02-19_warshall/</guid>
+      <guid>https://iluvata.github.io/post/2021-02-19_dp_and_warshall/</guid>
       <description>今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
 集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
 关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）

@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/tags/algorithm/" />
-<meta property="og:updated_time" content="2021-02-19T13:35:34+08:00" />
+<meta property="og:updated_time" content="2021-02-24T10:52:06+08:00" />
 
 
 
@@ -153,6 +153,12 @@
     
       
       
+      <a class="ui label" href="/tags/operating-system/" title="Operating System">
+        Operating System
+      </a>
+    
+      
+      
       <a class="ui label" href="/tags/sicp/" title="Sicp">
         Sicp
       </a>
@@ -198,7 +204,19 @@
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2021-02-19_warshall/">理解动态规划</a>
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与dijkstra算法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-19_dp_and_warshall/">理解动态规划与warshall算法</a>
                 </div>
               </div>
             
@@ -222,6 +240,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-02-16_yearly-review/">2020年度回顾以及新年目标</a>
                 </div>
               </div>
@@ -241,6 +265,30 @@
               <div class="item">
                 <div class="content">
                   <a class="item" href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/%E8%80%83%E7%A0%94/" title="考研">
+              考研
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
                 </div>
               </div>
             
@@ -301,15 +349,47 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-19_warshall/">
+  <a class="image" href="https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/">
     
-      <img src="/img/2021-02-19_dijkstra.jpg" alt="理解动态规划" />
+      <img src="2021-03-01_greedy.jpg" alt="理解贪心算法与dijkstra算法" />
     
   </a>
 
   <div class="content">
     <h2 class="ui medium header">
-      <a href="/post/2021-02-19_warshall/">理解动态规划</a>
+      <a href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与dijkstra算法</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Feb 24, 2021</p>
+    </div>
+    <div class="description">
+       贪心与动态规划  我们知道动态规划求解的问题需要具有 1. 最优子结构 2. 重复子问题 具有最优子结构的问题有时也可以用贪心算法求解。条件是最优解中只包含一个子问题的最优解，而一般的动态规划 最优解包含多个子问题的最优解。比如fib算法，fib(5)需要fib(4)与fib(3)两个子问题的解，无法使用贪心算法。 阶乘算法factorial(5)的递归解只需要使用一个子问题factorial(4)的解，这种情况使用贪心算法，即无需自底向上 记录每一子问题的解，只需记录当前最近一子问题的解用于求解当前解。
+ 一个更直观的例子是0-1背包问题和部分背包问题。背包问题要求在指定的一些商品中选出能装入背包重量的最大价值的商品 组合。0-1背包问题中的每个商品是一个整体，要么整个装入，要么不装。部分背包问题里的商品类似水或金沙，可以分割后 装入部分。0-1背包问题是典型的动态规划例子，部分背包是贪心。
+ 我们容易得到背包问题的最优子结构
+  
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp_and_warshall/">
+    
+      <img src="/img/2021-02-19_dijkstra.jpg" alt="理解动态规划与warshall算法" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-02-19_dp_and_warshall/">理解动态规划与warshall算法</a>
     </h2>
     <div class="meta">
       <p class="date">Friday, Feb 19, 2021</p>

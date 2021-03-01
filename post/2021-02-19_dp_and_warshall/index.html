@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>理解动态规划与warshall算法 | Iluvata&#39;s Blog</title>
+
+    
+
+
+
+<meta name="author" content="Iluvata" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.80.0" />
+
+<link rel="canonical" href="https://iluvata.github.io/post/2021-02-19_dp_and_warshall/" />
+
+
+<meta property="og:title" content="理解动态规划与warshall算法" />
+<meta property="og:description" content="今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
+集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
+关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）
+ 函数：函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射.
+ A function from A to B is an assignment of exactly one element of B to each element of A.
+ 函数的种类包括
+  单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.
+  满射（onto）函数：值域中每个值都有对应的定义域元素.
+  双射： 满足单射及满射
+    闭包  闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。 其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).
+ 一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中， 如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c) 的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)}, 进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的 自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-02-19_dp_and_warshall/" />
+<meta property="article:published_time" content="2021-02-19T13:35:34+08:00" />
+<meta property="article:modified_time" content="2021-02-19T13:35:34+08:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="理解动态规划与warshall算法"/>
+<meta name="twitter:description" content="今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
+集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
+关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）
+ 函数：函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射.
+ A function from A to B is an assignment of exactly one element of B to each element of A.
+ 函数的种类包括
+  单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.
+  满射（onto）函数：值域中每个值都有对应的定义域元素.
+  双射： 满足单射及满射
+    闭包  闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。 其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).
+ 一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中， 如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c) 的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)}, 进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的 自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。"/>
+
+
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="/css/OverlayScrollbars.min.css" />
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  a:hover {
+    text-decoration: underline; 
+  }
+
+  
+  a {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a,
+  .inverted a:hover {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+  }
+  
+
+  
+</style>
+
+    
+
+
+
+
+
+
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary inverted menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/iluvata.github.io'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">
+          理解动态规划与warshall算法
+          <div class="sub header">
+            @
+            
+              Iluvata
+            
+
+            | 
+                Friday, Feb 19, 2021
+              
+
+            | 1 minutes read
+
+            | Update at
+              
+                Friday, Feb 19, 2021
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main">
+<p>今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法
+和动态规划一起整理一下。</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+集合、关系和闭包
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>要理解闭包首先需要了解集合和关系（函数）。
+  在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。</p>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+关系与函数
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。
+  关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性
+  的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）</p>
+<p>
+  函数：函数可以看作一种特殊的关系。
+  函数是每个定义域中元素到唯一一个值域中元素的映射.</p>
+<p>
+  A function from A to B is an assignment of exactly one element
+  of B to each element of A.</p>
+<p>
+  <a href="https://www.shuxuele.com/sets/injective-surjective-bijective.html">函数的种类</a>包括</p>
+<ul>
+<li>
+<p>单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.</p>
+</li>
+<li>
+<p>满射（onto）函数：值域中每个值都有对应的定义域元素.</p>
+</li>
+<li>
+<p>双射： 满足单射及满射</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+闭包
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。
+  其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).</p>
+<p>
+  一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中，
+  如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c)
+  的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)},
+  进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的
+  自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。</p>
+<p>
+  我们把算法整理一下写出来是这样的
+  <img src="/img/2021-02-20_transitive-closure.png" alt="/img/2021-02-20_transitive-closure.png" title="/img/2021-02-20_transitive-closure.png" /></p>
+<p>
+  在有限关系中，相同的步骤最多只需要执行n次。n为集合中元素的个数。该定理证明需要引入路径path的概念。我们把从一个元素a通过一系列
+  传递关系最终到达另一元素b中间这一系列关系称为a到b的路径。经过关系的数量称为路径长度。可以证明，集合中任意两点间路径长度最长为n。
+  因为若有一条路径长度&gt;n，其中必定经过某一顶点大于一次，形成环路。将该环路去掉可以得到长度&lt;=n的路径。易证R^i是集合中有长度为i的
+  路径的连接矩阵（如果a到b间有一条长度为i的路径，R^i[a,b]=1，否则R^i[a,b]=0）。这样我们可以在有限的步骤（n步）得到有限集合的
+  传递闭包。</p>
+<p>
+  可以用伪代码表示</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">procedure transitive closure
+A := M
+B := A
+for i:= 2 to n
+A := A * M   // 计算A^i
+B := B or A
+return B</code></pre></div>
+</div>
+<p>该算法每次计算 A := A*M  的复杂度为O(n^3), B := B or A 复杂度为O(n^2)。算法整体复杂度为O(n^4)。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+floyd-warshall算法
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>关于dijkstra算法与floyd算法的介绍我找到了一篇介绍<a href="https://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html">博客</a>。</p>
+<p>
+  warshall算法是一种可以用更低复杂度计算传递闭包的算法。之前我们得到的算法计算了n次A^i, 每次矩阵乘法复杂度为O(n^3). warshall算法提供了一种
+  O(n^3)的方法得到最终的传递闭包。</p>
+<p>
+  如果点i与点j间有一点k，可以找到关系(i,k), (k,j)，我们就将(i,j)看作可用长度为n的路径连接，加入当前矩阵。我们检测n次得到最终的长度0-n的路径
+  矩阵。每次把一点作为k，检查所有i与j，复杂度为O(n^2)。最终得到的算法复杂度为O(n^3).</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+动态规划
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+分治法
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>分治法的核心思想是将问题划分为独立的子问题，递归求解后合并得到问题的解。典型的例子有归并排序。
+   归并排序的步骤：1. 拆分 2. 递归求解 3. 归并 </p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+动态规划
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>分治法是将问题分为多个小的子问题，解决后合并得到解。但这种方式在碰到一些最优化问题时复杂度
+   会变成指数级别。比如计算斐波那契数列，用分治法递归计算fib(5)需要计算fin(4)+fib(3)。在计算
+   fib(4)的时候也需要计算fib(3)。就造成了fib(3)这个子问题的重复计算。这种情况会发生在子问题存在
+   重叠的时候。分治法适用于子问题分离的问题，却无法解决具有重复子问题的问题。动态规划用于解决
+   原问题的最优解中包含子问题最优解的问题。</p>
+<p>
+   用动态规划解决一个最优化问题分为4个步骤：</p>
+<ol>
+<li>
+<p>描述最优解的结构 在fib中fib(n)由前两个子问题fib(n-1)与fib(n-2)相加得到。</p>
+</li>
+<li>
+<p>递归定义最优解的值 fib(n) = fib(n-1)+fib(n-2)</p>
+</li>
+<li>
+<p>自底向上计算最优解 记录每次结果，用于计算下次结果值</p>
+</li>
+<li>
+<p>构造最优解 fib问题只需要最终值就够了，但有些问题比如最短路径除了记录每个子问题代价外还需要在过程中记录经过的结点。最后使用记录的结点构造路径。</p>
+</li>
+</ol>
+<p>关于是否可以使用动态规划有2个标志：</p>
+<ol>
+<li>
+<p>是否具有最有子结构 最优解是由子问题的最优解构成</p>
+</li>
+<li>
+<p>子问题是否重叠 虽然不重叠也可以用，但子问题重叠的时候能解决分治法无法解决的问题
+由于使用自底向上的表格法，无需重复求解子问题</p>
+</li>
+</ol>
+<p>问题是否具有最优子结构需要注意问题的子问题是否相互独立。即子问题1的最优解是否会影响到子问题2的最优解。如果会相互影响，那就不能假定问题具有最优子结构。</p>
+<div id="outline-container-headline-8" class="outline-4">
+<h4 id="headline-8">
+最长公共子序列问题
+</h4>
+<div id="outline-text-headline-8" class="outline-text-4">
+<p>一个串的子序列是该串中的元素子集按原有顺序排列生成的串。如&lt;a1, a2, a3, a4&gt;的子序列有&lt;a1&gt;, &lt;a1, a3&gt;, &lt;a2, a3, a4&gt;等。但&lt;a3, a2&gt;不是。
+    现在我们需要求出两个串的最长公共子序列。</p>
+<p>
+    我们首先分析问题是否具有最优子结构。易看出两个串{a1…an}和{b1…bm}的最长公共子序列包含了{a1…a(n-1)}与{b1…b(m-1)}的最长公共子序列。如果an = bm,
+    所求最长公共子序列为{a1…a(n-1)}与{b1…b(m-1)}的最长公共子序列+an；否则为{a1…a(n-1)}与{b1…bm}或{a1…an}与{b1…b(m-1)}的最长公共子序列。该问题
+    的最优解中包含了子问题的最优解，具有最优子结构。</p>
+<p>
+    下一步是写出递归解。</p>
+<p>
+    最后将递归解改为自底向上求解，代回得到解。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+贪心算法
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>与动态规划相同，贪心算法也可以用来解决具有最有子结构的问题。他和动态规划的区别是：贪心算法用自顶向下方式，先选择
+   当时看起来的最优选择，再求解子问题;而不是先找子问题的最优解再选择。</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+        
+          <a class="ui label" href="/tags/algorithm" title="algorithm">algorithm</a>
+        
+          <a class="ui label" href="/tags/math" title="math">math</a>
+        
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+    
+    
+
+    
+
+  </div>
+  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
+    
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">集合、关系和闭包</a>
+<ul>
+<li><a href="#headline-2">关系与函数</a>
+</li>
+<li><a href="#headline-3">闭包</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-4">floyd-warshall算法</a>
+</li>
+<li><a href="#headline-5">动态规划</a>
+<ul>
+<li><a href="#headline-6">分治法</a>
+</li>
+<li><a href="#headline-7">动态规划</a>
+<ul>
+<li><a href="#headline-8">最长公共子序列问题</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">贪心算法</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+      </div>
+    
+
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img/avatar.png">
+      
+    </div>
+
+    
+    <h1 class="ui medium header">
+    
+      Iluvata&#39;s blog
+      <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
+    
+    </h1>
+    
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="ui attached center aligned segment dream-tags">
+    
+      
+      
+      <a class="ui label" href="/tags/algorithm/" title="Algorithm">
+        Algorithm
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/emacs/" title="Emacs">
+        Emacs
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/hugo/" title="Hugo">
+        Hugo
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/math/" title="Math">
+        Math
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/operating-system/" title="Operating System">
+        Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/sicp/" title="Sicp">
+        Sicp
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/work/" title="Work">
+        Work
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/%E8%80%83%E7%A0%94/" title="考研">
+        考研
+      </a>
+    
+  </section>
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+      
+      
+      
+      
+
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/learning/" title="Learning">
+              Learning
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与dijkstra算法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-19_dp_and_warshall/">理解动态规划与warshall算法</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/life/" title="Life">
+              Life
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-16_yearly-review/">2020年度回顾以及新年目标</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/%E8%80%83%E7%A0%94/" title="考研">
+              考研
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+
+      
+    </div>
+  </section>
+  
+
+  <section class="ui attached segment header-socials">
+    <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class=" mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+  </section>
+
+  <section class="ui bottom attached center aligned segment">
+    
+      <p>© 2021 Iluvata&#39;s Blog</p>
+    
+
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+    
+  </section>
+</article>
+
+  </aside>
+</div>
+
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <div class="ui centered relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui bottom attached segment">
+        <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class="large mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+    
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  true 
+  window.hasTwitterEmbed =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+
+
+
+    
+
+    
+  </body>
+</html>
