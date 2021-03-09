@@ -6,17 +6,7 @@
     <description>Recent content in life on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Feb 2021 23:30:15 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/categories/life/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>在org mode中嵌入latex</title>
-      <link>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</link>
-      <pubDate>Mon, 22 Feb 2021 23:30:15 +0800</pubDate>
-      
-      <guid>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</guid>
-      <description>最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
- 首先自然是官方文档.</description>
-    </item>
-    
+    <lastBuildDate>Tue, 16 Feb 2021 19:00:39 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/categories/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2020年度回顾以及新年目标</title>
       <link>https://iluvata.github.io/post/2021-02-16_yearly-review/</link>

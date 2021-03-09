@@ -8,7 +8,7 @@
     <language>en</language>
     <lastBuildDate>Wed, 24 Feb 2021 10:52:06 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>理解贪心算法与dijkstra算法</title>
+      <title>理解贪心算法与Dijkstra算法</title>
       <link>https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/</link>
       <pubDate>Wed, 24 Feb 2021 10:52:06 +0800</pubDate>
       
@@ -22,15 +22,15 @@
   贪心选择性质
   最优子结构
   贪心选择性质即上文中我们说的“能找到只包含一个子问题的最优解“。通过适当的变换，一些问题可以找到贪心选择性质，如上文中的活动调度问题。 最优子结构即动态规划中的“由子问题的最优解构成当前问题最优解”的性质。满足这两个条件的问题即可使用贪心算法。但在有些情况下，不能轻易找出 最优子结构，但是问题的确可以使用贪心算法求解。比如PAT-1067.
-  Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，dijkstra算法解决了最短路径问题。从算法思想的角度来说，dijkstra算法使用了贪心策略。与之相对的是 bellman-ford算法。同为计算最短路径的算法，bellman-ford算法使用了动态规划的思想，复杂度为O(n^3)。dijkstra算法在此基础上 进一步限定条件（warshall算法可以用来计算带有负权的图，dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).</description>
+  Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，Dijkstra算法解决了最短路径问题。从算法思想的角度来说，Dijkstra算法使用了贪心策略。与之相对的是 Bellman-Ford算法。同为计算最短路径的算法，Bellman-Ford算法使用了动态规划的思想，复杂度为O(n^3)。Dijkstra算法在此基础上 进一步限定条件（Bellman-Ford算法可以用来计算带有负权的图，Dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).</description>
     </item>
     
     <item>
       <title>理解动态规划与warshall算法</title>
-      <link>https://iluvata.github.io/post/2021-02-19_dp_and_warshall/</link>
+      <link>https://iluvata.github.io/post/2021-02-19_dp-and-warshall/</link>
       <pubDate>Fri, 19 Feb 2021 13:35:34 +0800</pubDate>
       
-      <guid>https://iluvata.github.io/post/2021-02-19_dp_and_warshall/</guid>
+      <guid>https://iluvata.github.io/post/2021-02-19_dp-and-warshall/</guid>
       <description>今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
 集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
 关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）

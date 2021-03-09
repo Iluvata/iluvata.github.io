@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/tags/math/" />
-<meta property="og:updated_time" content="2021-02-19T13:35:34+08:00" />
+<meta property="og:updated_time" content="2021-03-04T17:54:59+08:00" />
 
 
 
@@ -204,19 +204,25 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与dijkstra算法</a>
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2021-02-19_dp_and_warshall/">理解动态规划与warshall算法</a>
+                  <a class="item" href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
                 </div>
               </div>
             
@@ -237,12 +243,6 @@
           </div>
           <div class="content">
             <div class="ui list">
-            
-              <div class="item">
-                <div class="content">
-                  <a class="item" href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
-                </div>
-              </div>
             
               <div class="item">
                 <div class="content">
@@ -325,7 +325,39 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp_and_warshall/">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">
+    
+      <img src="/img/2021-03-04_euler.jpeg" alt="欧拉环路和汉密尔顿环路" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Mar 4, 2021</p>
+    </div>
+    <div class="description">
+      图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。 欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到 一条经过所有边，最后回到源点的环路。
+ 欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
+ 对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
+ 和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/">
     
       <img src="/img/2021-02-19_dijkstra.jpg" alt="理解动态规划与warshall算法" />
     
@@ -333,7 +365,7 @@
 
   <div class="content">
     <h2 class="ui medium header">
-      <a href="/post/2021-02-19_dp_and_warshall/">理解动态规划与warshall算法</a>
+      <a href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
     </h2>
     <div class="meta">
       <p class="date">Friday, Feb 19, 2021</p>
@@ -356,7 +388,7 @@
   <div class="extra content">
     <div class="author">@&nbsp;Iluvata</div>
     <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
+      <i class="clock icon"></i>2 minutes read</div>
   </div>
 </article>
 

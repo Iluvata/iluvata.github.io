@@ -6,26 +6,43 @@
     <description>Recent content in Posts on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 Mar 2021 22:52:59 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Mar 2021 17:54:59 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>欧拉环路和汉密尔顿环路</title>
+      <link>https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/</link>
+      <pubDate>Thu, 04 Mar 2021 17:54:59 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/</guid>
+      <description>图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。 欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到 一条经过所有边，最后回到源点的环路。
+ 欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
+ 对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
+ 和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&amp;gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&amp;gt;=n.或者，任意节点的度&amp;gt;=n/2.</description>
+    </item>
+    
     <item>
       <title>电脑是怎么启动的</title>
       <link>https://iluvata.github.io/post/2021-03-01_how-computer-startup/</link>
       <pubDate>Mon, 01 Mar 2021 22:52:59 +0800</pubDate>
       
       <guid>https://iluvata.github.io/post/2021-03-01_how-computer-startup/</guid>
-      <description> 启动过程简介  计算机开机过程大致可以被分为几个阶段：
+      <description>x86启动过程简介  x86计算机开机过程大致可以被分为几个阶段：
   按下开机键
-  cpu跳转至bios
-  bios进行开机自检
+  CPU跳转至BIOS物理地址
+  BIOS进行开机自检
   寻找启动设备
   从MBR加载启动区
-  BIOS
-    BIOS   参考链接：计算机启动过程 北航课件
-  </description>
+  BIOS转移控制给BootLoader
+  第一阶段：硬件  BIOS  Basic Input/Output System 基本输入输出系统，被固化在ROM上的一组程序，提供最底层对硬件的控制。 也被称为固件。
+UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈传参，动态链接，更大寻址。
+    MBR  Master Boot Record 主引导记录。硬盘的第一个扇区，存放预启动信息、分区表信息。
+    第二阶段：系统软件  Boot Loader  操作系统内核加载器。初始化硬件，建立内存空间映射。
+  GRUB
+  LILO
+    加载内核  根据grub设定的内核映像所在路径读取，解压，放入内存。初始化函数，设备，建立Linux核心环境（初始化寄存器、堆栈）。</description>
     </item>
     
     <item>
-      <title>理解贪心算法与dijkstra算法</title>
+      <title>理解贪心算法与Dijkstra算法</title>
       <link>https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/</link>
       <pubDate>Wed, 24 Feb 2021 10:52:06 +0800</pubDate>
       
@@ -39,25 +56,15 @@
   贪心选择性质
   最优子结构
   贪心选择性质即上文中我们说的“能找到只包含一个子问题的最优解“。通过适当的变换，一些问题可以找到贪心选择性质，如上文中的活动调度问题。 最优子结构即动态规划中的“由子问题的最优解构成当前问题最优解”的性质。满足这两个条件的问题即可使用贪心算法。但在有些情况下，不能轻易找出 最优子结构，但是问题的确可以使用贪心算法求解。比如PAT-1067.
-  Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，dijkstra算法解决了最短路径问题。从算法思想的角度来说，dijkstra算法使用了贪心策略。与之相对的是 bellman-ford算法。同为计算最短路径的算法，bellman-ford算法使用了动态规划的思想，复杂度为O(n^3)。dijkstra算法在此基础上 进一步限定条件（warshall算法可以用来计算带有负权的图，dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).</description>
-    </item>
-    
-    <item>
-      <title>在org mode中嵌入latex</title>
-      <link>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</link>
-      <pubDate>Mon, 22 Feb 2021 23:30:15 +0800</pubDate>
-      
-      <guid>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</guid>
-      <description>最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
- 首先自然是官方文档.</description>
+  Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，Dijkstra算法解决了最短路径问题。从算法思想的角度来说，Dijkstra算法使用了贪心策略。与之相对的是 Bellman-Ford算法。同为计算最短路径的算法，Bellman-Ford算法使用了动态规划的思想，复杂度为O(n^3)。Dijkstra算法在此基础上 进一步限定条件（Bellman-Ford算法可以用来计算带有负权的图，Dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).</description>
     </item>
     
     <item>
       <title>理解动态规划与warshall算法</title>
-      <link>https://iluvata.github.io/post/2021-02-19_dp_and_warshall/</link>
+      <link>https://iluvata.github.io/post/2021-02-19_dp-and-warshall/</link>
       <pubDate>Fri, 19 Feb 2021 13:35:34 +0800</pubDate>
       
-      <guid>https://iluvata.github.io/post/2021-02-19_dp_and_warshall/</guid>
+      <guid>https://iluvata.github.io/post/2021-02-19_dp-and-warshall/</guid>
       <description>今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
 集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
 关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）
@@ -158,6 +165,19 @@ print(&amp;#34;hello world&amp;#34;)   插入图片：用
 安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
 hugo server --buildDrafts -t dream  新建github仓库 云端部署
 hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org  云端仓库为：根目录/public （在此目录下管理git）  云端文章目录为：根目录/public/post/blog   </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</guid>
+      <description>— title: &amp;#34;在org mode中嵌入latex&amp;#34; date: 2021-02-22T23:30:15+08:00 draft: false categories: [&amp;#39;life&amp;#39;] tags: [&amp;#39;emacs&amp;#39;] cover: &amp;#39;/img/2021-03-01_latex.jpg&amp;#39; —
+ 最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
+ \begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
+ If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
+ 参考链接：官方文档 Spacemacs和Org-mode和LaTeX</description>
     </item>
     
   </channel>

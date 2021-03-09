@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/categories/learning/" />
-<meta property="og:updated_time" content="2021-03-01T22:52:59+08:00" />
+<meta property="og:updated_time" content="2021-03-04T17:54:59+08:00" />
 
 
 
@@ -204,19 +204,25 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与dijkstra算法</a>
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2021-02-19_dp_and_warshall/">理解动态规划与warshall算法</a>
+                  <a class="item" href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
                 </div>
               </div>
             
@@ -237,12 +243,6 @@
           </div>
           <div class="content">
             <div class="ui list">
-            
-              <div class="item">
-                <div class="content">
-                  <a class="item" href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
-                </div>
-              </div>
             
               <div class="item">
                 <div class="content">
@@ -325,6 +325,38 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">
+    
+      <img src="/img/2021-03-04_euler.jpeg" alt="欧拉环路和汉密尔顿环路" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Mar 4, 2021</p>
+    </div>
+    <div class="description">
+      图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。 欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到 一条经过所有边，最后回到源点的环路。
+ 欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
+ 对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
+ 和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-01_how-computer-startup/">
     
       <img src="/img/2021-03-01_grub.jpg" alt="电脑是怎么启动的" />
@@ -339,15 +371,20 @@
       <p class="date">Monday, Mar 1, 2021</p>
     </div>
     <div class="description">
-       启动过程简介  计算机开机过程大致可以被分为几个阶段：
+      x86启动过程简介  x86计算机开机过程大致可以被分为几个阶段：
   按下开机键
-  cpu跳转至bios
-  bios进行开机自检
+  CPU跳转至BIOS物理地址
+  BIOS进行开机自检
   寻找启动设备
   从MBR加载启动区
-  BIOS
-    BIOS   参考链接：计算机启动过程 北航课件
-  
+  BIOS转移控制给BootLoader
+  第一阶段：硬件  BIOS  Basic Input/Output System 基本输入输出系统，被固化在ROM上的一组程序，提供最底层对硬件的控制。 也被称为固件。
+UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈传参，动态链接，更大寻址。
+    MBR  Master Boot Record 主引导记录。硬盘的第一个扇区，存放预启动信息、分区表信息。
+    第二阶段：系统软件  Boot Loader  操作系统内核加载器。初始化硬件，建立内存空间映射。
+  GRUB
+  LILO
+    加载内核  根据grub设定的内核映像所在路径读取，解压，放入内存。初始化函数，设备，建立Linux核心环境（初始化寄存器、堆栈）。
     </div>
   </div>
 
@@ -364,13 +401,13 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/">
     
-      <img src="/img/2021-03-01_greedy.jpg" alt="理解贪心算法与dijkstra算法" />
+      <img src="/img/2021-03-01_greedy.jpg" alt="理解贪心算法与Dijkstra算法" />
     
   </a>
 
   <div class="content">
     <h2 class="ui medium header">
-      <a href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与dijkstra算法</a>
+      <a href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
     </h2>
     <div class="meta">
       <p class="date">Wednesday, Feb 24, 2021</p>
@@ -385,7 +422,7 @@
   贪心选择性质
   最优子结构
   贪心选择性质即上文中我们说的“能找到只包含一个子问题的最优解“。通过适当的变换，一些问题可以找到贪心选择性质，如上文中的活动调度问题。 最优子结构即动态规划中的“由子问题的最优解构成当前问题最优解”的性质。满足这两个条件的问题即可使用贪心算法。但在有些情况下，不能轻易找出 最优子结构，但是问题的确可以使用贪心算法求解。比如PAT-1067.
-  Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，dijkstra算法解决了最短路径问题。从算法思想的角度来说，dijkstra算法使用了贪心策略。与之相对的是 bellman-ford算法。同为计算最短路径的算法，bellman-ford算法使用了动态规划的思想，复杂度为O(n^3)。dijkstra算法在此基础上 进一步限定条件（warshall算法可以用来计算带有负权的图，dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).
+  Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，Dijkstra算法解决了最短路径问题。从算法思想的角度来说，Dijkstra算法使用了贪心策略。与之相对的是 Bellman-Ford算法。同为计算最短路径的算法，Bellman-Ford算法使用了动态规划的思想，复杂度为O(n^3)。Dijkstra算法在此基础上 进一步限定条件（Bellman-Ford算法可以用来计算带有负权的图，Dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).
     </div>
   </div>
 
@@ -400,7 +437,7 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp_and_warshall/">
+  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/">
     
       <img src="/img/2021-02-19_dijkstra.jpg" alt="理解动态规划与warshall算法" />
     
@@ -408,7 +445,7 @@
 
   <div class="content">
     <h2 class="ui medium header">
-      <a href="/post/2021-02-19_dp_and_warshall/">理解动态规划与warshall算法</a>
+      <a href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
     </h2>
     <div class="meta">
       <p class="date">Friday, Feb 19, 2021</p>
@@ -431,7 +468,7 @@
   <div class="extra content">
     <div class="author">@&nbsp;Iluvata</div>
     <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
+      <i class="clock icon"></i>2 minutes read</div>
   </div>
 </article>
 

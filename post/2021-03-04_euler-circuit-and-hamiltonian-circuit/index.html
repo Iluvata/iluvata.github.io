@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title> | Iluvata&#39;s Blog</title>
+    <title>欧拉环路和汉密尔顿环路 | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,28 +17,27 @@
 
 <meta name="generator" content="Hugo 0.80.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-02-22_latex-with-emacs/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/" />
 
 
-<meta property="og:title" content="" />
-<meta property="og:description" content="— title: &#34;在org mode中嵌入latex&#34; date: 2021-02-22T23:30:15&#43;08:00 draft: false categories: [&#39;life&#39;] tags: [&#39;emacs&#39;] cover: &#39;/img/2021-03-01_latex.jpg&#39; —
- 最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
- \begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=&#43;\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX" />
+<meta property="og:title" content="欧拉环路和汉密尔顿环路" />
+<meta property="og:description" content="图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。 欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到 一条经过所有边，最后回到源点的环路。
+ 欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
+ 对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
+ 和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-02-22_latex-with-emacs/" />
-
+<meta property="og:url" content="https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/" />
+<meta property="article:published_time" content="2021-03-04T17:54:59+08:00" />
+<meta property="article:modified_time" content="2021-03-04T17:54:59+08:00" />
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="— title: &#34;在org mode中嵌入latex&#34; date: 2021-02-22T23:30:15&#43;08:00 draft: false categories: [&#39;life&#39;] tags: [&#39;emacs&#39;] cover: &#39;/img/2021-03-01_latex.jpg&#39; —
- 最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
- \begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=&#43;\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX"/>
+<meta name="twitter:title" content="欧拉环路和汉密尔顿环路"/>
+<meta name="twitter:description" content="图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。 欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到 一条经过所有边，最后回到源点的环路。
+ 欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
+ 对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
+ 和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2."/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -114,7 +113,7 @@
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          
+          欧拉环路和汉密尔顿环路
           <div class="sub header">
             @
             
@@ -122,45 +121,45 @@
             
 
             | 
-                Monday, Jan 1, 0001
+                Thursday, Mar 4, 2021
               
 
             | 1 minutes read
 
             | Update at
               
-                Monday, Jan 1, 0001
+                Thursday, Mar 4, 2021
               
           </div>
         </h1>
       </header>
 
-      <article class="main"><p>—
-title: &#34;在org mode中嵌入latex&#34;
-date: 2021-02-22T23:30:15+08:00
-draft: false
-categories: [&#39;life&#39;]
-tags: [&#39;emacs&#39;]
-cover: &#39;/img/2021-03-01_latex.jpg&#39;
-—</p>
+      <article class="main"><p>
+图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。
+欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到
+一条经过所有边，最后回到源点的环路。</p>
 <p>
-最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。
-于是干脆在这里记一下怎么在org mode中内嵌latex。</p>
+欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为
+同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路
+即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。</p>
 <p>
-\begin{equation}                        % arbitrary environments,
-x=\sqrt{b}                              % even tables, figures
-\end{equation}                          % etc</p>
+对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是
+除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果
+想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。
+对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点，
+从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。</p>
 <p>
-If $a^2=b$ and \( b=2 \), then the solution must be
-either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].</p>
-<p>
-参考链接：<a href="https://orgmode.org/manual/Embedded-LaTeX.html">官方文档</a> <a href="https://blog.poi.cat/post/spacemacs-plus-org-mode-plus-latex">Spacemacs和Org-mode和LaTeX</a></p>
+和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。
+虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非
+邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2.</p>
 </article>
     </section>
 
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
-          <a class="ui label">No Tags</a>
+        
+          <a class="ui label" href="/tags/math" title="math">math</a>
+        
       
       <div
         class="ui label"
