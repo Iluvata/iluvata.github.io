@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/post/" />
-<meta property="og:updated_time" content="2021-03-04T17:54:59+08:00" />
+<meta property="og:updated_time" content="2021-03-11T07:43:55+08:00" />
 
 
 
@@ -204,6 +204,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-03-09_file-and-database/">文件系统与数据库系统</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
                 </div>
               </div>
@@ -322,6 +328,76 @@
   </div>
 
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-01-27_hugo-config/">
+    
+      <img src="/img/picdemo.png" alt="hugo 博客配置" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Jan 27, 2021</p>
+    </div>
+    <div class="description">
+       主题配置  我创建了一个包含整个博客目录的仓库，在这里，以便在不同的地方随时pull下来
+ 需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
+  02-19注：之前以为删了dream里面的.git就可以直接管理整个博客了，后面发现并不行。需要用 git rm --cached themes/dream 把git子模块去掉
+  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
+ 如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
+ 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
+ 添加tag和category: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categories: [&#34;category1&#34;, &#34;category2&#34;]
+   插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
+print(&#34;hello world&#34;)   插入图片：用
+[[图片路径]]     
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-01-08_hugo/">
+    
+      <img src="/img/default4.jpg" alt="hugo博客站点搭建" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-01-08_hugo/">hugo博客站点搭建</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Friday, Jan 8, 2021</p>
+    </div>
+    <div class="description">
+        由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。
+安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
+hugo server --buildDrafts -t dream  新建github仓库 云端部署
+hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org  云端仓库为：根目录/public （在此目录下管理git）  云端文章目录为：根目录/public/post/blog   
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
