@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/post/" />
-<meta property="og:updated_time" content="2021-03-14T22:50:46+08:00" />
+<meta property="og:updated_time" content="2021-03-15T13:13:42+08:00" />
 
 
 
@@ -204,6 +204,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
                 </div>
               </div>
@@ -337,9 +343,44 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-15_computer-structure/">
+    
+      <img src="/img/2021-03-15_A-Simplified-MIPS-Processor-Architecture.png" alt="计算机体系结构与组成原理" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 15, 2021</p>
+    </div>
+    <div class="description">
+       计算机体系结构概要  计算机体系结构讲的是同系列计算机为操作系统提供的接口（包括机器语言、汇编语言等），以及底层 硬件的结构设计。计算机组成原理讲的是硬件实现。目前的计算机一般都是用冯诺依曼结构，特点是 存储程序，即将程序作为数据和数据存储在同一存储器中。要执行程序的时候从第一个存储单元开始 顺序执行，根据控制流跳转。与之对应的是哈佛结构，将数据和程序分别存放在两个不同的存储器 中。
+ 要了解计算机，首要的是了解计算机是怎么存储数据的。包括补码、原码等各种格式和他们的运算。 在了解了数据在计算机中的表示方式后，我们需要知道他们在哪里如何被存储，在哪里怎么进行运算。 在了解计算机进行运算的步骤之前需要知道计算机是用什么格式发出命令的，即机器语言与汇编语言。 以上便是计算机主机的任务：存储、运算、控制。除此之外，计算机还需要规范数据如何在各部件间 传输，即确定总线的相关标准。最后，如果只有之前的操作我们只能将计算机看作一个黑盒，什么都 进不去，什么都出不来，就算一直在计算也没有用处。因此对于输入/输出的讨论也极为重要。
+  现代计算机中，控制器和运算器一起被叫做CPU，CPU和主存一起组成主机，主机与外设一起组成硬件设备。 硬件和软件一起组成计算机系统。
+  存储器层次结构  目前我们能用于做存储器的材料与工艺有很多，不同方式/目的做出的存储器特性也不同。如磁盘，磁带， RAM，ROM，FLASH等。存储器的分类方式有很多，如用用掉电后能否保存数据可以分成挥发性存储器与 非挥发性存储器；能否随机访问可以分为随机访问存储器与顺序访问存储器等。除此之外，就算是在 主机内部使用的存储器，不同工艺也有很大的性能与价格差距。SRAM可以用于寄存器，速度最快， 但是集成度低，在单位空间内塞不下很大容量，并且价格贵。DRAM动态随机访问存储器一般用于主存， 相比SRAM速度较慢，但是集成度较高并且便宜。
+ 我们对计算机性能的要求是无上限的，但同时成本也需要控制在可接受的范围。因此就算我们让一台计算机 主机内所有的存储器都用SRAM，我们还是会想要更大更快的内存。为了解决上述价格与速度的矛盾，我们 引入了分层次存储器。在拥有DRAM作为主存的大容量低价格的同时使用SRAM作为CPU内部寄存器以获取高速度。 完整的层次结构中速度从快到慢，容量从小到大是：寄存器-cache-主存-外存.
+ 主存与CPU之间通过总线相连，数据从主存中取出到寄存器中，在寄存器中传入ALU等部件组成的数据通路进行 计算，得到的结果也存放在寄存器，需要时写入主存中。随着硬件的发展，虽然主存的速度也在不断增长， 但CPU速度的增长速度远大于主存，两者之间的速度差距越来越大。
+  指令系统/CPU   总线与IO   
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/">
     
-      <img src="2021-03-14_lisp.png" alt="编程语言的基本组成" />
+      <img src="/img/2021-03-14_lisp.png" alt="编程语言的基本组成" />
     
   </a>
 
@@ -655,45 +696,6 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
  数学我一道大题符号错了，我估的是那道小问分扣光。错了一个选择一个填空扣10分。好像还错了一道大题。我觉得最后100-130都有可能（130不太可能吧。。。） 英语作文自我感觉还行，但翻译基本瞎翻，估计50-80分。政治主观题写满了，虽然 我认为有的原理都写了，但还是抄了一大堆材料，完全不知道怎么估分。。就算40-70吧。专业课算90-120？这样最后估出来应该是280-400。。。TM和没估一样。 然后就一直没什么动力复习复试，也不知道从哪里着手复习（我机试准备用csp抵）。
 机试  是打算用csp抵分的，但是前几天群里看到有效期好象是一年，准备用大三上成绩的我菊花一紧（大四9月也考了一次，但是没前一次好，并且语言显示的是all，不知道能不能用），想着还是应该准备下的。就算最后还是抵了，但如果算法和数据结构 不复习，面试被问到也肯定gg。这两周B站找了个数据结构的视频有空看，但是不做习题还是没啥用。翻了下《算法笔记》，里面就是一道一道题，硬去做的话效率也不高。好在我之前准备PAT的时候每题的代码和感悟都还留着，还在微软TO DO上按 专题把一些题目分了类。之后就按之前的记录再刷一遍吧，把每个专题的知识点在博客上整理下。然后还是要刷下北航的机试真题。
   面试     
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
-    
-      <img src="/img/default2.jpg" alt="在spacemacs中写scheme" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
     </div>
   </div>
 

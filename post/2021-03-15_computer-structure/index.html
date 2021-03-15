@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>计算机体系结构与组成原理 | Iluvata&#39;s Blog</title>
+
+    
+
+
+
+<meta name="author" content="Iluvata" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.80.0" />
+
+<link rel="canonical" href="https://iluvata.github.io/post/2021-03-15_computer-structure/" />
+
+
+<meta property="og:title" content="计算机体系结构与组成原理" />
+<meta property="og:description" content=" 计算机体系结构概要  计算机体系结构讲的是同系列计算机为操作系统提供的接口（包括机器语言、汇编语言等），以及底层 硬件的结构设计。计算机组成原理讲的是硬件实现。目前的计算机一般都是用冯诺依曼结构，特点是 存储程序，即将程序作为数据和数据存储在同一存储器中。要执行程序的时候从第一个存储单元开始 顺序执行，根据控制流跳转。与之对应的是哈佛结构，将数据和程序分别存放在两个不同的存储器 中。
+ 要了解计算机，首要的是了解计算机是怎么存储数据的。包括补码、原码等各种格式和他们的运算。 在了解了数据在计算机中的表示方式后，我们需要知道他们在哪里如何被存储，在哪里怎么进行运算。 在了解计算机进行运算的步骤之前需要知道计算机是用什么格式发出命令的，即机器语言与汇编语言。 以上便是计算机主机的任务：存储、运算、控制。除此之外，计算机还需要规范数据如何在各部件间 传输，即确定总线的相关标准。最后，如果只有之前的操作我们只能将计算机看作一个黑盒，什么都 进不去，什么都出不来，就算一直在计算也没有用处。因此对于输入/输出的讨论也极为重要。
+  现代计算机中，控制器和运算器一起被叫做CPU，CPU和主存一起组成主机，主机与外设一起组成硬件设备。 硬件和软件一起组成计算机系统。
+  存储器层次结构  目前我们能用于做存储器的材料与工艺有很多，不同方式/目的做出的存储器特性也不同。如磁盘，磁带， RAM，ROM，FLASH等。存储器的分类方式有很多，如用用掉电后能否保存数据可以分成挥发性存储器与 非挥发性存储器；能否随机访问可以分为随机访问存储器与顺序访问存储器等。除此之外，就算是在 主机内部使用的存储器，不同工艺也有很大的性能与价格差距。SRAM可以用于寄存器，速度最快， 但是集成度低，在单位空间内塞不下很大容量，并且价格贵。DRAM动态随机访问存储器一般用于主存， 相比SRAM速度较慢，但是集成度较高并且便宜。
+ 我们对计算机性能的要求是无上限的，但同时成本也需要控制在可接受的范围。因此就算我们让一台计算机 主机内所有的存储器都用SRAM，我们还是会想要更大更快的内存。为了解决上述价格与速度的矛盾，我们 引入了分层次存储器。在拥有DRAM作为主存的大容量低价格的同时使用SRAM作为CPU内部寄存器以获取高速度。 完整的层次结构中速度从快到慢，容量从小到大是：寄存器-cache-主存-外存.
+ 主存与CPU之间通过总线相连，数据从主存中取出到寄存器中，在寄存器中传入ALU等部件组成的数据通路进行 计算，得到的结果也存放在寄存器，需要时写入主存中。随着硬件的发展，虽然主存的速度也在不断增长， 但CPU速度的增长速度远大于主存，两者之间的速度差距越来越大。
+  指令系统/CPU   总线与IO   " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-03-15_computer-structure/" />
+<meta property="article:published_time" content="2021-03-15T13:13:42+08:00" />
+<meta property="article:modified_time" content="2021-03-15T13:13:42+08:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="计算机体系结构与组成原理"/>
+<meta name="twitter:description" content=" 计算机体系结构概要  计算机体系结构讲的是同系列计算机为操作系统提供的接口（包括机器语言、汇编语言等），以及底层 硬件的结构设计。计算机组成原理讲的是硬件实现。目前的计算机一般都是用冯诺依曼结构，特点是 存储程序，即将程序作为数据和数据存储在同一存储器中。要执行程序的时候从第一个存储单元开始 顺序执行，根据控制流跳转。与之对应的是哈佛结构，将数据和程序分别存放在两个不同的存储器 中。
+ 要了解计算机，首要的是了解计算机是怎么存储数据的。包括补码、原码等各种格式和他们的运算。 在了解了数据在计算机中的表示方式后，我们需要知道他们在哪里如何被存储，在哪里怎么进行运算。 在了解计算机进行运算的步骤之前需要知道计算机是用什么格式发出命令的，即机器语言与汇编语言。 以上便是计算机主机的任务：存储、运算、控制。除此之外，计算机还需要规范数据如何在各部件间 传输，即确定总线的相关标准。最后，如果只有之前的操作我们只能将计算机看作一个黑盒，什么都 进不去，什么都出不来，就算一直在计算也没有用处。因此对于输入/输出的讨论也极为重要。
+  现代计算机中，控制器和运算器一起被叫做CPU，CPU和主存一起组成主机，主机与外设一起组成硬件设备。 硬件和软件一起组成计算机系统。
+  存储器层次结构  目前我们能用于做存储器的材料与工艺有很多，不同方式/目的做出的存储器特性也不同。如磁盘，磁带， RAM，ROM，FLASH等。存储器的分类方式有很多，如用用掉电后能否保存数据可以分成挥发性存储器与 非挥发性存储器；能否随机访问可以分为随机访问存储器与顺序访问存储器等。除此之外，就算是在 主机内部使用的存储器，不同工艺也有很大的性能与价格差距。SRAM可以用于寄存器，速度最快， 但是集成度低，在单位空间内塞不下很大容量，并且价格贵。DRAM动态随机访问存储器一般用于主存， 相比SRAM速度较慢，但是集成度较高并且便宜。
+ 我们对计算机性能的要求是无上限的，但同时成本也需要控制在可接受的范围。因此就算我们让一台计算机 主机内所有的存储器都用SRAM，我们还是会想要更大更快的内存。为了解决上述价格与速度的矛盾，我们 引入了分层次存储器。在拥有DRAM作为主存的大容量低价格的同时使用SRAM作为CPU内部寄存器以获取高速度。 完整的层次结构中速度从快到慢，容量从小到大是：寄存器-cache-主存-外存.
+ 主存与CPU之间通过总线相连，数据从主存中取出到寄存器中，在寄存器中传入ALU等部件组成的数据通路进行 计算，得到的结果也存放在寄存器，需要时写入主存中。随着硬件的发展，虽然主存的速度也在不断增长， 但CPU速度的增长速度远大于主存，两者之间的速度差距越来越大。
+  指令系统/CPU   总线与IO   "/>
+
+
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="/css/OverlayScrollbars.min.css" />
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  a:hover {
+    text-decoration: underline; 
+  }
+
+  
+  a {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a,
+  .inverted a:hover {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+  }
+  
+
+  
+</style>
+
+    
+
+
+
+
+
+
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary inverted menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/iluvata.github.io'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">
+          计算机体系结构与组成原理
+          <div class="sub header">
+            @
+            
+              Iluvata
+            
+
+            | 
+                Monday, Mar 15, 2021
+              
+
+            | 1 minutes read
+
+            | Update at
+              
+                Monday, Mar 15, 2021
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main">
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+计算机体系结构概要
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>计算机体系结构讲的是同系列计算机为操作系统提供的接口（包括机器语言、汇编语言等），以及底层
+  硬件的结构设计。计算机组成原理讲的是硬件实现。目前的计算机一般都是用冯诺依曼结构，特点是
+  存储程序，即将程序作为数据和数据存储在同一存储器中。要执行程序的时候从第一个存储单元开始
+  顺序执行，根据控制流跳转。与之对应的是哈佛结构，将数据和程序分别存放在两个不同的存储器
+  中。</p>
+<p>
+  要了解计算机，首要的是了解计算机是怎么存储数据的。包括补码、原码等各种格式和他们的运算。
+  在了解了数据在计算机中的表示方式后，我们需要知道他们在哪里如何被存储，在哪里怎么进行运算。
+  在了解计算机进行运算的步骤之前需要知道计算机是用什么格式发出命令的，即机器语言与汇编语言。
+  以上便是计算机主机的任务：存储、运算、控制。除此之外，计算机还需要规范数据如何在各部件间
+  传输，即确定总线的相关标准。最后，如果只有之前的操作我们只能将计算机看作一个黑盒，什么都
+  进不去，什么都出不来，就算一直在计算也没有用处。因此对于输入/输出的讨论也极为重要。</p>
+<p>
+  <img src="/img/2021-03-15_von-neumann.jpg" alt="/img/2021-03-15_von-neumann.jpg" title="/img/2021-03-15_von-neumann.jpg" /></p>
+<p>
+  现代计算机中，控制器和运算器一起被叫做CPU，CPU和主存一起组成主机，主机与外设一起组成硬件设备。
+  硬件和软件一起组成计算机系统。</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+存储器层次结构
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>目前我们能用于做存储器的材料与工艺有很多，不同方式/目的做出的存储器特性也不同。如磁盘，磁带，
+  RAM，ROM，FLASH等。存储器的分类方式有很多，如用用掉电后能否保存数据可以分成挥发性存储器与
+  非挥发性存储器；能否随机访问可以分为随机访问存储器与顺序访问存储器等。除此之外，就算是在
+  主机内部使用的存储器，不同工艺也有很大的性能与价格差距。SRAM可以用于寄存器，速度最快，
+  但是集成度低，在单位空间内塞不下很大容量，并且价格贵。DRAM动态随机访问存储器一般用于主存，
+  相比SRAM速度较慢，但是集成度较高并且便宜。</p>
+<p>
+  我们对计算机性能的要求是无上限的，但同时成本也需要控制在可接受的范围。因此就算我们让一台计算机
+  主机内所有的存储器都用SRAM，我们还是会想要更大更快的内存。为了解决上述价格与速度的矛盾，我们
+  引入了分层次存储器。在拥有DRAM作为主存的大容量低价格的同时使用SRAM作为CPU内部寄存器以获取高速度。
+  完整的层次结构中速度从快到慢，容量从小到大是：寄存器-cache-主存-外存.</p>
+<p>
+  主存与CPU之间通过总线相连，数据从主存中取出到寄存器中，在寄存器中传入ALU等部件组成的数据通路进行
+  计算，得到的结果也存放在寄存器，需要时写入主存中。随着硬件的发展，虽然主存的速度也在不断增长，
+  但CPU速度的增长速度远大于主存，两者之间的速度差距越来越大。</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+指令系统/CPU
+</h2>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+总线与IO
+</h2>
+</div>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+        
+          <a class="ui label" href="/tags/operating-system" title="operating system">operating system</a>
+        
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+    
+    
+
+    
+
+  </div>
+  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
+    
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">计算机体系结构概要</a>
+</li>
+<li><a href="#headline-2">存储器层次结构</a>
+</li>
+<li><a href="#headline-3">指令系统/CPU</a>
+</li>
+<li><a href="#headline-4">总线与IO</a>
+</li>
+</ul>
+</nav>
+      </div>
+    
+
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img/avatar.png">
+      
+    </div>
+
+    
+    <h1 class="ui medium header">
+    
+      Iluvata&#39;s blog
+      <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
+    
+    </h1>
+    
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="ui attached center aligned segment dream-tags">
+    
+      
+      
+      <a class="ui label" href="/tags/algorithm/" title="Algorithm">
+        Algorithm
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/emacs/" title="Emacs">
+        Emacs
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/hugo/" title="Hugo">
+        Hugo
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/math/" title="Math">
+        Math
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/operating-system/" title="Operating System">
+        Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/sicp/" title="Sicp">
+        Sicp
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/work/" title="Work">
+        Work
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/%E8%80%83%E7%A0%94/" title="考研">
+        考研
+      </a>
+    
+  </section>
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+      
+      
+      
+      
+
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/learning/" title="Learning">
+              Learning
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-09_file-and-database/">文件系统与数据库系统</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/life/" title="Life">
+              Life
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-16_yearly-review/">2020年度回顾以及新年目标</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+
+      
+    </div>
+  </section>
+  
+
+  <section class="ui attached segment header-socials">
+    <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class=" mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+  </section>
+
+  <section class="ui bottom attached center aligned segment">
+    
+      <p>© 2021 Iluvata&#39;s Blog</p>
+    
+
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+    
+  </section>
+</article>
+
+  </aside>
+</div>
+
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <div class="ui centered relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui bottom attached segment">
+        <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class="large mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+    
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  true 
+  window.hasTwitterEmbed =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+
+
+
+    
+
+    
+  </body>
+</html>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/post/" />
-<meta property="og:updated_time" content="2021-03-14T22:50:46+08:00" />
+<meta property="og:updated_time" content="2021-03-15T13:13:42+08:00" />
 
 
 
@@ -204,6 +204,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
                 </div>
               </div>
@@ -337,6 +343,45 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
+    
+      <img src="/img/default3.jpg" alt="在spacemacs中写scheme" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Tuesday, Feb 2, 2021</p>
+    </div>
+    <div class="description">
+      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
+windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
+ 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
+ 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
+$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
+ 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
+ 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
+ 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
+ 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
+ 太折磨人了，明天试下转到linux用第三个博客中的步骤。
+  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/">
     
       <img src="/img/default2.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
@@ -406,7 +451,7 @@ print(&#34;hello world&#34;)   插入图片：用
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-01-08_hugo/">
     
-      <img src="/img/default3.jpg" alt="hugo博客站点搭建" />
+      <img src="/img/default4.jpg" alt="hugo博客站点搭建" />
     
   </a>
 
