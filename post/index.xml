@@ -125,6 +125,18 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
     </item>
     
     <item>
+      <title>在org mode中嵌入latex</title>
+      <link>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</link>
+      <pubDate>Mon, 22 Feb 2021 23:30:15 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</guid>
+      <description>最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
+ \begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
+ If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
+ 参考链接：官方文档 Spacemacs和Org-mode和LaTeX</description>
+    </item>
+    
+    <item>
       <title>理解动态规划与warshall算法</title>
       <link>https://iluvata.github.io/post/2021-02-19_dp-and-warshall/</link>
       <pubDate>Fri, 19 Feb 2021 13:35:34 +0800</pubDate>
@@ -230,19 +242,6 @@ print(&amp;#34;hello world&amp;#34;)   插入图片：用
 安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
 hugo server --buildDrafts -t dream  新建github仓库 云端部署
 hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&amp;#34;https://iluvata.github.io/&amp;#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org  云端仓库为：根目录/public （在此目录下管理git）  云端文章目录为：根目录/public/post/blog   </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iluvata.github.io/post/2021-02-22_latex-with-emacs/</guid>
-      <description>— title: &amp;#34;在org mode中嵌入latex&amp;#34; date: 2021-02-22T23:30:15+08:00 draft: false categories: [&amp;#39;life&amp;#39;] tags: [&amp;#39;emacs&amp;#39;] cover: &amp;#39;/img/2021-03-01_latex.jpg&amp;#39; —
- 最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
- \begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX</description>
     </item>
     
   </channel>
