@@ -364,9 +364,10 @@
     </div>
     <div class="description">
       最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
- \begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
+\begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
  If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX
+ 但是虽然orgmode支持的latex能导出pdf，hugo生成的html网页还是不支持。
+ 参考链接：官方文档 Spacemacs和Org-mode和LaTeX Hugo中的LaTeX渲染 Hugo中添加LaTeX渲染
     </div>
   </div>
 
@@ -383,7 +384,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
     
-      <img src="/img/default2.jpg" alt="在spacemacs中写scheme" />
+      <img src="/img/default4.jpg" alt="在spacemacs中写scheme" />
     
   </a>
 
@@ -422,7 +423,7 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/">
     
-      <img src="/img/default2.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
+      <img src="/img/default3.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
     
   </a>
 
