@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>在spacemacs中写scheme | Iluvata&#39;s Blog</title>
+    <title>推荐系统基础 | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,41 +17,25 @@
 
 <meta name="generator" content="Hugo 0.80.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/" />
 
 
-<meta property="og:title" content="在spacemacs中写scheme" />
-<meta property="og:description" content="参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit." />
+<meta property="og:title" content="推荐系统基础" />
+<meta property="og:description" content=" 从线性回归到FM   特征工程  特征工程是将原始数据转化成更好的表达问题本质特征的过程，使得这些特征运用到预测模型中能 提高对不可见数据的模型预测精度。
+ 直接将时钟的图片点阵输入一个网络进行训练，希望得到当前时间。虽然可能有些效果，但是网络 内部需要学习图片代表的意义，多了一层学习成本，得到的效果可能会较差。如果预先将图片处理 成三根指针指向的方位，作为输入得到的效果会好很多。这个从图片到方位的过程就是特征工程.
+  MF矩阵分解   协同过滤和基于内容的推荐系统   " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/" />
-<meta property="article:published_time" content="2021-02-02T22:35:46+08:00" />
-<meta property="article:modified_time" content="2021-02-02T22:35:46+08:00" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/" />
+<meta property="article:published_time" content="2021-03-18T07:44:33+08:00" />
+<meta property="article:modified_time" content="2021-03-18T07:44:33+08:00" />
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在spacemacs中写scheme"/>
-<meta name="twitter:description" content="参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit."/>
+<meta name="twitter:title" content="推荐系统基础"/>
+<meta name="twitter:description" content=" 从线性回归到FM   特征工程  特征工程是将原始数据转化成更好的表达问题本质特征的过程，使得这些特征运用到预测模型中能 提高对不可见数据的模型预测精度。
+ 直接将时钟的图片点阵输入一个网络进行训练，希望得到当前时间。虽然可能有些效果，但是网络 内部需要学习图片代表的意义，多了一层学习成本，得到的效果可能会较差。如果预先将图片处理 成三根指针指向的方位，作为输入得到的效果会好很多。这个从图片到方位的过程就是特征工程.
+  MF矩阵分解   协同过滤和基于内容的推荐系统   "/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -127,7 +111,7 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          在spacemacs中写scheme
+          推荐系统基础
           <div class="sub header">
             @
             
@@ -135,70 +119,54 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
             
 
             | 
-                Tuesday, Feb 2, 2021
+                Thursday, Mar 18, 2021
               
 
             | 1 minutes read
 
             | Update at
               
-                Tuesday, Feb 2, 2021
+                Thursday, Mar 18, 2021
               
           </div>
         </h1>
       </header>
 
       <article class="main">
-<p>参考资料：<a href="https://develop.spacemacs.org/layers/+lang/scheme/README.html">官方文档</a> <a href="https://david6686.github.io/blog/silentink/35940/">在spacemacs安装scheme环境</a> <a href="http://v5b7.com/editor/emacs/scheme.html">在emacs里学习SICP</a> <a href="http://geiser.nongun.org/geiser_4.html#The-source-and-the-REPL">geiser文档</a></p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-windows安装
+从线性回归到FM
 </h2>
-<div id="outline-text-headline-1" class="outline-text-2">
-<p>一开始看官方文档和 <a href="https://david6686.github.io/blog/silentink/35940/">在spacemacs安装scheme环境</a> 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。</p>
-<p>
-首先是 <code class="verbatim">chicken</code> 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。</p>
-<p>
-在安装了 <code class="verbatim">chicken</code> 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：</p>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ chicken-install -s apropos chicken-doc
-$ cd <span style="color:#e6db74">`</span>csi -p <span style="color:#e6db74">&#39;(chicken-home)&#39;</span><span style="color:#e6db74">`</span>
-$ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx</code></pre></div>
-</div>
-<p>在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。</p>
-<p>
-然后第二条指令其实是运行 <code class="verbatim">csi</code> chicken scheme 解释器后运行 <code class="verbatim">&#39;(chicken-home)&#39;</code> ，结果作为输出，进入chicken安装目录。</p>
-<p>
-我在安装chicken包时看到安装目录在 <code class="verbatim">c:/tools/chicken</code> 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）</p>
-<p>
-最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问<a href="https://3e8.org/pub/chicken-doc/">https://3e8.org/pub/chicken-doc/</a>
-发现有zip包，下载下来解压后放到 <code class="verbatim">c:/tools/chicken</code> 下，这步也算完成了。</p>
-<p>
-接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。</p>
-<p>
-太折磨人了，明天试下转到linux用第三个博客中的步骤。</p>
-</div>
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-linux安装配置
+特征工程
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
-<p>在 <code class="verbatim">dotspacemacs-configuration-layers</code> 中添加scheme, 在终端安装 <code class="verbatim">mit-scheme</code> 。emacs打开scm文件后 <code class="verbatim">M-x run-geiser</code> ，回到scm文件窗口 <code class="verbatim">C-c C-s</code> 选择mit.</p>
+<p>特征工程是将原始数据转化成更好的表达问题本质特征的过程，使得这些特征运用到预测模型中能
+  提高对不可见数据的模型预测精度。</p>
 <p>
-  在要运行的语句块 <code class="verbatim">C-x C-e</code> 即可运行。或者到解释器窗口运行 <code class="verbatim">(load &#34;yourfile.scm&#34;)</code> = 即可运行。或者到解释器窗口运行 <code class="verbatim">(load &#34;yourfile.scm&#34;)</code> 或 <code class="verbatim">C-c C-b</code> 运行整个文件. </p>
+  直接将时钟的图片点阵输入一个网络进行训练，希望得到当前时间。虽然可能有些效果，但是网络
+  内部需要学习图片代表的意义，多了一层学习成本，得到的效果可能会较差。如果预先将图片处理
+  成三根指针指向的方位，作为输入得到的效果会好很多。这个从图片到方位的过程就是特征工程.</p>
 </div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+MF矩阵分解
+</h2>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+协同过滤和基于内容的推荐系统
+</h2>
 </div>
 </article>
     </section>
 
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
-        
-          <a class="ui label" href="/tags/emacs" title="emacs">emacs</a>
-        
-          <a class="ui label" href="/tags/sicp" title="sicp">sicp</a>
-        
+          <a class="ui label">No Tags</a>
       
       <div
         class="ui label"
@@ -223,9 +191,13 @@ linux安装配置
       <div class="ui segment toc">
         <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">windows安装</a>
+<li><a href="#headline-1">从线性回归到FM</a>
 </li>
-<li><a href="#headline-2">linux安装配置</a>
+<li><a href="#headline-2">特征工程</a>
+</li>
+<li><a href="#headline-3">MF矩阵分解</a>
+</li>
+<li><a href="#headline-4">协同过滤和基于内容的推荐系统</a>
 </li>
 </ul>
 </nav>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/" />
-<meta property="og:updated_time" content="2021-03-15T13:13:42+08:00" />
+<meta property="og:updated_time" content="2021-03-19T14:52:58+08:00" />
 
 
 
@@ -204,6 +204,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-03-19_distributions/">概率统计中的分布</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
                 </div>
               </div>
@@ -347,6 +353,102 @@
 
   
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
+    
+      <img src="/img/default4.jpg" alt="概率统计中的分布" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-19_distributions/">概率统计中的分布</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Friday, Mar 19, 2021</p>
+    </div>
+    <div class="description">
+       连续分布  均匀分布   正态分布  距离某一中心值偏离的误差越大的概率越小。可用于自然界许多现象的模拟.
+  指数分布  EX=1/lambda DX=1/lambda^2 指数分布的无记忆性：先验概率与后验概率相同。可用于模拟电器使用：不管之前使用了多久， 能继续使用x小时的概率不变。 先验概率 后验概率
+    离散分布  0-1分布  0-1分布随机变量取值为0或1，参数只有一个p，即取值为1的概率。
+  二项分布  二项分布是多个相同0-1分布的叠加。B(n,p)中n为随机变量的数量，p和0-1分布中相同。 输入k得到的结果为k个随机变量得到1的概率。
+  泊松分布  EX=DX=lambda 在二项分布数值非常大的时候B(1000, 0.001), n=1000, p=0.001的时候计算量非常大。 可以用泊松分布进行模拟。lambda=n*p, 随机变量为k. 经常被用来模拟排队。在每个离散时间一个客户可能来的概率为p, 泊松分布可以模拟 总客户数为n时在时间点k来的客户数量。
+    
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/">
+    
+      <img src="/img/default2.jpg" alt="推荐系统基础" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-18_recommending-system-basics/">推荐系统基础</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Mar 18, 2021</p>
+    </div>
+    <div class="description">
+       从线性回归到FM   特征工程  特征工程是将原始数据转化成更好的表达问题本质特征的过程，使得这些特征运用到预测模型中能 提高对不可见数据的模型预测精度。
+ 直接将时钟的图片点阵输入一个网络进行训练，希望得到当前时间。虽然可能有些效果，但是网络 内部需要学习图片代表的意义，多了一层学习成本，得到的效果可能会较差。如果预先将图片处理 成三根指针指向的方位，作为输入得到的效果会好很多。这个从图片到方位的过程就是特征工程.
+  MF矩阵分解   协同过滤和基于内容的推荐系统   
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-17_operating-system/">
+    
+      <img src="/img/default3.jpg" alt="操作系统" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-17_operating-system/">操作系统</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Mar 17, 2021</p>
+    </div>
+    <div class="description">
+       操作系统的模块  操作系统是在裸机之上，为用户提供资源管理服务的软件。需要管理的软硬件资源包括CPU，内存， 外设等。与之对应，操作系统大致可以分为5个子模块：CPU管理模块，内存管理模块，文件系统， IO管理模块。
+  进程和处理器调度  进程是程序的一次执行。但是进程是计算机中活动的状态，随着时间改变保存的数据，而不是像程序 那样，静止地保存在磁盘中。关于进程的讨论包括进程的状态，通信，同步互斥，死锁。在多道程序 操作系统中CPU不能一直被同一进程占据，需要进行调度，决定每个时间由那个进程占用CPU。CPU 调度的形式包括先来先服务，短作业优先法，时间片轮转法，优先级调度法，高相应比优先， 多级队列轮转法等。死锁是两个或以上互斥进程在执行过程中占据对方需要的一部分资源的同时请求 的部分资源被对方占据，造成的阻塞，无法向前推进的状态。死锁的必要条件有临界资源互斥执行， 不可剥夺已有资源，在占有部分资源的情况下进行请求，以及请求形成环路循环等待。处理方法有 预防，避免，检测和恢复。死锁预防是指破坏4个必要条件中任意一个；避免是用银行家算法，在每次 请求保证之后的状态是安全的才分配资源；检测使用资源分配图。
+  内存管理，虚存   文件系统   IO子模块   
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -593,109 +695,6 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
   最优子结构
   贪心选择性质即上文中我们说的“能找到只包含一个子问题的最优解“。通过适当的变换，一些问题可以找到贪心选择性质，如上文中的活动调度问题。 最优子结构即动态规划中的“由子问题的最优解构成当前问题最优解”的性质。满足这两个条件的问题即可使用贪心算法。但在有些情况下，不能轻易找出 最优子结构，但是问题的确可以使用贪心算法求解。比如PAT-1067.
   Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，Dijkstra算法解决了最短路径问题。从算法思想的角度来说，Dijkstra算法使用了贪心策略。与之相对的是 Bellman-Ford算法。同为计算最短路径的算法，Bellman-Ford算法使用了动态规划的思想，复杂度为O(n^3)。Dijkstra算法在此基础上 进一步限定条件（Bellman-Ford算法可以用来计算带有负权的图，Dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-22_latex-with-emacs/">
-    
-      <img src="/img/2021-03-01_latex.jpg" alt="在org mode中嵌入latex" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Feb 22, 2021</p>
-    </div>
-    <div class="description">
-      最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
-\begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 但是虽然orgmode支持的latex能导出pdf，hugo生成的html网页还是不支持。
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX Hugo中的LaTeX渲染 Hugo中添加LaTeX渲染
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/">
-    
-      <img src="/img/2021-02-19_dijkstra.jpg" alt="理解动态规划与warshall算法" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Feb 19, 2021</p>
-    </div>
-    <div class="description">
-      今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
-集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
-关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）
- 函数：函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射.
- A function from A to B is an assignment of exactly one element of B to each element of A.
- 函数的种类包括
-  单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.
-  满射（onto）函数：值域中每个值都有对应的定义域元素.
-  双射： 满足单射及满射
-    闭包  闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。 其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).
- 一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中， 如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c) 的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)}, 进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的 自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>2 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-19_deploy-nextcloud/">
-    
-      <img src="/img/2021-02-19_nextcloud.jpg" alt="nextcloud网盘搭建" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-19_deploy-nextcloud/">nextcloud网盘搭建</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Feb 19, 2021</p>
-    </div>
-    <div class="description">
-      最近发现在多个设备，系统之间换来换去，文件传输是个问题。想到还有个空闲着的服务器， 为什么不搭个nextcloud网盘，这样在各个系统做笔记和传文件都方便。
- 其实我之前在服务器上用过nextcloud，但不知道什么原因好像挂了。。那今天就重新来部署一次吧。
- 在网上找到一篇简易的搭建教程,搭建宝塔面板建站，下载nextcloud安装器（php文件，放在网站上浏览器直接访问）， 跟着步骤就安装完成了。。 https://zhuanlan.zhihu.com/p/38485411
     </div>
   </div>
 
