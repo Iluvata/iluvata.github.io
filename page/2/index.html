@@ -24,7 +24,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iluvata.github.io/" />
-<meta property="og:updated_time" content="2021-03-29T23:03:25+08:00" />
+<meta property="og:updated_time" content="2021-04-07T16:03:50+08:00" />
 
 
 
@@ -204,6 +204,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-03-19_distributions/">概率统计中的分布</a>
                 </div>
               </div>
@@ -353,6 +359,48 @@
 
   
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-01_how-computer-startup/">
+    
+      <img src="/img/2021-03-01_grub.jpg" alt="电脑是怎么启动的" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 1, 2021</p>
+    </div>
+    <div class="description">
+      x86启动过程简介  x86计算机开机过程大致可以被分为几个阶段：
+  按下开机键
+  CPU跳转至BIOS物理地址
+  BIOS进行开机自检
+  寻找启动设备
+  从MBR加载启动区
+  BIOS转移控制给BootLoader
+  第一阶段：硬件  BIOS  Basic Input/Output System 基本输入输出系统，被固化在ROM上的一组程序，提供最底层对硬件的控制。 也被称为固件。
+UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈传参，动态链接，更大寻址。
+    MBR  Master Boot Record 主引导记录。硬盘的第一个扇区，存放预启动信息、分区表信息。
+    第二阶段：系统软件  Boot Loader  操作系统内核加载器。初始化硬件，建立内存空间映射。
+  GRUB
+  LILO
+    加载内核  根据grub设定的内核映像所在路径读取，解压，放入内存。初始化函数，设备，建立Linux核心环境（初始化寄存器、堆栈）。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -581,7 +629,7 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/">
     
-      <img src="/img/default1.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
+      <img src="/img/default4.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
     
   </a>
 

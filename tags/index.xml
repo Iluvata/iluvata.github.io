@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Mar 2021 14:52:58 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 16:03:50 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sicp</title>
+      <link>https://iluvata.github.io/tags/sicp/</link>
+      <pubDate>Wed, 07 Apr 2021 16:03:50 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/tags/sicp/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>math</title>
       <link>https://iluvata.github.io/tags/math/</link>
@@ -31,15 +40,6 @@
       <pubDate>Mon, 15 Mar 2021 13:13:42 +0800</pubDate>
       
       <guid>https://iluvata.github.io/tags/operating-system/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sicp</title>
-      <link>https://iluvata.github.io/tags/sicp/</link>
-      <pubDate>Sun, 14 Mar 2021 22:50:46 +0800</pubDate>
-      
-      <guid>https://iluvata.github.io/tags/sicp/</guid>
       <description></description>
     </item>
     
