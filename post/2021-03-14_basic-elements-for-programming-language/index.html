@@ -15,7 +15,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.80.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 <link rel="canonical" href="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/" />
 
@@ -28,9 +28,10 @@
 (factorial 4)    块结构–以牛顿法求平方根为例  牛顿法是用于求解方程根的算法，从一个猜测开始每次迭代得到一个更好的猜测，不断向根逼近，直到 一个我们指定的要求达到为止。 通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的 sqrt算法。
 (define (sqrt-iter guess x) (if (good-enough? guess x) guess (sqrt-iter (better-guess guess x) x))) (define (sqrt x) (sqrt-iter 2.0 x))  在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了 防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-03-14T22:50:46+08:00" />
 <meta property="article:modified_time" content="2021-03-14T22:50:46+08:00" />
+
 
 
 
@@ -150,12 +151,12 @@
 原子元素是语言本身提供给我们的最小过程与数据结构，如乘法 <code class="verbatim">*</code> ，整数数据类型. 在scheme中我们将
 一个操作过程写在括号语句内，语句的第一个元素作为运用的过程（操作符），随后的元素作为操作数。如</p>
 <div class="src src-scheme">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(* <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(* <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>)</code></pre></div>
 </div>
 <p>
 运算复合的能力使我们能够从基本操作中构建复杂操作，如求解阶乘</p>
 <div class="src src-scheme">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">factorial</span> n)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">factorial</span> n)
     (<span style="color:#66d9ef">if </span>(&lt; n <span style="color:#ae81ff">2</span>)
         <span style="color:#ae81ff">1</span>
         (* n (<span style="color:#a6e22e">factorial</span> (- n <span style="color:#ae81ff">1</span>)))))</code></pre></div>
@@ -164,7 +165,7 @@
 最后是构建抽象的能力，能够让我们不被所有实现细节扰乱思路，只把之前构建的函数当作黑盒直接拿来
 使用</p>
 <div class="src src-scheme">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">factorial</span> <span style="color:#ae81ff">4</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">factorial</span> <span style="color:#ae81ff">4</span>)</code></pre></div>
 </div>
 </div>
 </div>
@@ -178,7 +179,7 @@
   通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的
   sqrt算法。</p>
 <div class="src src-scheme">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sqrt-iter</span> guess x)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sqrt-iter</span> guess x)
     (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
         guess
         (<span style="color:#a6e22e">sqrt-iter</span> (<span style="color:#a6e22e">better-guess</span> guess x) x)))
@@ -189,7 +190,7 @@
 <p>在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了
   防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt.</p>
 <div class="src src-scheme">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(sqrt x)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(sqrt x)
     (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">improve</span> guess x)
       (<span style="color:#a6e22e">average</span> guess (/ x guess)))
     (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
@@ -203,7 +204,7 @@
 <p>我们发现sqrt函数中所有的x其实都是同一个，既然improve和good-enough?的作用域在sqrt中，
   那么其实可以省去x，最终得到的代码为</p>
 <div class="src src-scheme">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(sqrt x)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>(sqrt x)
     (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">better-guess</span> guess)
       (<span style="color:#a6e22e">average</span> guess (/ x guess)))
     (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">good-enough?</span> guess)
@@ -299,6 +300,12 @@
     
       
       
+      <a class="ui label" href="/tags/ctf/" title="Ctf">
+        Ctf
+      </a>
+    
+      
+      
       <a class="ui label" href="/tags/emacs/" title="Emacs">
         Emacs
       </a>
@@ -319,6 +326,12 @@
       
       <a class="ui label" href="/tags/operating-system/" title="Operating System">
         Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/pwn/" title="Pwn">
+        Pwn
       </a>
     
       
@@ -365,6 +378,12 @@
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">
@@ -437,6 +456,12 @@
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">

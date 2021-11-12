@@ -15,7 +15,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.80.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 <link rel="canonical" href="https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/" />
 
@@ -32,9 +32,10 @@
   贪心选择性质即上文中我们说的“能找到只包含一个子问题的最优解“。通过适当的变换，一些问题可以找到贪心选择性质，如上文中的活动调度问题。 最优子结构即动态规划中的“由子问题的最优解构成当前问题最优解”的性质。满足这两个条件的问题即可使用贪心算法。但在有些情况下，不能轻易找出 最优子结构，但是问题的确可以使用贪心算法求解。比如PAT-1067.
   Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，Dijkstra算法解决了最短路径问题。从算法思想的角度来说，Dijkstra算法使用了贪心策略。与之相对的是 Bellman-Ford算法。同为计算最短路径的算法，Bellman-Ford算法使用了动态规划的思想，复杂度为O(n^3)。Dijkstra算法在此基础上 进一步限定条件（Bellman-Ford算法可以用来计算带有负权的图，Dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-02-24T10:52:06+08:00" />
 <meta property="article:modified_time" content="2021-02-24T10:52:06+08:00" />
+
 
 
 
@@ -244,7 +245,7 @@ Bellman-Ford算法
    Dijkstra算法在每个节点进入S时用“松弛”操作更新剩余在Q中节点的距离，需要“松弛”的点共n-2个（去除第一个和最后一个）。和Dijkstra算法不同，Bellman-Ford
    算法不将整个节点的集合分作2部分，而是直接直接对所有边进行“松弛”，共进行V-1次，V为点的数量。易得，该算法复杂度为O(VE)，其中V为图中节点个数，E为边数。</p>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">for (var i = 0; i &lt; n - 1; i++) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">for (var i = 0; i &lt; n - 1; i++) {
  for (var j = 0; j &lt; m; j++) {//对m条边进行循环
    var edge = edges[j];
    // 松弛操作
@@ -365,6 +366,12 @@ Bellman-Ford算法
     
       
       
+      <a class="ui label" href="/tags/ctf/" title="Ctf">
+        Ctf
+      </a>
+    
+      
+      
       <a class="ui label" href="/tags/emacs/" title="Emacs">
         Emacs
       </a>
@@ -385,6 +392,12 @@ Bellman-Ford算法
       
       <a class="ui label" href="/tags/operating-system/" title="Operating System">
         Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/pwn/" title="Pwn">
+        Pwn
       </a>
     
       
@@ -431,6 +444,12 @@ Bellman-Ford算法
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">
@@ -503,6 +522,12 @@ Bellman-Ford算法
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">

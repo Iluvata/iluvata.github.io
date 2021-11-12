@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>用easy-hugo在spacemacs中写hugo博客 | Iluvata&#39;s Blog</title>
+    <title>pwn | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,22 +17,20 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/" />
+<link rel="canonical" href="https://iluvata.github.io/tags/pwn/" />
 
 
-<meta property="og:title" content="用easy-hugo在spacemacs中写hugo博客" />
-<meta property="og:description" content="配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;) 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-02-02T21:52:48+08:00" />
-<meta property="article:modified_time" content="2021-02-02T21:52:48+08:00" />
+<meta property="og:title" content="pwn" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://iluvata.github.io/tags/pwn/" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="用easy-hugo在spacemacs中写hugo博客"/>
-<meta name="twitter:description" content="配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;) 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章"/>
+<meta name="twitter:title" content="pwn"/>
+<meta name="twitter:description" content=""/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -72,13 +70,7 @@
   
 </style>
 
-    
-
-
-
-
-
-
+     
   </head>
 
   <body class="default">
@@ -103,199 +95,7 @@
           <div class="dream-max-width">
             
 <div class="ui centered relaxed grid dream-grid">
-  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
-    
-    <section class="ui top attached segment">
-      <header>
-        <h1 class="ui large header">
-          用easy-hugo在spacemacs中写hugo博客
-          <div class="sub header">
-            @
-            
-              Iluvata
-            
-
-            | 
-                Tuesday, Feb 2, 2021
-              
-
-            | 1 minutes read
-
-            | Update at
-              
-                Tuesday, Feb 2, 2021
-              
-          </div>
-        </h1>
-      </header>
-
-      <article class="main">
-<div id="outline-container-headline-1" class="outline-2">
-<h2 id="headline-1">
-配置easy-hugo layer
-</h2>
-<div id="outline-text-headline-1" class="outline-text-2">
-<p>我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在<a href="https://github.com/humanfactors/spacemacs-easy-hugo">这里</a>. 
-把这个仓库中的 <code class="verbatim">packages.el</code> 放到自己的 <code class="verbatim">.emacs.d/private/hugo</code> 文件夹下就可以了.
-然后在 <code class="verbatim">.spacemacs</code> 文件中的 <code class="verbatim">dotspacemacs-configuration-layers</code> 中添加 <code class="verbatim">hugo</code> 层. </p>
-<p>
-这时候如果直接运行 <code class="verbatim">M-x easy-hugo</code> 会提示找不到 <code class="verbatim">easy-hugo-basedir</code> ，在.spacemacs 
-文件夹下的 <code class="verbatim">user-config</code> 项中加上 <code class="verbatim">(setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;)</code> 
-重新载入就可以运行了。 </p>
-</div>
-</div>
-<div id="outline-container-headline-2" class="outline-2">
-<h2 id="headline-2">
-运行指南 
-</h2>
-<div id="outline-text-headline-2" class="outline-text-2">
-<p>在输入 <code class="verbatim">M-x easy-hugo</code> 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键 </p>
-<table>
-<thead>
-<tr>
-<th>Key Binding</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>SPC m n</code></td>
-<td>&#39;easy-hugo-newpost</td>
-</tr>
-<tr>
-<td><code>SPC m D</code></td>
-<td>&#39;easy-hugo-article</td>
-</tr>
-<tr>
-<td><code>SPC m p</code></td>
-<td>&#39;easy-hugo-preview</td>
-</tr>
-<tr>
-<td><code>SPC m P</code></td>
-<td>&#39;easy-hugo-publish</td>
-</tr>
-<tr>
-<td><code>SPC m o</code></td>
-<td>&#39;easy-hugo-open</td>
-</tr>
-<tr>
-<td><code>SPC m d</code></td>
-<td>&#39;easy-hugo-delete~</td>
-</tr>
-<tr>
-<td><code>SPC m c</code></td>
-<td>&#39;easy-hugo-open-config</td>
-</tr>
-<tr>
-<td><code>SPC m f</code></td>
-<td>&#39;easy-hugo-open</td>
-</tr>
-<tr>
-<td><code>SPC m N</code></td>
-<td>&#39;easy-hugo-no-help</td>
-</tr>
-<tr>
-<td><code>SPC m v</code></td>
-<td>&#39;easy-hugo-view</td>
-</tr>
-<tr>
-<td><code>SPC m r</code></td>
-<td>&#39;easy-hugo-refresh</td>
-</tr>
-<tr>
-<td><code>SPC m s</code></td>
-<td>&#39;easy-hugo-sort-time</td>
-</tr>
-<tr>
-<td><code>SPC m S</code></td>
-<td>&#39;easy-hugo-sort-char</td>
-</tr>
-<tr>
-<td><code>SPC m G</code></td>
-<td>&#39;easy-hugo-github-deploy</td>
-</tr>
-<tr>
-<td><code>SPC m A</code></td>
-<td>&#39;easy-hugo-amazon-s3-deploy</td>
-</tr>
-<tr>
-<td><code>SPC m C</code></td>
-<td>&#39;easy-hugo-google-cloud-storage-deploy</td>
-</tr>
-<tr>
-<td><code>SPC m q</code></td>
-<td>&#39;evil-delete-buffer</td>
-</tr>
-</tbody>
-</table>
-<p>
-如果记不住，按下 <code class="verbatim">SPC</code> 后就会有提示 </p>
-<p>
-比如 <code class="verbatim">SPC m n</code> 创建新文章</p>
-<p>
-<code class="verbatim">SPC m p</code> 查看文章预览</p>
-</div>
-</div>
-<div id="outline-container-headline-3" class="outline-2">
-<h2 id="headline-3">
-layer解析
-</h2>
-<div id="outline-text-headline-3" class="outline-text-2">
-<p>这个配置的代码不是很复杂，可以来稍微看一下 </p>
-<div class="src src-emacs-lisp">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defconst hugo-packages
-  <span style="color:#f92672">&#39;</span>(easy-hugo))</code></pre></div>
-</div>
-<p>hugo-packages中指定了这个layer需要的package，本次只指定了一个package: easy-hugo. 继续往下看发现在 <code class="verbatim">set-leader-keys-for-major-mode</code> 中绑定了 <code class="verbatim">easy-hugo-mode</code> 作为主要mode时的一些快捷键. </p>
-<p>
-所以这个layer基本上就是对 <code class="verbatim">easy-hugo</code> package 中的一些快捷键进行了自定义，进一步的资料可以查看<a href="https://github.com/masasam/emacs-easy-hugo">easy-hugo</a>文档.</p>
-</div>
-</div>
-</article>
-    </section>
-
-    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
-      
-        
-          <a class="ui label" href="/tags/emacs" title="emacs">emacs</a>
-        
-          <a class="ui label" href="/tags/hugo" title="hugo">hugo</a>
-        
-      
-      <div
-        class="ui label"
-        style="float: right; cursor: pointer;"
-        onclick="savePostAsImg()">
-        <i class="save icon"></i>Save as image
-      </div>
-    </footer>
-
-    
-
-    
-    
-    
-
-    
-
-  </div>
-  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
-    
-    
-      <div class="ui segment toc">
-        <nav id="TableOfContents">
-<ul>
-<li><a href="#headline-1">配置easy-hugo layer</a>
-</li>
-<li><a href="#headline-2">运行指南 </a>
-</li>
-<li><a href="#headline-3">layer解析</a>
-</li>
-</ul>
-</nav>
-      </div>
-    
-
+  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
     <article class="dream-header">
   <section class="ui top attached center aligned segment">
     <div class="ui small circular image">
@@ -305,12 +105,12 @@ layer解析
     </div>
 
     
-    <h1 class="ui medium header">
+    <div class="ui medium header">
     
       Iluvata&#39;s blog
       <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
     
-    </h1>
+    </div>
     
 
     <div class="ui horizontal list">
@@ -579,7 +379,48 @@ layer解析
   </section>
 </article>
 
-  </aside>
+  </div>
+
+  
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
+    
+      <img src="/img/default1.jpg" alt="libc泄漏" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Nov 10, 2021</p>
+    </div>
+    <div class="description">
+      libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
+格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] + &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.info(&#34;printf address: 0x%x&#34; % printf_addr)   DynELF 不要求我们拿到 libc.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+
+  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+    
+
+
+
+  </div>
 </div>
 
           </div>
@@ -678,11 +519,9 @@ layer解析
 <script src="/js/theme.js"></script>
 
     
-<script src="/js/html2canvas.min.js"></script>
-<script src="/js/post.js"></script>
-
-
-
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/grid.js"></script>
 
 
     
