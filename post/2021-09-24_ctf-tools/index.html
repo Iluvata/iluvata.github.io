@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CTF基本工具使用指北 | Iluvata&#39;s Blog</title>
+
+    
+
+
+
+<meta name="author" content="Iluvata" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.87.0" />
+
+<link rel="canonical" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/" />
+
+
+<meta property="og:title" content="CTF基本工具使用指北" />
+<meta property="og:description" content="环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机&#43;宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
+ multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]    pwntools  io交互  连接
+本地 ：sh = porcess(&#34;./level0&#34;) 远程：sh = remote(&#34;127.0.0.1&#34;,10001) 关闭连接：sh.close()   io
+sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-09-24_ctf-tools/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-24T14:43:07+08:00" />
+<meta property="article:modified_time" content="2021-09-24T14:43:07+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CTF基本工具使用指北"/>
+<meta name="twitter:description" content="环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机&#43;宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
+ multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]    pwntools  io交互  连接
+本地 ：sh = porcess(&#34;./level0&#34;) 远程：sh = remote(&#34;127.0.0.1&#34;,10001) 关闭连接：sh.close()   io
+sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh."/>
+
+
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="/css/OverlayScrollbars.min.css" />
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  a:hover {
+    text-decoration: underline; 
+  }
+
+  
+  a {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a,
+  .inverted a:hover {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+  }
+  
+
+  
+</style>
+
+    
+
+
+
+
+
+
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary inverted menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/iluvata.github.io'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">
+          CTF基本工具使用指北
+          <div class="sub header">
+            @
+            
+              Iluvata
+            
+
+            | 
+                Friday, Sep 24, 2021
+              
+
+            | 3 minutes read
+
+            | Update at
+              
+                Friday, Sep 24, 2021
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main">
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+环境搭建
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。</p>
+<p>
+multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考<a href="https://github.com/giantbranch/pwn-env-init">pwn-env-init</a>，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 <code class="verbatim">curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py</code> 然后运行 <code class="verbatim">get-pip.py</code> 。还有 <code class="verbatim">one_gadget</code> 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-add-repository ppa:brightbox/ruby-ng
+
+$ sudo apt-get update
+
+$ sudo apt-get install ruby2.4 ruby2.4-dev
+
+$ ruby2.4 -v</code></pre></div>
+</div>
+<p>
+还可以装个 <code class="verbatim">tmux</code> ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">context<span style="color:#f92672">.</span>arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;amd64&#34;</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;tmux&#39;</span>, <span style="color:#e6db74">&#39;splitw&#39;</span>, <span style="color:#e6db74">&#39;-h&#39;</span>]</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+pwntools
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+io交互
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p><strong>连接</strong></p>
+<div class="src src-text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">本地 ：sh = porcess(&#34;./level0&#34;)
+远程：sh = remote(&#34;127.0.0.1&#34;,10001)
+关闭连接：sh.close()</code></pre></div>
+</div>
+<p>
+<strong>io</strong></p>
+<div class="src src-text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">sh.send(data)  发送数据
+sh.sendline(data)  发送一行数据，相当于在数据后面加\n
+sh.recv(numb = 2048, timeout = dufault)  接受数据，numb指定接收的字节，timeout指定超时
+sh.recvline(keepends=True)  接受一行数据，keepends为是否保留行尾的\n
+sh.recvuntil(&#34;Hello,World\n&#34;,drop=fasle)  接受数据直到我们设置的标志出现
+sh.recvall()  一直接收直到EOF
+sh.recvrepeat(timeout = default)  持续接受直到EOF或timeout
+sh.interactive()  直接进行交互，相当于回到shell的模式，在取得shell之后使用</code></pre></div>
+</div>
+<p>
+有些人习惯在wp开头定义一些缩写</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">l64 <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span>            : u64(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x7f</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>,<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+l32 <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span>            : u32(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xf7</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">4</span>,<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+sla <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> a,b        : p<span style="color:#f92672">.</span>sendlineafter(str(a),str(b))
+sa  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> a,b        : p<span style="color:#f92672">.</span>sendafter(str(a),str(b))
+lg  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> name,data  : p<span style="color:#f92672">.</span>success(name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;: 0x</span><span style="color:#e6db74">%x</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> data)
+se  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> payload    : p<span style="color:#f92672">.</span>send(payload)
+rl  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span>            : p<span style="color:#f92672">.</span>recv()
+sl  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> payload    : p<span style="color:#f92672">.</span>sendline(payload)
+ru  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> a          : p<span style="color:#f92672">.</span>recvuntil(str(a))</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+elf
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> e <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;/bin/cat&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> print hex(e<span style="color:#f92672">.</span>address)  <span style="color:#75715e"># 文件装载的基地址</span>
+<span style="color:#ae81ff">0x400000</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> print hex(e<span style="color:#f92672">.</span>symbols[<span style="color:#e6db74">&#39;write&#39;</span>]) <span style="color:#75715e"># 函数地址</span>
+<span style="color:#ae81ff">0x401680</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> print hex(e<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;write&#39;</span>]) <span style="color:#75715e"># GOT表的地址</span>
+<span style="color:#ae81ff">0x60b070</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> print hex(e<span style="color:#f92672">.</span>plt[<span style="color:#e6db74">&#39;write&#39;</span>]) <span style="color:#75715e"># PLT的地址</span>
+<span style="color:#ae81ff">0x401680</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> print hex(e<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;/bin/sh&#39;</span>)<span style="color:#f92672">.</span>next())<span style="color:#75715e"># 字符串/bin/sh的地址</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+shellcode
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p><code class="verbatim">asm</code> 模块用于汇编和反汇编， <code class="verbatim">shellcode</code> 模块用于生成shellcode.</p>
+<p>
+用asm汇编</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> asm(<span style="color:#e6db74">&#39;nop&#39;</span>)
+<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> asm(<span style="color:#e6db74">&#39;nop&#39;</span>, arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;arm&#39;</span>)
+<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00\xf0</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\xe3</span><span style="color:#e6db74">&#39;</span></code></pre></div>
+</div>
+<p>
+可以在开头用context指定架构</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> context<span style="color:#f92672">.</span>arch      <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;i386&#39;</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> context<span style="color:#f92672">.</span>os        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;linux&#39;</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> context<span style="color:#f92672">.</span>endian    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;little&#39;</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> context<span style="color:#f92672">.</span>word_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">32</span></code></pre></div>
+</div>
+<p>
+disasm进行反汇编</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> print disasm(<span style="color:#e6db74">&#39;6a0258cd80ebf9&#39;</span><span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;hex&#39;</span>))
+   <span style="color:#ae81ff">0</span>:   <span style="color:#ae81ff">6</span>a <span style="color:#ae81ff">02</span>                   push   <span style="color:#ae81ff">0x2</span>
+   <span style="color:#ae81ff">2</span>:   <span style="color:#ae81ff">58</span>                      pop    eax
+   <span style="color:#ae81ff">3</span>:   cd <span style="color:#ae81ff">80</span>                   int    <span style="color:#ae81ff">0x80</span>
+   <span style="color:#ae81ff">5</span>:   eb f9                   jmp    <span style="color:#ae81ff">0x0</span></code></pre></div>
+</div>
+<p>
+shellcraft生成shellcode</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> print shellcraft<span style="color:#f92672">.</span>i386<span style="color:#f92672">.</span>nop()<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+    nop
+<span style="color:#f92672">&gt;&gt;&gt;</span> print shellcraft<span style="color:#f92672">.</span>i386<span style="color:#f92672">.</span>linux<span style="color:#f92672">.</span>sh()
+    <span style="color:#f92672">/*</span> push <span style="color:#e6db74">&#39;/bin///sh</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">*/</span>
+    push <span style="color:#ae81ff">0x68</span>
+    push <span style="color:#ae81ff">0x732f2f2f</span>
+    push <span style="color:#ae81ff">0x6e69622f</span>
+<span style="color:#f92672">...</span></code></pre></div>
+</div>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+context(os<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linux&#39;</span>,arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;amd64&#39;</span>)
+shellcode <span style="color:#f92672">=</span> asm(shellcraft<span style="color:#f92672">.</span>sh())
+
+或者
+
+<span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+shellcode <span style="color:#f92672">=</span> asm(shellcraft<span style="color:#f92672">.</span>amd64<span style="color:#f92672">.</span>linux<span style="color:#f92672">.</span>sh())</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+fmtstr
+</h3>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+rop
+</h3>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+memleak
+</h3>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+ida pro
+</h2>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+gdb
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+print
+</h3>
+</div>
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
+exam
+</h3>
+</div>
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
+info
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
+<div id="outline-container-headline-14" class="outline-4">
+<h4 id="headline-14">
+展示内存映射信息
+</h4>
+<div id="outline-text-headline-14" class="outline-text-4">
+<p>i proc mappings</p>
+</div>
+</div>
+<div id="outline-container-headline-15" class="outline-4">
+<h4 id="headline-15">
+展示寄存器值
+</h4>
+<div id="outline-text-headline-15" class="outline-text-4">
+<p>i registers
+    i registers eax
+    p $eax</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-2">
+<h2 id="headline-16">
+其他
+</h2>
+<div id="outline-text-headline-16" class="outline-text-2">
+<div id="outline-container-headline-17" class="outline-3">
+<h3 id="headline-17">
+gdb调试时输入payload
+</h3>
+<div id="outline-text-headline-17" class="outline-text-3">
+<p>有时候我们想要动态调试程序，查看payload执行结果。但是gdb调试中不能直接输入不可见字符。
+   可以用脚本生成payload保存为文件后在gdb中重定向输入执行。
+   gdb中用 <code class="verbatim">run &lt; payload</code> 重定向</p>
+</div>
+</div>
+<div id="outline-container-headline-18" class="outline-3">
+<h3 id="headline-18">
+ROPgadget
+</h3>
+<div id="outline-text-headline-18" class="outline-text-3">
+<p>搜索gadget
+   ROPgadget –binary [file] –only &#34;pop|ret&#34;</p>
+<p>
+   实例：</p>
+<ul>
+<li>
+<p>搜索libc.so.6中 <code class="verbatim">pop %rdi; ret</code>
+ROPgadget –binary /lib/x86_64-linux-gnu/libc.so.6 –only &#34;pop|ret&#34; | grep &#34;rdi&#34;</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-19" class="outline-3">
+<h3 id="headline-19">
+strings搜索二进制文件中字符串
+</h3>
+<div id="outline-text-headline-19" class="outline-text-3">
+<p>strings -a -tx [file] | grep [string-needed]</p>
+<p>
+   -a Scan the entire file, not just the data section [default]
+   -t –radix={o,d,x} Print the location of the string in base 8, 10 or 16</p>
+</div>
+</div>
+<div id="outline-container-headline-20" class="outline-3">
+<h3 id="headline-20">
+nm搜索文件中的symbol
+</h3>
+<div id="outline-text-headline-20" class="outline-text-3">
+<p>-D 搜索动态符号</p>
+<p>
+   实例：</p>
+<ul>
+<li>
+<p>搜索libc.so.6中的 <code class="verbatim">system</code>
+nm -D /lib/x86_64-linux-gnu/libc.so.6 | grep &#34;system&#34;</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-21" class="outline-3">
+<h3 id="headline-21">
+patchelf &amp; ldd 修改ELF文件动态链接信息
+</h3>
+<div id="outline-text-headline-21" class="outline-text-3">
+<p>有些题目会提供libc，在本地调试的时候需要更换对应libc版本。可以用<a href="https://github.com/matrix1001/glibc-all-in-one">glibc-all-in-one</a>下载不同版本的 <code class="verbatim">ld.so</code> 和 <code class="verbatim">libc.so</code> . 然后用 <code class="verbatim">patchelf</code> 修改ELF文件。</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">patchelf --set-rpath <span style="color:#e6db74">${</span>path<span style="color:#e6db74">}</span> ./<span style="color:#e6db74">${</span>name<span style="color:#e6db74">}</span>
+patchelf --set-interpreter <span style="color:#e6db74">${</span>path<span style="color:#e6db74">}</span>/ld-<span style="color:#e6db74">${</span>version<span style="color:#e6db74">}</span>.so ./<span style="color:#e6db74">${</span>name<span style="color:#e6db74">}</span></code></pre></div>
+</div>
+<p>
+修改前后可以用 <code class="verbatim">ldd</code> 和 <code class="verbatim">file</code> 命令查看文件的libc和ld。</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$  Nnote ldd Nnote
+	linux-vdso.so.1 <span style="color:#f92672">=</span>&gt;  <span style="color:#f92672">(</span>0x00007fffb11aa000<span style="color:#f92672">)</span>
+	libc.so.6 <span style="color:#f92672">=</span>&gt; /home/ubuntu/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc.so.6 <span style="color:#f92672">(</span>0x00007fec6e7d2000<span style="color:#f92672">)</span>
+	/home/ubuntu/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/ld-2.31.so <span style="color:#f92672">=</span>&gt; /lib64/ld-linux-x86-64.so.2 <span style="color:#f92672">(</span>0x00007fec6e7a8000<span style="color:#f92672">)</span>
+$  Nnote ldd Nnote_bak
+	linux-vdso.so.1 <span style="color:#f92672">=</span>&gt;  <span style="color:#f92672">(</span>0x00007ffedd9fc000<span style="color:#f92672">)</span>
+	libc.so.6 <span style="color:#f92672">=</span>&gt; /lib/x86_64-linux-gnu/libc.so.6 <span style="color:#f92672">(</span>0x00007f3be3a3d000<span style="color:#f92672">)</span>
+	/lib64/ld-linux-x86-64.so.2 <span style="color:#f92672">(</span>0x00007f3be3e07000<span style="color:#f92672">)</span>
+$  Nnote file Nnote
+Nnote: ELF 64-bit LSB shared object, x86-64, version <span style="color:#ae81ff">1</span> <span style="color:#f92672">(</span>SYSV<span style="color:#f92672">)</span>, dynamically linked, interpreter /home/ubuntu/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/ld-2.31.so, BuildID<span style="color:#f92672">[</span>sha1<span style="color:#f92672">]=</span>27ade7b137a313e3ada867e5bb89d2060dabea54, <span style="color:#66d9ef">for</span> GNU/Linux 3.2.0, stripped</code></pre></div>
+</div>
+<p>
+在pwntools连接程序的时候也可以用 <code class="verbatim">p = process([&#34;/path/to/ld.so&#34;, &#34;./test&#34;], env={&#34;LD_PRELOAD&#34;:&#34;/path/to/libc.so.6&#34;})</code> ，但用这种方法我还没成功过。。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-22" class="outline-2">
+<h2 id="headline-22">
+参考资料
+</h2>
+<div id="outline-text-headline-22" class="outline-text-2">
+<ul>
+<li>
+<p><a href="https://www.pianshen.com/article/1581166709/">gdb调试</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/weixin_43901038/article/details/105499821">字符串生成与定位</a></p>
+</li>
+<li>
+<p><a href="https://bbs.pediy.com/thread-254868.htm">关于不同版本glibc更换的一些问题</a></p>
+</li>
+<li>
+<p><a href="https://firmianay.gitbooks.io/ctf-all-in-one/content/doc/2.4.1_pwntools.html#pwntools-%E5%9C%A8-ctf-%E4%B8%AD%E7%9A%84%E8%BF%90%E7%94%A8">pwntools在ctf中的利用</a></p>
+</li>
+<li>
+<p><a href="https://www.jianshu.com/p/355e4badab50">pwntools使用</a></p>
+</li>
+</ul>
+</div>
+</div>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+        
+          <a class="ui label" href="/tags/ctf" title="ctf">ctf</a>
+        
+          <a class="ui label" href="/tags/pwn" title="pwn">pwn</a>
+        
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+    
+    
+
+    
+
+  </div>
+  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
+    
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">环境搭建</a>
+</li>
+<li><a href="#headline-2">pwntools</a>
+<ul>
+<li><a href="#headline-3">io交互</a>
+</li>
+<li><a href="#headline-4">elf</a>
+</li>
+<li><a href="#headline-5">shellcode</a>
+</li>
+<li><a href="#headline-6">fmtstr</a>
+</li>
+<li><a href="#headline-7">rop</a>
+</li>
+<li><a href="#headline-8">memleak</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">ida pro</a>
+</li>
+<li><a href="#headline-10">gdb</a>
+<ul>
+<li><a href="#headline-11">print</a>
+</li>
+<li><a href="#headline-12">exam</a>
+</li>
+<li><a href="#headline-13">info</a>
+<ul>
+<li><a href="#headline-14">展示内存映射信息</a>
+</li>
+<li><a href="#headline-15">展示寄存器值</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#headline-16">其他</a>
+<ul>
+<li><a href="#headline-17">gdb调试时输入payload</a>
+</li>
+<li><a href="#headline-18">ROPgadget</a>
+</li>
+<li><a href="#headline-19">strings搜索二进制文件中字符串</a>
+</li>
+<li><a href="#headline-20">nm搜索文件中的symbol</a>
+</li>
+<li><a href="#headline-21">patchelf &amp; ldd 修改ELF文件动态链接信息</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-22">参考资料</a>
+</li>
+</ul>
+</nav>
+      </div>
+    
+
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img/avatar.png">
+      
+    </div>
+
+    
+    <h1 class="ui medium header">
+    
+      Iluvata&#39;s blog
+      <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
+    
+    </h1>
+    
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="ui attached center aligned segment dream-tags">
+    
+      
+      
+      <a class="ui label" href="/tags/algorithm/" title="Algorithm">
+        Algorithm
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/ctf/" title="Ctf">
+        Ctf
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/emacs/" title="Emacs">
+        Emacs
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/hugo/" title="Hugo">
+        Hugo
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/math/" title="Math">
+        Math
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/operating-system/" title="Operating System">
+        Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/pwn/" title="Pwn">
+        Pwn
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/sicp/" title="Sicp">
+        Sicp
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/work/" title="Work">
+        Work
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/%E8%80%83%E7%A0%94/" title="考研">
+        考研
+      </a>
+    
+  </section>
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+      
+      
+      
+      
+
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/learning/" title="Learning">
+              Learning
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-19_distributions/">概率统计中的分布</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-09_file-and-database/">文件系统与数据库系统</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/life/" title="Life">
+              Life
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-16_yearly-review/">2020年度回顾以及新年目标</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+
+      
+    </div>
+  </section>
+  
+
+  <section class="ui attached segment header-socials">
+    <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class=" mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+  </section>
+
+  <section class="ui bottom attached center aligned segment">
+    
+      <p>© 2021 Iluvata&#39;s Blog</p>
+    
+
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+    
+  </section>
+</article>
+
+  </aside>
+</div>
+
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <div class="ui centered relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui bottom attached segment">
+        <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class="large mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+    
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  true 
+  window.hasTwitterEmbed =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+
+
+
+    
+
+    
+  </body>
+</html>

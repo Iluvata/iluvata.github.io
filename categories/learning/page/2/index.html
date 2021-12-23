@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>最大似然估计与基本演绎法 | Iluvata&#39;s Blog</title>
+    <title>learning | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,26 +17,20 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/" />
+<link rel="canonical" href="https://iluvata.github.io/categories/learning/" />
 
 
-<meta property="og:title" content="最大似然估计与基本演绎法" />
-<meta property="og:description" content="在数理统计中，极大似然估计是一种使用已知样本来反推最大概率的模型参数的方法。比如我们知道（或者推测）某个 随机变量服从正态分布，但是不知道分布的参数值。如果我们能够获取到几个分布中的样本，就可以对其进行拟合，尝试 得到最有可能的参数值来确定该分布。那具体要怎么通过样本来得到分布的参数呢？
- 极大似然估计使用了一种最符合直觉的方法，即使用取到这些样本组合概率最大的参数。这个过程和福尔摩斯使用的基本演绎法 及其相似。在《四签名》中，福尔摩斯在推理凶手的逃跑路线（没想到吧jojo，这就是我的逃跑路线啊，wryyyyy 23333） 的时候说，当你排除了所有不可能的情况后，剩下的，不管多不可能，就是事实。类似的方法还在《巴斯克维尔的猎犬》中 福尔摩斯推断来访者身份以及许多其他地方中使用过。如果把你扔到二等车厢，让你指出每个人的职业，你会怎么做。首先 当然是对对象进行观察，观察他们的衣着，膝盖，手腕，衣领。得到的结果，比如说一个人的膝盖上有泥土，就是数理统计 中的样本。给定了一系列的样本，如手腕上有粉末，衣领上有灰，脚上穿着皮鞋，戴着眼镜；这些结合在一起得到了样本空间。 我们会怎么推断这个人的职业呢？符合这些样本情况的职业可能有很多，还可能有一些样本是由于一些意外的活动引起的。但是一般 来说，我们不会把这个人的职业判断成运动员。尽管由于一系列的小概率事件使得一位运动员打扮成这样，但我们的推理是基于 最有可能导致这些样本的情况进行的。这也就是最大似然的思想方式。
- 回到概率统计中，那在数学上该如何计算参数值呢？我们将几个样本值分别带入分布公式，要求的参数作为变量，将每个样本 得到的对应概率表达式相乘作为联合概率（需要各样本相互独立），把取到使得该联合概率最大的值拿来当作目标参数值。 再往下更具体的计算步骤包括处理联合概率（即极大似然目标函数），希望求解使其最大化的最优化问题。一般的方法是 对其做对数处理，然后求导，使得导数为0的参数值能让目标函数取到极大值，就是我们要求的值了。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-04-19T19:00:13+08:00" />
-<meta property="article:modified_time" content="2021-04-19T19:00:13+08:00" />
+<meta property="og:title" content="learning" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://iluvata.github.io/categories/learning/" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="最大似然估计与基本演绎法"/>
-<meta name="twitter:description" content="在数理统计中，极大似然估计是一种使用已知样本来反推最大概率的模型参数的方法。比如我们知道（或者推测）某个 随机变量服从正态分布，但是不知道分布的参数值。如果我们能够获取到几个分布中的样本，就可以对其进行拟合，尝试 得到最有可能的参数值来确定该分布。那具体要怎么通过样本来得到分布的参数呢？
- 极大似然估计使用了一种最符合直觉的方法，即使用取到这些样本组合概率最大的参数。这个过程和福尔摩斯使用的基本演绎法 及其相似。在《四签名》中，福尔摩斯在推理凶手的逃跑路线（没想到吧jojo，这就是我的逃跑路线啊，wryyyyy 23333） 的时候说，当你排除了所有不可能的情况后，剩下的，不管多不可能，就是事实。类似的方法还在《巴斯克维尔的猎犬》中 福尔摩斯推断来访者身份以及许多其他地方中使用过。如果把你扔到二等车厢，让你指出每个人的职业，你会怎么做。首先 当然是对对象进行观察，观察他们的衣着，膝盖，手腕，衣领。得到的结果，比如说一个人的膝盖上有泥土，就是数理统计 中的样本。给定了一系列的样本，如手腕上有粉末，衣领上有灰，脚上穿着皮鞋，戴着眼镜；这些结合在一起得到了样本空间。 我们会怎么推断这个人的职业呢？符合这些样本情况的职业可能有很多，还可能有一些样本是由于一些意外的活动引起的。但是一般 来说，我们不会把这个人的职业判断成运动员。尽管由于一系列的小概率事件使得一位运动员打扮成这样，但我们的推理是基于 最有可能导致这些样本的情况进行的。这也就是最大似然的思想方式。
- 回到概率统计中，那在数学上该如何计算参数值呢？我们将几个样本值分别带入分布公式，要求的参数作为变量，将每个样本 得到的对应概率表达式相乘作为联合概率（需要各样本相互独立），把取到使得该联合概率最大的值拿来当作目标参数值。 再往下更具体的计算步骤包括处理联合概率（即极大似然目标函数），希望求解使其最大化的最优化问题。一般的方法是 对其做对数处理，然后求导，使得导数为0的参数值能让目标函数取到极大值，就是我们要求的值了。"/>
+<meta name="twitter:title" content="learning"/>
+<meta name="twitter:description" content=""/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -76,13 +70,7 @@
   
 </style>
 
-    
-
-
-
-
-
-
+     
   </head>
 
   <body class="default">
@@ -107,81 +95,7 @@
           <div class="dream-max-width">
             
 <div class="ui centered relaxed grid dream-grid">
-  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
-    
-    <section class="ui top attached segment">
-      <header>
-        <h1 class="ui large header">
-          最大似然估计与基本演绎法
-          <div class="sub header">
-            @
-            
-              Iluvata
-            
-
-            | 
-                Monday, Apr 19, 2021
-              
-
-            | 1 minutes read
-
-            | Update at
-              
-                Monday, Apr 19, 2021
-              
-          </div>
-        </h1>
-      </header>
-
-      <article class="main"><p>
-在数理统计中，极大似然估计是一种使用已知样本来反推最大概率的模型参数的方法。比如我们知道（或者推测）某个
-随机变量服从正态分布，但是不知道分布的参数值。如果我们能够获取到几个分布中的样本，就可以对其进行拟合，尝试
-得到最有可能的参数值来确定该分布。那具体要怎么通过样本来得到分布的参数呢？</p>
-<p>
-极大似然估计使用了一种最符合直觉的方法，即使用取到这些样本组合概率最大的参数。这个过程和福尔摩斯使用的基本演绎法
-及其相似。在《四签名》中，福尔摩斯在推理凶手的逃跑路线（没想到吧jojo，这就是我的逃跑路线啊，wryyyyy 23333）
-的时候说，当你排除了所有不可能的情况后，剩下的，不管多不可能，就是事实。类似的方法还在《巴斯克维尔的猎犬》中
-福尔摩斯推断来访者身份以及许多其他地方中使用过。如果把你扔到二等车厢，让你指出每个人的职业，你会怎么做。首先
-当然是对对象进行观察，观察他们的衣着，膝盖，手腕，衣领。得到的结果，比如说一个人的膝盖上有泥土，就是数理统计
-中的样本。给定了一系列的样本，如手腕上有粉末，衣领上有灰，脚上穿着皮鞋，戴着眼镜；这些结合在一起得到了样本空间。
-我们会怎么推断这个人的职业呢？符合这些样本情况的职业可能有很多，还可能有一些样本是由于一些意外的活动引起的。但是一般
-来说，我们不会把这个人的职业判断成运动员。尽管由于一系列的小概率事件使得一位运动员打扮成这样，但我们的推理是基于
-最有可能导致这些样本的情况进行的。这也就是最大似然的思想方式。</p>
-<p>
-回到概率统计中，那在数学上该如何计算参数值呢？我们将几个样本值分别带入分布公式，要求的参数作为变量，将每个样本
-得到的对应概率表达式相乘作为联合概率（需要各样本相互独立），把取到使得该联合概率最大的值拿来当作目标参数值。
-再往下更具体的计算步骤包括处理联合概率（即极大似然目标函数），希望求解使其最大化的最优化问题。一般的方法是
-对其做对数处理，然后求导，使得导数为0的参数值能让目标函数取到极大值，就是我们要求的值了。</p>
-</article>
-    </section>
-
-    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
-      
-        
-          <a class="ui label" href="/tags/math" title="math">math</a>
-        
-      
-      <div
-        class="ui label"
-        style="float: right; cursor: pointer;"
-        onclick="savePostAsImg()">
-        <i class="save icon"></i>Save as image
-      </div>
-    </footer>
-
-    
-
-    
-    
-    
-
-    
-
-  </div>
-  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
-    
-    
-
+  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
     <article class="dream-header">
   <section class="ui top attached center aligned segment">
     <div class="ui small circular image">
@@ -191,12 +105,12 @@
     </div>
 
     
-    <h1 class="ui medium header">
+    <div class="ui medium header">
     
       Iluvata&#39;s blog
       <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
     
-    </h1>
+    </div>
     
 
     <div class="ui horizontal list">
@@ -471,7 +385,66 @@
   </section>
 </article>
 
-  </aside>
+  </div>
+
+  
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/">
+    
+      <img src="/img/2021-02-19_dijkstra.jpg" alt="理解动态规划与warshall算法" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Friday, Feb 19, 2021</p>
+    </div>
+    <div class="description">
+      今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
+集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
+关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）
+ 函数：函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射.
+ A function from A to B is an assignment of exactly one element of B to each element of A.
+ 函数的种类包括
+  单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.
+  满射（onto）函数：值域中每个值都有对应的定义域元素.
+  双射： 满足单射及满射
+    闭包  闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。 其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).
+ 一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中， 如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c) 的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)}, 进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的 自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>2 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+
+  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+    
+<article class="ui attached center aligned segment card dream-card">
+  <div class="content">
+    <div class="ui medium header">
+      <a href="/categories/learning/" title="Previous page">
+        Previous page
+      </a>
+    </div>
+  </div>
+</article>
+
+
+
+
+  </div>
 </div>
 
           </div>
@@ -570,11 +543,9 @@
 <script src="/js/theme.js"></script>
 
     
-<script src="/js/html2canvas.min.js"></script>
-<script src="/js/post.js"></script>
-
-
-
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/grid.js"></script>
 
 
     

