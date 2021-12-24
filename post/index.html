@@ -216,6 +216,18 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-12-23_heap/">pwn堆题整理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-13_rop/">ROP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
                 </div>
               </div>
@@ -391,6 +403,74 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
+    
+      <img src="/img/default1.jpg" alt="pwn堆题整理" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-12-23_heap/">pwn堆题整理</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Dec 23, 2021</p>
+    </div>
+    <div class="description">
+      堆溢出  Nnote  花了一周打的UNCTF，光做PWN了，做了7道，就差这道堆题没做出来。最后还有30名以内。。。因为这比赛本身就是入门级的，算是我第一次实战吧。赛后看着wp调试出来。当时应该是找到了漏洞点，但因为基础薄弱最终也没做出来，更别说环境还弄了半天没弄好。。。通过这道题我算是实际开始入门堆了吧。这里是官方wp。
+exp环境  题目给的libc是2.31
+patchelf --set-rpath ~/glibc-all-in-one/libs/2.31 ./Nnote patchelf --set-interpreter ~/glibc-all-in-one/libs/2.31/ld-2.31.so ./Nnote    泄漏libc  从libc-2.26开始加入了TCache，2.28加入对TCache二次释放的检查. TCache为每个线程加入64个单链表的bins，（64bit系统）以16字节递增，从24B到1032B。每个bins最多放7个chunk。堆开头的0x250的堆块就是tcache_perthread_struct. 在free时，如果chunk大小符合要求，就会在放入fastbins之前放入tcache。分配堆块时若从fastbins中成功返回一个chunk，对应fastbins中其他chunk会被放入对应tcache直到装满。small bins中情况类似。chunk合并时chunk会优先放入tcache。tcache中chunk的PREV_INUSE位和在fastbins中一样不会被清零，因此不会被合并。
+ 因此这题需要先构造出大于0x410(1040B)的堆块，释放进unsorted bin。需要注意在想释放的堆块后还要再申请一块chunk，防止因为和topchunk相邻而直接合并进topchunk。unsorted bin中如果只有一个chunk，并且这个chunk在上次分配时被使用过时，若申请一个大小属于small bins(32B-1008B)的空间，会直接从该chunk中进行切割，切出低地址部分返回。
+ 这题申请大小限制不小于0，不大于128，并且根据申请的大小限制了修改时能写入的字节数。但是申请0B的堆块时能通过整数溢出绕过限制条件引起堆溢出。因此这里构造大小为0x480的chunk的方法就是构造9个连在一起的，大小为0x80的chunk（malloc申请的大小为0x78）；然后利用最上面堆块上面的堆溢出覆盖第一块的块大小字段为0x481（块大小字段最低bit为PREV_INUSE）。释放后再申请一个0x80的chunk，会从之前释放到unsorted bin头部割出0x80，导致现在在unsorted bin中的chunk和原来申请的9块中的第二块重叠，输出第二块的数据就可以得到unsorted bin。
+add(0) for i in range(9): add(0x78) add(0x18) edit(0 , &#39;a&#39;*0x18+p64(0x481)) delete(1) add(0x78) show(2) __malloc_hook = l64() - 0x70 libc.address = __malloc_hook - libc.sym[&#39;__malloc_hook&#39;]   得到的地址和main_arena(或__malloc_hook)之间的偏移是固定的。可以在gdb调试里看到与__malloc_hook之间的偏移为0x70。
+gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x60: 0x0 0x70: 0x0 0x80: 0x0 unsortedbin all: 0x558be3001330 —▸ 0x7f6c92886be0 (main_arena+96) ◂— 0x558be3001330 smallbins empty largebins empty gef➤ x/gx &amp;__malloc_hook 0x7f6c92886b70 &lt;__malloc_hook&gt;:	0x0000000000000000    劫持free_hook  这时候申请两个0x40的chunk，序号分别为11和12.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
+    
+      <img src="/img/default2.jpg" alt="ROP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-11-13_rop/">ROP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Saturday, Nov 13, 2021</p>
+    </div>
+    <div class="description">
+       BROP  确定retaddr的偏移   寻找stopgadget  可以用io.recv()是否成功来判断是否为stopdadget，并且可以根据返回的内容大致猜测覆盖的地址是什么函数
+  寻找bropgadget  所谓bropgadget其实就是__libc_csu_init里最后一段包含6个连续pop的汇编，对这段汇编进行偏移还能构造出对于另外几个寄存器的pop。 寻找方法也就是在猜测的retaddr后跟6个trap（会导致程序崩溃的retaddr），再跟上之前找到的stopgadget，最后再跟几个trap。验证的方法可以是在跟上6个trap后不跟stopgadget而是直接跟上trap，看是否会崩溃（如果不会崩溃，有可能是遇到了plt表。为什么plt表不会崩溃？因为plt表用jmp直接跳转去执行函数了）。
+  寻找puts/write@plt  通过尝试puts出elf头的\x7fELF确定是否遇到了puts的plt
+  dump出内存  用之前得到的puts@pltdump出内存
+  在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移   ret2libc     SROP   
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
       <img src="/img/default4.jpg" alt="libc泄漏" />
@@ -425,7 +505,7 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
-      <img src="/img/default1.jpg" alt="CTF基本工具使用指北" />
+      <img src="/img/default2.jpg" alt="CTF基本工具使用指北" />
     
   </a>
 
@@ -459,7 +539,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/">
     
-      <img src="/img/default3.jpg" alt="最大似然估计与基本演绎法" />
+      <img src="/img/default2.jpg" alt="最大似然估计与基本演绎法" />
     
   </a>
 
@@ -594,7 +674,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/">
     
-      <img src="/img/default4.jpg" alt="推荐系统基础" />
+      <img src="/img/default2.jpg" alt="推荐系统基础" />
     
   </a>
 
@@ -625,7 +705,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-17_operating-system/">
     
-      <img src="/img/default1.jpg" alt="操作系统" />
+      <img src="/img/default4.jpg" alt="操作系统" />
     
   </a>
 
@@ -640,75 +720,6 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
        操作系统的模块  操作系统是在裸机之上，为用户提供资源管理服务的软件。需要管理的软硬件资源包括CPU，内存， 外设等。与之对应，操作系统大致可以分为5个子模块：CPU管理模块，内存管理模块，文件系统， IO管理模块。
   进程和处理器调度  进程是程序的一次执行。但是进程是计算机中活动的状态，随着时间改变保存的数据，而不是像程序 那样，静止地保存在磁盘中。关于进程的讨论包括进程的状态，通信，同步互斥，死锁。在多道程序 操作系统中CPU不能一直被同一进程占据，需要进行调度，决定每个时间由那个进程占用CPU。CPU 调度的形式包括先来先服务，短作业优先法，时间片轮转法，优先级调度法，高相应比优先， 多级队列轮转法等。死锁是两个或以上互斥进程在执行过程中占据对方需要的一部分资源的同时请求 的部分资源被对方占据，造成的阻塞，无法向前推进的状态。死锁的必要条件有临界资源互斥执行， 不可剥夺已有资源，在占有部分资源的情况下进行请求，以及请求形成环路循环等待。处理方法有 预防，避免，检测和恢复。死锁预防是指破坏4个必要条件中任意一个；避免是用银行家算法，在每次 请求保证之后的状态是安全的才分配资源；检测使用资源分配图。
   内存管理，虚存   文件系统   IO子模块   
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-15_computer-structure/">
-    
-      <img src="/img/2021-03-15_A-Simplified-MIPS-Processor-Architecture.png" alt="计算机体系结构与组成原理" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Mar 15, 2021</p>
-    </div>
-    <div class="description">
-      计算机体系结构概要  计算机体系结构讲的是同系列计算机为操作系统提供的接口（包括机器语言、汇编语言等），以及底层 硬件的结构设计。计算机组成原理讲的是硬件实现。目前的计算机一般都是用冯诺依曼结构，特点是 存储程序，即将程序作为数据和数据存储在同一存储器中。要执行程序的时候从第一个存储单元开始 顺序执行，根据控制流跳转。与之对应的是哈佛结构，将数据和程序分别存放在两个不同的存储器 中。
- 要了解计算机，首要的是了解计算机是怎么存储数据的。包括补码、原码等各种格式和他们的运算。 在了解了数据在计算机中的表示方式后，我们需要知道他们在哪里如何被存储，在哪里怎么进行运算。 在了解计算机进行运算的步骤之前需要知道计算机是用什么格式发出命令的，即机器语言与汇编语言。 以上便是计算机主机的任务：存储、运算、控制。除此之外，计算机还需要规范数据如何在各部件间 传输，即确定总线的相关标准。最后，如果只有之前的操作我们只能将计算机看作一个黑盒，什么都 进不去，什么都出不来，就算一直在计算也没有用处。因此对于输入/输出的讨论也极为重要。
-  现代计算机中，控制器和运算器一起被叫做CPU，CPU和主存一起组成主机，主机与外设一起组成硬件设备。 硬件和软件一起组成计算机系统。
-  存储器层次结构  目前我们能用于做存储器的材料与工艺有很多，不同方式/目的做出的存储器特性也不同。如磁盘，磁带， RAM，ROM，FLASH等。存储器的分类方式有很多，如用用掉电后能否保存数据可以分成挥发性存储器与 非挥发性存储器；能否随机访问可以分为随机访问存储器与顺序访问存储器等。除此之外，就算是在 主机内部使用的存储器，不同工艺也有很大的性能与价格差距。SRAM可以用于寄存器，速度最快， 但是集成度低，在单位空间内塞不下很大容量，并且价格贵。DRAM动态随机访问存储器一般用于主存， 相比SRAM速度较慢，但是集成度较高并且便宜。
- 我们对计算机性能的要求是无上限的，但同时成本也需要控制在可接受的范围。因此就算我们让一台计算机 主机内所有的存储器都用SRAM，我们还是会想要更大更快的内存。为了解决上述价格与速度的矛盾，我们 引入了分层次存储器。在拥有DRAM作为主存的大容量低价格的同时使用SRAM作为CPU内部寄存器以获取高速度。 完整的层次结构中速度从快到慢，容量从小到大是：寄存器-cache-主存-外存.
- 主存与CPU之间通过总线相连，数据从主存中取出到寄存器中，在寄存器中传入ALU等部件组成的数据通路进行 计算，得到的结果也存放在寄存器，需要时写入主存中。随着硬件的发展，虽然主存的速度也在不断增长， 但CPU速度的增长速度远大于主存，两者之间的速度差距越来越大。为了调节两者间的速度差异，最大 程度发挥CPU性能，Cache作为高速缓存被引入。Cache具有接近CPU的存取速度，保存最近常用的主存中 的单元副本，并且实时更新。主存、Cache、CPU之间的关系，乃至整个存储器层次结构中上下层软硬件 的关系，我们可以形象的用柜台和仓库进行类比。存取速度更快但是容量更小的上层存储器是商店里的柜台， 下层存储器是商店的仓库，数据是仓库中的物品。当用户/计算机需要购买物品时，如果柜台中有物品 就可以直接从柜台快速拿取，若没有则需要经过繁琐的步骤去仓库取出。但是我们不能把仓库中所有物品 直接放入柜台。还有一种类比是把数据看作学生使用的文具，最上层，即速度最快，容量最小的一层是 学生书桌上的文具盒，需要的时候可以随时取用。下一层是书包，可能有些较大的文具无法放在文具盒中， 这时就需要花稍多的时间从背包内取出。再下一层可以是学生的家。有时候可能会把要用的东西落在了家中， 或者书包也装不下，只能放在家中。这时若再需要用到就要花大代价跑回家去拿。但是一旦从家中拿到了 文具，已经将它装在了包里，那下次再次取用就只要去包里找就行了。CPU内寄存器、Cache、主存间的关系 大致是这样，只是这里的“物品”：数据是可以被拷贝到上层存储器的，从下层“取走”到上层后下层还保留着 一份原本，上层只是“复制”走了一份副本。值得一提的一点是为什么我们每天只需要一个包来装学习用品 就够日常使用了，而不是经常跑回家拿东西呢？假设我们把所有科目的书和试卷等全都放在家里，每天的 课程表让我们知道当天的科目，再加上当前的课程进度，综合起来我们可以判断只需要带走一部分相关的资料 而非全部科目的所有资料就足够当天的学习使用了。在计算机中也有类似的情况，就是计算机在执行一道 程序的时候在一段时间内会反复使用同一段或相邻的空间。这就相当于得知了当前的“课程进度”和“课表” 后，我们能够确定大致需要带的资料，在一段时间（比如一天）内无需反复回家更换。程序在一段时间 内反复访问相同的空间的特性叫做时间局部性，访问某空间后大概率访问相邻空间的特性叫做空间局部性。 程序的局部性原理使得是的Cache能够作为CPU与主存间的高速缓存大大提升整体系统的效率。
- 那么我们在使用Cache的时候需要注意哪些细节呢？首先，由于一个学生在上学的时候不可能把整个家里所有 东西都装在背包中，需要挑选出每天要带走的东西。Cache需要确定保存哪些副本，当空间满了的时候 如何进行替换。Cache的替换策略有随机替换, FIFO, LRU, LFU. 其次，Cache中保存的是主存中的副本， Cache以行为单位，一行内可以包括多个主存单元（一般是1字节大小），与行对应大小的单位在主存 中被称为块。Cache最理想的实现方式是每行都能保存主存中任意块的副本，但是由于Cache的总 容量比主存小，我们需要对存在每行中的每个块指定一个标识以分辨对应主存中的位置。 按照上面的设想，我们需要在每行保存完整的主存块地址（非存储单元地址，用于分辨块中不同存储 单元的最后几位不用记录）作为唯一标识，这样每次想要找出CPU给出的主存单元对应的Cache行所需 的开销就会比较大。那么我们可以换一种思路进行映射：由于主存容量较大，地址的长度也比Cache中地址要长， 那我们把高位多出来的那部分作为唯一标识，剩下的主存地址就直接用到Cache上当作行地址，这样需要保存 的标识长度就短了很多，每次在Cache中找对应的主存块也不用对比所有行的标识，只需找到编号低位 与地址相同的那一行。以上两种Cache与主存之间的映射方式分别是全相联映射和直接映射。有的时候， 我们虽然用不起全相联映射，又发现直接映射太过于死板以至于在跑一些程序的时候无法很好的 完整高速缓存的工作（无法很好利用时间局部性），那就可以将两者结合起来，先将Cache中的行分组， 在组内进行任意对应。这就是组相联映射。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/">
-    
-      <img src="/img/2021-03-14_lisp.png" alt="编程语言的基本组成" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Sunday, Mar 14, 2021</p>
-    </div>
-    <div class="description">
-      编程语言的基本组成  编程语言的基本组成是SICP的第一节讨论的内容。编程语言所需要的基本元素有3个：原子元素（原子过程、 原子数据结构）、将运算进行复合的能力、对过程进行抽象的能力。
- 原子元素是语言本身提供给我们的最小过程与数据结构，如乘法 * ，整数数据类型. 在scheme中我们将 一个操作过程写在括号语句内，语句的第一个元素作为运用的过程（操作符），随后的元素作为操作数。如
-(* 3 4)   运算复合的能力使我们能够从基本操作中构建复杂操作，如求解阶乘
-(define (factorial n) (if (&lt; n 2) 1 (* n (factorial (- n 1)))))   最后是构建抽象的能力，能够让我们不被所有实现细节扰乱思路，只把之前构建的函数当作黑盒直接拿来 使用
-(factorial 4)    块结构–以牛顿法求平方根为例  牛顿法是用于求解方程根的算法，从一个猜测开始每次迭代得到一个更好的猜测，不断向根逼近，直到 一个我们指定的要求达到为止。 通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的 sqrt算法。
-(define (sqrt-iter guess x) (if (good-enough? guess x) guess (sqrt-iter (better-guess guess x) x))) (define (sqrt x) (sqrt-iter 2.0 x))  在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了 防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt.
     </div>
   </div>
 

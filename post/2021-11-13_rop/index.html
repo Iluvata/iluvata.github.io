@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>在org mode中嵌入latex | Iluvata&#39;s Blog</title>
+    <title>ROP | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,30 +17,30 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-02-22_latex-with-emacs/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2021-11-13_rop/" />
 
 
-<meta property="og:title" content="在org mode中嵌入latex" />
-<meta property="og:description" content="最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
-\begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=&#43;\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 但是虽然orgmode支持的latex能导出pdf，hugo生成的html网页还是不支持。
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX Hugo中的LaTeX渲染 Hugo中添加LaTeX渲染" />
+<meta property="og:title" content="ROP" />
+<meta property="og:description" content=" BROP  确定retaddr的偏移   寻找stopgadget  可以用io.recv()是否成功来判断是否为stopdadget，并且可以根据返回的内容大致猜测覆盖的地址是什么函数
+  寻找bropgadget  所谓bropgadget其实就是__libc_csu_init里最后一段包含6个连续pop的汇编，对这段汇编进行偏移还能构造出对于另外几个寄存器的pop。 寻找方法也就是在猜测的retaddr后跟6个trap（会导致程序崩溃的retaddr），再跟上之前找到的stopgadget，最后再跟几个trap。验证的方法可以是在跟上6个trap后不跟stopgadget而是直接跟上trap，看是否会崩溃（如果不会崩溃，有可能是遇到了plt表。为什么plt表不会崩溃？因为plt表用jmp直接跳转去执行函数了）。
+  寻找puts/write@plt  通过尝试puts出elf头的\x7fELF确定是否遇到了puts的plt
+  dump出内存  用之前得到的puts@pltdump出内存
+  在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移   ret2libc     SROP   " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-02-22_latex-with-emacs/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-02-22T23:30:15+08:00" />
-<meta property="article:modified_time" content="2021-02-22T23:30:15+08:00" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-11-13_rop/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-13T01:57:10+08:00" />
+<meta property="article:modified_time" content="2021-11-13T01:57:10+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在org mode中嵌入latex"/>
-<meta name="twitter:description" content="最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
-\begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=&#43;\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 但是虽然orgmode支持的latex能导出pdf，hugo生成的html网页还是不支持。
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX Hugo中的LaTeX渲染 Hugo中添加LaTeX渲染"/>
+<meta name="twitter:title" content="ROP"/>
+<meta name="twitter:description" content=" BROP  确定retaddr的偏移   寻找stopgadget  可以用io.recv()是否成功来判断是否为stopdadget，并且可以根据返回的内容大致猜测覆盖的地址是什么函数
+  寻找bropgadget  所谓bropgadget其实就是__libc_csu_init里最后一段包含6个连续pop的汇编，对这段汇编进行偏移还能构造出对于另外几个寄存器的pop。 寻找方法也就是在猜测的retaddr后跟6个trap（会导致程序崩溃的retaddr），再跟上之前找到的stopgadget，最后再跟几个trap。验证的方法可以是在跟上6个trap后不跟stopgadget而是直接跟上trap，看是否会崩溃（如果不会崩溃，有可能是遇到了plt表。为什么plt表不会崩溃？因为plt表用jmp直接跳转去执行函数了）。
+  寻找puts/write@plt  通过尝试puts出elf头的\x7fELF确定是否遇到了puts的plt
+  dump出内存  用之前得到的puts@pltdump出内存
+  在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移   ret2libc     SROP   "/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -116,7 +116,7 @@
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          在org mode中嵌入latex
+          ROP
           <div class="sub header">
             @
             
@@ -124,39 +124,89 @@
             
 
             | 
-                Monday, Feb 22, 2021
+                Saturday, Nov 13, 2021
               
 
             | 1 minutes read
 
             | Update at
               
-                Monday, Feb 22, 2021
+                Saturday, Nov 13, 2021
               
           </div>
         </h1>
       </header>
 
-      <article class="main"><p>
-最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。
-于是干脆在这里记一下怎么在org mode中内嵌latex。</p>
-<p>\begin{equation}                        % arbitrary environments,
-x=\sqrt{b}                              % even tables, figures
-\end{equation}                          % etc</p>
-<p>
-If $a^2=b$ and \( b=2 \), then the solution must be
-either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].</p>
-<p>
-但是虽然orgmode支持的latex能导出pdf，hugo生成的html网页还是不支持。</p>
-<p>
-参考链接：<a href="https://orgmode.org/manual/Embedded-LaTeX.html">官方文档</a> <a href="https://blog.poi.cat/post/spacemacs-plus-org-mode-plus-latex">Spacemacs和Org-mode和LaTeX</a> <a href="https://orianna-zzo.github.io/sci-tech/2018-03/blog%E5%85%BB%E6%88%90%E8%AE%B06-hugo%E4%B8%AD%E7%9A%84latex%E6%B8%B2%E6%9F%93/">Hugo中的LaTeX渲染</a> <a href="https://corpython.github.io/post/hugo%E6%B7%BB%E5%8A%A0latex%E5%85%AC%E5%BC%8F%E6%B8%B2%E6%9F%93/">Hugo中添加LaTeX渲染</a></p>
+      <article class="main">
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+BROP
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+确定retaddr的偏移
+</h3>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+寻找stopgadget
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>可以用io.recv()是否成功来判断是否为stopdadget，并且可以根据返回的内容大致猜测覆盖的地址是什么函数</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+寻找bropgadget
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>所谓bropgadget其实就是__libc_csu_init里最后一段包含6个连续pop的汇编，对这段汇编进行偏移还能构造出对于另外几个寄存器的pop。
+寻找方法也就是在猜测的retaddr后跟6个trap（会导致程序崩溃的retaddr），再跟上之前找到的stopgadget，最后再跟几个trap。验证的方法可以是在跟上6个trap后不跟stopgadget而是直接跟上trap，看是否会崩溃（如果不会崩溃，有可能是遇到了plt表。为什么plt表不会崩溃？因为plt表用jmp直接跳转去执行函数了）。</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+寻找puts/write@plt
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>通过尝试puts出elf头的\x7fELF确定是否遇到了puts的plt</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+dump出内存
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>用之前得到的puts@pltdump出内存</p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移
+</h3>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+ret2libc
+</h3>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+SROP
+</h2>
+</div>
 </article>
     </section>
 
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
         
-          <a class="ui label" href="/tags/emacs" title="emacs">emacs</a>
+          <a class="ui label" href="/tags/pwn" title="pwn">pwn</a>
+        
+          <a class="ui label" href="/tags/ctf" title="ctf">ctf</a>
         
       
       <div
@@ -178,6 +228,33 @@ either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].</p>
   </div>
   <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
     
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">BROP</a>
+<ul>
+<li><a href="#headline-2">确定retaddr的偏移</a>
+</li>
+<li><a href="#headline-3">寻找stopgadget</a>
+</li>
+<li><a href="#headline-4">寻找bropgadget</a>
+</li>
+<li><a href="#headline-5">寻找puts/write@plt</a>
+</li>
+<li><a href="#headline-6">dump出内存</a>
+</li>
+<li><a href="#headline-7">在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移</a>
+</li>
+<li><a href="#headline-8">ret2libc</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">SROP</a>
+</li>
+</ul>
+</nav>
+      </div>
     
 
     <article class="dream-header">

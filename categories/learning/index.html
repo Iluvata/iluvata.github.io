@@ -216,6 +216,18 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-12-23_heap/">pwn堆题整理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-13_rop/">ROP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
                 </div>
               </div>
@@ -391,6 +403,74 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
+    
+      <img src="/img/default1.jpg" alt="pwn堆题整理" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-12-23_heap/">pwn堆题整理</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Dec 23, 2021</p>
+    </div>
+    <div class="description">
+      堆溢出  Nnote  花了一周打的UNCTF，光做PWN了，做了7道，就差这道堆题没做出来。最后还有30名以内。。。因为这比赛本身就是入门级的，算是我第一次实战吧。赛后看着wp调试出来。当时应该是找到了漏洞点，但因为基础薄弱最终也没做出来，更别说环境还弄了半天没弄好。。。通过这道题我算是实际开始入门堆了吧。这里是官方wp。
+exp环境  题目给的libc是2.31
+patchelf --set-rpath ~/glibc-all-in-one/libs/2.31 ./Nnote patchelf --set-interpreter ~/glibc-all-in-one/libs/2.31/ld-2.31.so ./Nnote    泄漏libc  从libc-2.26开始加入了TCache，2.28加入对TCache二次释放的检查. TCache为每个线程加入64个单链表的bins，（64bit系统）以16字节递增，从24B到1032B。每个bins最多放7个chunk。堆开头的0x250的堆块就是tcache_perthread_struct. 在free时，如果chunk大小符合要求，就会在放入fastbins之前放入tcache。分配堆块时若从fastbins中成功返回一个chunk，对应fastbins中其他chunk会被放入对应tcache直到装满。small bins中情况类似。chunk合并时chunk会优先放入tcache。tcache中chunk的PREV_INUSE位和在fastbins中一样不会被清零，因此不会被合并。
+ 因此这题需要先构造出大于0x410(1040B)的堆块，释放进unsorted bin。需要注意在想释放的堆块后还要再申请一块chunk，防止因为和topchunk相邻而直接合并进topchunk。unsorted bin中如果只有一个chunk，并且这个chunk在上次分配时被使用过时，若申请一个大小属于small bins(32B-1008B)的空间，会直接从该chunk中进行切割，切出低地址部分返回。
+ 这题申请大小限制不小于0，不大于128，并且根据申请的大小限制了修改时能写入的字节数。但是申请0B的堆块时能通过整数溢出绕过限制条件引起堆溢出。因此这里构造大小为0x480的chunk的方法就是构造9个连在一起的，大小为0x80的chunk（malloc申请的大小为0x78）；然后利用最上面堆块上面的堆溢出覆盖第一块的块大小字段为0x481（块大小字段最低bit为PREV_INUSE）。释放后再申请一个0x80的chunk，会从之前释放到unsorted bin头部割出0x80，导致现在在unsorted bin中的chunk和原来申请的9块中的第二块重叠，输出第二块的数据就可以得到unsorted bin。
+add(0) for i in range(9): add(0x78) add(0x18) edit(0 , &#39;a&#39;*0x18+p64(0x481)) delete(1) add(0x78) show(2) __malloc_hook = l64() - 0x70 libc.address = __malloc_hook - libc.sym[&#39;__malloc_hook&#39;]   得到的地址和main_arena(或__malloc_hook)之间的偏移是固定的。可以在gdb调试里看到与__malloc_hook之间的偏移为0x70。
+gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x60: 0x0 0x70: 0x0 0x80: 0x0 unsortedbin all: 0x558be3001330 —▸ 0x7f6c92886be0 (main_arena+96) ◂— 0x558be3001330 smallbins empty largebins empty gef➤ x/gx &amp;__malloc_hook 0x7f6c92886b70 &lt;__malloc_hook&gt;:	0x0000000000000000    劫持free_hook  这时候申请两个0x40的chunk，序号分别为11和12.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
+    
+      <img src="/img/default4.jpg" alt="ROP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-11-13_rop/">ROP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Saturday, Nov 13, 2021</p>
+    </div>
+    <div class="description">
+       BROP  确定retaddr的偏移   寻找stopgadget  可以用io.recv()是否成功来判断是否为stopdadget，并且可以根据返回的内容大致猜测覆盖的地址是什么函数
+  寻找bropgadget  所谓bropgadget其实就是__libc_csu_init里最后一段包含6个连续pop的汇编，对这段汇编进行偏移还能构造出对于另外几个寄存器的pop。 寻找方法也就是在猜测的retaddr后跟6个trap（会导致程序崩溃的retaddr），再跟上之前找到的stopgadget，最后再跟几个trap。验证的方法可以是在跟上6个trap后不跟stopgadget而是直接跟上trap，看是否会崩溃（如果不会崩溃，有可能是遇到了plt表。为什么plt表不会崩溃？因为plt表用jmp直接跳转去执行函数了）。
+  寻找puts/write@plt  通过尝试puts出elf头的\x7fELF确定是否遇到了puts的plt
+  dump出内存  用之前得到的puts@pltdump出内存
+  在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移   ret2libc     SROP   
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
       <img src="/img/default3.jpg" alt="libc泄漏" />
@@ -425,7 +505,7 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
-      <img src="/img/default4.jpg" alt="CTF基本工具使用指北" />
+      <img src="/img/default2.jpg" alt="CTF基本工具使用指北" />
     
   </a>
 
@@ -459,7 +539,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
     
-      <img src="/img/default4.jpg" alt="迭代与递归" />
+      <img src="/img/default1.jpg" alt="迭代与递归" />
     
   </a>
 
@@ -650,86 +730,6 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
  欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
  对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
  和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-01_how-computer-startup/">
-    
-      <img src="/img/2021-03-01_grub.jpg" alt="电脑是怎么启动的" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Mar 1, 2021</p>
-    </div>
-    <div class="description">
-      x86启动过程简介  x86计算机开机过程大致可以被分为几个阶段：
-  按下开机键
-  CPU跳转至BIOS物理地址
-  BIOS进行开机自检
-  寻找启动设备
-  从MBR加载启动区
-  BIOS转移控制给BootLoader
-  第一阶段：硬件  BIOS  Basic Input/Output System 基本输入输出系统，被固化在ROM上的一组程序，提供最底层对硬件的控制。 也被称为固件。
-UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈传参，动态链接，更大寻址。
-    MBR  Master Boot Record 主引导记录。硬盘的第一个扇区，存放预启动信息、分区表信息。
-    第二阶段：系统软件  Boot Loader  操作系统内核加载器。初始化硬件，建立内存空间映射。
-  GRUB
-  LILO
-    加载内核  根据grub设定的内核映像所在路径读取，解压，放入内存。初始化函数，设备，建立Linux核心环境（初始化寄存器、堆栈）。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/">
-    
-      <img src="/img/2021-03-01_greedy.jpg" alt="理解贪心算法与Dijkstra算法" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Wednesday, Feb 24, 2021</p>
-    </div>
-    <div class="description">
-      贪心与动态规划  我们知道动态规划求解的问题需要具有   最优子结构   重复子问题   具有最优子结构的问题有时也可以用贪心算法求解。条件是最优解中只包含一个子问题的最优解，而一般的动态规划 最优解包含多个子问题的最优解。比如fib算法，fib(5)需要fib(4)与fib(3)两个子问题的解，无法使用贪心算法。 阶乘算法factorial(5)的递归解只需要使用一个子问题factorial(4)的解，这种情况使用贪心算法，即无需自底向上 记录每一子问题的解，只需记录当前最近一子问题的解用于求解当前解。
- 一个更直观的例子是0-1背包问题和部分背包问题。背包问题要求在指定的一些商品中选出能装入背包重量的最大价值的商品 组合。0-1背包问题中的每个商品是一个整体，要么整个装入，要么不装。部分背包问题里的商品类似水或金沙，可以分割后 装入部分。0-1背包问题是典型的动态规划例子，而部分背包则可以用贪心。
- 我们容易得到背包问题的最优子结构：要求重量的最优解包含了背包去掉某个物品重量后的最优解。考虑所有物品的最优解中 包含了考虑其中部分物品得到的最优解。对于0-1背包问题，通过以上两个维度我们可以列出状态转移方程：从考虑0个物品开始 依次加入每个物品，重量从0开始递增至所给背包重量；当前重量下考虑了当前加入所有物品能得到的最大价值 = max{(当前最大重量减去 当前物品重量后，不考虑当前物品能得到的最大价值 + 当前物品价值), (同等重量，不考虑当前物品能得到的最大价值),( 考虑了当前物品，最大重量-1时能得到的最大价值)}. 对于部分背包问题，如果还是使用0-1背包的方法来求解，我们会发现这次 要求的重量都是连续的，每次递增的重量无法确定。但是不妨假设我们可以每次递增无穷小的重量，就容易看出每次状态转移时， 能得到最大价值的选择一定是从剩余物品中（价值/重量）比例最大的物品中抽取加入。这样每次求最优解用到的唯一一个最优 子问题就能被确定下来，我们可以直接使用贪心算法，即，永远在剩余物品中选择（价值/重量）比例最大的物品加入，直到包 满。
- 另一个例子是活动选择问题。对几个互相竞争的活动进行调度，希望找出一个最大的相互兼容活动集合。给出每个活动的开始时间与持续时长， 我们希望得到一定时间段内所能容纳的最多活动数量（多个活动间不能有重叠时间）。容易找到这个问题的最优子结构：每个活动将整体时间分为 两部分：该活动前的时间与该活动后的时间。在这两段时间内我们都需要最大化执行任务数，两段的任务数之和+1，所得的就是整个时间段的最优 解。找到最优子结构后就不难得到动态规划算法了。我们知道在这个问题的最优解中包含了两个子问题的最优解，即：活动左边时间段最优解与右边时间段 最优解。如果我们进一步观察，可以发现如果我们将选择的当前活动限制为当前时间段后开始并能最早执行完的活动，得到当前最优解所需的子问题 就只剩一个：当前活动后的时间段。可以证明该贪心选择能够得到最优解。通过一个简单的变换，我们将原来需要2个子问题的解变成了只需要1个子问题的解。 这种情况下，我们无需记录所有子问题的解来进行动态规划自底向上求解当前解，只需要记录前一子问题的解，自顶向下求解问题。
- 一些能够轻易看出使用动态规划求解的问题，可以思考能不能通过变换求解过程得到贪心策略来进一步优化，给出贪心算法。
-  贪心策略的基本内容  使用贪心算法需要的条件有两个：
-  贪心选择性质
-  最优子结构
-  贪心选择性质即上文中我们说的“能找到只包含一个子问题的最优解“。通过适当的变换，一些问题可以找到贪心选择性质，如上文中的活动调度问题。 最优子结构即动态规划中的“由子问题的最优解构成当前问题最优解”的性质。满足这两个条件的问题即可使用贪心算法。但在有些情况下，不能轻易找出 最优子结构，但是问题的确可以使用贪心算法求解。比如PAT-1067.
-  Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，Dijkstra算法解决了最短路径问题。从算法思想的角度来说，Dijkstra算法使用了贪心策略。与之相对的是 Bellman-Ford算法。同为计算最短路径的算法，Bellman-Ford算法使用了动态规划的思想，复杂度为O(n^3)。Dijkstra算法在此基础上 进一步限定条件（Bellman-Ford算法可以用来计算带有负权的图，Dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).
     </div>
   </div>
 

@@ -225,6 +225,23 @@ HITBCTF2018 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_
 </div>
 </div>
 </div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+libc版本
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+2.31
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<p>2.31下的堆，只能申请 0x80 大小以下的堆块，但可申请的大小包含了 0</p>
+<p>
+首先需要知道一个知识点，malloc 在执行 malloc( 0 ) 时仍然会返回一个最小的堆块，那么此时记录堆块 size 的值会变成0，此时再edit这个堆块，会发生 0 - 1 整数溢出，导致可以写入很大一块内存。</p>
+</div>
+</div>
+</div>
+</div>
 </article>
     </section>
 
@@ -284,6 +301,12 @@ HITBCTF2018 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_
 <li><a href="#headline-9">HITBCTF2018 gundam</a>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+<li><a href="#headline-10">libc版本</a>
+<ul>
+<li><a href="#headline-11">2.31</a>
 </li>
 </ul>
 </li>
@@ -409,6 +432,18 @@ HITBCTF2018 <a href="https://www.bookstack.cn/read/CTF-All-In-One/doc-6.1.2_pwn_
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-23_heap/">pwn堆题整理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-13_rop/">ROP</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">

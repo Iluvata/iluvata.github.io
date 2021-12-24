@@ -216,6 +216,18 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-12-23_heap/">pwn堆题整理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-13_rop/">ROP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
                 </div>
               </div>
@@ -388,6 +400,75 @@
   </div>
 
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-15_computer-structure/">
+    
+      <img src="/img/2021-03-15_A-Simplified-MIPS-Processor-Architecture.png" alt="计算机体系结构与组成原理" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 15, 2021</p>
+    </div>
+    <div class="description">
+      计算机体系结构概要  计算机体系结构讲的是同系列计算机为操作系统提供的接口（包括机器语言、汇编语言等），以及底层 硬件的结构设计。计算机组成原理讲的是硬件实现。目前的计算机一般都是用冯诺依曼结构，特点是 存储程序，即将程序作为数据和数据存储在同一存储器中。要执行程序的时候从第一个存储单元开始 顺序执行，根据控制流跳转。与之对应的是哈佛结构，将数据和程序分别存放在两个不同的存储器 中。
+ 要了解计算机，首要的是了解计算机是怎么存储数据的。包括补码、原码等各种格式和他们的运算。 在了解了数据在计算机中的表示方式后，我们需要知道他们在哪里如何被存储，在哪里怎么进行运算。 在了解计算机进行运算的步骤之前需要知道计算机是用什么格式发出命令的，即机器语言与汇编语言。 以上便是计算机主机的任务：存储、运算、控制。除此之外，计算机还需要规范数据如何在各部件间 传输，即确定总线的相关标准。最后，如果只有之前的操作我们只能将计算机看作一个黑盒，什么都 进不去，什么都出不来，就算一直在计算也没有用处。因此对于输入/输出的讨论也极为重要。
+  现代计算机中，控制器和运算器一起被叫做CPU，CPU和主存一起组成主机，主机与外设一起组成硬件设备。 硬件和软件一起组成计算机系统。
+  存储器层次结构  目前我们能用于做存储器的材料与工艺有很多，不同方式/目的做出的存储器特性也不同。如磁盘，磁带， RAM，ROM，FLASH等。存储器的分类方式有很多，如用用掉电后能否保存数据可以分成挥发性存储器与 非挥发性存储器；能否随机访问可以分为随机访问存储器与顺序访问存储器等。除此之外，就算是在 主机内部使用的存储器，不同工艺也有很大的性能与价格差距。SRAM可以用于寄存器，速度最快， 但是集成度低，在单位空间内塞不下很大容量，并且价格贵。DRAM动态随机访问存储器一般用于主存， 相比SRAM速度较慢，但是集成度较高并且便宜。
+ 我们对计算机性能的要求是无上限的，但同时成本也需要控制在可接受的范围。因此就算我们让一台计算机 主机内所有的存储器都用SRAM，我们还是会想要更大更快的内存。为了解决上述价格与速度的矛盾，我们 引入了分层次存储器。在拥有DRAM作为主存的大容量低价格的同时使用SRAM作为CPU内部寄存器以获取高速度。 完整的层次结构中速度从快到慢，容量从小到大是：寄存器-cache-主存-外存.
+ 主存与CPU之间通过总线相连，数据从主存中取出到寄存器中，在寄存器中传入ALU等部件组成的数据通路进行 计算，得到的结果也存放在寄存器，需要时写入主存中。随着硬件的发展，虽然主存的速度也在不断增长， 但CPU速度的增长速度远大于主存，两者之间的速度差距越来越大。为了调节两者间的速度差异，最大 程度发挥CPU性能，Cache作为高速缓存被引入。Cache具有接近CPU的存取速度，保存最近常用的主存中 的单元副本，并且实时更新。主存、Cache、CPU之间的关系，乃至整个存储器层次结构中上下层软硬件 的关系，我们可以形象的用柜台和仓库进行类比。存取速度更快但是容量更小的上层存储器是商店里的柜台， 下层存储器是商店的仓库，数据是仓库中的物品。当用户/计算机需要购买物品时，如果柜台中有物品 就可以直接从柜台快速拿取，若没有则需要经过繁琐的步骤去仓库取出。但是我们不能把仓库中所有物品 直接放入柜台。还有一种类比是把数据看作学生使用的文具，最上层，即速度最快，容量最小的一层是 学生书桌上的文具盒，需要的时候可以随时取用。下一层是书包，可能有些较大的文具无法放在文具盒中， 这时就需要花稍多的时间从背包内取出。再下一层可以是学生的家。有时候可能会把要用的东西落在了家中， 或者书包也装不下，只能放在家中。这时若再需要用到就要花大代价跑回家去拿。但是一旦从家中拿到了 文具，已经将它装在了包里，那下次再次取用就只要去包里找就行了。CPU内寄存器、Cache、主存间的关系 大致是这样，只是这里的“物品”：数据是可以被拷贝到上层存储器的，从下层“取走”到上层后下层还保留着 一份原本，上层只是“复制”走了一份副本。值得一提的一点是为什么我们每天只需要一个包来装学习用品 就够日常使用了，而不是经常跑回家拿东西呢？假设我们把所有科目的书和试卷等全都放在家里，每天的 课程表让我们知道当天的科目，再加上当前的课程进度，综合起来我们可以判断只需要带走一部分相关的资料 而非全部科目的所有资料就足够当天的学习使用了。在计算机中也有类似的情况，就是计算机在执行一道 程序的时候在一段时间内会反复使用同一段或相邻的空间。这就相当于得知了当前的“课程进度”和“课表” 后，我们能够确定大致需要带的资料，在一段时间（比如一天）内无需反复回家更换。程序在一段时间 内反复访问相同的空间的特性叫做时间局部性，访问某空间后大概率访问相邻空间的特性叫做空间局部性。 程序的局部性原理使得是的Cache能够作为CPU与主存间的高速缓存大大提升整体系统的效率。
+ 那么我们在使用Cache的时候需要注意哪些细节呢？首先，由于一个学生在上学的时候不可能把整个家里所有 东西都装在背包中，需要挑选出每天要带走的东西。Cache需要确定保存哪些副本，当空间满了的时候 如何进行替换。Cache的替换策略有随机替换, FIFO, LRU, LFU. 其次，Cache中保存的是主存中的副本， Cache以行为单位，一行内可以包括多个主存单元（一般是1字节大小），与行对应大小的单位在主存 中被称为块。Cache最理想的实现方式是每行都能保存主存中任意块的副本，但是由于Cache的总 容量比主存小，我们需要对存在每行中的每个块指定一个标识以分辨对应主存中的位置。 按照上面的设想，我们需要在每行保存完整的主存块地址（非存储单元地址，用于分辨块中不同存储 单元的最后几位不用记录）作为唯一标识，这样每次想要找出CPU给出的主存单元对应的Cache行所需 的开销就会比较大。那么我们可以换一种思路进行映射：由于主存容量较大，地址的长度也比Cache中地址要长， 那我们把高位多出来的那部分作为唯一标识，剩下的主存地址就直接用到Cache上当作行地址，这样需要保存 的标识长度就短了很多，每次在Cache中找对应的主存块也不用对比所有行的标识，只需找到编号低位 与地址相同的那一行。以上两种Cache与主存之间的映射方式分别是全相联映射和直接映射。有的时候， 我们虽然用不起全相联映射，又发现直接映射太过于死板以至于在跑一些程序的时候无法很好的 完整高速缓存的工作（无法很好利用时间局部性），那就可以将两者结合起来，先将Cache中的行分组， 在组内进行任意对应。这就是组相联映射。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/">
+    
+      <img src="/img/2021-03-14_lisp.png" alt="编程语言的基本组成" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Sunday, Mar 14, 2021</p>
+    </div>
+    <div class="description">
+      编程语言的基本组成  编程语言的基本组成是SICP的第一节讨论的内容。编程语言所需要的基本元素有3个：原子元素（原子过程、 原子数据结构）、将运算进行复合的能力、对过程进行抽象的能力。
+ 原子元素是语言本身提供给我们的最小过程与数据结构，如乘法 * ，整数数据类型. 在scheme中我们将 一个操作过程写在括号语句内，语句的第一个元素作为运用的过程（操作符），随后的元素作为操作数。如
+(* 3 4)   运算复合的能力使我们能够从基本操作中构建复杂操作，如求解阶乘
+(define (factorial n) (if (&lt; n 2) 1 (* n (factorial (- n 1)))))   最后是构建抽象的能力，能够让我们不被所有实现细节扰乱思路，只把之前构建的函数当作黑盒直接拿来 使用
+(factorial 4)    块结构–以牛顿法求平方根为例  牛顿法是用于求解方程根的算法，从一个猜测开始每次迭代得到一个更好的猜测，不断向根逼近，直到 一个我们指定的要求达到为止。 通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的 sqrt算法。
+(define (sqrt-iter guess x) (if (good-enough? guess x) guess (sqrt-iter (better-guess guess x) x))) (define (sqrt x) (sqrt-iter 2.0 x))  在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了 防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -668,88 +749,6 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
       最近发现在多个设备，系统之间换来换去，文件传输是个问题。想到还有个空闲着的服务器， 为什么不搭个nextcloud网盘，这样在各个系统做笔记和传文件都方便。
  其实我之前在服务器上用过nextcloud，但不知道什么原因好像挂了。。那今天就重新来部署一次吧。
  在网上找到一篇简易的搭建教程,搭建宝塔面板建站，下载nextcloud安装器（php文件，放在网站上浏览器直接访问）， 跟着步骤就安装完成了。。 https://zhuanlan.zhihu.com/p/38485411
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-16_yearly-review/">
-    
-      <img src="/img/2021-02-16_max-coffee.jpg" alt="2020年度回顾以及新年目标" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-16_yearly-review/">2020年度回顾以及新年目标</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 16, 2021</p>
-    </div>
-    <div class="description">
-      2020简要回顾  今天是农历大年初五，是个对过去一年进行复盘与新的一年进行规划的好时机。我的过去一年如果用两个词来总结的话应该就是疫情和考研了。由于疫情，前半年我是在家里度过的；后半年到了学校后也是一直在准备考研。
- 年初（可能年前就开始了）的时候，由于在家无聊，我开始疯狂追番，然后好像一直看到5月。。。我能记得的那几个月看的番有：碧蓝之海，clannad，青春猪头少年，实教，春物，冰菓，日在校园，笨蛋测验召唤兽，月色真美， 魔法少女小圆，白色相簿2，四谎，k-on 等等。3月开始上网课，4月甚至逃了2周的课从早到晚看小说追完了春物，还在网上买了大老师最喜欢的max咖啡（不得不说还算不错，特别是在5月锻炼完洗了澡后来一罐冰冰的max的感觉贼舒爽）。。
- 然后正式开始准备考研应该是在5月中旬，开始的一个月还在看k-on，每天瞎看几个小时数学，然后看几个小时动漫。。
-  3月之前还有在一边查考研院校信息一边准备PAT，基本上甲级的题库快刷完了。但最后开学的时间一直在推就把报名退了。代码放在这个仓库。考研一开始选了4个学校：上海科技大学，川大，北航，浙大。最后确定了北航。
- 2-3月还开始了英语背单词，于是年后那一两个月的生活就是早上11-12点起床，中午吃了午饭后背背百词斩，下午做个4-5道pat，晚饭后开始看动漫到两三点。 从5月期中考那段时间开始，感觉回校应该无望了，就买了考研书开始准备起来。之后具体的安排写在考研初试里面。8月回校，每天抽点时间准备了大三下的期末考。接着9月学校安排了实训。10月开始可以一心备考，到12月底考完。
- 考完后马上在牛客网上投了几份实习简历，回家。十几份简历只有一份网易北京测开的给了面试，然后拿到offer在1月中到北京开始实习。实习到现在也有一个月了，考完初试快2个月了，离复试差不多剩1个月。这期间一边玩一边随便看点 复试有关的东西。是时候开始全力准备复试了。
-  考研初试  3-5月  从3月开始就一直在查院校信息。这时每天中午用百词斩背单词，悠哉游哉的看动漫，开始上网课后 也会登上去听。考北航一部分原因是之前12月的CSP考了320分，看有哪些院校考研可以用上的时候 看到了北航。对于CSP考试我感觉考个300分一点也不难，之前完全没准备过，上场后不要慌，第3题 慢慢写能写出来。前3题拿满后再看下后两题能不能骗点分。要强行说我为这个考试做了什么准备的话 可能只有大二下学期的时候（还是大三上？我有点忘了。。。）照着一个知识点清单把算法导论中的 重点章节啃完了。。。还有就是可能刷了一点leetcode题。那时候还没开始刷PAT，但事实证明刷了 PAT之后去考CSP也没多大帮助，前三题基本用不到什么算法，细心点慢慢写，不要急就能做出来。。
- 4月买了恋恋有词开始背。每天早上一个list，按照记忆曲线复习。我在第一遍背的时候先用emacs把 不熟的单词整理出来，之后重复背的时候就直接在emacs上背。
-  还可以直接在上面直接做时间规划，每次调出agenda页面后直接就可以跳转到当天要背的列表。
-  自己整理的好处除了能够量身定制词汇表外，遇到自己容易混淆的几个单词也能整理在一起，通过 链接跳转。还有就是emacs全键盘操作，效率很高。
- 恋恋有词总共就30个list，到5月就背完了。背完了后除了继续复习一轮中按照记忆曲线没结束的 列表，每天靠午休的时候摸鱼看英文小说新增单词。4月到5月中一个半月时间居然看完了福尔摩斯 里血字的研究和一半的四签名。。在用emacs背恋恋有词期间（直到考完），手机上用app背单词 也没停。不过背单词的软件倒是换了几个，从3月前的百词斩换成默默，之后变成扇贝，可以说每个 软件上都快背完一本书但就是没背完。。。
- 这3个月基本每天只花了一点时间在考研英语上，不知不觉时间就混过去了。后面买了李正元全书， 花2周囫囵吞枣看了一遍但感觉完全没用。。。
-  6-7月  5月中旬开始我每天规定了7个小时的学习时间，算是正式开始准备考研了。因为在家里容易偷懒， 我用上了之前买的滴答清单会员来制定每天的学习计划。
-  滴答清单里面可以记录习惯打卡，我每天上午做3小时的数学，下午3小时的专业课，晚上2小时数学 习题。每次点击可以记录半小时。滴答清单有个番茄时钟的功能（需要会员），我就按照番茄计时 每次学25分钟，完成后点一下习惯记录算学了半小时，休息5分钟。但其实一般很少25分钟准时休息， 都是完成了计时结束时正在做的那道题或学的那个知识点后再休息，所经常会超时，平均算学了半小时 也不算过分吧2333. 一开始在休息的时候还经常会拿起 手机来玩，很快发现5分钟休息玩手机根本不能起到休息的作用，而且一不注意就容易忽略计时器 提醒继续玩下去。后来感觉最好的休息方式还是啥都不干，坐着冥想哈哈。 一开始买了滴答会员后我还加了个习惯：每天冥想10分钟，没想到坚持了半年直到开学，成了我 坚持最久完成率最高的习惯。。训练放空思想可能对专注确实起到了一些作用吧。
- 当时我还在自己的阿里云服务器上搭了个nextcloud网盘，把每天用emacs记录的单词直接放在上面。 除此之外，每天晚上还会总结一下当天学的东西，在orgmode里写下来放上去。这时我是每周周日 休息一天，在休息日会看着上周每天总结的东西再做一个周总结。我把放总结笔记的文件夹叫做 watson，就像想把学过的东西教给他一样去总结哈哈。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
-    
-      <img src="/img/default3.jpg" alt="在spacemacs中写scheme" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
     </div>
   </div>
 
