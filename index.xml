@@ -6,7 +6,45 @@
     <description>Recent content on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 Dec 2021 14:55:04 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Dec 2021 14:11:26 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>图嵌入</title>
+      <link>https://iluvata.github.io/post/2021-12-28_graph-embedding/</link>
+      <pubDate>Tue, 28 Dec 2021 14:11:26 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-12-28_graph-embedding/</guid>
+      <description> 图嵌入的通用框架   /img/2021-12-28_graph-embedding-framework
+ 通常的图嵌入框架有4个组件：
+  映射函数：把节点从图域映射到嵌入域
+  信息提取器：从图域中提取出关键信息 $I$
+  重构器：从嵌入域重构提取的信息，重构出的信息记为 $I&amp;#39;$
+  优化目标：对 $I$ 和 $I&amp;#39;$ 进行优化，学习映射函数/重构器中的参数
+    简单图嵌入  简单图是无重边，没有指向自己的边的图。是静态的、无向的、无符号的和同质的。可以根据想要保留的信息，即信息提取器需要从图中提取出的信息，进行分类。目前这些信息有：
+  节点共现
+  结构角色
+  节点状态
+  社区结构
+  保留节点共现的图嵌入     </description>
+    </item>
+    
+    <item>
+      <title>N1Book Web 学习</title>
+      <link>https://iluvata.github.io/post/2021-12-28_n1book-web/</link>
+      <pubDate>Tue, 28 Dec 2021 00:17:37 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-12-28_n1book-web/</guid>
+      <description>  buuctf n1book web刷题
+信息收集  常见的收集  网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用dirsearch扫描站点目录。
+cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
+  -e 指定网站语言
+  -w 可以加上自己的字典（带上路径）
+  –random-agents 使用代理（使用的代理目录在uesr-agents.txt中，可以自己添加）
+  脚本扫描的数据库在 db 文件夹，可以自己加。这题的目标文件有三个： robots.txt , index.php~ , .index.php.swp 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。
+ robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。
+  粗心的小李  git泄漏题可以用的工具有GitHack，scrabble。只要目标网站上有.git，运行脚本就能把网站dump下来。
+GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      </description>
+    </item>
+    
     <item>
       <title>pwn堆题整理</title>
       <link>https://iluvata.github.io/post/2021-12-23_heap/</link>

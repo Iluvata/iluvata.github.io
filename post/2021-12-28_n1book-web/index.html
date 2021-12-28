@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>sicp | Iluvata&#39;s Blog</title>
+    <title>N1Book Web 学习 | Iluvata&#39;s Blog</title>
 
     
 
@@ -17,20 +17,40 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/tags/sicp/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2021-12-28_n1book-web/" />
 
 
-<meta property="og:title" content="sicp" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://iluvata.github.io/tags/sicp/" />
+<meta property="og:title" content="N1Book Web 学习" />
+<meta property="og:description" content="  buuctf n1book web刷题
+信息收集  常见的收集  网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用dirsearch扫描站点目录。
+cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
+  -e 指定网站语言
+  -w 可以加上自己的字典（带上路径）
+  –random-agents 使用代理（使用的代理目录在uesr-agents.txt中，可以自己添加）
+  脚本扫描的数据库在 db 文件夹，可以自己加。这题的目标文件有三个： robots.txt , index.php~ , .index.php.swp 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。
+ robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。
+  粗心的小李  git泄漏题可以用的工具有GitHack，scrabble。只要目标网站上有.git，运行脚本就能把网站dump下来。
+GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-12-28_n1book-web/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-28T00:17:37+08:00" />
+<meta property="article:modified_time" content="2021-12-28T00:17:37+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="sicp"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="N1Book Web 学习"/>
+<meta name="twitter:description" content="  buuctf n1book web刷题
+信息收集  常见的收集  网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用dirsearch扫描站点目录。
+cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
+  -e 指定网站语言
+  -w 可以加上自己的字典（带上路径）
+  –random-agents 使用代理（使用的代理目录在uesr-agents.txt中，可以自己添加）
+  脚本扫描的数据库在 db 文件夹，可以自己加。这题的目标文件有三个： robots.txt , index.php~ , .index.php.swp 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。
+ robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。
+  粗心的小李  git泄漏题可以用的工具有GitHack，scrabble。只要目标网站上有.git，运行脚本就能把网站dump下来。
+GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      "/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -70,7 +90,13 @@
   
 </style>
 
-     
+    
+
+
+
+
+
+
   </head>
 
   <body class="default">
@@ -95,7 +121,132 @@
           <div class="dream-max-width">
             
 <div class="ui centered relaxed grid dream-grid">
-  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">
+          N1Book Web 学习
+          <div class="sub header">
+            @
+            
+              Iluvata
+            
+
+            | 
+                Tuesday, Dec 28, 2021
+              
+
+            | 1 minutes read
+
+            | Update at
+              
+                Tuesday, Dec 28, 2021
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main">
+<p>
+<a href="https://buuoj.cn/challenges">buuctf</a> n1book web刷题</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+信息收集
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+常见的收集
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用<a href="https://github.com/maurosoria/dirsearch">dirsearch</a>扫描站点目录。</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cd dirsearch
+python3 dirsearch.py -u 192.168.21.128 -e php</code></pre></div>
+</div>
+<ul>
+<li>
+<p>-u 指定目标ip</p>
+</li>
+<li>
+<p>-e 指定网站语言</p>
+</li>
+<li>
+<p>-w 可以加上自己的字典（带上路径）</p>
+</li>
+<li>
+<p>–random-agents 使用代理（使用的代理目录在uesr-agents.txt中，可以自己添加）</p>
+</li>
+</ul>
+<p>脚本扫描的数据库在 <code class="verbatim">db</code> 文件夹，可以自己加。这题的目标文件有三个： <code class="verbatim">robots.txt</code> , <code class="verbatim">index.php~</code> , <code class="verbatim">.index.php.swp</code> 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。</p>
+<p>
+robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+粗心的小李
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>git泄漏题可以用的工具有<a href="https://github.com/lijiejie/githack">GitHack</a>，<a href="https://github.com/denny0223/scrabble">scrabble</a>。只要目标网站上有.git，运行脚本就能把网站dump下来。</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">GitHack.py http://www.openssl.org/.git/</code></pre></div>
+</div>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scrabble http://example.com/</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+        
+          <a class="ui label" href="/tags/ctf" title="ctf">ctf</a>
+        
+          <a class="ui label" href="/tags/web" title="web">web</a>
+        
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+    
+    
+
+    
+
+  </div>
+  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
+    
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">信息收集</a>
+<ul>
+<li><a href="#headline-2">常见的收集</a>
+</li>
+<li><a href="#headline-3">粗心的小李</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+      </div>
+    
+
     <article class="dream-header">
   <section class="ui top attached center aligned segment">
     <div class="ui small circular image">
@@ -105,12 +256,12 @@
     </div>
 
     
-    <div class="ui medium header">
+    <h1 class="ui medium header">
     
       Iluvata&#39;s blog
       <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
     
-    </div>
+    </h1>
     
 
     <div class="ui horizontal list">
@@ -409,123 +560,7 @@
   </section>
 </article>
 
-  </div>
-
-  
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
-    
-      <img src="/img/default1.jpg" alt="迭代与递归" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Wednesday, Apr 7, 2021</p>
-    </div>
-    <div class="description">
-      递归处理与递归过程  用一个经典的递归例子：阶乘 来说明。
-(define (factorial n) (if (= n 1) 1 (* n factorial (- n 1))))  以上是经典的阶乘的递归处理，若输入为1则输出1,否则结果为当前n×递归执行n-1.
-(define (factorial n) (fact-iter 1 1 n)) (define (fact-iter product counter max-count) (if (&gt; counter max-count) product (fact-iter (* counter product) (+ count 1) max-count)))  以上是阶乘的迭代处理。我们在每一次迭代（循环）中输入了得到下一结果所需的所有信息，编译器无需像在递归处理中一样 保存每次n的值以计算最后的结果。
- 但是用我们熟悉的c语言来理解以上这段代码，我们会觉得在形式上 fact-iter 函数在函数体中调用了自身，也应该算作 递归而不是迭代。在c语言中，我们理解的迭代是使用 for 或 while 在代码块中显式地更改变量，以上代码很明显 没有使用“循环”。这就引出了递归过程与递归处理的区别。以上代码使用的确实是我们在c语言中称作“递归过程”的代码形式， 但根据我们对“迭代处理”的定义，即编译器无需保存中间变量，它很显然是符合“迭代处理”要求的。在c语言和其他很多 语言中，使用递归过程的迭代处理会和普通的递归处理一样，在每次递归中保存一些值，导致无法到达很深的递归深度。在lisp 编译器的实现中使用了“尾递归”优化技术，即若一个函数在调用自身时（满足递归过程条件）将该调用放在最后执行，并且 无需保存多余的变量，将所有必要的变量输入下一层，那么编译器在执行的时候就不会保存多余的信息，而是像迭代那样直接 用下一层来覆盖当前层。
-  多种形式的递归与迭代  线性递归  上面factorial的递归实现中每次进入一个下一层，保存的数据随n的增大是线性增长的。这种形式的递归处理叫做线性递归。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/">
-    
-      <img src="/img/2021-03-14_lisp.png" alt="编程语言的基本组成" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Sunday, Mar 14, 2021</p>
-    </div>
-    <div class="description">
-      编程语言的基本组成  编程语言的基本组成是SICP的第一节讨论的内容。编程语言所需要的基本元素有3个：原子元素（原子过程、 原子数据结构）、将运算进行复合的能力、对过程进行抽象的能力。
- 原子元素是语言本身提供给我们的最小过程与数据结构，如乘法 * ，整数数据类型. 在scheme中我们将 一个操作过程写在括号语句内，语句的第一个元素作为运用的过程（操作符），随后的元素作为操作数。如
-(* 3 4)   运算复合的能力使我们能够从基本操作中构建复杂操作，如求解阶乘
-(define (factorial n) (if (&lt; n 2) 1 (* n (factorial (- n 1)))))   最后是构建抽象的能力，能够让我们不被所有实现细节扰乱思路，只把之前构建的函数当作黑盒直接拿来 使用
-(factorial 4)    块结构–以牛顿法求平方根为例  牛顿法是用于求解方程根的算法，从一个猜测开始每次迭代得到一个更好的猜测，不断向根逼近，直到 一个我们指定的要求达到为止。 通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的 sqrt算法。
-(define (sqrt-iter guess x) (if (good-enough? guess x) guess (sqrt-iter (better-guess guess x) x))) (define (sqrt x) (sqrt-iter 2.0 x))  在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了 防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
-    
-      <img src="/img/default3.jpg" alt="在spacemacs中写scheme" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-
-  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-    
-
-
-
-  </div>
+  </aside>
 </div>
 
           </div>
@@ -624,9 +659,11 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
 <script src="/js/theme.js"></script>
 
     
-<script src="/js/imagesloaded.pkgd.min.js"></script>
-<script src="/js/masonry.pkgd.min.js"></script>
-<script src="/js/grid.js"></script>
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+
 
 
     
