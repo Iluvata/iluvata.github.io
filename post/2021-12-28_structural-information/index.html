@@ -40,8 +40,11 @@
 <meta property="og:title" content="结构信息论" />
 <meta property="og:description" content="  给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
   直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
- $$H(p) = -\sum_{i=1}^{n}p_i{log}_2p_i$$
-位置熵/一维结构熵   高维结构熵   结构熵最小化   " />
+位置熵/一维结构熵  我们把一张图 $G$ 的度分布的熵叫做图 $G$ 的位置熵，也是图的一维结构熵。
+ $$ \begin{aligned} \mathcal{H}^{1}(G) &amp;=H(\mathbf{p})=H\left(\frac{d_{1}}{2 m}, \ldots, \frac{d_{n}}{2 m}\right) \\ &amp;=-\sum_{i=1}^{n} \frac{d_{i}}{2 m} \cdot \log _{2} \frac{d_{i}}{2 m} \end{aligned} $$
+ 其中 $m$ 为图 $G = (V, E)$ 中边的数量，即 $|E|$ ； $d_i$ 为结点 $i$ 的度。一维结构熵 $H^i(G)$ ，从直观上解释，是确定在有静态分布的图 $G$ 中随机游走能够达到的结点的一维编码所需的信息量。
+ 现在让我们更进一步地理解上面这个公式。我们之前对的香农熵解释是：对分布中的每个取值，根据该取值出现的概率给他一个码字（编码）长度，使得描述分布中取值所需的平均编码长度最小。这个最小的编码长度就是分布的信息熵。在位置熵中，我们可以认为简单图中一个结点在随机游走中被访问的概率就是该结点的度在所有结点的度之和中所占的比例。因此若要给该结点一个编码，最优的编码长度应当是 $-{log}_2\frac{d_i}{2m}$ 。加权平均后记为该图 $G$ 的位置熵/一维结构熵 $H^1(G)$ 。
+  高维结构熵   结构熵最小化   " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iluvata.github.io/post/2021-12-28_structural-information/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-28T15:08:33+08:00" />
@@ -54,8 +57,11 @@
 <meta name="twitter:title" content="结构信息论"/>
 <meta name="twitter:description" content="  给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
   直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
- $$H(p) = -\sum_{i=1}^{n}p_i{log}_2p_i$$
-位置熵/一维结构熵   高维结构熵   结构熵最小化   "/>
+位置熵/一维结构熵  我们把一张图 $G$ 的度分布的熵叫做图 $G$ 的位置熵，也是图的一维结构熵。
+ $$ \begin{aligned} \mathcal{H}^{1}(G) &amp;=H(\mathbf{p})=H\left(\frac{d_{1}}{2 m}, \ldots, \frac{d_{n}}{2 m}\right) \\ &amp;=-\sum_{i=1}^{n} \frac{d_{i}}{2 m} \cdot \log _{2} \frac{d_{i}}{2 m} \end{aligned} $$
+ 其中 $m$ 为图 $G = (V, E)$ 中边的数量，即 $|E|$ ； $d_i$ 为结点 $i$ 的度。一维结构熵 $H^i(G)$ ，从直观上解释，是确定在有静态分布的图 $G$ 中随机游走能够达到的结点的一维编码所需的信息量。
+ 现在让我们更进一步地理解上面这个公式。我们之前对的香农熵解释是：对分布中的每个取值，根据该取值出现的概率给他一个码字（编码）长度，使得描述分布中取值所需的平均编码长度最小。这个最小的编码长度就是分布的信息熵。在位置熵中，我们可以认为简单图中一个结点在随机游走中被访问的概率就是该结点的度在所有结点的度之和中所占的比例。因此若要给该结点一个编码，最优的编码长度应当是 $-{log}_2\frac{d_i}{2m}$ 。加权平均后记为该图 $G$ 的位置熵/一维结构熵 $H^1(G)$ 。
+  高维结构熵   结构熵最小化   "/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -159,12 +165,24 @@
 <img src="/img/2021-12-28_entropy.png" alt="/img/2021-12-28_entropy.png" title="/img/2021-12-28_entropy.png" /></p>
 <p>
 直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。</p>
-<p>
- $$H(p) = -\sum_{i=1}^{n}p_i{log}_2p_i$$</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
 位置熵/一维结构熵
 </h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>我们把一张图 $G$ 的度分布的熵叫做图 $G$ 的位置熵，也是图的一维结构熵。</p>
+<p>
+$$
+\begin{aligned}
+\mathcal{H}^{1}(G) &amp;=H(\mathbf{p})=H\left(\frac{d_{1}}{2 m}, \ldots, \frac{d_{n}}{2 m}\right) \\
+&amp;=-\sum_{i=1}^{n} \frac{d_{i}}{2 m} \cdot \log _{2} \frac{d_{i}}{2 m}
+\end{aligned}
+$$</p>
+<p>
+其中 $m$ 为图 $G = (V, E)$ 中边的数量，即 $|E|$ ； $d_i$ 为结点 $i$ 的度。一维结构熵 $H^i(G)$ ，从直观上解释，是确定在有静态分布的图 $G$ 中随机游走能够达到的结点的一维编码所需的信息量。</p>
+<p>
+现在让我们更进一步地理解上面这个公式。我们之前对的香农熵解释是：对分布中的每个取值，根据该取值出现的概率给他一个码字（编码）长度，使得描述分布中取值所需的平均编码长度最小。这个最小的编码长度就是分布的信息熵。在位置熵中，我们可以认为简单图中一个结点在随机游走中被访问的概率就是该结点的度在所有结点的度之和中所占的比例。因此若要给该结点一个编码，最优的编码长度应当是 $-{log}_2\frac{d_i}{2m}$ 。加权平均后记为该图 $G$ 的位置熵/一维结构熵 $H^1(G)$ 。</p>
+</div>
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
@@ -348,6 +366,12 @@
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">

@@ -4,10 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>hugo 博客配置 | Iluvata&#39;s Blog</title>
+    <title>在hugo中使用latex | Iluvata&#39;s Blog</title>
 
     
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
 
 
 
@@ -19,40 +34,32 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-01-27_hugo-config/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/" />
 
 
-<meta property="og:title" content="hugo 博客配置" />
-<meta property="og:description" content=" 主题配置  我创建了一个包含整个博客目录的仓库，在这里，以便在不同的地方随时pull下来
- 需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
-  02-19注：之前以为删了dream里面的.git就可以直接管理整个博客了，后面发现并不行。需要用 git rm --cached themes/dream 把git子模块去掉
-  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
- 如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
- 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
- 添加tag和category: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categories: [&#34;category1&#34;, &#34;category2&#34;]
-   插入附件  文章嵌入代码：用#&#43;begin_src和#&#43;end_src表示代码
-print(&#34;hello world&#34;)   插入图片：用
-[[图片路径]]     " />
+<meta property="og:title" content="在hugo中使用latex" />
+<meta property="og:description" content="主要参考这片文章。在katex官网找到Auto-render拓展，在生成的html&lt;head&gt;段中加上以下代码就行了。
+&lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css&#34; integrity=&#34;sha384-R4558gYOUz8mP9YWpZJjofhk&#43;zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs&#34; crossorigin=&#34;anonymous&#34;&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js&#34; integrity=&#34;sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js&#34; integrity=&#34;sha384-&#43;XBljXPPiv&#43;OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR&#34; crossorigin=&#34;anonymous&#34; onload=&#34;renderMathInElement(document.body);&#34;&gt;&lt;/script&gt;   加入的方法为在模板中添加。模板位置为（以我的dream主题为例） /themes/dream/layouts/partials/helpers/katex.html 。但是不要直接照搬上面的代码，最好去网站找最新代码。
+ 为了能够控制哪些博客需要渲染，而不是渲染所有博客，在 /themes/dream/layouts/partials/head.html 添加以下代码
+{{ if .Params.math }}{{ partial &#34;helpers/katex.html&#34; . }}{{ end }}   在需要渲染的博客头上添加
+--- math: true ---   如果需要渲染行内表达式，即渲染 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ 为 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ ，在 katex.html 中写入下面代码
+&lt;script&gt; document.addEventListener(&#34;DOMContentLoaded&#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &#34;$$&#34;, right: &#34;$$&#34;, display: true}, {left: &#34;$&#34;, right: &#34;$&#34;, display: false} ] }); }); &lt;/script&gt;   最后放一个跨行公式测试效果" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-01-27_hugo-config/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-01-27T10:58:42+08:00" />
-<meta property="article:modified_time" content="2021-01-27T10:58:42+08:00" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-28T20:04:31+08:00" />
+<meta property="article:modified_time" content="2021-12-28T20:04:31+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="hugo 博客配置"/>
-<meta name="twitter:description" content=" 主题配置  我创建了一个包含整个博客目录的仓库，在这里，以便在不同的地方随时pull下来
- 需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
-  02-19注：之前以为删了dream里面的.git就可以直接管理整个博客了，后面发现并不行。需要用 git rm --cached themes/dream 把git子模块去掉
-  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
- 如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
- 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
- 添加tag和category: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categories: [&#34;category1&#34;, &#34;category2&#34;]
-   插入附件  文章嵌入代码：用#&#43;begin_src和#&#43;end_src表示代码
-print(&#34;hello world&#34;)   插入图片：用
-[[图片路径]]     "/>
+<meta name="twitter:title" content="在hugo中使用latex"/>
+<meta name="twitter:description" content="主要参考这片文章。在katex官网找到Auto-render拓展，在生成的html&lt;head&gt;段中加上以下代码就行了。
+&lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css&#34; integrity=&#34;sha384-R4558gYOUz8mP9YWpZJjofhk&#43;zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs&#34; crossorigin=&#34;anonymous&#34;&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js&#34; integrity=&#34;sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js&#34; integrity=&#34;sha384-&#43;XBljXPPiv&#43;OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR&#34; crossorigin=&#34;anonymous&#34; onload=&#34;renderMathInElement(document.body);&#34;&gt;&lt;/script&gt;   加入的方法为在模板中添加。模板位置为（以我的dream主题为例） /themes/dream/layouts/partials/helpers/katex.html 。但是不要直接照搬上面的代码，最好去网站找最新代码。
+ 为了能够控制哪些博客需要渲染，而不是渲染所有博客，在 /themes/dream/layouts/partials/head.html 添加以下代码
+{{ if .Params.math }}{{ partial &#34;helpers/katex.html&#34; . }}{{ end }}   在需要渲染的博客头上添加
+--- math: true ---   如果需要渲染行内表达式，即渲染 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ 为 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ ，在 katex.html 中写入下面代码
+&lt;script&gt; document.addEventListener(&#34;DOMContentLoaded&#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &#34;$$&#34;, right: &#34;$$&#34;, display: true}, {left: &#34;$&#34;, right: &#34;$&#34;, display: false} ] }); }); &lt;/script&gt;   最后放一个跨行公式测试效果"/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -128,7 +135,7 @@ print(&#34;hello world&#34;)   插入图片：用
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          hugo 博客配置
+          在hugo中使用latex
           <div class="sub header">
             @
             
@@ -136,63 +143,61 @@ print(&#34;hello world&#34;)   插入图片：用
             
 
             | 
-                Wednesday, Jan 27, 2021
+                Tuesday, Dec 28, 2021
               
 
             | 1 minutes read
 
             | Update at
               
-                Wednesday, Jan 27, 2021
+                Tuesday, Dec 28, 2021
               
           </div>
         </h1>
       </header>
 
-      <article class="main">
-<div id="outline-container-headline-1" class="outline-3">
-<h3 id="headline-1">
-主题配置
-</h3>
-<div id="outline-text-headline-1" class="outline-text-3">
-<p>我创建了一个包含整个博客目录的仓库，在<a href="https://github.com/iluvata/my-hugo-blog">这里</a>，以便在不同的地方随时pull下来</p>
-<p>
-需要注意的是这个仓库中还嵌套包含了另外两个仓库，<a href="https://github.com/iluvata/iluvata.github.io">页面仓库</a>对应public文件夹，以及
-<a href="https://github.com/iluvata/hugo-theme-dream">dream</a>主题仓库，对应themes/dream文件夹</p>
-<ul>
-<li>
-<p>02-19注：之前以为删了dream里面的.git就可以直接管理整个博客了，后面发现并不行。需要用 <code class="verbatim">git rm --cached themes/dream</code> 把git子模块去掉</p>
-</li>
-</ul>
-<p>主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.</p>
-<p>
-如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png</p>
-<p>
-修改封面图片：文章添加参数&#34;cover&#34;  cover:/img/somepicture.png</p>
-<p>
-添加tag和category: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categories: [&#34;category1&#34;, &#34;category2&#34;]</p>
-<p>
-<img src="/img/2021-01-27_params.jpg" alt="/img/2021-01-27_params.jpg" title="/img/2021-01-27_params.jpg" /></p>
+      <article class="main"><p>
+主要参考<a href="https://mertbakir.gitlab.io/hugo/math-typesetting-in-hugo/">这片文章</a>。在katex官网找到<a href="https://katex.org/docs/autorender.html">Auto-render</a>拓展，在生成的html&lt;head&gt;段中加上以下代码就行了。</p>
+<div class="src src-html">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css&#34;</span> <span style="color:#a6e22e">integrity</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs&#34;</span> <span style="color:#a6e22e">crossorigin</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;anonymous&#34;</span>&gt;
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">defer</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js&#34;</span> <span style="color:#a6e22e">integrity</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx&#34;</span> <span style="color:#a6e22e">crossorigin</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;anonymous&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">defer</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js&#34;</span> <span style="color:#a6e22e">integrity</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR&#34;</span> <span style="color:#a6e22e">crossorigin</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;anonymous&#34;</span>
+    <span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;renderMathInElement(document.body);&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;</code></pre></div>
 </div>
-</div>
-<div id="outline-container-headline-2" class="outline-3">
-<h3 id="headline-2">
-插入附件
-</h3>
-<div id="outline-text-headline-2" class="outline-text-3">
-<p>文章嵌入代码：用#+begin_src和#+end_src表示代码</p>
+<p>
+加入的方法为在模板中添加。模板位置为（以我的dream主题为例） <code class="verbatim">/themes/dream/layouts/partials/helpers/katex.html</code> 。但是不要直接照搬上面的代码，最好去网站找最新代码。</p>
+<p>
+为了能够控制哪些博客需要渲染，而不是渲染所有博客，在 <code class="verbatim">/themes/dream/layouts/partials/head.html</code> 添加以下代码</p>
 <div class="src src-text">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">print(&#34;hello world&#34;)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">{{ if .Params.math }}{{ partial &#34;helpers/katex.html&#34; . }}{{ end }}</code></pre></div>
 </div>
 <p>
-插入图片：用</p>
+在需要渲染的博客头上添加</p>
 <div class="src src-text">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[[图片路径]]</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">---
+math: true
+---</code></pre></div>
 </div>
 <p>
-<img src="/img/picdemo.png" alt="/img/picdemo.png" title="/img/picdemo.png" /></p>
+如果需要渲染行内表达式，即渲染 <code class="verbatim">$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$</code> 为 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ ，在 <code class="verbatim">katex.html</code> 中写入下面代码</p>
+<div class="src src-html">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">script</span>&gt;
+    document.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;DOMContentLoaded&#34;</span>, <span style="color:#66d9ef">function</span>() {
+        <span style="color:#a6e22e">renderMathInElement</span>(document.<span style="color:#a6e22e">body</span>, {
+            <span style="color:#a6e22e">delimiters</span><span style="color:#f92672">:</span> [
+                {<span style="color:#a6e22e">left</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;$$&#34;</span>, <span style="color:#a6e22e">right</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;$$&#34;</span>, <span style="color:#a6e22e">display</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>},
+                {<span style="color:#a6e22e">left</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;$&#34;</span>, <span style="color:#a6e22e">right</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;$&#34;</span>, <span style="color:#a6e22e">display</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}
+            ]
+        });
+    });
+&lt;/<span style="color:#f92672">script</span>&gt;</code></pre></div>
 </div>
-</div>
+<p>
+最后放一个跨行公式测试效果</p>
+<p>
+$$
+H(p_1, \cdots, p_n) = -\sum^{n}_{i=1}p_i{log}_2p_i
+$$</p>
 </article>
     </section>
 
@@ -200,6 +205,8 @@ print(&#34;hello world&#34;)   插入图片：用
       
         
           <a class="ui label" href="/tags/hugo" title="hugo">hugo</a>
+        
+          <a class="ui label" href="/tags/math" title="math">math</a>
         
       
       <div
@@ -221,17 +228,6 @@ print(&#34;hello world&#34;)   插入图片：用
   </div>
   <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
     
-    
-      <div class="ui segment toc">
-        <nav id="TableOfContents">
-<ul>
-<li><a href="#headline-1">主题配置</a>
-</li>
-<li><a href="#headline-2">插入附件</a>
-</li>
-</ul>
-</nav>
-      </div>
     
 
     <article class="dream-header">

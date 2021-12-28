@@ -6,7 +6,21 @@
     <description>Recent content in Posts on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 28 Dec 2021 15:08:33 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Dec 2021 20:04:31 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在hugo中使用latex</title>
+      <link>https://iluvata.github.io/post/2021-12-28_hugo-with-latex/</link>
+      <pubDate>Tue, 28 Dec 2021 20:04:31 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-12-28_hugo-with-latex/</guid>
+      <description>主要参考这片文章。在katex官网找到Auto-render拓展，在生成的html&amp;lt;head&amp;gt;段中加上以下代码就行了。
+&amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css&amp;#34; integrity=&amp;#34;sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34;&amp;gt; &amp;lt;script defer src=&amp;#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js&amp;#34; integrity=&amp;#34;sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script defer src=&amp;#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js&amp;#34; integrity=&amp;#34;sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34; onload=&amp;#34;renderMathInElement(document.body);&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;   加入的方法为在模板中添加。模板位置为（以我的dream主题为例） /themes/dream/layouts/partials/helpers/katex.html 。但是不要直接照搬上面的代码，最好去网站找最新代码。
+ 为了能够控制哪些博客需要渲染，而不是渲染所有博客，在 /themes/dream/layouts/partials/head.html 添加以下代码
+{{ if .Params.math }}{{ partial &amp;#34;helpers/katex.html&amp;#34; . }}{{ end }}   在需要渲染的博客头上添加
+--- math: true ---   如果需要渲染行内表达式，即渲染 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ 为 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ ，在 katex.html 中写入下面代码
+&amp;lt;script&amp;gt; document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &amp;#34;$$&amp;#34;, right: &amp;#34;$$&amp;#34;, display: true}, {left: &amp;#34;$&amp;#34;, right: &amp;#34;$&amp;#34;, display: false} ] }); }); &amp;lt;/script&amp;gt;   最后放一个跨行公式测试效果</description>
+    </item>
+    
     <item>
       <title>结构信息论</title>
       <link>https://iluvata.github.io/post/2021-12-28_structural-information/</link>
@@ -15,8 +29,11 @@
       <guid>https://iluvata.github.io/post/2021-12-28_structural-information/</guid>
       <description>  给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
   直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
- $$H(p) = -\sum_{i=1}^{n}p_i{log}_2p_i$$
-位置熵/一维结构熵   高维结构熵   结构熵最小化   </description>
+位置熵/一维结构熵  我们把一张图 $G$ 的度分布的熵叫做图 $G$ 的位置熵，也是图的一维结构熵。
+ $$ \begin{aligned} \mathcal{H}^{1}(G) &amp;amp;=H(\mathbf{p})=H\left(\frac{d_{1}}{2 m}, \ldots, \frac{d_{n}}{2 m}\right) \\ &amp;amp;=-\sum_{i=1}^{n} \frac{d_{i}}{2 m} \cdot \log _{2} \frac{d_{i}}{2 m} \end{aligned} $$
+ 其中 $m$ 为图 $G = (V, E)$ 中边的数量，即 $|E|$ ； $d_i$ 为结点 $i$ 的度。一维结构熵 $H^i(G)$ ，从直观上解释，是确定在有静态分布的图 $G$ 中随机游走能够达到的结点的一维编码所需的信息量。
+ 现在让我们更进一步地理解上面这个公式。我们之前对的香农熵解释是：对分布中的每个取值，根据该取值出现的概率给他一个码字（编码）长度，使得描述分布中取值所需的平均编码长度最小。这个最小的编码长度就是分布的信息熵。在位置熵中，我们可以认为简单图中一个结点在随机游走中被访问的概率就是该结点的度在所有结点的度之和中所占的比例。因此若要给该结点一个编码，最优的编码长度应当是 $-{log}_2\frac{d_i}{2m}$ 。加权平均后记为该图 $G$ 的位置熵/一维结构熵 $H^1(G)$ 。
+  高维结构熵   结构熵最小化   </description>
     </item>
     
     <item>

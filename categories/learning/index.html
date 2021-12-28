@@ -230,6 +230,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_structural-information/">结构信息论</a>
                 </div>
               </div>
@@ -429,9 +435,43 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/">
+    
+      <img src="/img/default3.jpg" alt="在hugo中使用latex" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Tuesday, Dec 28, 2021</p>
+    </div>
+    <div class="description">
+      主要参考这片文章。在katex官网找到Auto-render拓展，在生成的html&lt;head&gt;段中加上以下代码就行了。
+&lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css&#34; integrity=&#34;sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs&#34; crossorigin=&#34;anonymous&#34;&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js&#34; integrity=&#34;sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js&#34; integrity=&#34;sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR&#34; crossorigin=&#34;anonymous&#34; onload=&#34;renderMathInElement(document.body);&#34;&gt;&lt;/script&gt;   加入的方法为在模板中添加。模板位置为（以我的dream主题为例） /themes/dream/layouts/partials/helpers/katex.html 。但是不要直接照搬上面的代码，最好去网站找最新代码。
+ 为了能够控制哪些博客需要渲染，而不是渲染所有博客，在 /themes/dream/layouts/partials/head.html 添加以下代码
+{{ if .Params.math }}{{ partial &#34;helpers/katex.html&#34; . }}{{ end }}   在需要渲染的博客头上添加
+--- math: true ---   如果需要渲染行内表达式，即渲染 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ 为 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ ，在 katex.html 中写入下面代码
+&lt;script&gt; document.addEventListener(&#34;DOMContentLoaded&#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &#34;$$&#34;, right: &#34;$$&#34;, display: true}, {left: &#34;$&#34;, right: &#34;$&#34;, display: false} ] }); }); &lt;/script&gt;   最后放一个跨行公式测试效果
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_structural-information/">
     
-      <img src="/img/default1.jpg" alt="结构信息论" />
+      <img src="/img/default2.jpg" alt="结构信息论" />
     
   </a>
 
@@ -445,8 +485,11 @@
     <div class="description">
         给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
   直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
- $$H(p) = -\sum_{i=1}^{n}p_i{log}_2p_i$$
-位置熵/一维结构熵   高维结构熵   结构熵最小化   
+位置熵/一维结构熵  我们把一张图 $G$ 的度分布的熵叫做图 $G$ 的位置熵，也是图的一维结构熵。
+ $$ \begin{aligned} \mathcal{H}^{1}(G) &amp;=H(\mathbf{p})=H\left(\frac{d_{1}}{2 m}, \ldots, \frac{d_{n}}{2 m}\right) \\ &amp;=-\sum_{i=1}^{n} \frac{d_{i}}{2 m} \cdot \log _{2} \frac{d_{i}}{2 m} \end{aligned} $$
+ 其中 $m$ 为图 $G = (V, E)$ 中边的数量，即 $|E|$ ； $d_i$ 为结点 $i$ 的度。一维结构熵 $H^i(G)$ ，从直观上解释，是确定在有静态分布的图 $G$ 中随机游走能够达到的结点的一维编码所需的信息量。
+ 现在让我们更进一步地理解上面这个公式。我们之前对的香农熵解释是：对分布中的每个取值，根据该取值出现的概率给他一个码字（编码）长度，使得描述分布中取值所需的平均编码长度最小。这个最小的编码长度就是分布的信息熵。在位置熵中，我们可以认为简单图中一个结点在随机游走中被访问的概率就是该结点的度在所有结点的度之和中所占的比例。因此若要给该结点一个编码，最优的编码长度应当是 $-{log}_2\frac{d_i}{2m}$ 。加权平均后记为该图 $G$ 的位置熵/一维结构熵 $H^1(G)$ 。
+  高维结构熵   结构熵最小化   
     </div>
   </div>
 
@@ -501,7 +544,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
     
-      <img src="/img/default3.jpg" alt="pwn堆题整理" />
+      <img src="/img/default1.jpg" alt="pwn堆题整理" />
     
   </a>
 
@@ -536,7 +579,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
     
-      <img src="/img/default4.jpg" alt="ROP" />
+      <img src="/img/default3.jpg" alt="ROP" />
     
   </a>
 
@@ -569,7 +612,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
-      <img src="/img/default1.jpg" alt="libc泄漏" />
+      <img src="/img/default4.jpg" alt="libc泄漏" />
     
   </a>
 
@@ -635,7 +678,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
     
-      <img src="/img/default1.jpg" alt="迭代与递归" />
+      <img src="/img/default2.jpg" alt="迭代与递归" />
     
   </a>
 
@@ -668,7 +711,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
     
-      <img src="/img/default4.jpg" alt="概率统计中的分布" />
+      <img src="/img/default2.jpg" alt="概率统计中的分布" />
     
   </a>
 
@@ -721,40 +764,6 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
  我们对计算机性能的要求是无上限的，但同时成本也需要控制在可接受的范围。因此就算我们让一台计算机 主机内所有的存储器都用SRAM，我们还是会想要更大更快的内存。为了解决上述价格与速度的矛盾，我们 引入了分层次存储器。在拥有DRAM作为主存的大容量低价格的同时使用SRAM作为CPU内部寄存器以获取高速度。 完整的层次结构中速度从快到慢，容量从小到大是：寄存器-cache-主存-外存.
  主存与CPU之间通过总线相连，数据从主存中取出到寄存器中，在寄存器中传入ALU等部件组成的数据通路进行 计算，得到的结果也存放在寄存器，需要时写入主存中。随着硬件的发展，虽然主存的速度也在不断增长， 但CPU速度的增长速度远大于主存，两者之间的速度差距越来越大。为了调节两者间的速度差异，最大 程度发挥CPU性能，Cache作为高速缓存被引入。Cache具有接近CPU的存取速度，保存最近常用的主存中 的单元副本，并且实时更新。主存、Cache、CPU之间的关系，乃至整个存储器层次结构中上下层软硬件 的关系，我们可以形象的用柜台和仓库进行类比。存取速度更快但是容量更小的上层存储器是商店里的柜台， 下层存储器是商店的仓库，数据是仓库中的物品。当用户/计算机需要购买物品时，如果柜台中有物品 就可以直接从柜台快速拿取，若没有则需要经过繁琐的步骤去仓库取出。但是我们不能把仓库中所有物品 直接放入柜台。还有一种类比是把数据看作学生使用的文具，最上层，即速度最快，容量最小的一层是 学生书桌上的文具盒，需要的时候可以随时取用。下一层是书包，可能有些较大的文具无法放在文具盒中， 这时就需要花稍多的时间从背包内取出。再下一层可以是学生的家。有时候可能会把要用的东西落在了家中， 或者书包也装不下，只能放在家中。这时若再需要用到就要花大代价跑回家去拿。但是一旦从家中拿到了 文具，已经将它装在了包里，那下次再次取用就只要去包里找就行了。CPU内寄存器、Cache、主存间的关系 大致是这样，只是这里的“物品”：数据是可以被拷贝到上层存储器的，从下层“取走”到上层后下层还保留着 一份原本，上层只是“复制”走了一份副本。值得一提的一点是为什么我们每天只需要一个包来装学习用品 就够日常使用了，而不是经常跑回家拿东西呢？假设我们把所有科目的书和试卷等全都放在家里，每天的 课程表让我们知道当天的科目，再加上当前的课程进度，综合起来我们可以判断只需要带走一部分相关的资料 而非全部科目的所有资料就足够当天的学习使用了。在计算机中也有类似的情况，就是计算机在执行一道 程序的时候在一段时间内会反复使用同一段或相邻的空间。这就相当于得知了当前的“课程进度”和“课表” 后，我们能够确定大致需要带的资料，在一段时间（比如一天）内无需反复回家更换。程序在一段时间 内反复访问相同的空间的特性叫做时间局部性，访问某空间后大概率访问相邻空间的特性叫做空间局部性。 程序的局部性原理使得是的Cache能够作为CPU与主存间的高速缓存大大提升整体系统的效率。
  那么我们在使用Cache的时候需要注意哪些细节呢？首先，由于一个学生在上学的时候不可能把整个家里所有 东西都装在背包中，需要挑选出每天要带走的东西。Cache需要确定保存哪些副本，当空间满了的时候 如何进行替换。Cache的替换策略有随机替换, FIFO, LRU, LFU. 其次，Cache中保存的是主存中的副本， Cache以行为单位，一行内可以包括多个主存单元（一般是1字节大小），与行对应大小的单位在主存 中被称为块。Cache最理想的实现方式是每行都能保存主存中任意块的副本，但是由于Cache的总 容量比主存小，我们需要对存在每行中的每个块指定一个标识以分辨对应主存中的位置。 按照上面的设想，我们需要在每行保存完整的主存块地址（非存储单元地址，用于分辨块中不同存储 单元的最后几位不用记录）作为唯一标识，这样每次想要找出CPU给出的主存单元对应的Cache行所需 的开销就会比较大。那么我们可以换一种思路进行映射：由于主存容量较大，地址的长度也比Cache中地址要长， 那我们把高位多出来的那部分作为唯一标识，剩下的主存地址就直接用到Cache上当作行地址，这样需要保存 的标识长度就短了很多，每次在Cache中找对应的主存块也不用对比所有行的标识，只需找到编号低位 与地址相同的那一行。以上两种Cache与主存之间的映射方式分别是全相联映射和直接映射。有的时候， 我们虽然用不起全相联映射，又发现直接映射太过于死板以至于在跑一些程序的时候无法很好的 完整高速缓存的工作（无法很好利用时间局部性），那就可以将两者结合起来，先将Cache中的行分组， 在组内进行任意对应。这就是组相联映射。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/">
-    
-      <img src="/img/2021-03-14_lisp.png" alt="编程语言的基本组成" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Sunday, Mar 14, 2021</p>
-    </div>
-    <div class="description">
-      编程语言的基本组成  编程语言的基本组成是SICP的第一节讨论的内容。编程语言所需要的基本元素有3个：原子元素（原子过程、 原子数据结构）、将运算进行复合的能力、对过程进行抽象的能力。
- 原子元素是语言本身提供给我们的最小过程与数据结构，如乘法 * ，整数数据类型. 在scheme中我们将 一个操作过程写在括号语句内，语句的第一个元素作为运用的过程（操作符），随后的元素作为操作数。如
-(* 3 4)   运算复合的能力使我们能够从基本操作中构建复杂操作，如求解阶乘
-(define (factorial n) (if (&lt; n 2) 1 (* n (factorial (- n 1)))))   最后是构建抽象的能力，能够让我们不被所有实现细节扰乱思路，只把之前构建的函数当作黑盒直接拿来 使用
-(factorial 4)    块结构–以牛顿法求平方根为例  牛顿法是用于求解方程根的算法，从一个猜测开始每次迭代得到一个更好的猜测，不断向根逼近，直到 一个我们指定的要求达到为止。 通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的 sqrt算法。
-(define (sqrt-iter guess x) (if (good-enough? guess x) guess (sqrt-iter (better-guess guess x) x))) (define (sqrt x) (sqrt-iter 2.0 x))  在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了 防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt.
     </div>
   </div>
 

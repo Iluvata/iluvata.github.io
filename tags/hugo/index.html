@@ -230,6 +230,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_structural-information/">结构信息论</a>
                 </div>
               </div>
@@ -426,6 +432,40 @@
   </div>
 
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/">
+    
+      <img src="/img/default2.jpg" alt="在hugo中使用latex" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Tuesday, Dec 28, 2021</p>
+    </div>
+    <div class="description">
+      主要参考这片文章。在katex官网找到Auto-render拓展，在生成的html&lt;head&gt;段中加上以下代码就行了。
+&lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css&#34; integrity=&#34;sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs&#34; crossorigin=&#34;anonymous&#34;&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js&#34; integrity=&#34;sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt; &lt;script defer src=&#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js&#34; integrity=&#34;sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR&#34; crossorigin=&#34;anonymous&#34; onload=&#34;renderMathInElement(document.body);&#34;&gt;&lt;/script&gt;   加入的方法为在模板中添加。模板位置为（以我的dream主题为例） /themes/dream/layouts/partials/helpers/katex.html 。但是不要直接照搬上面的代码，最好去网站找最新代码。
+ 为了能够控制哪些博客需要渲染，而不是渲染所有博客，在 /themes/dream/layouts/partials/head.html 添加以下代码
+{{ if .Params.math }}{{ partial &#34;helpers/katex.html&#34; . }}{{ end }}   在需要渲染的博客头上添加
+--- math: true ---   如果需要渲染行内表达式，即渲染 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ 为 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ ，在 katex.html 中写入下面代码
+&lt;script&gt; document.addEventListener(&#34;DOMContentLoaded&#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &#34;$$&#34;, right: &#34;$$&#34;, display: true}, {left: &#34;$&#34;, right: &#34;$&#34;, display: false} ] }); }); &lt;/script&gt;   最后放一个跨行公式测试效果
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">

@@ -6,7 +6,21 @@
     <description>Recent content in math on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 19 Apr 2021 19:00:13 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Dec 2021 20:04:31 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在hugo中使用latex</title>
+      <link>https://iluvata.github.io/post/2021-12-28_hugo-with-latex/</link>
+      <pubDate>Tue, 28 Dec 2021 20:04:31 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-12-28_hugo-with-latex/</guid>
+      <description>主要参考这片文章。在katex官网找到Auto-render拓展，在生成的html&amp;lt;head&amp;gt;段中加上以下代码就行了。
+&amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css&amp;#34; integrity=&amp;#34;sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34;&amp;gt; &amp;lt;script defer src=&amp;#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js&amp;#34; integrity=&amp;#34;sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script defer src=&amp;#34;https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js&amp;#34; integrity=&amp;#34;sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34; onload=&amp;#34;renderMathInElement(document.body);&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;   加入的方法为在模板中添加。模板位置为（以我的dream主题为例） /themes/dream/layouts/partials/helpers/katex.html 。但是不要直接照搬上面的代码，最好去网站找最新代码。
+ 为了能够控制哪些博客需要渲染，而不是渲染所有博客，在 /themes/dream/layouts/partials/head.html 添加以下代码
+{{ if .Params.math }}{{ partial &amp;#34;helpers/katex.html&amp;#34; . }}{{ end }}   在需要渲染的博客头上添加
+--- math: true ---   如果需要渲染行内表达式，即渲染 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ 为 $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ ，在 katex.html 中写入下面代码
+&amp;lt;script&amp;gt; document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &amp;#34;$$&amp;#34;, right: &amp;#34;$$&amp;#34;, display: true}, {left: &amp;#34;$&amp;#34;, right: &amp;#34;$&amp;#34;, display: false} ] }); }); &amp;lt;/script&amp;gt;   最后放一个跨行公式测试效果</description>
+    </item>
+    
     <item>
       <title>最大似然估计与基本演绎法</title>
       <link>https://iluvata.github.io/post/2021-04-19_likehood-reasoning/</link>
