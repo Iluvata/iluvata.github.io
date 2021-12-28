@@ -6,7 +6,18 @@
     <description>Recent content in Posts on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 28 Dec 2021 14:11:26 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Dec 2021 15:08:33 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>结构信息论</title>
+      <link>https://iluvata.github.io/post/2021-12-28_structural-information/</link>
+      <pubDate>Tue, 28 Dec 2021 15:08:33 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2021-12-28_structural-information/</guid>
+      <description>  给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
+  直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
+位置熵/一维结构熵   高维结构熵   结构熵最小化   </description>
+    </item>
+    
     <item>
       <title>图嵌入</title>
       <link>https://iluvata.github.io/post/2021-12-28_graph-embedding/</link>
@@ -15,9 +26,9 @@
       <guid>https://iluvata.github.io/post/2021-12-28_graph-embedding/</guid>
       <description> 图嵌入的通用框架    通常的图嵌入框架有4个组件：
   映射函数：把节点从图域映射到嵌入域
-  信息提取器：从图域中提取出关键信息 $I$
-  重构器：从嵌入域重构提取的信息，重构出的信息记为 $I&amp;#39;$
-  优化目标：对 $I$ 和 $I&amp;#39;$ 进行优化，学习映射函数/重构器中的参数
+  信息提取器：从图域中提取出关键信息 I
+  重构器：从嵌入域重构提取的信息，重构出的信息记为 I&amp;#39;
+  优化目标：对 I 和 I&amp;#39; 进行优化，学习映射函数/重构器中的参数
     简单图嵌入  简单图是无重边，没有指向自己的边的图。是静态的、无向的、无符号的和同质的。可以根据想要保留的信息，即信息提取器需要从图中提取出的信息，进行分类。目前这些信息有：
   节点共现
   结构角色

@@ -10,6 +10,8 @@
 
 
 
+
+
 <meta name="author" content="Iluvata" />
 <meta name="description" content="" />
 
@@ -153,6 +155,12 @@
     
       
       
+      <a class="ui label" href="/tags/information/" title="Information">
+        Information
+      </a>
+    
+      
+      
       <a class="ui label" href="/tags/math/" title="Math">
         Math
       </a>
@@ -219,6 +227,12 @@
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_structural-information/">结构信息论</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">
@@ -415,9 +429,43 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
+    
+      <img src="/img/default2.jpg" alt="概率统计中的分布" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-19_distributions/">概率统计中的分布</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Friday, Mar 19, 2021</p>
+    </div>
+    <div class="description">
+       连续分布  均匀分布   正态分布  距离某一中心值偏离的误差越大的概率越小。可用于自然界许多现象的模拟.
+  指数分布  EX=1/lambda DX=1/lambda^2 指数分布的无记忆性：先验概率与后验概率相同。可用于模拟电器使用：不管之前使用了多久， 能继续使用x小时的概率不变。 先验概率 后验概率
+    离散分布  0-1分布  0-1分布随机变量取值为0或1，参数只有一个p，即取值为1的概率。
+  二项分布  二项分布是多个相同0-1分布的叠加。B(n,p)中n为随机变量的数量，p和0-1分布中相同。 输入k得到的结果为k个随机变量得到1的概率。
+  泊松分布  EX=DX=lambda 在二项分布数值非常大的时候B(1000, 0.001), n=1000, p=0.001的时候计算量非常大。 可以用泊松分布进行模拟。lambda=n*p, 随机变量为k. 经常被用来模拟排队。在每个离散时间一个客户可能来的概率为p, 泊松分布可以模拟 总客户数为n时在时间点k来的客户数量。
+    
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/">
     
-      <img src="/img/default4.jpg" alt="推荐系统基础" />
+      <img src="/img/default2.jpg" alt="推荐系统基础" />
     
   </a>
 
@@ -448,7 +496,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-17_operating-system/">
     
-      <img src="/img/default2.jpg" alt="操作系统" />
+      <img src="/img/default4.jpg" alt="操作系统" />
     
   </a>
 
@@ -720,39 +768,6 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
   最优子结构
   贪心选择性质即上文中我们说的“能找到只包含一个子问题的最优解“。通过适当的变换，一些问题可以找到贪心选择性质，如上文中的活动调度问题。 最优子结构即动态规划中的“由子问题的最优解构成当前问题最优解”的性质。满足这两个条件的问题即可使用贪心算法。但在有些情况下，不能轻易找出 最优子结构，但是问题的确可以使用贪心算法求解。比如PAT-1067.
   Dijkstra算法与Bellman-Ford算法  Dijkstra算法  作为图论中几乎是最有名的算法，Dijkstra算法解决了最短路径问题。从算法思想的角度来说，Dijkstra算法使用了贪心策略。与之相对的是 Bellman-Ford算法。同为计算最短路径的算法，Bellman-Ford算法使用了动态规划的思想，复杂度为O(n^3)。Dijkstra算法在此基础上 进一步限定条件（Bellman-Ford算法可以用来计算带有负权的图，Dijkstra只能用于权值为正数的情况）利用了问题具有贪心选择性质，用贪心策略 将最短路径算法的复杂度进一步减到了O(n^2).
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-22_latex-with-emacs/">
-    
-      <img src="/img/2021-03-01_latex.jpg" alt="在org mode中嵌入latex" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Feb 22, 2021</p>
-    </div>
-    <div class="description">
-      最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
-\begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 但是虽然orgmode支持的latex能导出pdf，hugo生成的html网页还是不支持。
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX Hugo中的LaTeX渲染 Hugo中添加LaTeX渲染
     </div>
   </div>
 

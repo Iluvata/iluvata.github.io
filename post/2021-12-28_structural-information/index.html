@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>emacs | Iluvata&#39;s Blog</title>
+    <title>结构信息论 | Iluvata&#39;s Blog</title>
 
     
 
@@ -19,20 +19,26 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/tags/emacs/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2021-12-28_structural-information/" />
 
 
-<meta property="og:title" content="emacs" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://iluvata.github.io/tags/emacs/" />
+<meta property="og:title" content="结构信息论" />
+<meta property="og:description" content="  给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
+  直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
+位置熵/一维结构熵   高维结构熵   结构熵最小化   " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iluvata.github.io/post/2021-12-28_structural-information/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-28T15:08:33+08:00" />
+<meta property="article:modified_time" content="2021-12-28T15:08:33+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="emacs"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="结构信息论"/>
+<meta name="twitter:description" content="  给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
+  直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
+位置熵/一维结构熵   高维结构熵   结构熵最小化   "/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -72,7 +78,13 @@
   
 </style>
 
-     
+    
+
+
+
+
+
+
   </head>
 
   <body class="default">
@@ -97,7 +109,97 @@
           <div class="dream-max-width">
             
 <div class="ui centered relaxed grid dream-grid">
-  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">
+          结构信息论
+          <div class="sub header">
+            @
+            
+              Iluvata
+            
+
+            | 
+                Tuesday, Dec 28, 2021
+              
+
+            | 1 minutes read
+
+            | Update at
+              
+                Tuesday, Dec 28, 2021
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main">
+<p>
+给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 <strong>描述的平均长度</strong> 就是该分布的信息熵。我们定义某一分布的信息熵如下：</p>
+<p>
+<img src="/img/2021-12-28_entropy.png" alt="/img/2021-12-28_entropy.png" title="/img/2021-12-28_entropy.png" /></p>
+<p>
+直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+位置熵/一维结构熵
+</h2>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+高维结构熵
+</h2>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+结构熵最小化
+</h2>
+</div>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+        
+          <a class="ui label" href="/tags/information" title="information">information</a>
+        
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+    
+    
+
+    
+
+  </div>
+  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
+    
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">位置熵/一维结构熵</a>
+</li>
+<li><a href="#headline-2">高维结构熵</a>
+</li>
+<li><a href="#headline-3">结构熵最小化</a>
+</li>
+</ul>
+</nav>
+      </div>
+    
+
     <article class="dream-header">
   <section class="ui top attached center aligned segment">
     <div class="ui small circular image">
@@ -107,12 +209,12 @@
     </div>
 
     
-    <div class="ui medium header">
+    <h1 class="ui medium header">
     
       Iluvata&#39;s blog
       <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
     
-    </div>
+    </h1>
     
 
     <div class="ui horizontal list">
@@ -423,118 +525,7 @@
   </section>
 </article>
 
-  </div>
-
-  
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-22_latex-with-emacs/">
-    
-      <img src="/img/2021-03-01_latex.jpg" alt="在org mode中嵌入latex" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Feb 22, 2021</p>
-    </div>
-    <div class="description">
-      最近写博客发现就算在想着办法避免使用数学公式，在写有关算法，更不用说数学博客的时候还是不可避免的会碰上好多需要使用latex的情况。 于是干脆在这里记一下怎么在org mode中内嵌latex。
-\begin{equation} % arbitrary environments, x=\sqrt{b} % even tables, figures \end{equation} % etc
- If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
- 但是虽然orgmode支持的latex能导出pdf，hugo生成的html网页还是不支持。
- 参考链接：官方文档 Spacemacs和Org-mode和LaTeX Hugo中的LaTeX渲染 Hugo中添加LaTeX渲染
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
-    
-      <img src="/img/default4.jpg" alt="在spacemacs中写scheme" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/">
-    
-      <img src="/img/default3.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;) 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-
-  <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-    
-
-
-
-  </div>
+  </aside>
 </div>
 
           </div>
@@ -633,9 +624,11 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
 <script src="/js/theme.js"></script>
 
     
-<script src="/js/imagesloaded.pkgd.min.js"></script>
-<script src="/js/masonry.pkgd.min.js"></script>
-<script src="/js/grid.js"></script>
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+
 
 
     

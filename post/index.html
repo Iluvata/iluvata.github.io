@@ -10,6 +10,8 @@
 
 
 
+
+
 <meta name="author" content="Iluvata" />
 <meta name="description" content="" />
 
@@ -153,6 +155,12 @@
     
       
       
+      <a class="ui label" href="/tags/information/" title="Information">
+        Information
+      </a>
+    
+      
+      
       <a class="ui label" href="/tags/math/" title="Math">
         Math
       </a>
@@ -219,6 +227,12 @@
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_structural-information/">结构信息论</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">
@@ -415,6 +429,37 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-12-28_structural-information/">
+    
+      <img src="/img/default2.jpg" alt="结构信息论" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-12-28_structural-information/">结构信息论</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Tuesday, Dec 28, 2021</p>
+    </div>
+    <div class="description">
+        给定一个分布，想要描述一个服从该分布的随机变量取值平均所需的信息量就是该分布的熵，也可以理解为该分布的不确定性。信息熵越大，该分布的不确定性越大，完全确定取值所需的信息就越多。例如在一个随机变量有8种等可能取值的分布中，为了确定一个结果，需要一个能够容纳8个不同值的标识。因此用3bit字符串足够描述这些标识。如果分布是非均匀的，则可以对概率大的取值用较短的描述，这样我们能得到一个平均更短的描述。这个 描述的平均长度 就是该分布的信息熵。我们定义某一分布的信息熵如下：
+  直观地解释， $l=-logp_i$ 是描述概率为 $p_i$ 的事件的二进制长度，熵就是每个事件的描述长度的加权平均。
+位置熵/一维结构熵   高维结构熵   结构熵最小化   
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_graph-embedding/">
     
       <img src="/img/2021-12-28_graph-embedding-framework.png" alt="图嵌入" />
@@ -431,9 +476,9 @@
     <div class="description">
        图嵌入的通用框架    通常的图嵌入框架有4个组件：
   映射函数：把节点从图域映射到嵌入域
-  信息提取器：从图域中提取出关键信息 $I$
-  重构器：从嵌入域重构提取的信息，重构出的信息记为 $I&#39;$
-  优化目标：对 $I$ 和 $I&#39;$ 进行优化，学习映射函数/重构器中的参数
+  信息提取器：从图域中提取出关键信息 I
+  重构器：从嵌入域重构提取的信息，重构出的信息记为 I&#39;
+  优化目标：对 I 和 I&#39; 进行优化，学习映射函数/重构器中的参数
     简单图嵌入  简单图是无重边，没有指向自己的边的图。是静态的、无向的、无符号的和同质的。可以根据想要保留的信息，即信息提取器需要从图中提取出的信息，进行分类。目前这些信息有：
   节点共现
   结构角色
@@ -456,7 +501,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default1.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default3.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -529,7 +574,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
     
-      <img src="/img/default3.jpg" alt="ROP" />
+      <img src="/img/default2.jpg" alt="ROP" />
     
   </a>
 
@@ -562,7 +607,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
-      <img src="/img/default1.jpg" alt="libc泄漏" />
+      <img src="/img/default4.jpg" alt="libc泄漏" />
     
   </a>
 
@@ -594,7 +639,7 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
-      <img src="/img/default3.jpg" alt="CTF基本工具使用指北" />
+      <img src="/img/default4.jpg" alt="CTF基本工具使用指北" />
     
   </a>
 
@@ -628,7 +673,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/">
     
-      <img src="/img/default1.jpg" alt="最大似然估计与基本演绎法" />
+      <img src="/img/default4.jpg" alt="最大似然估计与基本演绎法" />
     
   </a>
 
@@ -659,7 +704,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
     
-      <img src="/img/default4.jpg" alt="迭代与递归" />
+      <img src="/img/default2.jpg" alt="迭代与递归" />
     
   </a>
 
@@ -713,40 +758,6 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
   面试  考完后完全没什么心情准备面试，还去实习了。出分前更是一点底都没有，甚至不知道自己能不能进复试（我自己估分最低是280。。），就在每天上班前看一会离散。后面开始每天写博客整理可能会被问到的课程和项目。结果准备的课基本都没问，问了几个很基础的问题。我们是网上面试，一进去先让抽一道政治。然后是英语自我介绍。说完后老师用英语问我最常用的编程语言是什么，我说cpp。然后问有什么难点，我说了一些面向对象的特性比较难记忆和理解。英语完了后是线性代数，问我怎么解线性方程组Ax=b，还有怎么判断一个向量组无关。之后是离散，问了偏序，全序，良序是什么。然后是数据结构，问给一个文本，怎么统计每个词的词频。我说python可以用字典，C++可以用Map，老师说他问实现的数据结构是什么，我说红黑树。老师继续问我红黑树的细节是怎样的。。我答不上来，就说了还可以用二叉排序树，用字典序进行排序，找到后给节点的记数+1，找不到就新建节点。老师问复杂度是多少，我说对数复杂度。然后老师还问我知不知道多态是什么，我说了一大堆，后来想想应该是答错了。。最后问了我有什么项目，我说了一半时间就到了。
     后话  我的考研经历大致就是这些了，希望对你们有点用吧。中间我省了很多废话，要是对一些更详细的细节感兴趣的话可以看下我的博客，里面更详细的记录了一些我的学习方法啥的，虽然更多的是废话哈哈.总结起来我感觉我自己的考研之路还是相对比较轻松的，特别是后期疯狂摸鱼，又是跑步又是看小说，考前两周还因为在大冷天跑步后冲凉把自己送进了医院。。。考完后我自己的估分是280-400，出分的时候突然跳出来430我着实是吓了一跳，看来改卷并没有我想象的那么严格2333.最后祝大家都能考上自己喜欢的研究生，欢迎到然姐的北航考研群473862594，或直接找我1124026683问问题。
   
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
-    
-      <img src="/img/default3.jpg" alt="概率统计中的分布" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-19_distributions/">概率统计中的分布</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Mar 19, 2021</p>
-    </div>
-    <div class="description">
-       连续分布  均匀分布   正态分布  距离某一中心值偏离的误差越大的概率越小。可用于自然界许多现象的模拟.
-  指数分布  EX=1/lambda DX=1/lambda^2 指数分布的无记忆性：先验概率与后验概率相同。可用于模拟电器使用：不管之前使用了多久， 能继续使用x小时的概率不变。 先验概率 后验概率
-    离散分布  0-1分布  0-1分布随机变量取值为0或1，参数只有一个p，即取值为1的概率。
-  二项分布  二项分布是多个相同0-1分布的叠加。B(n,p)中n为随机变量的数量，p和0-1分布中相同。 输入k得到的结果为k个随机变量得到1的概率。
-  泊松分布  EX=DX=lambda 在二项分布数值非常大的时候B(1000, 0.001), n=1000, p=0.001的时候计算量非常大。 可以用泊松分布进行模拟。lambda=n*p, 随机变量为k. 经常被用来模拟排队。在每个离散时间一个客户可能来的概率为p, 泊松分布可以模拟 总客户数为n时在时间点k来的客户数量。
-    
     </div>
   </div>
 
