@@ -13,8 +13,7 @@
       <pubDate>Tue, 28 Dec 2021 14:11:26 +0800</pubDate>
       
       <guid>https://iluvata.github.io/post/2021-12-28_graph-embedding/</guid>
-      <description> 图嵌入的通用框架   /img/2021-12-28_graph-embedding-framework
- 通常的图嵌入框架有4个组件：
+      <description> 图嵌入的通用框架    通常的图嵌入框架有4个组件：
   映射函数：把节点从图域映射到嵌入域
   信息提取器：从图域中提取出关键信息 $I$
   重构器：从嵌入域重构提取的信息，重构出的信息记为 $I&amp;#39;$
