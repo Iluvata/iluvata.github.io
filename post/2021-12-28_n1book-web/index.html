@@ -23,7 +23,7 @@
 
 
 <meta property="og:title" content="N1Book Web 学习" />
-<meta property="og:description" content="  buuctf n1book web刷题
+<meta property="og:description" content="buuctf n1book web刷题
 信息收集  常见的收集  网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用dirsearch扫描站点目录。
 cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   -e 指定网站语言
@@ -32,7 +32,7 @@ cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   脚本扫描的数据库在 db 文件夹，可以自己加。这题的目标文件有三个： robots.txt , index.php~ , .index.php.swp 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。
  robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。
   粗心的小李  git泄漏题可以用的工具有GitHack，scrabble。只要目标网站上有.git，运行脚本就能把网站dump下来。
-GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      " />
+GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL注入    数字型注入 若输入参数为1，查询的语句为 select * from table where id=1 。若输入参数为1&#43;1返回2的结果，基本能确定是数字型输入。 参数前后没有过滤也没有引号，可以直接union。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iluvata.github.io/post/2021-12-28_n1book-web/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-28T00:17:37+08:00" />
@@ -43,7 +43,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      " />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="N1Book Web 学习"/>
-<meta name="twitter:description" content="  buuctf n1book web刷题
+<meta name="twitter:description" content="buuctf n1book web刷题
 信息收集  常见的收集  网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用dirsearch扫描站点目录。
 cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   -e 指定网站语言
@@ -52,7 +52,7 @@ cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   脚本扫描的数据库在 db 文件夹，可以自己加。这题的目标文件有三个： robots.txt , index.php~ , .index.php.swp 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。
  robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。
   粗心的小李  git泄漏题可以用的工具有GitHack，scrabble。只要目标网站上有.git，运行脚本就能把网站dump下来。
-GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      "/>
+GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL注入    数字型注入 若输入参数为1，查询的语句为 select * from table where id=1 。若输入参数为1&#43;1返回2的结果，基本能确定是数字型输入。 参数前后没有过滤也没有引号，可以直接union。"/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -202,6 +202,36 @@ robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文�
 </div>
 </div>
 </div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+SQL注入
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<ul>
+<li>
+<p>数字型注入
+若输入参数为1，查询的语句为 <code class="verbatim">select * from table where id=1</code> 。若输入参数为1+1返回2的结果，基本能确定是数字型输入。
+参数前后没有过滤也没有引号，可以直接union。</p>
+</li>
+<li>
+<p>字符型注入
+在输入参数前后加了引号。若输入参数为1，查询语句为 <code class="verbatim">select * from table where id = &#39;1&#39;</code> 。可以通过补全引号后在后面加union，在最后加上#或者–+注释掉之后的内容。</p>
+</li>
+</ul>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+SQL注入-1
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>先测试一下，发现只有id=1, 2, 3的时候有内容。id=3的时候提示有后门参数tips，tips=1会显示出执行的sql语句。</p>
+<p>
+<img src="/img/2021-12-29_sql1-tips.png" alt="/img/2021-12-29_sql1-tips.png" title="/img/2021-12-29_sql1-tips.png" /></p>
+<p>
+可以看出是字符形式的注入。执行 <code class="verbatim">select * from notes where id =&#39;-1&#39; union select 1,2, group_concat(table_name) from information_schema.tables where table_schema=database()#&#39;</code> 获取表名，查到有个表 <code class="verbatim">fl4g</code> 。要注意select出来的个数必须为3，直接 <code class="verbatim">select *</code> 查不到东西。应该是后台过滤了参数必须为3个，并且只有后面两个会显示，所以查出来的 <code class="verbatim">table_name</code> 也要用 <code class="verbatim">group_concat</code> 合并为一个字段。拿到表名后执行 <code class="verbatim">select * from notes where id =&#39;4&#39; union select 1,2,group_concat(column_name) from information_schema.columns where table_name = &#39;fl4g&#39; #&#39;</code> 获取到列名为fllllag。最后执行 <code class="verbatim">select * from notes where id = &#39;4&#39; union select 1,2,fllllag from fl4g</code> 就能获取flag。</p>
+</div>
+</div>
+</div>
+</div>
 </article>
     </section>
 
@@ -241,6 +271,12 @@ robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文�
 <li><a href="#headline-2">常见的收集</a>
 </li>
 <li><a href="#headline-3">粗心的小李</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-4">SQL注入</a>
+<ul>
+<li><a href="#headline-5">SQL注入-1</a>
 </li>
 </ul>
 </li>

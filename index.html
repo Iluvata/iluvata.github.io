@@ -436,9 +436,40 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-12-29_mathematical-statistics/">
+    
+      <img src="/img/default3.jpg" alt="数理统计复习" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-12-29_mathematical-statistics/">数理统计复习</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Dec 29, 2021</p>
+    </div>
+    <div class="description">
+      第一张 抽样分布  充分统计量  统计量 是不含任何未知参数的，样本的函数。 充分统计量 是包含了样本中关于总体参数（参数估计）的所有信息的统计量。若 $T(x_1, x_2, \cdots, x_n)=t$ 是关于参数 $\theta$ 的充分统计量， 条件分布函数 $F_{\theta}(x_1, x_2, \cdots, x_n | t)$ 与参数 $\theta$ 无关。因为T中已经包含了样本中关于 $\theta$ 的所有信息，在知道 $t$ 后从参数中提取不出更多和 $\theta$ 有关的信息了。
+ 常用 因子分解定理 求充分统计量。若样本 $x_1, x_2, \cdots, x_n$ 的联合分布 $p(x;\theta)$ 可以进行如下分解 $$p(x;\theta)=g(T(x),\theta)h(x)$$ 则 $T(x)$ 是 $\theta$ 的充分统计量。这里的分解是先提取出仅含有 $x$ 的因子，然后尝试把剩下的因子中的 $\theta$ 和 $x$ 分开，写作他们两之间的函数。分开后仅含有 $x$ 的表达式就是充分统计量。
+例题  给一个总体的密度函数 $p(x;\theta)$ 和简单样本 $x_1, x_2, \cdots, x_n$ ，求 $\theta$ 的充分统计量。其中 $g(T(X), \theta)$ 里可能会包含有 $x$ 和 $\theta$ 的示性函数，这时候把可以考虑用顺序统计量把 $x_{(n)}$ 和 $x_{(1)}$ 分出来。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>6 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/">
     
-      <img src="/img/default3.jpg" alt="在hugo中使用latex" />
+      <img src="/img/default2.jpg" alt="在hugo中使用latex" />
     
   </a>
 
@@ -472,7 +503,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_structural-information/">
     
-      <img src="/img/default2.jpg" alt="结构信息论" />
+      <img src="/img/default3.jpg" alt="结构信息论" />
     
   </a>
 
@@ -489,47 +520,8 @@
 位置熵/一维结构熵  我们把一张图 $G$ 的度分布的熵叫做图 $G$ 的位置熵，也是图的一维结构熵。
  $$ \begin{aligned} \mathcal{H}^{1}(G) &amp;=H(\mathbf{p})=H\left(\frac{d_{1}}{2 m}, \ldots, \frac{d_{n}}{2 m}\right) \\ &amp;=-\sum_{i=1}^{n} \frac{d_{i}}{2 m} \cdot \log _{2} \frac{d_{i}}{2 m} \end{aligned} $$
  其中 $m$ 为图 $G = (V, E)$ 中边的数量，即 $|E|$ ； $d_i$ 为结点 $i$ 的度。一维结构熵 $H^i(G)$ ，从直观上解释，是确定在有静态分布的图 $G$ 中随机游走能够达到的结点的一维编码所需的信息量。
- 现在让我们更进一步地理解上面这个公式。我们之前对的香农熵解释是：对分布中的每个取值，根据该取值出现的概率给他一个码字（编码）长度，使得描述分布中取值所需的平均编码长度最小。这个最小的编码长度就是分布的信息熵。在位置熵中，我们可以认为简单图中一个结点在随机游走中被访问的概率就是该结点的度在所有结点的度之和中所占的比例。因此若要给该结点一个编码，最优的编码长度应当是 $-{log}_2\frac{d_i}{2m}$ 。加权平均后记为该图 $G$ 的位置熵/一维结构熵 $H^1(G)$ 。
+ 现在让我们进一步理解上面这个公式。我们之前对的香农熵解释是：对分布中的每个取值，根据该取值出现的概率给他一个码字（编码）长度，使得描述分布中取值所需的平均编码长度最小。这个最小的编码长度就是分布的信息熵。在位置熵中，我们可以认为简单图中一个结点在随机游走中被访问的概率就是该结点的度在所有结点的度之和中所占的比例。因此若要给该结点一个编码，最优的编码长度应当是 $-\log_2\frac{d_i}{2m}$ 。加权平均后记为该图 $G$ 的位置熵/一维结构熵 $H^1(G)$ 。
   高维结构熵   结构熵最小化   
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-12-28_graph-embedding/">
-    
-      <img src="/img/2021-12-28_graph-embedding-framework.png" alt="图嵌入" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-12-28_graph-embedding/">图嵌入</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Dec 28, 2021</p>
-    </div>
-    <div class="description">
-       图嵌入的通用框架    通常的图嵌入框架有4个组件：
-  映射函数：把节点从图域映射到嵌入域
-  信息提取器：从图域中提取出关键信息 I
-  重构器：从嵌入域重构提取的信息，重构出的信息记为 I&#39;
-  优化目标：对 I 和 I&#39; 进行优化，学习映射函数/重构器中的参数
-    简单图嵌入  简单图是无重边，没有指向自己的边的图。是静态的、无向的、无符号的和同质的。可以根据想要保留的信息，即信息提取器需要从图中提取出的信息，进行分类。目前这些信息有：
-  节点共现
-  结构角色
-  节点状态
-  社区结构
-  保留节点共现的图嵌入     
     </div>
   </div>
 
@@ -546,7 +538,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default1.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default3.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -558,7 +550,7 @@
       <p class="date">Tuesday, Dec 28, 2021</p>
     </div>
     <div class="description">
-        buuctf n1book web刷题
+      buuctf n1book web刷题
 信息收集  常见的收集  网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用dirsearch扫描站点目录。
 cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   -e 指定网站语言
@@ -567,7 +559,7 @@ cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   脚本扫描的数据库在 db 文件夹，可以自己加。这题的目标文件有三个： robots.txt , index.php~ , .index.php.swp 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。
  robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。
   粗心的小李  git泄漏题可以用的工具有GitHack，scrabble。只要目标网站上有.git，运行脚本就能把网站dump下来。
-GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      
+GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL注入    数字型注入 若输入参数为1，查询的语句为 select * from table where id=1 。若输入参数为1+1返回2的结果，基本能确定是数字型输入。 参数前后没有过滤也没有引号，可以直接union。
     </div>
   </div>
 
@@ -584,7 +576,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
     
-      <img src="/img/default2.jpg" alt="pwn堆题整理" />
+      <img src="/img/default1.jpg" alt="pwn堆题整理" />
     
   </a>
 
@@ -619,7 +611,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
     
-      <img src="/img/default1.jpg" alt="ROP" />
+      <img src="/img/default3.jpg" alt="ROP" />
     
   </a>
 
@@ -652,7 +644,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
-      <img src="/img/default3.jpg" alt="libc泄漏" />
+      <img src="/img/default2.jpg" alt="libc泄漏" />
     
   </a>
 
@@ -684,7 +676,7 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
-      <img src="/img/default2.jpg" alt="CTF基本工具使用指北" />
+      <img src="/img/default3.jpg" alt="CTF基本工具使用指北" />
     
   </a>
 
@@ -718,7 +710,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/">
     
-      <img src="/img/default2.jpg" alt="最大似然估计与基本演绎法" />
+      <img src="/img/default3.jpg" alt="最大似然估计与基本演绎法" />
     
   </a>
 
@@ -749,7 +741,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
     
-      <img src="/img/default3.jpg" alt="迭代与递归" />
+      <img src="/img/default4.jpg" alt="迭代与递归" />
     
   </a>
 

@@ -13,7 +13,7 @@
       <pubDate>Tue, 28 Dec 2021 00:17:37 +0800</pubDate>
       
       <guid>https://iluvata.github.io/post/2021-12-28_n1book-web/</guid>
-      <description>  buuctf n1book web刷题
+      <description>buuctf n1book web刷题
 信息收集  常见的收集  网站上可能会有敏感目录/文件导致信息泄漏，如.git，vim的备份文件.swp等。可以用dirsearch扫描站点目录。
 cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   -e 指定网站语言
@@ -22,7 +22,7 @@ cd dirsearch python3 dirsearch.py -u 192.168.21.128 -e php    -u 指定目标ip
   脚本扫描的数据库在 db 文件夹，可以自己加。这题的目标文件有三个： robots.txt , index.php~ , .index.php.swp 。我一开始扫了2次没扫出来，指定了php语言后扫出了robots.txt。
  robots.txt是网站定的允许爬虫规则；后缀为~的是gedit的备份文件；.文件名.swp是vim的备份文件。
   粗心的小李  git泄漏题可以用的工具有GitHack，scrabble。只要目标网站上有.git，运行脚本就能把网站dump下来。
-GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      </description>
+GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL注入    数字型注入 若输入参数为1，查询的语句为 select * from table where id=1 。若输入参数为1+1返回2的结果，基本能确定是数字型输入。 参数前后没有过滤也没有引号，可以直接union。</description>
     </item>
     
   </channel>
