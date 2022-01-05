@@ -38,7 +38,7 @@
 
 
 <meta property="og:title" content="数理统计复习" />
-<meta property="og:description" content="第一张 抽样分布  充分统计量  统计量 是不含任何未知参数的，样本的函数。 充分统计量 是包含了样本中关于总体参数（参数估计）的所有信息的统计量。若 $T(x_1, x_2, \cdots, x_n)=t$ 是关于参数 $\theta$ 的充分统计量， 条件分布函数 $F_{\theta}(x_1, x_2, \cdots, x_n | t)$ 与参数 $\theta$ 无关。因为T中已经包含了样本中关于 $\theta$ 的所有信息，在知道 $t$ 后从参数中提取不出更多和 $\theta$ 有关的信息了。
+<meta property="og:description" content="第一章 抽样分布  充分统计量  统计量 是不含任何未知参数的，样本的函数。 充分统计量 是包含了样本中关于总体参数（参数估计）的所有信息的统计量。若 $T(x_1, x_2, \cdots, x_n)=t$ 是关于参数 $\theta$ 的充分统计量， 条件分布函数 $F_{\theta}(x_1, x_2, \cdots, x_n | t)$ 与参数 $\theta$ 无关。因为T中已经包含了样本中关于 $\theta$ 的所有信息，在知道 $t$ 后从参数中提取不出更多和 $\theta$ 有关的信息了。
  常用 因子分解定理 求充分统计量。若样本 $x_1, x_2, \cdots, x_n$ 的联合分布 $p(x;\theta)$ 可以进行如下分解 $$p(x;\theta)=g(T(x),\theta)h(x)$$ 则 $T(x)$ 是 $\theta$ 的充分统计量。这里的分解是先提取出仅含有 $x$ 的因子，然后尝试把剩下的因子中的 $\theta$ 和 $x$ 分开，写作他们两之间的函数。分开后仅含有 $x$ 的表达式就是充分统计量。
 例题  给一个总体的密度函数 $p(x;\theta)$ 和简单样本 $x_1, x_2, \cdots, x_n$ ，求 $\theta$ 的充分统计量。其中 $g(T(X), \theta)$ 里可能会包含有 $x$ 和 $\theta$ 的示性函数，这时候把可以考虑用顺序统计量把 $x_{(n)}$ 和 $x_{(1)}$ 分出来。" />
 <meta property="og:type" content="article" />
@@ -51,7 +51,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="数理统计复习"/>
-<meta name="twitter:description" content="第一张 抽样分布  充分统计量  统计量 是不含任何未知参数的，样本的函数。 充分统计量 是包含了样本中关于总体参数（参数估计）的所有信息的统计量。若 $T(x_1, x_2, \cdots, x_n)=t$ 是关于参数 $\theta$ 的充分统计量， 条件分布函数 $F_{\theta}(x_1, x_2, \cdots, x_n | t)$ 与参数 $\theta$ 无关。因为T中已经包含了样本中关于 $\theta$ 的所有信息，在知道 $t$ 后从参数中提取不出更多和 $\theta$ 有关的信息了。
+<meta name="twitter:description" content="第一章 抽样分布  充分统计量  统计量 是不含任何未知参数的，样本的函数。 充分统计量 是包含了样本中关于总体参数（参数估计）的所有信息的统计量。若 $T(x_1, x_2, \cdots, x_n)=t$ 是关于参数 $\theta$ 的充分统计量， 条件分布函数 $F_{\theta}(x_1, x_2, \cdots, x_n | t)$ 与参数 $\theta$ 无关。因为T中已经包含了样本中关于 $\theta$ 的所有信息，在知道 $t$ 后从参数中提取不出更多和 $\theta$ 有关的信息了。
  常用 因子分解定理 求充分统计量。若样本 $x_1, x_2, \cdots, x_n$ 的联合分布 $p(x;\theta)$ 可以进行如下分解 $$p(x;\theta)=g(T(x),\theta)h(x)$$ 则 $T(x)$ 是 $\theta$ 的充分统计量。这里的分解是先提取出仅含有 $x$ 的因子，然后尝试把剩下的因子中的 $\theta$ 和 $x$ 分开，写作他们两之间的函数。分开后仅含有 $x$ 的表达式就是充分统计量。
 例题  给一个总体的密度函数 $p(x;\theta)$ 和简单样本 $x_1, x_2, \cdots, x_n$ ，求 $\theta$ 的充分统计量。其中 $g(T(X), \theta)$ 里可能会包含有 $x$ 和 $\theta$ 的示性函数，这时候把可以考虑用顺序统计量把 $x_{(n)}$ 和 $x_{(1)}$ 分出来。"/>
 
@@ -153,7 +153,7 @@
       <article class="main">
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-第一张 抽样分布
+第一章 抽样分布
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
 <div id="outline-container-headline-2" class="outline-3">
@@ -183,30 +183,26 @@ $$p(x;\theta)=g(T(x),\theta)h(x)$$
 <div id="outline-text-headline-4" class="outline-text-3">
 <ul>
 <li>
-<p>卡方分布</p>
+<p>卡方分布
+n个标准正态分布的平方和，记做 $\chi^2(n)$ ，自由度为n。</p>
 </li>
-</ul>
-<p>n个标准正态分布的平方和，记做 $\chi^2(n)$ ，自由度为n。</p>
-<ul>
 <li>
-<p>t分布</p>
-</li>
-</ul>
-<p>设 $X\sim N(0,1), Y\sim \chi^2(n)$ ，X与Y相互独立。
+<p>t分布
+设 $X\sim N(0,1), Y\sim \chi^2(n)$ ，X与Y相互独立。
 $$
 T=\frac{X}{\sqrt{Y / n}} \sim t(n)
 $$
 自由度为n。</p>
-<ul>
-<li>
-<p>F分布</p>
 </li>
-</ul>
-<p>设 $X\sim \chi^2(n_1), Y\sim \chi^2(n_2)$ ，X与Y相互独立。
+<li>
+<p>F分布
+设 $X\sim \chi^2(n_1), Y\sim \chi^2(n_2)$ ，X与Y相互独立。
 $$
 F=\frac{X/n_1}{Y/n_2} \sim F(n_1, n_2)
 $$
 自由度为 $(n_1, n_2)$ 。</p>
+</li>
+</ul>
 <div id="outline-container-headline-5" class="outline-4">
 <h4 id="headline-5">
 例题
@@ -238,6 +234,10 @@ $$
 <h3 id="headline-6">
 分位数
 </h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>$$P\{X\leqslant x_p\}=F(x_p)=p$$
+则称 $x_p$ 为此概率分布的 $p$ 分位数。即一个分布的 <strong>p分位数</strong> 就是使得分布函数取到p的自变量x的值，也就是符合该分布的随机变量取到小于等于该自变量值 $x_p$ 的概率为 $p$ 。</p>
+</div>
 </div>
 </div>
 </div>
@@ -632,7 +632,7 @@ S_{e}=\sum_{i=1}^{p} \sum_{j=1}^{n_{i}}\left(x_{i j}-\bar{x}_{i} .\right)^{2}
       <div class="ui segment toc">
         <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">第一张 抽样分布</a>
+<li><a href="#headline-1">第一章 抽样分布</a>
 <ul>
 <li><a href="#headline-2">充分统计量</a>
 <ul>
@@ -1037,7 +1037,7 @@ S_{e}=\sum_{i=1}^{p} \sum_{j=1}^{n_{i}}\left(x_{i j}-\bar{x}_{i} .\right)^{2}
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 Iluvata&#39;s Blog</p>
+      <p>© 2021 - 2022 Iluvata&#39;s Blog</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
