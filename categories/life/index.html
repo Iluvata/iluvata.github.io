@@ -230,6 +230,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
                 </div>
               </div>
@@ -344,6 +350,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
                 </div>
               </div>
@@ -432,6 +444,36 @@
   </div>
 
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2022-03-28_buaactf2022/">
+    
+      <img src="/img/2022-03-28_buaactf2022.png" alt="BUAACTF2022 WP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 28, 2022</p>
+    </div>
+    <div class="description">
+      crypto  ez game  求逆，哈希碰撞
+from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &#34;43089&#34;) # p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;1&#39;) sleep(1) for i in range(300): p.recvuntil(&#34;m): (&#34;) a = int(p.recvuntil(&#34;, &#34;, drop=True)) b = int(p.recvuntil(&#34;)&#34;, drop=True)) # p.interactive() p.sendline(str(invert(a, b))) log.success(str(i)) p.interactive()  from pwn import * x = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab58712467eab4004583eb8fb7f8955ad340609f4b30283e488832571415a085125e8f7cdc99fd91dbdf280373c5bd8823e3156348f5bae6dacd436c919c6dd53e2b487da03fd02396306d248cda0e99f33420f577ee8ce54b67080a80d1ec69821bcb6a8839396f9652b6ff72a70&#34;.decode(&#34;hex&#34;) y = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab50712467eab4004583eb8fb7f8955ad340609f4b30283e4888325f1415a085125e8f7cdc99fd91dbd7280373c5bd8823e3156348f5bae6dacd436c919c6dd53e23487da03fd02396306d248cda0e99f33420f577ee8ce54b67080280d1ec69821bcb6a8839396f965ab6ff72a70&#34;.decode(&#34;hex&#34;) # print(hashlib.md5(x).hexdigest()) # print(hashlib.md5(y).hexdigest()) p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;2&#39;) sleep(2) p.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>3 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -544,7 +586,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
     
-      <img src="/img/default1.jpg" alt="在spacemacs中写scheme" />
+      <img src="/img/default2.jpg" alt="在spacemacs中写scheme" />
     
   </a>
 

@@ -273,7 +273,9 @@ printf(buf);
 拿到shell是一件很嘻哈的事
 </h3>
 <div id="outline-text-headline-7" class="outline-text-3">
-<p><a href="/img/2022-03-28_shell.png">ida</a>
+<p>
+<img src="/img/2022-03-28_shell.png" alt="/img/2022-03-28_shell.png" title="/img/2022-03-28_shell.png" /></p>
+<p>
 ida看一眼，发现是orw+rop。</p>
 <div class="src src-shell">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ubuntu@pwn:~/bridge/buaactf2022/pwn/shell$ seccomp-tools dump ./shell
@@ -335,15 +337,22 @@ p<span style="color:#f92672">.</span>interactive()</code></pre></div>
 dream
 </h3>
 <div id="outline-text-headline-8" class="outline-text-3">
-<p>libc2.34下的堆题。
-<a href="/img/2022-03-28_new-dream.png">new-dream</a>
-new_dream是read后没有写入&#39;\x00&#39;，有信息泄漏。INDEX没有限制上限，可以无限创建新dream；但其实bss里只能放下8个地址，再往后就会覆盖SIZES。可以利用这点来修改SIZES，使得在edit_dream时可以覆盖下一堆块。
-<a href="/img/2022-03-28_bss.png">dream-bss</a>
-<a href="/img/2022-03-28_edit-dream.png">edit-dream</a>
+<p>libc2.34下的堆题。</p>
+<p>
+<img src="/img/2022-03-28_new-dream.png" alt="/img/2022-03-28_new-dream.png" title="/img/2022-03-28_new-dream.png" /></p>
+<p>
+new_dream是read后没有写入&#39;\x00&#39;，有信息泄漏。INDEX没有限制上限，可以无限创建新dream；但其实bss里只能放下8个地址，再往后就会覆盖SIZES。可以利用这点来修改SIZES，使得在edit_dream时可以覆盖下一堆块。</p>
+<p>
+<img src="/img/2022-03-28_bss.png" alt="/img/2022-03-28_bss.png" title="/img/2022-03-28_bss.png" /></p>
+<p>
+<img src="/img/2022-03-28_edit-dream.png" alt="/img/2022-03-28_edit-dream.png" title="/img/2022-03-28_edit-dream.png" /></p>
+<p>
 edit_dream有off-by-null。</p>
 <p>
-那么就可以用edit时的off-by-null让下一堆块认为上一块not in use，触发unlink后可以任意读写。
-<a href="/img/2022-03-28_unlink.jpeg">unlink</a>
+那么就可以用edit时的off-by-null让下一堆块认为上一块not in use，触发unlink后可以任意读写。</p>
+<p>
+<img src="/img/2022-03-28_unlink.jpeg" alt="/img/2022-03-28_unlink.jpeg" title="/img/2022-03-28_unlink.jpeg" /></p>
+<p>
 通过读HEAP_PTRS内容拿到堆地址，再计算堆内偏移，读到dream1中保存的unsorted bin addr，leak libc base.</p>
 <div class="src src-python">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># leak</span>
@@ -461,7 +470,11 @@ misc
 
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
-          <a class="ui label">No Tags</a>
+        
+          <a class="ui label" href="/tags/ctf" title="ctf">ctf</a>
+        
+          <a class="ui label" href="/tags/pwn" title="pwn">pwn</a>
+        
       
       <div
         class="ui label"
@@ -651,6 +664,12 @@ misc
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
                 </div>
               </div>
@@ -762,6 +781,12 @@ misc
           </div>
           <div class="content">
             <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
             
               <div class="item">
                 <div class="content">
