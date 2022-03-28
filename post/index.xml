@@ -6,7 +6,39 @@
     <description>Recent content in Posts on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 29 Dec 2021 14:47:10 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Mar 2022 13:53:31 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BUAACTF2022 WP</title>
+      <link>https://iluvata.github.io/post/2022-03-28_buaactf2022/</link>
+      <pubDate>Mon, 28 Mar 2022 13:53:31 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2022-03-28_buaactf2022/</guid>
+      <description>crypto  ez game  求逆，哈希碰撞
+from pwn import * from gmpy2 import invert p = remote(&amp;#34;101.43.185.64&amp;#34;, &amp;#34;43089&amp;#34;) # p = remote(&amp;#34;49.232.31.80&amp;#34;, &amp;#34;8088&amp;#34;) p.recvuntil(&amp;#34;y)\n&amp;#34;) p.sendline(&amp;#39;1&amp;#39;) sleep(1) for i in range(300): p.recvuntil(&amp;#34;m): (&amp;#34;) a = int(p.recvuntil(&amp;#34;, &amp;#34;, drop=True)) b = int(p.recvuntil(&amp;#34;)&amp;#34;, drop=True)) # p.interactive() p.sendline(str(invert(a, b))) log.success(str(i)) p.interactive()  from pwn import * x = &amp;#34;d131dd02c5e6eec4693d9a0698aff95c2fcab58712467eab4004583eb8fb7f8955ad340609f4b30283e488832571415a085125e8f7cdc99fd91dbdf280373c5bd8823e3156348f5bae6dacd436c919c6dd53e2b487da03fd02396306d248cda0e99f33420f577ee8ce54b67080a80d1ec69821bcb6a8839396f9652b6ff72a70&amp;#34;.decode(&amp;#34;hex&amp;#34;) y = &amp;#34;d131dd02c5e6eec4693d9a0698aff95c2fcab50712467eab4004583eb8fb7f8955ad340609f4b30283e4888325f1415a085125e8f7cdc99fd91dbd7280373c5bd8823e3156348f5bae6dacd436c919c6dd53e23487da03fd02396306d248cda0e99f33420f577ee8ce54b67080280d1ec69821bcb6a8839396f965ab6ff72a70&amp;#34;.decode(&amp;#34;hex&amp;#34;) # print(hashlib.md5(x).hexdigest()) # print(hashlib.md5(y).hexdigest()) p = remote(&amp;#34;49.232.31.80&amp;#34;, &amp;#34;8088&amp;#34;) p.recvuntil(&amp;#34;y)\n&amp;#34;) p.sendline(&amp;#39;2&amp;#39;) sleep(2) p.</description>
+    </item>
+    
+    <item>
+      <title>高等数理逻辑复习</title>
+      <link>https://iluvata.github.io/post/2022-01-13_mathematical-logic/</link>
+      <pubDate>Thu, 13 Jan 2022 19:08:08 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2022-01-13_mathematical-logic/</guid>
+      <description>符号化 一阶描述    实数范围内有无穷多个零点
+    公理集合论    相容性、独立性
+  无穷公理独立
+  空集满足的7个公理
+  偶对公理由其他公理推出：空集、幂集、替换
+  不存在全集
+      自然数    集合论定义
+  证明归纳法 子集公理提取出满足条件的数，根据条件公式可知提取出的数仍然满足归纳集，和自然数集相等
+  任意自然数后继非0 归纳法
+  每个非零自然数有前驱 反证法，去掉无前驱数后仍是归纳集，和自然数集为最小归纳集矛盾
+  证明存在偏序关系 归纳法
+    命题逻辑    独立性 修改某个规则的真值赋值，证明对其他规则的语义没有影响（其他规则仍旧成立）；从语法能推出的某规则不再能语义推出。
+  完全集
+  证明极小完全集 本身能定义完全集（合取，析取，非），任意真子集不能定义某个包含去除的符号的公式（不是完全集）。</description>
+    </item>
+    
     <item>
       <title>数理统计复习</title>
       <link>https://iluvata.github.io/post/2021-12-29_mathematical-statistics/</link>
@@ -112,11 +144,14 @@ def leak(addr): p = remote(&amp;#39;127.0.0.1&amp;#39;, &amp;#39;10001&amp;#39;)
       
       <guid>https://iluvata.github.io/post/2021-09-24_ctf-tools/</guid>
       <description>环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
- multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
-$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
-context.arch=&amp;#34;amd64&amp;#34; context.terminal = [&amp;#39;tmux&amp;#39;, &amp;#39;splitw&amp;#39;, &amp;#39;-h&amp;#39;]    pwntools  io交互  连接
-本地 ：sh = porcess(&amp;#34;./level0&amp;#34;) 远程：sh = remote(&amp;#34;127.0.0.1&amp;#34;,10001) 关闭连接：sh.close()   io
-sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh.</description>
+multipass launch 16.04 --name pwn --disk 15G --mem 4G   multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+ ,#+begin_src shell $ sudo apt-add-repository ppa:brightbox/ruby-ng
+ $ sudo apt-get update
+ $ sudo apt-get install ruby2.4 ruby2.4-dev
+ $ ruby2.4 -v
+#+end_src
+ 还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+context.arch=&amp;#34;amd64&amp;#34; context.terminal = [&amp;#39;tmux&amp;#39;, &amp;#39;splitw&amp;#39;, &amp;#39;-h&amp;#39;]    pwntools  io交互  连接</description>
     </item>
     
     <item>

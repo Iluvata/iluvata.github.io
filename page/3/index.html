@@ -436,6 +436,80 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">
+    
+      <img src="/img/2021-03-04_euler.jpeg" alt="欧拉环路和汉密尔顿环路" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Mar 4, 2021</p>
+    </div>
+    <div class="description">
+      图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。 欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到 一条经过所有边，最后回到源点的环路。
+ 欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
+ 对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
+ 和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-01_how-computer-startup/">
+    
+      <img src="/img/2021-03-01_grub.jpg" alt="电脑是怎么启动的" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 1, 2021</p>
+    </div>
+    <div class="description">
+      x86启动过程简介  x86计算机开机过程大致可以被分为几个阶段：
+  按下开机键
+  CPU跳转至BIOS物理地址
+  BIOS进行开机自检
+  寻找启动设备
+  从MBR加载启动区
+  BIOS转移控制给BootLoader
+  第一阶段：硬件  BIOS  Basic Input/Output System 基本输入输出系统，被固化在ROM上的一组程序，提供最底层对硬件的控制。 也被称为固件。
+UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈传参，动态链接，更大寻址。
+    MBR  Master Boot Record 主引导记录。硬盘的第一个扇区，存放预启动信息、分区表信息。
+    第二阶段：系统软件  Boot Loader  操作系统内核加载器。初始化硬件，建立内存空间映射。
+  GRUB
+  LILO
+    加载内核  根据grub设定的内核映像所在路径读取，解压，放入内存。初始化函数，设备，建立Linux核心环境（初始化寄存器、堆栈）。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-24_greedy-and-dijkstra/">
     
       <img src="/img/2021-03-01_greedy.jpg" alt="理解贪心算法与Dijkstra算法" />
@@ -661,7 +735,7 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/">
     
-      <img src="/img/default4.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
+      <img src="/img/default1.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
     
   </a>
 
@@ -724,38 +798,6 @@ print(&#34;hello world&#34;)   插入图片：用
 
     </div>
   
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-01-08_hugo/">
-    
-      <img src="/img/default1.jpg" alt="hugo博客站点搭建" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-01-08_hugo/">hugo博客站点搭建</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Jan 8, 2021</p>
-    </div>
-    <div class="description">
-        由于支持emacs org-mode（顺便还能在github上部署），我选择了hugo进行建站。
-安装hugo  sudo apt-get install hugo    新建站点  hugo new site /path/to/site  下载主题（我用的是dream） 本地运行
-hugo server --buildDrafts -t dream  新建github仓库 云端部署
-hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts    写/发布文章  hugo new post/newBlog.org hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts  文章路径为：根目录/content/post/newBlog.org  云端仓库为：根目录/public （在此目录下管理git）  云端文章目录为：根目录/public/post/blog   
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
 
   <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
     
@@ -770,6 +812,16 @@ hugo --theme=dream --baseUrl=&#34;https://iluvata.github.io/&#34; --buildDrafts 
 </article>
 
 
+
+<article class="ui attached center aligned segment card dream-card">
+  <div class="content">
+    <div class="ui medium header">
+      <a href="/page/4/" title="Next page">
+        Next page
+      </a>
+    </div>
+  </div>
+</article>
 
 
   </div>

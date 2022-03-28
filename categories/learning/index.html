@@ -437,7 +437,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/">
     
-      <img src="/img/default3.jpg" alt="在hugo中使用latex" />
+      <img src="/img/default2.jpg" alt="在hugo中使用latex" />
     
   </a>
 
@@ -471,7 +471,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_structural-information/">
     
-      <img src="/img/default4.jpg" alt="结构信息论" />
+      <img src="/img/default3.jpg" alt="结构信息论" />
     
   </a>
 
@@ -506,7 +506,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default3.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default1.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -544,7 +544,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
     
-      <img src="/img/default2.jpg" alt="pwn堆题整理" />
+      <img src="/img/default1.jpg" alt="pwn堆题整理" />
     
   </a>
 
@@ -612,7 +612,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
-      <img src="/img/default3.jpg" alt="libc泄漏" />
+      <img src="/img/default2.jpg" alt="libc泄漏" />
     
   </a>
 
@@ -644,7 +644,7 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
-      <img src="/img/default1.jpg" alt="CTF基本工具使用指北" />
+      <img src="/img/default4.jpg" alt="CTF基本工具使用指北" />
     
   </a>
 
@@ -657,11 +657,14 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
     </div>
     <div class="description">
       环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
- multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
-$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+multipass launch 16.04 --name pwn --disk 15G --mem 4G   multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+ ,#+begin_src shell $ sudo apt-add-repository ppa:brightbox/ruby-ng
+ $ sudo apt-get update
+ $ sudo apt-get install ruby2.4 ruby2.4-dev
+ $ ruby2.4 -v
+#+end_src
+ 还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
 context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]    pwntools  io交互  连接
-本地 ：sh = porcess(&#34;./level0&#34;) 远程：sh = remote(&#34;127.0.0.1&#34;,10001) 关闭连接：sh.close()   io
-sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh.
     </div>
   </div>
 
@@ -678,7 +681,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
     
-      <img src="/img/default2.jpg" alt="迭代与递归" />
+      <img src="/img/default4.jpg" alt="迭代与递归" />
     
   </a>
 
@@ -711,7 +714,7 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
     
-      <img src="/img/default3.jpg" alt="概率统计中的分布" />
+      <img src="/img/default4.jpg" alt="概率统计中的分布" />
     
   </a>
 

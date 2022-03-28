@@ -436,6 +436,78 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2022-03-28_buaactf2022/">
+    
+      <img src="/img/default1.jpg" alt="BUAACTF2022 WP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 28, 2022</p>
+    </div>
+    <div class="description">
+      crypto  ez game  求逆，哈希碰撞
+from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &#34;43089&#34;) # p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;1&#39;) sleep(1) for i in range(300): p.recvuntil(&#34;m): (&#34;) a = int(p.recvuntil(&#34;, &#34;, drop=True)) b = int(p.recvuntil(&#34;)&#34;, drop=True)) # p.interactive() p.sendline(str(invert(a, b))) log.success(str(i)) p.interactive()  from pwn import * x = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab58712467eab4004583eb8fb7f8955ad340609f4b30283e488832571415a085125e8f7cdc99fd91dbdf280373c5bd8823e3156348f5bae6dacd436c919c6dd53e2b487da03fd02396306d248cda0e99f33420f577ee8ce54b67080a80d1ec69821bcb6a8839396f9652b6ff72a70&#34;.decode(&#34;hex&#34;) y = &#34;d131dd02c5e6eec4693d9a0698aff95c2fcab50712467eab4004583eb8fb7f8955ad340609f4b30283e4888325f1415a085125e8f7cdc99fd91dbd7280373c5bd8823e3156348f5bae6dacd436c919c6dd53e23487da03fd02396306d248cda0e99f33420f577ee8ce54b67080280d1ec69821bcb6a8839396f965ab6ff72a70&#34;.decode(&#34;hex&#34;) # print(hashlib.md5(x).hexdigest()) # print(hashlib.md5(y).hexdigest()) p = remote(&#34;49.232.31.80&#34;, &#34;8088&#34;) p.recvuntil(&#34;y)\n&#34;) p.sendline(&#39;2&#39;) sleep(2) p.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>3 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2022-01-13_mathematical-logic/">
+    
+      <img src="/img/default3.jpg" alt="高等数理逻辑复习" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2022-01-13_mathematical-logic/">高等数理逻辑复习</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Thursday, Jan 13, 2022</p>
+    </div>
+    <div class="description">
+      符号化 一阶描述    实数范围内有无穷多个零点
+    公理集合论    相容性、独立性
+  无穷公理独立
+  空集满足的7个公理
+  偶对公理由其他公理推出：空集、幂集、替换
+  不存在全集
+      自然数    集合论定义
+  证明归纳法 子集公理提取出满足条件的数，根据条件公式可知提取出的数仍然满足归纳集，和自然数集相等
+  任意自然数后继非0 归纳法
+  每个非零自然数有前驱 反证法，去掉无前驱数后仍是归纳集，和自然数集为最小归纳集矛盾
+  证明存在偏序关系 归纳法
+    命题逻辑    独立性 修改某个规则的真值赋值，证明对其他规则的语义没有影响（其他规则仍旧成立）；从语法能推出的某规则不再能语义推出。
+  完全集
+  证明极小完全集 本身能定义完全集（合取，析取，非），任意真子集不能定义某个包含去除的符号的公式（不是完全集）。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-29_mathematical-statistics/">
     
       <img src="/img/default3.jpg" alt="数理统计复习" />
@@ -469,7 +541,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/">
     
-      <img src="/img/default1.jpg" alt="在hugo中使用latex" />
+      <img src="/img/default2.jpg" alt="在hugo中使用latex" />
     
   </a>
 
@@ -503,7 +575,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_structural-information/">
     
-      <img src="/img/default4.jpg" alt="结构信息论" />
+      <img src="/img/default3.jpg" alt="结构信息论" />
     
   </a>
 
@@ -538,7 +610,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default3.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default4.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -576,7 +648,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
     
-      <img src="/img/default2.jpg" alt="pwn堆题整理" />
+      <img src="/img/default1.jpg" alt="pwn堆题整理" />
     
   </a>
 
@@ -644,7 +716,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
-      <img src="/img/default4.jpg" alt="libc泄漏" />
+      <img src="/img/default1.jpg" alt="libc泄漏" />
     
   </a>
 
@@ -689,11 +761,14 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
     </div>
     <div class="description">
       环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
- multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
-$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+multipass launch 16.04 --name pwn --disk 15G --mem 4G   multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+ ,#+begin_src shell $ sudo apt-add-repository ppa:brightbox/ruby-ng
+ $ sudo apt-get update
+ $ sudo apt-get install ruby2.4 ruby2.4-dev
+ $ ruby2.4 -v
+#+end_src
+ 还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
 context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]    pwntools  io交互  连接
-本地 ：sh = porcess(&#34;./level0&#34;) 远程：sh = remote(&#34;127.0.0.1&#34;,10001) 关闭连接：sh.close()   io
-sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh.
     </div>
   </div>
 
@@ -701,70 +776,6 @@ sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在�
     <div class="author">@&nbsp;Iluvata</div>
     <div class="reading-time">
       <i class="clock icon"></i>3 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/">
-    
-      <img src="/img/default4.jpg" alt="最大似然估计与基本演绎法" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Apr 19, 2021</p>
-    </div>
-    <div class="description">
-      在数理统计中，极大似然估计是一种使用已知样本来反推最大概率的模型参数的方法。比如我们知道（或者推测）某个 随机变量服从正态分布，但是不知道分布的参数值。如果我们能够获取到几个分布中的样本，就可以对其进行拟合，尝试 得到最有可能的参数值来确定该分布。那具体要怎么通过样本来得到分布的参数呢？
- 极大似然估计使用了一种最符合直觉的方法，即使用取到这些样本组合概率最大的参数。这个过程和福尔摩斯使用的基本演绎法 及其相似。在《四签名》中，福尔摩斯在推理凶手的逃跑路线（没想到吧jojo，这就是我的逃跑路线啊，wryyyyy 23333） 的时候说，当你排除了所有不可能的情况后，剩下的，不管多不可能，就是事实。类似的方法还在《巴斯克维尔的猎犬》中 福尔摩斯推断来访者身份以及许多其他地方中使用过。如果把你扔到二等车厢，让你指出每个人的职业，你会怎么做。首先 当然是对对象进行观察，观察他们的衣着，膝盖，手腕，衣领。得到的结果，比如说一个人的膝盖上有泥土，就是数理统计 中的样本。给定了一系列的样本，如手腕上有粉末，衣领上有灰，脚上穿着皮鞋，戴着眼镜；这些结合在一起得到了样本空间。 我们会怎么推断这个人的职业呢？符合这些样本情况的职业可能有很多，还可能有一些样本是由于一些意外的活动引起的。但是一般 来说，我们不会把这个人的职业判断成运动员。尽管由于一系列的小概率事件使得一位运动员打扮成这样，但我们的推理是基于 最有可能导致这些样本的情况进行的。这也就是最大似然的思想方式。
- 回到概率统计中，那在数学上该如何计算参数值呢？我们将几个样本值分别带入分布公式，要求的参数作为变量，将每个样本 得到的对应概率表达式相乘作为联合概率（需要各样本相互独立），把取到使得该联合概率最大的值拿来当作目标参数值。 再往下更具体的计算步骤包括处理联合概率（即极大似然目标函数），希望求解使其最大化的最优化问题。一般的方法是 对其做对数处理，然后求导，使得导数为0的参数值能让目标函数取到极大值，就是我们要求的值了。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
-    
-      <img src="/img/default4.jpg" alt="迭代与递归" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Wednesday, Apr 7, 2021</p>
-    </div>
-    <div class="description">
-      递归处理与递归过程  用一个经典的递归例子：阶乘 来说明。
-(define (factorial n) (if (= n 1) 1 (* n factorial (- n 1))))  以上是经典的阶乘的递归处理，若输入为1则输出1,否则结果为当前n×递归执行n-1.
-(define (factorial n) (fact-iter 1 1 n)) (define (fact-iter product counter max-count) (if (&gt; counter max-count) product (fact-iter (* counter product) (+ count 1) max-count)))  以上是阶乘的迭代处理。我们在每一次迭代（循环）中输入了得到下一结果所需的所有信息，编译器无需像在递归处理中一样 保存每次n的值以计算最后的结果。
- 但是用我们熟悉的c语言来理解以上这段代码，我们会觉得在形式上 fact-iter 函数在函数体中调用了自身，也应该算作 递归而不是迭代。在c语言中，我们理解的迭代是使用 for 或 while 在代码块中显式地更改变量，以上代码很明显 没有使用“循环”。这就引出了递归过程与递归处理的区别。以上代码使用的确实是我们在c语言中称作“递归过程”的代码形式， 但根据我们对“迭代处理”的定义，即编译器无需保存中间变量，它很显然是符合“迭代处理”要求的。在c语言和其他很多 语言中，使用递归过程的迭代处理会和普通的递归处理一样，在每次递归中保存一些值，导致无法到达很深的递归深度。在lisp 编译器的实现中使用了“尾递归”优化技术，即若一个函数在调用自身时（满足递归过程条件）将该调用放在最后执行，并且 无需保存多余的变量，将所有必要的变量输入下一层，那么编译器在执行的时候就不会保存多余的信息，而是像迭代那样直接 用下一层来覆盖当前层。
-  多种形式的递归与迭代  线性递归  上面factorial的递归实现中每次进入一个下一层，保存的数据随n的增大是线性增长的。这种形式的递归处理叫做线性递归。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
   </div>
 </article>
 

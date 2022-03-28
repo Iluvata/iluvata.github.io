@@ -72,11 +72,14 @@ def leak(addr): p = remote(&amp;#39;127.0.0.1&amp;#39;, &amp;#39;10001&amp;#39;)
       
       <guid>https://iluvata.github.io/post/2021-09-24_ctf-tools/</guid>
       <description>环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
- multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
-$ sudo apt-add-repository ppa:brightbox/ruby-ng $ sudo apt-get update $ sudo apt-get install ruby2.4 ruby2.4-dev $ ruby2.4 -v   还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
-context.arch=&amp;#34;amd64&amp;#34; context.terminal = [&amp;#39;tmux&amp;#39;, &amp;#39;splitw&amp;#39;, &amp;#39;-h&amp;#39;]    pwntools  io交互  连接
-本地 ：sh = porcess(&amp;#34;./level0&amp;#34;) 远程：sh = remote(&amp;#34;127.0.0.1&amp;#34;,10001) 关闭连接：sh.close()   io
-sh.send(data) 发送数据 sh.sendline(data) 发送一行数据，相当于在数据后面加\n sh.recv(numb = 2048, timeout = dufault) 接受数据，numb指定接收的字节，timeout指定超时 sh.</description>
+multipass launch 16.04 --name pwn --disk 15G --mem 4G   multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+ ,#+begin_src shell $ sudo apt-add-repository ppa:brightbox/ruby-ng
+ $ sudo apt-get update
+ $ sudo apt-get install ruby2.4 ruby2.4-dev
+ $ ruby2.4 -v
+#+end_src
+ 还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+context.arch=&amp;#34;amd64&amp;#34; context.terminal = [&amp;#39;tmux&amp;#39;, &amp;#39;splitw&amp;#39;, &amp;#39;-h&amp;#39;]    pwntools  io交互  连接</description>
     </item>
     
   </channel>

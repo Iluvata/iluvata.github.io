@@ -435,9 +435,73 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/">
+    
+      <img src="/img/default3.jpg" alt="最大似然估计与基本演绎法" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Apr 19, 2021</p>
+    </div>
+    <div class="description">
+      在数理统计中，极大似然估计是一种使用已知样本来反推最大概率的模型参数的方法。比如我们知道（或者推测）某个 随机变量服从正态分布，但是不知道分布的参数值。如果我们能够获取到几个分布中的样本，就可以对其进行拟合，尝试 得到最有可能的参数值来确定该分布。那具体要怎么通过样本来得到分布的参数呢？
+ 极大似然估计使用了一种最符合直觉的方法，即使用取到这些样本组合概率最大的参数。这个过程和福尔摩斯使用的基本演绎法 及其相似。在《四签名》中，福尔摩斯在推理凶手的逃跑路线（没想到吧jojo，这就是我的逃跑路线啊，wryyyyy 23333） 的时候说，当你排除了所有不可能的情况后，剩下的，不管多不可能，就是事实。类似的方法还在《巴斯克维尔的猎犬》中 福尔摩斯推断来访者身份以及许多其他地方中使用过。如果把你扔到二等车厢，让你指出每个人的职业，你会怎么做。首先 当然是对对象进行观察，观察他们的衣着，膝盖，手腕，衣领。得到的结果，比如说一个人的膝盖上有泥土，就是数理统计 中的样本。给定了一系列的样本，如手腕上有粉末，衣领上有灰，脚上穿着皮鞋，戴着眼镜；这些结合在一起得到了样本空间。 我们会怎么推断这个人的职业呢？符合这些样本情况的职业可能有很多，还可能有一些样本是由于一些意外的活动引起的。但是一般 来说，我们不会把这个人的职业判断成运动员。尽管由于一系列的小概率事件使得一位运动员打扮成这样，但我们的推理是基于 最有可能导致这些样本的情况进行的。这也就是最大似然的思想方式。
+ 回到概率统计中，那在数学上该如何计算参数值呢？我们将几个样本值分别带入分布公式，要求的参数作为变量，将每个样本 得到的对应概率表达式相乘作为联合概率（需要各样本相互独立），把取到使得该联合概率最大的值拿来当作目标参数值。 再往下更具体的计算步骤包括处理联合概率（即极大似然目标函数），希望求解使其最大化的最优化问题。一般的方法是 对其做对数处理，然后求导，使得导数为0的参数值能让目标函数取到极大值，就是我们要求的值了。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
+    
+      <img src="/img/default1.jpg" alt="迭代与递归" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Apr 7, 2021</p>
+    </div>
+    <div class="description">
+      递归处理与递归过程  用一个经典的递归例子：阶乘 来说明。
+(define (factorial n) (if (= n 1) 1 (* n factorial (- n 1))))  以上是经典的阶乘的递归处理，若输入为1则输出1,否则结果为当前n×递归执行n-1.
+(define (factorial n) (fact-iter 1 1 n)) (define (fact-iter product counter max-count) (if (&gt; counter max-count) product (fact-iter (* counter product) (+ count 1) max-count)))  以上是阶乘的迭代处理。我们在每一次迭代（循环）中输入了得到下一结果所需的所有信息，编译器无需像在递归处理中一样 保存每次n的值以计算最后的结果。
+ 但是用我们熟悉的c语言来理解以上这段代码，我们会觉得在形式上 fact-iter 函数在函数体中调用了自身，也应该算作 递归而不是迭代。在c语言中，我们理解的迭代是使用 for 或 while 在代码块中显式地更改变量，以上代码很明显 没有使用“循环”。这就引出了递归过程与递归处理的区别。以上代码使用的确实是我们在c语言中称作“递归过程”的代码形式， 但根据我们对“迭代处理”的定义，即编译器无需保存中间变量，它很显然是符合“迭代处理”要求的。在c语言和其他很多 语言中，使用递归过程的迭代处理会和普通的递归处理一样，在每次递归中保存一些值，导致无法到达很深的递归深度。在lisp 编译器的实现中使用了“尾递归”优化技术，即若一个函数在调用自身时（满足递归过程条件）将该调用放在最后执行，并且 无需保存多余的变量，将所有必要的变量输入下一层，那么编译器在执行的时候就不会保存多余的信息，而是像迭代那样直接 用下一层来覆盖当前层。
+  多种形式的递归与迭代  线性递归  上面factorial的递归实现中每次进入一个下一层，保存的数据随n的增大是线性增长的。这种形式的递归处理叫做线性递归。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-29_postgraduate-exam-experience/">
     
-      <img src="/img/default3.jpg" alt="末流211考研北航计科学硕430分经验帖" />
+      <img src="/img/default2.jpg" alt="末流211考研北航计科学硕430分经验帖" />
     
   </a>
 
@@ -474,7 +538,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
     
-      <img src="/img/default3.jpg" alt="概率统计中的分布" />
+      <img src="/img/default4.jpg" alt="概率统计中的分布" />
     
   </a>
 
@@ -508,7 +572,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/">
     
-      <img src="/img/default2.jpg" alt="推荐系统基础" />
+      <img src="/img/default1.jpg" alt="推荐系统基础" />
     
   </a>
 
@@ -539,7 +603,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-17_operating-system/">
     
-      <img src="/img/default2.jpg" alt="操作系统" />
+      <img src="/img/default1.jpg" alt="操作系统" />
     
   </a>
 
@@ -699,80 +763,6 @@
   虚读（幻读）：一个事务内对数据进行操作时别的外部语句修改了数据，导致对被修改的记录的操作失败
   不可重复读与幻读的区别是不可重复读查询同一数据项，幻读操作一批数据。
  为了提供不同场景对隔离性的需求，对于事务的隔离性定义了4中隔离级别：读未提交(read uncommitted), 读提交(read committed), 可重复读(repeatable read), 序列化(serializable). 序列化可避免脏读、不可重复读、幻读；可重复读可避免 脏读、不可重复读；读提交可避免脏读；读未提交无法保证任何情况。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">
-    
-      <img src="/img/2021-03-04_euler.jpeg" alt="欧拉环路和汉密尔顿环路" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Thursday, Mar 4, 2021</p>
-    </div>
-    <div class="description">
-      图论中有两种重要的特殊图：欧拉图和汉密尔顿图，各表示能够找到欧拉环路与汉密尔顿环路的图。 欧拉环路是由七桥问题来的：如何走过7座桥回到起点。在一般的图中，该问题可以被表示为：能不能找到 一条经过所有边，最后回到源点的环路。
- 欧拉路径是比欧拉环路更广的概念。欧拉路径即图中经过所有边一次的简单路径，不要求终点和源点为 同一点。汉密尔顿路径与之类似，只是要求的不是经过所有边一次而是经过所有点一次。汉密尔顿环路 即起点与终点在同一点的汉密尔顿路径，汉密尔顿图即能找出汉密尔顿路径的图。
- 对于欧拉图的判定最早由欧拉提出。方法很简单：图中每个点的度必须为偶数。判断欧拉路径的方法是 除了两个点外每个点的度数都为偶数，那两个点的度都为奇数。我们可以想象边经过一点的过程，如果 想要经过每条边一次，那每次入射一点后必定需要从另一条新的边出去。就像在一根线上串珠子的过程。 对于欧拉路径，除了头和尾两个点的度为奇数，其他都是偶数。对于欧拉环路来说头和尾是同一点， 从该点射出的路径最终还是要通过另一边回到该点。因此欧拉图所有点的度数都为偶数。
- 和欧拉图不同，汉密尔顿图没有已知的多项式时间判定方法。事实上，汉密尔顿图的判定是NP完全问题。 虽然没有找到判断汉密尔顿图的充要条件，但是已知的有充分条件。n&gt;=3个节点的简单图上，任意一对非 邻接节点的度数和&gt;=n.或者，任意节点的度&gt;=n/2.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-01_how-computer-startup/">
-    
-      <img src="/img/2021-03-01_grub.jpg" alt="电脑是怎么启动的" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Mar 1, 2021</p>
-    </div>
-    <div class="description">
-      x86启动过程简介  x86计算机开机过程大致可以被分为几个阶段：
-  按下开机键
-  CPU跳转至BIOS物理地址
-  BIOS进行开机自检
-  寻找启动设备
-  从MBR加载启动区
-  BIOS转移控制给BootLoader
-  第一阶段：硬件  BIOS  Basic Input/Output System 基本输入输出系统，被固化在ROM上的一组程序，提供最底层对硬件的控制。 也被称为固件。
-UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈传参，动态链接，更大寻址。
-    MBR  Master Boot Record 主引导记录。硬盘的第一个扇区，存放预启动信息、分区表信息。
-    第二阶段：系统软件  Boot Loader  操作系统内核加载器。初始化硬件，建立内存空间映射。
-  GRUB
-  LILO
-    加载内核  根据grub设定的内核映像所在路径读取，解压，放入内存。初始化函数，设备，建立Linux核心环境（初始化寄存器、堆栈）。
     </div>
   </div>
 
