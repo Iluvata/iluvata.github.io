@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>概率统计中的分布 | Iluvata&#39;s Blog</title>
+    <title>密码学 | Iluvata&#39;s Blog</title>
 
     
 
@@ -19,32 +19,22 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-03-19_distributions/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2022-04-08_crypto/" />
 
 
-<meta property="og:title" content="概率统计中的分布" />
-<meta property="og:description" content=" 连续分布  均匀分布   正态分布  距离某一中心值偏离的误差越大的概率越小。可用于自然界许多现象的模拟.
-  指数分布  EX=1/lambda DX=1/lambda^2 指数分布的无记忆性：先验概率与后验概率相同。可用于模拟电器使用：不管之前使用了多久， 能继续使用x小时的概率不变。 先验概率 后验概率
-    离散分布  0-1分布  0-1分布随机变量取值为0或1，参数只有一个p，即取值为1的概率。
-  二项分布  二项分布是多个相同0-1分布的叠加。B(n,p)中n为随机变量的数量，p和0-1分布中相同。 输入k得到的结果为k个随机变量得到1的概率。
-  泊松分布  EX=DX=lambda 在二项分布数值非常大的时候B(1000, 0.001), n=1000, p=0.001的时候计算量非常大。 可以用泊松分布进行模拟。lambda=n*p, 随机变量为k. 经常被用来模拟排队。在每个离散时间一个客户可能来的概率为p, 泊松分布可以模拟 总客户数为n时在时间点k来的客户数量。
-    " />
+<meta property="og:title" content="密码学" />
+<meta property="og:description" content="密码学常用工具  gmpy2 Crypto rsa etc.  import gmpy2 from Crypto.PublicKey import RSA import rsa import base64 public = RSA.importKey(open(&#39;./key.pub&#39;).read()) n = public.n e = public.e print(&#39;n = &#39;, n) print(&#39;e = &#39;, e) p = 863653476616376575308866344984576466644942572246900013156919 q = 965445304326998194798282228842484732438457170595999523426901 fn = (p - 1) * (q - 1) d = gmpy2.invert(e, fn) key = rsa.PrivateKey(n, e, int(d), p, q) with open(./flag.b64&#34;, &#34;rb&#34;) as f: f = base64.b64decode(f.read()) print(rsa.decrypt(f, key)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-03-19_distributions/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-03-19T14:52:58+08:00" />
-<meta property="article:modified_time" content="2021-03-19T14:52:58+08:00" />
+<meta property="og:url" content="https://iluvata.github.io/post/2022-04-08_crypto/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-08T19:44:08+08:00" />
+<meta property="article:modified_time" content="2022-04-08T19:44:08+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="概率统计中的分布"/>
-<meta name="twitter:description" content=" 连续分布  均匀分布   正态分布  距离某一中心值偏离的误差越大的概率越小。可用于自然界许多现象的模拟.
-  指数分布  EX=1/lambda DX=1/lambda^2 指数分布的无记忆性：先验概率与后验概率相同。可用于模拟电器使用：不管之前使用了多久， 能继续使用x小时的概率不变。 先验概率 后验概率
-    离散分布  0-1分布  0-1分布随机变量取值为0或1，参数只有一个p，即取值为1的概率。
-  二项分布  二项分布是多个相同0-1分布的叠加。B(n,p)中n为随机变量的数量，p和0-1分布中相同。 输入k得到的结果为k个随机变量得到1的概率。
-  泊松分布  EX=DX=lambda 在二项分布数值非常大的时候B(1000, 0.001), n=1000, p=0.001的时候计算量非常大。 可以用泊松分布进行模拟。lambda=n*p, 随机变量为k. 经常被用来模拟排队。在每个离散时间一个客户可能来的概率为p, 泊松分布可以模拟 总客户数为n时在时间点k来的客户数量。
-    "/>
+<meta name="twitter:title" content="密码学"/>
+<meta name="twitter:description" content="密码学常用工具  gmpy2 Crypto rsa etc.  import gmpy2 from Crypto.PublicKey import RSA import rsa import base64 public = RSA.importKey(open(&#39;./key.pub&#39;).read()) n = public.n e = public.e print(&#39;n = &#39;, n) print(&#39;e = &#39;, e) p = 863653476616376575308866344984576466644942572246900013156919 q = 965445304326998194798282228842484732438457170595999523426901 fn = (p - 1) * (q - 1) d = gmpy2.invert(e, fn) key = rsa.PrivateKey(n, e, int(d), p, q) with open(./flag.b64&#34;, &#34;rb&#34;) as f: f = base64.b64decode(f.read()) print(rsa.decrypt(f, key)."/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -120,7 +110,7 @@
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          概率统计中的分布
+          密码学
           <div class="sub header">
             @
             
@@ -128,14 +118,14 @@
             
 
             | 
-                Friday, Mar 19, 2021
+                Friday, Apr 8, 2022
               
 
             | 1 minutes read
 
             | Update at
               
-                Friday, Mar 19, 2021
+                Friday, Apr 8, 2022
               
           </div>
         </h1>
@@ -144,81 +134,63 @@
       <article class="main">
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-连续分布
+密码学常用工具
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
 <div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
-均匀分布
+gmpy2 Crypto rsa etc.
 </h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> gmpy2
+<span style="color:#f92672">from</span> Crypto.PublicKey <span style="color:#f92672">import</span> RSA
+<span style="color:#f92672">import</span> rsa
+<span style="color:#f92672">import</span> base64
+public <span style="color:#f92672">=</span> RSA<span style="color:#f92672">.</span>importKey(open(<span style="color:#e6db74">&#39;./key.pub&#39;</span>)<span style="color:#f92672">.</span>read())
+n <span style="color:#f92672">=</span> public<span style="color:#f92672">.</span>n
+e <span style="color:#f92672">=</span> public<span style="color:#f92672">.</span>e
+print(<span style="color:#e6db74">&#39;n = &#39;</span>, n)
+print(<span style="color:#e6db74">&#39;e = &#39;</span>, e)
+p <span style="color:#f92672">=</span> <span style="color:#ae81ff">863653476616376575308866344984576466644942572246900013156919</span>
+q <span style="color:#f92672">=</span> <span style="color:#ae81ff">965445304326998194798282228842484732438457170595999523426901</span>
+fn <span style="color:#f92672">=</span> (p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (q <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+d <span style="color:#f92672">=</span> gmpy2<span style="color:#f92672">.</span>invert(e, fn)
+key <span style="color:#f92672">=</span> rsa<span style="color:#f92672">.</span>PrivateKey(n, e, int(d), p, q)
+<span style="color:#66d9ef">with</span> open(<span style="color:#f92672">./</span>flag<span style="color:#f92672">.</span>b64<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#e6db74">rb</span><span style="color:#e6db74">&#34;) as f:</span>
+f <span style="color:#f92672">=</span> base64<span style="color:#f92672">.</span>b64decode(f<span style="color:#f92672">.</span>read())
+print(rsa<span style="color:#f92672">.</span>decrypt(f, key)<span style="color:#f92672">.</span>strip())</code></pre></div>
+</div>
+<p>Crypto.PublicKey 能用来解析 <code class="verbatim">.pub</code></p>
+</div>
 </div>
 <div id="outline-container-headline-3" class="outline-3">
 <h3 id="headline-3">
-正态分布
+大数分解
 </h3>
 <div id="outline-text-headline-3" class="outline-text-3">
-<p>距离某一中心值偏离的误差越大的概率越小。可用于自然界许多现象的模拟.</p>
-</div>
-</div>
-<div id="outline-container-headline-4" class="outline-3">
-<h3 id="headline-4">
-指数分布
-</h3>
-<div id="outline-text-headline-4" class="outline-text-3">
-<p>EX=1/lambda DX=1/lambda^2
-   指数分布的无记忆性：先验概率与后验概率相同。可用于模拟电器使用：不管之前使用了多久，
-   能继续使用x小时的概率不变。
-   先验概率 后验概率</p>
+<p>在线：www.factordb.com
+能分解100位以内</p>
 </div>
 </div>
 </div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+RSA
+</h2>
 </div>
 <div id="outline-container-headline-5" class="outline-2">
 <h2 id="headline-5">
-离散分布
+格密码
 </h2>
-<div id="outline-text-headline-5" class="outline-text-2">
-<div id="outline-container-headline-6" class="outline-3">
-<h3 id="headline-6">
-0-1分布
-</h3>
-<div id="outline-text-headline-6" class="outline-text-3">
-<p>0-1分布随机变量取值为0或1，参数只有一个p，即取值为1的概率。</p>
-</div>
-</div>
-<div id="outline-container-headline-7" class="outline-3">
-<h3 id="headline-7">
-二项分布
-</h3>
-<div id="outline-text-headline-7" class="outline-text-3">
-<p>二项分布是多个相同0-1分布的叠加。B(n,p)中n为随机变量的数量，p和0-1分布中相同。
-   输入k得到的结果为k个随机变量得到1的概率。</p>
-</div>
-</div>
-<div id="outline-container-headline-8" class="outline-3">
-<h3 id="headline-8">
-泊松分布
-</h3>
-<div id="outline-text-headline-8" class="outline-text-3">
-<p>EX=DX=lambda
-   在二项分布数值非常大的时候B(1000, 0.001), n=1000, p=0.001的时候计算量非常大。
-   可以用泊松分布进行模拟。lambda=n*p, 随机变量为k.
-   经常被用来模拟排队。在每个离散时间一个客户可能来的概率为p, 泊松分布可以模拟
-   总客户数为n时在时间点k来的客户数量。</p>
-</div>
-</div>
-</div>
 </div>
 </article>
     </section>
 
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
-        
-          <a class="ui label" href="/tags/math" title="math">math</a>
-        
-          <a class="ui label" href="/tags/%E8%80%83%E7%A0%94" title="考研">考研</a>
-        
+          <a class="ui label">No Tags</a>
       
       <div
         class="ui label"
@@ -243,25 +215,17 @@
       <div class="ui segment toc">
         <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">连续分布</a>
+<li><a href="#headline-1">密码学常用工具</a>
 <ul>
-<li><a href="#headline-2">均匀分布</a>
+<li><a href="#headline-2">gmpy2 Crypto rsa etc.</a>
 </li>
-<li><a href="#headline-3">正态分布</a>
-</li>
-<li><a href="#headline-4">指数分布</a>
+<li><a href="#headline-3">大数分解</a>
 </li>
 </ul>
 </li>
-<li><a href="#headline-5">离散分布</a>
-<ul>
-<li><a href="#headline-6">0-1分布</a>
+<li><a href="#headline-4">RSA</a>
 </li>
-<li><a href="#headline-7">二项分布</a>
-</li>
-<li><a href="#headline-8">泊松分布</a>
-</li>
-</ul>
+<li><a href="#headline-5">格密码</a>
 </li>
 </ul>
 </nav>

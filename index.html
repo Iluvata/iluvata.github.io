@@ -432,7 +432,7 @@
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 - 2022 Iluvata&#39;s Blog</p>
+      <p>© 2021 - 2023 Iluvata&#39;s Blog</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
@@ -445,6 +445,35 @@
 
   
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2022-04-08_crypto/">
+    
+      <img src="/img/default3.jpg" alt="密码学" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2022-04-08_crypto/">密码学</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Friday, Apr 8, 2022</p>
+    </div>
+    <div class="description">
+      密码学常用工具  gmpy2 Crypto rsa etc.  import gmpy2 from Crypto.PublicKey import RSA import rsa import base64 public = RSA.importKey(open(&#39;./key.pub&#39;).read()) n = public.n e = public.e print(&#39;n = &#39;, n) print(&#39;e = &#39;, e) p = 863653476616376575308866344984576466644942572246900013156919 q = 965445304326998194798282228842484732438457170595999523426901 fn = (p - 1) * (q - 1) d = gmpy2.invert(e, fn) key = rsa.PrivateKey(n, e, int(d), p, q) with open(./flag.b64&#34;, &#34;rb&#34;) as f: f = base64.b64decode(f.read()) print(rsa.decrypt(f, key).
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -522,7 +551,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-29_mathematical-statistics/">
     
-      <img src="/img/default2.jpg" alt="数理统计复习" />
+      <img src="/img/default4.jpg" alt="数理统计复习" />
     
   </a>
 
@@ -587,7 +616,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_structural-information/">
     
-      <img src="/img/default3.jpg" alt="结构信息论" />
+      <img src="/img/default1.jpg" alt="结构信息论" />
     
   </a>
 
@@ -622,7 +651,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default4.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default1.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -660,7 +689,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
     
-      <img src="/img/default2.jpg" alt="pwn堆题整理" />
+      <img src="/img/default3.jpg" alt="pwn堆题整理" />
     
   </a>
 
@@ -751,43 +780,6 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
     <div class="author">@&nbsp;Iluvata</div>
     <div class="reading-time">
       <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
-    
-      <img src="/img/default4.jpg" alt="CTF基本工具使用指北" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Sep 24, 2021</p>
-    </div>
-    <div class="description">
-      环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
-multipass launch 16.04 --name pwn --disk 15G --mem 4G   multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
- ,#+begin_src shell $ sudo apt-add-repository ppa:brightbox/ruby-ng
- $ sudo apt-get update
- $ sudo apt-get install ruby2.4 ruby2.4-dev
- $ ruby2.4 -v
-#+end_src
- 还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
-context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]    pwntools  io交互  连接
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>3 minutes read</div>
   </div>
 </article>
 

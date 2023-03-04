@@ -6,7 +6,16 @@
     <description>Recent content on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 28 Mar 2022 13:53:31 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Apr 2022 19:44:08 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>密码学</title>
+      <link>https://iluvata.github.io/post/2022-04-08_crypto/</link>
+      <pubDate>Fri, 08 Apr 2022 19:44:08 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2022-04-08_crypto/</guid>
+      <description>密码学常用工具  gmpy2 Crypto rsa etc.  import gmpy2 from Crypto.PublicKey import RSA import rsa import base64 public = RSA.importKey(open(&amp;#39;./key.pub&amp;#39;).read()) n = public.n e = public.e print(&amp;#39;n = &amp;#39;, n) print(&amp;#39;e = &amp;#39;, e) p = 863653476616376575308866344984576466644942572246900013156919 q = 965445304326998194798282228842484732438457170595999523426901 fn = (p - 1) * (q - 1) d = gmpy2.invert(e, fn) key = rsa.PrivateKey(n, e, int(d), p, q) with open(./flag.b64&amp;#34;, &amp;#34;rb&amp;#34;) as f: f = base64.b64decode(f.read()) print(rsa.decrypt(f, key).</description>
+    </item>
+    
     <item>
       <title>BUAACTF2022 WP</title>
       <link>https://iluvata.github.io/post/2022-03-28_buaactf2022/</link>

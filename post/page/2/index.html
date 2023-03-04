@@ -432,7 +432,7 @@
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 - 2022 Iluvata&#39;s Blog</p>
+      <p>© 2021 - 2023 Iluvata&#39;s Blog</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
@@ -444,6 +444,43 @@
   </div>
 
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
+    
+      <img src="/img/default1.jpg" alt="CTF基本工具使用指北" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Friday, Sep 24, 2021</p>
+    </div>
+    <div class="description">
+      环境搭建  在mac上我觉得比较好用的环境是multipass中ubuntu虚拟机+宿主机中的idapro，以及宿主机上vscode写python wp，在虚拟机中运行。
+multipass launch 16.04 --name pwn --disk 15G --mem 4G   multipass默认分配的内存和磁盘不太够用，建议内存分4G，磁盘分15G。ubuntu版本选择16.04. 虚拟机内环境配置可以参考pwn-env-init，建议使用py2. 但是脚本是用apt-get安装pip的，可能会有些问题，需要 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 然后运行 get-pip.py 。还有 one_gadget 目前需要ruby版本高于2.4，apt-get安装的ruby是2.3。可以执行下面的命令安装
+ ,#+begin_src shell $ sudo apt-add-repository ppa:brightbox/ruby-ng
+ $ sudo apt-get update
+ $ sudo apt-get install ruby2.4 ruby2.4-dev
+ $ ruby2.4 -v
+#+end_src
+ 还可以装个 tmux ，在pwntools连接gdb调试的时候在开头加上下面代码就可以分出调试窗口（虽然我现在也还没配好pwntools舒服地连gdb的环境。。。）。
+context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]    pwntools  io交互  连接
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>3 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -513,7 +550,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-29_postgraduate-exam-experience/">
     
-      <img src="/img/default2.jpg" alt="末流211考研北航计科学硕430分经验帖" />
+      <img src="/img/default4.jpg" alt="末流211考研北航计科学硕430分经验帖" />
     
   </a>
 
@@ -550,7 +587,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
     
-      <img src="/img/default3.jpg" alt="概率统计中的分布" />
+      <img src="/img/default2.jpg" alt="概率统计中的分布" />
     
   </a>
 
@@ -584,7 +621,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/">
     
-      <img src="/img/default4.jpg" alt="推荐系统基础" />
+      <img src="/img/default1.jpg" alt="推荐系统基础" />
     
   </a>
 
@@ -615,7 +652,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-17_operating-system/">
     
-      <img src="/img/default2.jpg" alt="操作系统" />
+      <img src="/img/default4.jpg" alt="操作系统" />
     
   </a>
 
@@ -736,45 +773,6 @@
   推荐系统评价指标  我们一般在评价推荐系统的时候使用的是准确率和召回率。   正确率 = 提取出的正确信息条数 / 提取出的信息条数   召回率 = 提取出的正确信息条数 / 样本中正确的信息条数   准确率给出提取的信息中正确的比例，召回率给出所有正确信息中被提出的比例。除了常用的两个 指标，用于衡量推荐系统的还有以上两者加权调和平均的F指标，平均绝对误差MAE，平均平方误差MSE（用于 给出评分数值的系统）等。在除了准确率之外，我们有时候希望从一些别的方面对推荐系统做出评价， 包括推荐物品的多样性，新鲜性，用户满意度，可解释性，鲁棒性，公平性等。这里主要讨论推荐系统的 鲁棒性，即在受到破坏（如注入虚假的用户访问记录和用户信息，刷好评，数据缺失）的时候正常工作 的能力。
   推荐系统鲁棒性   参考链接： 个性化推荐系统研究 个性化推荐系统评价方法综述 通过伪造共同访问对推荐系统进行攻击 全能的FM模型
   
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-09_file-and-database/">
-    
-      <img src="/img/2021-03-09_database.png" alt="文件系统与数据库系统" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-09_file-and-database/">文件系统与数据库系统</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Mar 9, 2021</p>
-    </div>
-    <div class="description">
-      数据库系统  数据库系统的组成部分包括数据库、软件、硬件和用户。数据库指的是系统中各种数据，包括目标数据 和描述数据。软件包括DBMS和开发工具等。 我们一般使用的数据库系统都是关系型数据库，这里将谈论的也主要是关系型。NoSQL之类的非关系型 数据库以后有时间可以去了解一下，我目前的理解是非关系型数据库可以支持使用一些更灵活的结构来 进行数据的存储，如json，可以避免数据结构多样性带来的问题。除了目前最常会用的关系型数据库外， 其他数据库结构还有层次模型和网状模型。
- 数据库系统的层次结构如下
- 软硬件层次
-  DBMS管理层次  关系型数据库中的“关系”即我们在离散数学中学过的关系(relation)：多个集合的笛卡尔积的子集。 只是我们在离散数学中讨论的一般是二元关系，只考虑两个集合。在关系型数据库中，我们考虑的范围 变成了n个集合，即数据库一张表中的n个字段。对于讨论n元关系的关系型数据库，我们能够进行的基本 操作有SELECTION, PROJECTION, JOIN. SELECTION与SQL语句中的查找语句一样，从表中找出满足 条件的语句。PROJECTION删除一些字段，只留下（展示）我们需要的字段。JOIN得到两张表的笛卡尔积。
-数据库三范式  数据库在设计表结构的时候为了减少冗余，避免在对数据进行操作时产生问题，需要遵循三范式。第一范式： 所有字段存储的都必须是最小的原子字段，不允许像结构体这样的复合结构。第二范式：所有字段必须完全 依赖于主键。如选课表(课程id，学生id，学生姓名，分数）中学生姓名没有完全依赖于主键（课程id，学生id）， 需要新建一个表（学生id，学生姓名）。否则每次存入相同学生id不同课程id的数据时都会存入相同的 学生姓名，增加了不必要的数据存储导致冗余。第三范式：所有非主键字段直接依赖于主键，不能存在传递依赖。 学生表（学生id，学院id，学院电话）中学院电话通过学院id传递依赖于主键学生id，需要拆分出（学院id，学院电话） 表。第三范式还可以用另一种形式表达：非主键间不能有依赖关系。BC范式在第三范式的基础上进一步限制 了主键间也不能有依赖。表（学生id，老师id，课程id）中，每个老师只能教一门课，每门课程可以有多个 老师，每个学生选了一门课后有对应的一名固定老师。表中三个字段都为主键，但是老师和课程之间存在依赖。   数据库事务  在对数据库进行操作的时候，我们希望有一些操作序列不可被分割，要么全部执行，要么不执行，中间没有别的 操作插入。数据库系统提供了把多条作为一个整体进行操作的功能，把这种整体称为事务。事务具有ACID特性： Atomicity原子性，Consistency一致性，Isolation隔离性，Durability持久性。原子性是我们之前说的 要么所有语句全部执行成功，要么全部不执行。一致性是指事务执行前后特定状态保持一致，如转账操作前后的 转账双方的总金额。隔离性是多个并发事务之间不能互相干扰。持久性是事务提交后的改变是持久（永久）的， 不会丢失COMMIT.
- 如果我们不考虑事务的隔离性，可能会发生的情况有：
-  脏读：事务在提交前的修改被读到
-  不可重复读：事务内的几次查询间别的外部语句修改了数据，导致一次事务中相同的读得到不同数据
-  虚读（幻读）：一个事务内对数据进行操作时别的外部语句修改了数据，导致对被修改的记录的操作失败
-  不可重复读与幻读的区别是不可重复读查询同一数据项，幻读操作一批数据。
- 为了提供不同场景对隔离性的需求，对于事务的隔离性定义了4中隔离级别：读未提交(read uncommitted), 读提交(read committed), 可重复读(repeatable read), 序列化(serializable). 序列化可避免脏读、不可重复读、幻读；可重复读可避免 脏读、不可重复读；读提交可避免脏读；读未提交无法保证任何情况。
     </div>
   </div>
 

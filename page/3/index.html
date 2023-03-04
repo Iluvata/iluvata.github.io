@@ -432,7 +432,7 @@
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 - 2022 Iluvata&#39;s Blog</p>
+      <p>© 2021 - 2023 Iluvata&#39;s Blog</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
@@ -445,6 +445,45 @@
 
   
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-09_file-and-database/">
+    
+      <img src="/img/2021-03-09_database.png" alt="文件系统与数据库系统" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-09_file-and-database/">文件系统与数据库系统</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Tuesday, Mar 9, 2021</p>
+    </div>
+    <div class="description">
+      数据库系统  数据库系统的组成部分包括数据库、软件、硬件和用户。数据库指的是系统中各种数据，包括目标数据 和描述数据。软件包括DBMS和开发工具等。 我们一般使用的数据库系统都是关系型数据库，这里将谈论的也主要是关系型。NoSQL之类的非关系型 数据库以后有时间可以去了解一下，我目前的理解是非关系型数据库可以支持使用一些更灵活的结构来 进行数据的存储，如json，可以避免数据结构多样性带来的问题。除了目前最常会用的关系型数据库外， 其他数据库结构还有层次模型和网状模型。
+ 数据库系统的层次结构如下
+ 软硬件层次
+  DBMS管理层次  关系型数据库中的“关系”即我们在离散数学中学过的关系(relation)：多个集合的笛卡尔积的子集。 只是我们在离散数学中讨论的一般是二元关系，只考虑两个集合。在关系型数据库中，我们考虑的范围 变成了n个集合，即数据库一张表中的n个字段。对于讨论n元关系的关系型数据库，我们能够进行的基本 操作有SELECTION, PROJECTION, JOIN. SELECTION与SQL语句中的查找语句一样，从表中找出满足 条件的语句。PROJECTION删除一些字段，只留下（展示）我们需要的字段。JOIN得到两张表的笛卡尔积。
+数据库三范式  数据库在设计表结构的时候为了减少冗余，避免在对数据进行操作时产生问题，需要遵循三范式。第一范式： 所有字段存储的都必须是最小的原子字段，不允许像结构体这样的复合结构。第二范式：所有字段必须完全 依赖于主键。如选课表(课程id，学生id，学生姓名，分数）中学生姓名没有完全依赖于主键（课程id，学生id）， 需要新建一个表（学生id，学生姓名）。否则每次存入相同学生id不同课程id的数据时都会存入相同的 学生姓名，增加了不必要的数据存储导致冗余。第三范式：所有非主键字段直接依赖于主键，不能存在传递依赖。 学生表（学生id，学院id，学院电话）中学院电话通过学院id传递依赖于主键学生id，需要拆分出（学院id，学院电话） 表。第三范式还可以用另一种形式表达：非主键间不能有依赖关系。BC范式在第三范式的基础上进一步限制 了主键间也不能有依赖。表（学生id，老师id，课程id）中，每个老师只能教一门课，每门课程可以有多个 老师，每个学生选了一门课后有对应的一名固定老师。表中三个字段都为主键，但是老师和课程之间存在依赖。   数据库事务  在对数据库进行操作的时候，我们希望有一些操作序列不可被分割，要么全部执行，要么不执行，中间没有别的 操作插入。数据库系统提供了把多条作为一个整体进行操作的功能，把这种整体称为事务。事务具有ACID特性： Atomicity原子性，Consistency一致性，Isolation隔离性，Durability持久性。原子性是我们之前说的 要么所有语句全部执行成功，要么全部不执行。一致性是指事务执行前后特定状态保持一致，如转账操作前后的 转账双方的总金额。隔离性是多个并发事务之间不能互相干扰。持久性是事务提交后的改变是持久（永久）的， 不会丢失COMMIT.
+ 如果我们不考虑事务的隔离性，可能会发生的情况有：
+  脏读：事务在提交前的修改被读到
+  不可重复读：事务内的几次查询间别的外部语句修改了数据，导致一次事务中相同的读得到不同数据
+  虚读（幻读）：一个事务内对数据进行操作时别的外部语句修改了数据，导致对被修改的记录的操作失败
+  不可重复读与幻读的区别是不可重复读查询同一数据项，幻读操作一批数据。
+ 为了提供不同场景对隔离性的需求，对于事务的隔离性定义了4中隔离级别：读未提交(read uncommitted), 读提交(read committed), 可重复读(repeatable read), 序列化(serializable). 序列化可避免脏读、不可重复读、幻读；可重复读可避免 脏读、不可重复读；读提交可避免脏读；读未提交无法保证任何情况。
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -708,7 +747,7 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
     
-      <img src="/img/default1.jpg" alt="在spacemacs中写scheme" />
+      <img src="/img/default3.jpg" alt="在spacemacs中写scheme" />
     
   </a>
 
@@ -760,44 +799,6 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
     </div>
     <div class="description">
       配置easy-hugo layer  我在github上找到有人写了spacemacs的easy-hugo layer，可以直接用，地址在这里. 把这个仓库中的 packages.el 放到自己的 .emacs.d/private/hugo 文件夹下就可以了. 然后在 .spacemacs 文件中的 dotspacemacs-configuration-layers 中添加 hugo 层.  这时候如果直接运行 M-x easy-hugo 会提示找不到 easy-hugo-basedir ，在.spacemacs 文件夹下的 user-config 项中加上 (setq easy-hugo-basedir &#34;your-path-to-hugo-basedir&#34;) 重新载入就可以运行了。   运行指南  在输入 M-x easy-hugo 进入easy-hugo mode 后，这个layer已经帮我们重新绑定了几个快捷键    Key Binding Description     SPC m n &#39;easy-hugo-newpost   SPC m D &#39;easy-hugo-article   SPC m p &#39;easy-hugo-preview   SPC m P &#39;easy-hugo-publish   SPC m o &#39;easy-hugo-open   SPC m d &#39;easy-hugo-delete~   SPC m c &#39;easy-hugo-open-config   SPC m f &#39;easy-hugo-open   SPC m N &#39;easy-hugo-no-help   SPC m v &#39;easy-hugo-view   SPC m r &#39;easy-hugo-refresh   SPC m s &#39;easy-hugo-sort-time   SPC m S &#39;easy-hugo-sort-char   SPC m G &#39;easy-hugo-github-deploy   SPC m A &#39;easy-hugo-amazon-s3-deploy   SPC m C &#39;easy-hugo-google-cloud-storage-deploy   SPC m q &#39;evil-delete-buffer     如果记不住，按下 SPC 后就会有提示  比如 SPC m n 创建新文章
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-01-27_hugo-config/">
-    
-      <img src="/img/picdemo.png" alt="hugo 博客配置" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Wednesday, Jan 27, 2021</p>
-    </div>
-    <div class="description">
-       主题配置  我创建了一个包含整个博客目录的仓库，在这里，以便在不同的地方随时pull下来
- 需要注意的是这个仓库中还嵌套包含了另外两个仓库，页面仓库对应public文件夹，以及 dream主题仓库，对应themes/dream文件夹
-  02-19注：之前以为删了dream里面的.git就可以直接管理整个博客了，后面发现并不行。需要用 git rm --cached themes/dream 把git子模块去掉
-  主题内容配置文件为config.toml，其中配置的路径都是从themes/dream/static文件夹开始的相对路径.
- 如配置头像所用的avatar=&#34;/img/avatar.png&#34;实际所在位置为themes/dream/static/img/avatar.png
- 修改封面图片：文章添加参数&#34;cover&#34; cover:/img/somepicture.png
- 添加tag和category: 在文章头部添加参数tags: [&#34;tag1&#34;, &#34;tag2&#34;]，categories: [&#34;category1&#34;, &#34;category2&#34;]
-   插入附件  文章嵌入代码：用#+begin_src和#+end_src表示代码
-print(&#34;hello world&#34;)   插入图片：用
-[[图片路径]]     
     </div>
   </div>
 
