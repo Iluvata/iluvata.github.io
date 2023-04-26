@@ -18,6 +18,17 @@ from pwn import * from gmpy2 import invert p = remote(&amp;#34;101.43.185.64&amp
     </item>
     
     <item>
+      <title>BUAACTF2023 WP</title>
+      <link>https://iluvata.github.io/post/2023-04-26_buaactf2023/</link>
+      <pubDate>Mon, 28 Mar 2022 13:53:31 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2023-04-26_buaactf2023/</guid>
+      <description>crypto  Block Cipher  直接写个解密
+def decrypt(parts): iv = b&amp;#39;\xba=y\xa3\xc6)\xcf\xf7&amp;#39; key = b&amp;#39;}6E\xeb(\x91\x08\xa0&amp;#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
+#encoding: utf-8 from pwn import * p = remote(&amp;#34;10.212.26.206&amp;#34;, &amp;#34;23004&amp;#34;) for i in range(20): p.recvuntil(&amp;#34;A = :&amp;#34;) a = int(p.recvline()) p.recvuntil(&amp;#34;B = :&amp;#34;) b = int(p.</description>
+    </item>
+    
+    <item>
       <title>N1Book Web 学习</title>
       <link>https://iluvata.github.io/post/2021-12-28_n1book-web/</link>
       <pubDate>Tue, 28 Dec 2021 00:17:37 +0800</pubDate>

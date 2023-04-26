@@ -236,6 +236,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
                 </div>
               </div>
@@ -351,6 +357,12 @@
               <div class="item">
                 <div class="content">
                   <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
                 </div>
               </div>
             
@@ -477,9 +489,40 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2023-04-26_buaactf2023/">
+    
+      <img src="/img/2023-04-26_buaactf2023.png" alt="BUAACTF2023 WP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 28, 2022</p>
+    </div>
+    <div class="description">
+      crypto  Block Cipher  直接写个解密
+def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(\x91\x08\xa0&#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
+#encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>4 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/">
     
-      <img src="/img/default2.jpg" alt="最大似然估计与基本演绎法" />
+      <img src="/img/default3.jpg" alt="最大似然估计与基本演绎法" />
     
   </a>
 
@@ -586,7 +629,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
     
-      <img src="/img/default4.jpg" alt="在spacemacs中写scheme" />
+      <img src="/img/default1.jpg" alt="在spacemacs中写scheme" />
     
   </a>
 
@@ -625,7 +668,7 @@ $ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` 
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-02-02_hugo-with-emacs/">
     
-      <img src="/img/default2.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
+      <img src="/img/default4.jpg" alt="用easy-hugo在spacemacs中写hugo博客" />
     
   </a>
 

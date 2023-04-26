@@ -236,6 +236,12 @@
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
                 </div>
               </div>
@@ -351,6 +357,12 @@
               <div class="item">
                 <div class="content">
                   <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
                 </div>
               </div>
             
@@ -477,9 +489,40 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2023-04-26_buaactf2023/">
+    
+      <img src="/img/2023-04-26_buaactf2023.png" alt="BUAACTF2023 WP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Monday, Mar 28, 2022</p>
+    </div>
+    <div class="description">
+      crypto  Block Cipher  直接写个解密
+def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(\x91\x08\xa0&#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
+#encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>4 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_hugo-with-latex/">
     
-      <img src="/img/default2.jpg" alt="在hugo中使用latex" />
+      <img src="/img/default4.jpg" alt="在hugo中使用latex" />
     
   </a>
 
@@ -548,7 +591,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default1.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default2.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -586,7 +629,7 @@ GitHack.py http://www.openssl.org/.git/  scrabble http://example.com/      SQL�
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-23_heap/">
     
-      <img src="/img/default1.jpg" alt="pwn堆题整理" />
+      <img src="/img/default3.jpg" alt="pwn堆题整理" />
     
   </a>
 
@@ -654,7 +697,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-10_ctf-libc-leak/">
     
-      <img src="/img/default4.jpg" alt="libc泄漏" />
+      <img src="/img/default3.jpg" alt="libc泄漏" />
     
   </a>
 
@@ -686,7 +729,7 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
-      <img src="/img/default2.jpg" alt="CTF基本工具使用指北" />
+      <img src="/img/default1.jpg" alt="CTF基本工具使用指北" />
     
   </a>
 
@@ -740,40 +783,6 @@ context.arch=&#34;amd64&#34; context.terminal = [&#39;tmux&#39;, &#39;splitw&#39
 (define (factorial n) (fact-iter 1 1 n)) (define (fact-iter product counter max-count) (if (&gt; counter max-count) product (fact-iter (* counter product) (+ count 1) max-count)))  以上是阶乘的迭代处理。我们在每一次迭代（循环）中输入了得到下一结果所需的所有信息，编译器无需像在递归处理中一样 保存每次n的值以计算最后的结果。
  但是用我们熟悉的c语言来理解以上这段代码，我们会觉得在形式上 fact-iter 函数在函数体中调用了自身，也应该算作 递归而不是迭代。在c语言中，我们理解的迭代是使用 for 或 while 在代码块中显式地更改变量，以上代码很明显 没有使用“循环”。这就引出了递归过程与递归处理的区别。以上代码使用的确实是我们在c语言中称作“递归过程”的代码形式， 但根据我们对“迭代处理”的定义，即编译器无需保存中间变量，它很显然是符合“迭代处理”要求的。在c语言和其他很多 语言中，使用递归过程的迭代处理会和普通的递归处理一样，在每次递归中保存一些值，导致无法到达很深的递归深度。在lisp 编译器的实现中使用了“尾递归”优化技术，即若一个函数在调用自身时（满足递归过程条件）将该调用放在最后执行，并且 无需保存多余的变量，将所有必要的变量输入下一层，那么编译器在执行的时候就不会保存多余的信息，而是像迭代那样直接 用下一层来覆盖当前层。
   多种形式的递归与迭代  线性递归  上面factorial的递归实现中每次进入一个下一层，保存的数据随n的增大是线性增长的。这种形式的递归处理叫做线性递归。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-03-19_distributions/">
-    
-      <img src="/img/default4.jpg" alt="概率统计中的分布" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-03-19_distributions/">概率统计中的分布</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Friday, Mar 19, 2021</p>
-    </div>
-    <div class="description">
-       连续分布  均匀分布   正态分布  距离某一中心值偏离的误差越大的概率越小。可用于自然界许多现象的模拟.
-  指数分布  EX=1/lambda DX=1/lambda^2 指数分布的无记忆性：先验概率与后验概率相同。可用于模拟电器使用：不管之前使用了多久， 能继续使用x小时的概率不变。 先验概率 后验概率
-    离散分布  0-1分布  0-1分布随机变量取值为0或1，参数只有一个p，即取值为1的概率。
-  二项分布  二项分布是多个相同0-1分布的叠加。B(n,p)中n为随机变量的数量，p和0-1分布中相同。 输入k得到的结果为k个随机变量得到1的概率。
-  泊松分布  EX=DX=lambda 在二项分布数值非常大的时候B(1000, 0.001), n=1000, p=0.001的时候计算量非常大。 可以用泊松分布进行模拟。lambda=n*p, 随机变量为k. 经常被用来模拟排队。在每个离散时间一个客户可能来的概率为p, 泊松分布可以模拟 总客户数为n时在时间点k来的客户数量。
-    
     </div>
   </div>
 

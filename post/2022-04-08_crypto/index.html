@@ -240,6 +240,26 @@ NTRU加密方式是用随机数 $r$ 做 $c \equiv r \cdot h + m \space (mod \spa
 </div>
 </div>
 </div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+二次剩余
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<p><a href="https://oi-wiki.org/math/number-theory/quad-residue/">OI-wiki</a>
+<a href="https://chenyangwang.gitbook.io/mathematical-base-for-information-safety/er-ci-tong-yu-shi-he-ping-fang-sheng-yu/mo-ping-fang-gen">模平方根</a>
+可以直接用gmpy2求根</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> gmpy2 <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+n <span style="color:#f92672">=</span> getPrime(<span style="color:#ae81ff">2048</span>)
+e <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>
+c <span style="color:#f92672">=</span> pow(m, e, n)
+R<span style="color:#f92672">.&lt;</span>x<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Zmod(n)[]
+f <span style="color:#f92672">=</span> x<span style="color:#f92672">^</span>e<span style="color:#f92672">-</span>c
+m_list <span style="color:#f92672">=</span> [int(i[<span style="color:#ae81ff">0</span>]) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>roots()]</code></pre></div>
+</div>
+</div>
+</div>
 </article>
     </section>
 
@@ -285,6 +305,8 @@ NTRU加密方式是用随机数 $r$ 做 $c \equiv r \cdot h + m \space (mod \spa
 <li><a href="#headline-6">NTRU</a>
 </li>
 </ul>
+</li>
+<li><a href="#headline-7">二次剩余</a>
 </li>
 </ul>
 </nav>
@@ -429,6 +451,12 @@ NTRU加密方式是用随机数 $r$ 做 $c \equiv r \cdot h + m \space (mod \spa
             
               <div class="item">
                 <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
                   <a class="item" href="/post/2021-12-28_hugo-with-latex/">在hugo中使用latex</a>
                 </div>
               </div>
@@ -544,6 +572,12 @@ NTRU加密方式是用随机数 $r$ 做 $c \equiv r \cdot h + m \space (mod \spa
               <div class="item">
                 <div class="content">
                   <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
                 </div>
               </div>
             
