@@ -230,13 +230,13 @@
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
                 </div>
               </div>
             
@@ -356,13 +356,13 @@
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
                 </div>
               </div>
             
@@ -459,6 +459,37 @@
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2023-04-26_buaactf2023/">
+    
+      <img src="/img/2023-04-26_buaactf2023.png" alt="BUAACTF2023 WP" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Wednesday, Apr 26, 2023</p>
+    </div>
+    <div class="description">
+      crypto  Block Cipher  直接写个解密
+def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(\x91\x08\xa0&#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
+#encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>4 minutes read</div>
+  </div>
+</article>
+
+    </div>
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2022-03-28_buaactf2022/">
     
       <img src="/img/2022-03-28_buaactf2022.png" alt="BUAACTF2022 WP" />
@@ -482,37 +513,6 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
     <div class="author">@&nbsp;Iluvata</div>
     <div class="reading-time">
       <i class="clock icon"></i>3 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2023-04-26_buaactf2023/">
-    
-      <img src="/img/2023-04-26_buaactf2023.png" alt="BUAACTF2023 WP" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Monday, Mar 28, 2022</p>
-    </div>
-    <div class="description">
-      crypto  Block Cipher  直接写个解密
-def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(\x91\x08\xa0&#39; results = [] for index, part in enumerate(parts): results.append(reduce(xor, [part, iv if index == 0 else parts[index-1], key])) return results      pwn  NLP  pwntools使用。后面的信息提取有点恶心
-#encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>4 minutes read</div>
   </div>
 </article>
 
@@ -557,7 +557,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
     
-      <img src="/img/default3.jpg" alt="ROP" />
+      <img src="/img/default2.jpg" alt="ROP" />
     
   </a>
 
@@ -622,7 +622,7 @@ def leak(addr): p = remote(&#39;127.0.0.1&#39;, &#39;10001&#39;) p.recvline() pa
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-09-24_ctf-tools/">
     
-      <img src="/img/default1.jpg" alt="CTF基本工具使用指北" />
+      <img src="/img/default4.jpg" alt="CTF基本工具使用指北" />
     
   </a>
 

@@ -28,8 +28,8 @@ def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(
 #encoding: utf-8 from pwn import * p = remote(&#34;10.212.26.206&#34;, &#34;23004&#34;) for i in range(20): p.recvuntil(&#34;A = :&#34;) a = int(p.recvline()) p.recvuntil(&#34;B = :&#34;) b = int(p." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iluvata.github.io/post/2023-04-26_buaactf2023/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-03-28T13:53:31+08:00" />
-<meta property="article:modified_time" content="2022-03-28T13:53:31+08:00" />
+<meta property="article:published_time" content="2023-04-26T13:53:31+08:00" />
+<meta property="article:modified_time" content="2023-04-26T13:53:31+08:00" />
 
 
 
@@ -122,14 +122,14 @@ def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(
             
 
             | 
-                Monday, Mar 28, 2022
+                Wednesday, Apr 26, 2023
               
 
             | 4 minutes read
 
             | Update at
               
-                Monday, Mar 28, 2022
+                Wednesday, Apr 26, 2023
               
           </div>
         </h1>
@@ -503,12 +503,12 @@ print(flag)</code></pre></div>
 ezvm
 </h3>
 <div id="outline-text-headline-11" class="outline-text-3">
-<p>初始化的地址做了1字节的偏移，ida上稍微调整一下。大致是malloc了两个结构体，第一个便宜0x40的地方用来存指令地址和ip，ZF，还有第二个结构的地址。第二个用来存输入字符串和加密后的flag。
+<p>初始化的地址做了1字节的偏移，ida上稍微调整一下。大致是malloc了两个结构体，第一个偏移0x40的地方用来存指令地址和ip，ZF，还有第二个结构的地址。第二个用来存输入字符串和加密后的flag。
 <img src="/img/2023-04-26_11e9.png" alt="/img/2023-04-26_11e9.png" title="/img/2023-04-26_11e9.png" />
 然后是痛苦的瞪。瞪了一下午硬逆了8条指令。
 <img src="/img/2023-04-26_ezvm.jpeg" alt="/img/2023-04-26_ezvm.jpeg" title="/img/2023-04-26_ezvm.jpeg" />
 最后解析指令集，发现只是简单的xor。
-以前没有怎么做过re，这次做这题本来是为了做pwn的ezvm。后面感觉快出了但时间不太够了。。</p>
+以前没有怎么做过re，这次做这题本来是为了做pwn的ezvm。后面做pwn的时候感觉快出了但时间不太够了。。</p>
 </div>
 </div>
 </div>
@@ -712,13 +712,13 @@ ezvm
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
                 </div>
               </div>
             
@@ -838,13 +838,13 @@ ezvm
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
+                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
                 </div>
               </div>
             
               <div class="item">
                 <div class="content">
-                  <a class="item" href="/post/2023-04-26_buaactf2023/">BUAACTF2023 WP</a>
+                  <a class="item" href="/post/2022-03-28_buaactf2022/">BUAACTF2022 WP</a>
                 </div>
               </div>
             
