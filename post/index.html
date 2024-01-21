@@ -444,7 +444,7 @@
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 - 2023 Iluvata&#39;s Blog</p>
+      <p>© 2021 - 2024 Iluvata&#39;s Blog</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
@@ -456,6 +456,36 @@
   </div>
 
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2024-01-21_safety_multiprocessing/">
+    
+      <img src="/img/default4.jpg" alt="系统编程安全--多进程" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2024-01-21_safety_multiprocessing/">系统编程安全--多进程</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Sunday, Jan 21, 2024</p>
+    </div>
+    <div class="description">
+      fork  unexpected child  int createChildAndSayHello() { pid_t pid = fork(); if (pid == 0) { sayHello(); return 0; } waitpid(pid); }   这里不是在main中调用fork， return后回到的是main函数或者调用函数，并没有退出子进程。类似的错误还有在处理fork多个child时不恰当的循环导致子进程也fork出预期外的孙子进程。
+  fork 与多线程混合使用可能出现的问题  pid_t pid = fork(); if (pid == 0){ const char** args = malloc(sizeof(char *) * num_args); // Note: On execvp, all memory will be freed.  execvp(args[0], args); // If execvp failed, free memory and exit.  free(args); exit(1); }   fork 后子进程的内存状态与父进程一样，包括堆栈和锁。fork只会复制当前线程。如果fork时有别的线程获得了malloc锁，fork后的malloc锁不能解除。fork时malloc会处于不安全状态吗？
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -492,7 +522,7 @@ def decrypt(parts): iv = b&#39;\xba=y\xa3\xc6)\xcf\xf7&#39; key = b&#39;}6E\xeb(
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2022-04-08_crypto/">
     
-      <img src="/img/default2.jpg" alt="密码学" />
+      <img src="/img/default1.jpg" alt="密码学" />
     
   </a>
 
@@ -551,7 +581,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2022-01-13_mathematical-logic/">
     
-      <img src="/img/default3.jpg" alt="高等数理逻辑复习" />
+      <img src="/img/default4.jpg" alt="高等数理逻辑复习" />
     
   </a>
 
@@ -593,7 +623,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-29_mathematical-statistics/">
     
-      <img src="/img/default2.jpg" alt="数理统计复习" />
+      <img src="/img/default4.jpg" alt="数理统计复习" />
     
   </a>
 
@@ -693,7 +723,7 @@ from pwn import * from gmpy2 import invert p = remote(&#34;101.43.185.64&#34;, &
       <article class="ui attached segment card dream-card">
   <a class="image" href="https://iluvata.github.io/post/2021-12-28_n1book-web/">
     
-      <img src="/img/default2.jpg" alt="N1Book Web 学习" />
+      <img src="/img/default3.jpg" alt="N1Book Web 学习" />
     
   </a>
 
@@ -750,39 +780,6 @@ patchelf --set-rpath ~/glibc-all-in-one/libs/2.31 ./Nnote patchelf --set-interpr
  这题申请大小限制不小于0，不大于128，并且根据申请的大小限制了修改时能写入的字节数。但是申请0B的堆块时能通过整数溢出绕过限制条件引起堆溢出。因此这里构造大小为0x480的chunk的方法就是构造9个连在一起的，大小为0x80的chunk（malloc申请的大小为0x78）；然后利用最上面堆块上面的堆溢出覆盖第一块的块大小字段为0x481（块大小字段最低bit为PREV_INUSE）。释放后再申请一个0x80的chunk，会从之前释放到unsorted bin头部割出0x80，导致现在在unsorted bin中的chunk和原来申请的9块中的第二块重叠，输出第二块的数据就可以得到unsorted bin。
 add(0) for i in range(9): add(0x78) add(0x18) edit(0 , &#39;a&#39;*0x18+p64(0x481)) delete(1) add(0x78) show(2) __malloc_hook = l64() - 0x70 libc.address = __malloc_hook - libc.sym[&#39;__malloc_hook&#39;]   得到的地址和main_arena(或__malloc_hook)之间的偏移是固定的。可以在gdb调试里看到与__malloc_hook之间的偏移为0x70。
 gef➤ bins tcachebins empty fastbins 0x20: 0x0 0x30: 0x0 0x40: 0x0 0x50: 0x0 0x60: 0x0 0x70: 0x0 0x80: 0x0 unsortedbin all: 0x558be3001330 —▸ 0x7f6c92886be0 (main_arena+96) ◂— 0x558be3001330 smallbins empty largebins empty gef➤ x/gx &amp;__malloc_hook 0x7f6c92886b70 &lt;__malloc_hook&gt;:	0x0000000000000000    劫持free_hook  这时候申请两个0x40的chunk，序号分别为11和12.
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-11-13_rop/">
-    
-      <img src="/img/default2.jpg" alt="ROP" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-11-13_rop/">ROP</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Saturday, Nov 13, 2021</p>
-    </div>
-    <div class="description">
-       BROP  确定retaddr的偏移   寻找stopgadget  可以用io.recv()是否成功来判断是否为stopdadget，并且可以根据返回的内容大致猜测覆盖的地址是什么函数
-  寻找bropgadget  所谓bropgadget其实就是__libc_csu_init里最后一段包含6个连续pop的汇编，对这段汇编进行偏移还能构造出对于另外几个寄存器的pop。 寻找方法也就是在猜测的retaddr后跟6个trap（会导致程序崩溃的retaddr），再跟上之前找到的stopgadget，最后再跟几个trap。验证的方法可以是在跟上6个trap后不跟stopgadget而是直接跟上trap，看是否会崩溃（如果不会崩溃，有可能是遇到了plt表。为什么plt表不会崩溃？因为plt表用jmp直接跳转去执行函数了）。
-  寻找puts/write@plt  通过尝试puts出elf头的\x7fELF确定是否遇到了puts的plt
-  dump出内存  用之前得到的puts@pltdump出内存
-  在dump出的内存中找到任意函数的got，打印出got内容从而确定libc和偏移   ret2libc     SROP   
     </div>
   </div>
 

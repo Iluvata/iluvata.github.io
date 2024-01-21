@@ -444,7 +444,7 @@
 
   <section class="ui bottom attached center aligned segment">
     
-      <p>© 2021 - 2023 Iluvata&#39;s Blog</p>
+      <p>© 2021 - 2024 Iluvata&#39;s Blog</p>
     
 
     <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
@@ -456,6 +456,40 @@
   </div>
 
   
+  
+    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
+      <article class="ui attached segment card dream-card">
+  <a class="image" href="https://iluvata.github.io/post/2021-03-14_basic-elements-for-programming-language/">
+    
+      <img src="/img/2021-03-14_lisp.png" alt="编程语言的基本组成" />
+    
+  </a>
+
+  <div class="content">
+    <h2 class="ui medium header">
+      <a href="/post/2021-03-14_basic-elements-for-programming-language/">编程语言的基本组成</a>
+    </h2>
+    <div class="meta">
+      <p class="date">Sunday, Mar 14, 2021</p>
+    </div>
+    <div class="description">
+      编程语言的基本组成  编程语言的基本组成是SICP的第一节讨论的内容。编程语言所需要的基本元素有3个：原子元素（原子过程、 原子数据结构）、将运算进行复合的能力、对过程进行抽象的能力。
+ 原子元素是语言本身提供给我们的最小过程与数据结构，如乘法 * ，整数数据类型. 在scheme中我们将 一个操作过程写在括号语句内，语句的第一个元素作为运用的过程（操作符），随后的元素作为操作数。如
+(* 3 4)   运算复合的能力使我们能够从基本操作中构建复杂操作，如求解阶乘
+(define (factorial n) (if (&lt; n 2) 1 (* n (factorial (- n 1)))))   最后是构建抽象的能力，能够让我们不被所有实现细节扰乱思路，只把之前构建的函数当作黑盒直接拿来 使用
+(factorial 4)    块结构–以牛顿法求平方根为例  牛顿法是用于求解方程根的算法，从一个猜测开始每次迭代得到一个更好的猜测，不断向根逼近，直到 一个我们指定的要求达到为止。 通过使用抽象和运算符合的能力，我们能够构造improve, good-enough?等方法，最终构造出我们想要的 sqrt算法。
+(define (sqrt-iter guess x) (if (good-enough? guess x) guess (sqrt-iter (better-guess guess x) x))) (define (sqrt x) (sqrt-iter 2.0 x))  在求解的过程中，我们定义的一些方法只有在sqrt中才会被用到，如improve, good-enough?等。为了 防止和其他代码名称冲突，可以把他们全都放到sqrt的定义内，让他们的作用域只限于sqrt.
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div class="author">@&nbsp;Iluvata</div>
+    <div class="reading-time">
+      <i class="clock icon"></i>1 minutes read</div>
+  </div>
+</article>
+
+    </div>
   
     <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
       <article class="ui attached segment card dream-card">
@@ -779,45 +813,6 @@ UEFI  Unified Extensible Firmware Interface 统一可拓展固件接口。堆栈
   6-7月  5月中旬开始我每天规定了7个小时的学习时间，算是正式开始准备考研了。因为在家里容易偷懒， 我用上了之前买的滴答清单会员来制定每天的学习计划。
   滴答清单里面可以记录习惯打卡，我每天上午做3小时的数学，下午3小时的专业课，晚上2小时数学 习题。每次点击可以记录半小时。滴答清单有个番茄时钟的功能（需要会员），我就按照番茄计时 每次学25分钟，完成后点一下习惯记录算学了半小时，休息5分钟。但其实一般很少25分钟准时休息， 都是完成了计时结束时正在做的那道题或学的那个知识点后再休息，所经常会超时，平均算学了半小时 也不算过分吧2333. 一开始在休息的时候还经常会拿起 手机来玩，很快发现5分钟休息玩手机根本不能起到休息的作用，而且一不注意就容易忽略计时器 提醒继续玩下去。后来感觉最好的休息方式还是啥都不干，坐着冥想哈哈。 一开始买了滴答会员后我还加了个习惯：每天冥想10分钟，没想到坚持了半年直到开学，成了我 坚持最久完成率最高的习惯。。训练放空思想可能对专注确实起到了一些作用吧。
  当时我还在自己的阿里云服务器上搭了个nextcloud网盘，把每天用emacs记录的单词直接放在上面。 除此之外，每天晚上还会总结一下当天学的东西，在orgmode里写下来放上去。这时我是每周周日 休息一天，在休息日会看着上周每天总结的东西再做一个周总结。我把放总结笔记的文件夹叫做 watson，就像想把学过的东西教给他一样去总结哈哈。
-    </div>
-  </div>
-
-  <div class="extra content">
-    <div class="author">@&nbsp;Iluvata</div>
-    <div class="reading-time">
-      <i class="clock icon"></i>1 minutes read</div>
-  </div>
-</article>
-
-    </div>
-  
-    <div class="sixteen wide mobile eight wide tablet eight wide computer four wide large screen four wide widescreen column dream-column">
-      <article class="ui attached segment card dream-card">
-  <a class="image" href="https://iluvata.github.io/post/2021-02-02_scheme-in-emacs/">
-    
-      <img src="/img/default3.jpg" alt="在spacemacs中写scheme" />
-    
-  </a>
-
-  <div class="content">
-    <h2 class="ui medium header">
-      <a href="/post/2021-02-02_scheme-in-emacs/">在spacemacs中写scheme</a>
-    </h2>
-    <div class="meta">
-      <p class="date">Tuesday, Feb 2, 2021</p>
-    </div>
-    <div class="description">
-      参考资料：官方文档 在spacemacs安装scheme环境 在emacs里学习SICP geiser文档
-windows安装  一开始看官方文档和 在spacemacs安装scheme环境 做了好久，试图在windows上搭起环境，但是中间遇到好多问题，这里记下几个。。
- 首先是 chicken 的安装。文档只说了apt包，但其实pip包也可以？（没试过）。我用的是windows的chocolatey，成功安装了。
- 在安装了 chicken 后，为了完整安装对应文档（不知道为什么不能把文档放到同个包里一起安装了。。。），还要运行一下命令：
-$ chicken-install -s apropos chicken-doc $ cd `csi -p &#39;(chicken-home)&#39;` $ curl https://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | sudo tar zx  在尝试用powershell运行第一条指令时提示不存在cp指令中断了。查了好久资料后发现可以用git shell运行成功。
- 然后第二条指令其实是运行 csi chicken scheme 解释器后运行 &#39;(chicken-home)&#39; ，结果作为输出，进入chicken安装目录。
- 我在安装chicken包时看到安装目录在 c:/tools/chicken 下，就直接转过去了（不知道为什么，解释器中这条命令也运行失败。。）
- 最后是在当前目录下载chicken-doc并且解tar包。但我是在windows下，就手动用浏览器访问https://3e8.org/pub/chicken-doc/ 发现有zip包，下载下来解压后放到 c:/tools/chicken 下，这步也算完成了。
- 接着按照第二个博客中的步骤，确实可以运行了，但看不到输出也不会报错，重启后甚至又不能运行了。。。
- 太折磨人了，明天试下转到linux用第三个博客中的步骤。
-  linux安装配置  在 dotspacemacs-configuration-layers 中添加scheme, 在终端安装 mit-scheme 。emacs打开scm文件后 M-x run-geiser ，回到scm文件窗口 C-c C-s 选择mit.
     </div>
   </div>
 

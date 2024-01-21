@@ -6,7 +6,17 @@
     <description>Recent content on Iluvata&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 26 Apr 2023 13:53:31 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jan 2024 15:10:06 +0800</lastBuildDate><atom:link href="https://iluvata.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>系统编程安全--多进程</title>
+      <link>https://iluvata.github.io/post/2024-01-21_safety_multiprocessing/</link>
+      <pubDate>Sun, 21 Jan 2024 15:10:06 +0800</pubDate>
+      
+      <guid>https://iluvata.github.io/post/2024-01-21_safety_multiprocessing/</guid>
+      <description>fork  unexpected child  int createChildAndSayHello() { pid_t pid = fork(); if (pid == 0) { sayHello(); return 0; } waitpid(pid); }   这里不是在main中调用fork， return后回到的是main函数或者调用函数，并没有退出子进程。类似的错误还有在处理fork多个child时不恰当的循环导致子进程也fork出预期外的孙子进程。
+  fork 与多线程混合使用可能出现的问题  pid_t pid = fork(); if (pid == 0){ const char** args = malloc(sizeof(char *) * num_args); // Note: On execvp, all memory will be freed.  execvp(args[0], args); // If execvp failed, free memory and exit.  free(args); exit(1); }   fork 后子进程的内存状态与父进程一样，包括堆栈和锁。fork只会复制当前线程。如果fork时有别的线程获得了malloc锁，fork后的malloc锁不能解除。fork时malloc会处于不安全状态吗？</description>
+    </item>
+    
     <item>
       <title>BUAACTF2023 WP</title>
       <link>https://iluvata.github.io/post/2023-04-26_buaactf2023/</link>
